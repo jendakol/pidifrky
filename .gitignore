@@ -1,0 +1,11 @@
+*.class
+*.log
+
+dist/*
+target/
+
+gradlew*
+
+# IntelliJ IDEA
+.idea
+*.iml

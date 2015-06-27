@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:1.2.3"
+        classpath "jp.leafytree.gradle:gradle-android-scala-plugin:1.4"
+    }
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://mint.splunk.com/gradle/"
+    }
+}
+
+apply plugin: "com.android.application"
+apply plugin: "jp.leafytree.android-scala"
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 22
+        versionCode 46
+        versionName "1.1-redes"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+//    buildTypes {
+////        release {
+////            runProguard false
+////        }
+//        debug {
+//            runProguard true
+//            proguardFile 'proguard-rules.txt'
+//        }
+////        releaseProGuard {
+////            debuggable false
+////            jniDebugBuild false
+////            renderscriptDebugBuild false
+////            runProguard true
+////            zipAlign true
+////        }
+//    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFile file("proguard-rules.txt")
+        }
+
+        release {
+            minifyEnabled true
+            proguardFile file("proguard-rules.txt")
+        }
+    }
+}
+
+dependencies {
+//    compile project(':android-support-v4-preferencefragment')
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.android.support:support-annotations:20.0.0'
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.google.maps.android:android-maps-utils:0.3.1@aar'
+    compile "com.splunk.mint:mint:4.1"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "org.scala-lang:scala-library:2.11.6"
+}
