@@ -23,13 +23,13 @@ apply plugin: "com.android.application"
 apply plugin: "jp.leafytree.android-scala"
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion '21.1.2'
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 22
         versionCode 46
-        versionName "1.1-redes"
+        versionName "2.0"
     }
 
     compileOptions {
@@ -69,13 +69,13 @@ android {
 
 dependencies {
 //    compile project(':android-support-v4-preferencefragment')
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.android.support:support-annotations:20.0.0'
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.maps.android:android-maps-utils:0.3.1@aar'
     compile "com.splunk.mint:mint:4.1"
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "org.scala-lang:scala-library:2.11.6"
+    compile "org.scala-lang:scala-library:2.11.7"
 }
