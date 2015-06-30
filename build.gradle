@@ -8,15 +8,11 @@ buildscript {
     }
 }
 
-// In this section you declare where to find the dependencies of your project
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
-    maven {
-        url "https://mint.splunk.com/gradle/"
-    }
+    maven { url "https://mint.splunk.com/gradle/" }
+    maven { url "http://nexus.antczak.org/content/repositories/thirdparty/" }
 }
 
 apply plugin: "com.android.application"
@@ -24,7 +20,7 @@ apply plugin: "jp.leafytree.android-scala"
 
 android {
     compileSdkVersion 22
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '22.0.1'
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 22
@@ -68,14 +64,17 @@ android {
 }
 
 dependencies {
-//    compile project(':android-support-v4-preferencefragment')
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.android.support:support-annotations:20.0.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.google.maps.android:android-maps-utils:0.3.1@aar'
-    compile "com.splunk.mint:mint:4.1"
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4-preferencefragment:1.0.0'
+    compile 'com.avast:android-styled-dialogs:2.2.0'
 
-    compile "org.scala-lang:scala-library:2.11.7"
+    compile 'com.google.maps.android:android-maps-utils:0.3.1@aar'
+    compile 'org.apache.commons:commons-lang3:3.4'
+
+    compile 'com.splunk.mint:mint:4.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'org.scala-lang:scala-library:2.11.7'
 }
