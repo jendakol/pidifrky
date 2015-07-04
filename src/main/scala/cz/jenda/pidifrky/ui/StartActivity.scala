@@ -36,4 +36,8 @@ class StartActivity extends BasicActivity {
   def click(v: View): Unit = {
     goTo(classOf[CardsListActivity])
   }
+
+  def goToMap(v: View): Unit = {
+    goTo(classOf[MapActivity])
+  }
 }

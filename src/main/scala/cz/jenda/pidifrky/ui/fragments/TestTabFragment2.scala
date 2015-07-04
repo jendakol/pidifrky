@@ -2,7 +2,6 @@ package cz.jenda.pidifrky.ui.fragments
 
 import android.os.Bundle
 import android.view.{LayoutInflater, View, ViewGroup}
-import android.widget.TextView
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.ui.api.TabFragment
 
@@ -15,7 +14,7 @@ class TestTabFragment2 extends TabFragment {
 
     val view = inflater.inflate(R.layout.main, container, false)
 
-    Option(view.findViewById(R.id.textview).asInstanceOf[TextView]).foreach(_.setText("Jupiii"))
+    //    Option(view.findViewById(R.id.textview).asInstanceOf[TextView]).foreach(_.setText("Jupiii"))
 
     view
   }

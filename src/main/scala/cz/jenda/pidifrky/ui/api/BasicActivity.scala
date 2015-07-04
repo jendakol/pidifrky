@@ -1,6 +1,7 @@
 package cz.jenda.pidifrky.ui.api
 
 import android.os.Bundle
+import android.support.v4.app.{NavUtils, TaskStackBuilder}
 import android.support.v7.app.AppCompatActivity
 import android.view.{Menu, MenuItem}
 import com.google.android.gms.analytics.{GoogleAnalytics, HitBuilders, Tracker}
@@ -101,9 +102,36 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     super.onCreateOptionsMenu(menu)
   }
 
-  override def onOptionsItemSelected(item: MenuItem): Boolean = actionBarMenu().map { _ =>
-    onActionBarClicked.apply(item.getItemId)
-  }.getOrElse(super.onOptionsItemSelected(item))
+  protected def upButtonClicked(): Unit = {
+    val upIntent = NavUtils.getParentActivityIntent(this)
+
+    if (upIntent != null) {
+      if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+        TaskStackBuilder.create(this)
+          .addNextIntentWithParentStack(upIntent)
+          .startActivities()
+      }
+      else {
+        NavUtils.navigateUpTo(this, upIntent)
+      }
+    }
+    else {
+      DebugReporter.breadcrumb("upIntent is null")
+    }
+  }
+
+  override def onOptionsItemSelected(item: MenuItem): Boolean = {
+    val id = item.getItemId
+    if (id == android.R.id.home) {
+      upButtonClicked()
+      true
+    }
+    else {
+      actionBarMenu()
+        .map { _ => onActionBarClicked.apply(id) }
+        .getOrElse(super.onOptionsItemSelected(item))
+    }
+  }
 
   protected def onApplicationStart(): Unit = {}
 

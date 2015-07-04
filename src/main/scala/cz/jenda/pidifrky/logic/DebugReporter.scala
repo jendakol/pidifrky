@@ -27,4 +27,8 @@ object DebugReporter {
 
     Mint.logExceptionMessage("Comment", msg, e)
   }
+
+  def breadcrumb(msg: String): Unit = {
+    Mint.leaveBreadcrumb(msg)
+  }
 }
