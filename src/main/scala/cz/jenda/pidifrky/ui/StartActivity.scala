@@ -4,6 +4,7 @@ import java.lang.Thread.UncaughtExceptionHandler
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.{DebugReporter, Utils}
 import cz.jenda.pidifrky.ui.api.BasicActivity
@@ -29,7 +30,7 @@ class StartActivity extends BasicActivity {
     })
 
     setContentView(R.layout.main)
-    findTextView(R.id.textview).foreach(_.setText(R.string.hello_world))
+    findView(R.id.button, classOf[Button]).foreach(_.setText(R.string.hello_world))
   }
 
   def click(v: View): Unit = {

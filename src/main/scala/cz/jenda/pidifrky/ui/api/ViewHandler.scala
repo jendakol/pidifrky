@@ -38,6 +38,24 @@ object ViewHandler {
       None
   }
 
-  def findTextView(activity: AppCompatActivity, id: Int): Option[TextView] = findView(activity, id, classOf[TextView])
+  def findTextView(view: AppCompatActivity, id: Int): Option[TextView] = findView(view, id, classOf[TextView])
+
+  def findView(view: View, id: Int): Option[View] = Option(view.findViewById(id))
+
+  def findView[T <: View](activity: View, id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = findView(activity, id) flatMap {
+    case v: View =>
+      if (ct.runtimeClass.isInstance(v)) {
+        Some(v.asInstanceOf[T])
+      }
+      else {
+        DebugReporter.debug(AnotherTypeOfViewException)
+        None
+      }
+    case _ =>
+      DebugReporter.debug(CannotFindViewException)
+      None
+  }
+
+  def findTextView(view: View, id: Int): Option[TextView] = findView(view, id, classOf[TextView])
 
 }
