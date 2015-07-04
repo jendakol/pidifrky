@@ -33,23 +33,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-//    buildTypes {
-////        release {
-////            runProguard false
-////        }
-//        debug {
-//            runProguard true
-//            proguardFile 'proguard-rules.txt'
-//        }
-////        releaseProGuard {
-////            debuggable false
-////            jniDebugBuild false
-////            renderscriptDebugBuild false
-////            runProguard true
-////            zipAlign true
-////        }
-//    }
-
     buildTypes {
         debug {
             minifyEnabled true
@@ -59,6 +42,7 @@ android {
         release {
             minifyEnabled true
             proguardFile file("proguard-rules.txt")
+            debuggable false
         }
     }
 }
@@ -71,10 +55,15 @@ dependencies {
     compile 'com.android.support:support-v4-preferencefragment:1.0.0'
     compile 'com.avast:android-styled-dialogs:2.2.0'
 
+    compile('io.nlopez.smartlocation:library:3.0.11') {
+        transitive = false
+    }
     compile 'com.google.maps.android:android-maps-utils:0.3.1@aar'
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.google.guava:guava:18.0'
+    compile 'com.google.code.findbugs:jsr305:3.0.0'
 
-    compile 'com.splunk.mint:mint:4.1'
+    compile 'com.splunk.mint:mint:4.2.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.scala-lang:scala-library:2.11.7'
 }

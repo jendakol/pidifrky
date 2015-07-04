@@ -12,6 +12,7 @@ import android.graphics.Color
 import android.os.Debug
 import android.view.{Display, Gravity}
 import android.widget.{TextView, Toast}
+import com.splunk.mint.Mint
 import cz.jenda.pidifrky.R
 
 import scala.util.Try
@@ -144,9 +145,11 @@ import scala.util.Try
   private var debug: Option[Boolean] = None
 
   def isDebug: Boolean = debug.getOrElse {
-    debug = Some(Debug.isDebuggerConnected)
+    val debug = Debug.isDebuggerConnected
+    this.debug = Some(debug)
     DebugReporter.debug("Is debug: " + debug)
-    debug.get
+    if (debug) Mint.enableDebug()
+    debug
   }
 
   def getOrientation: Int = orientation

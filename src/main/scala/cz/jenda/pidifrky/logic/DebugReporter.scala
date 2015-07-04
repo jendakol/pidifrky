@@ -20,7 +20,9 @@ object DebugReporter {
     Mint.addExtraData("ignored", "true")
 
     Application.currentActivity.foreach { ctx =>
-      ctx.getTracker.foreach(_.send(new HitBuilders.ExceptionBuilder().setDescription(new StandardExceptionParser(ctx, null).getDescription(Thread.currentThread.getName, e)).setFatal(false).build))
+      val description = new StandardExceptionParser(ctx, null).getDescription(Thread.currentThread.getName, e)
+      debug(description)
+      ctx.getTracker.foreach(_.send(new HitBuilders.ExceptionBuilder().setDescription(description).setFatal(false).build))
     }
 
     Mint.logExceptionMessage("Comment", msg, e)

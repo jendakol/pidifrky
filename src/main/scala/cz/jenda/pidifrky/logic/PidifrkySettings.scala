@@ -2,6 +2,7 @@ package cz.jenda.pidifrky.logic
 
 import android.content.{Context, SharedPreferences}
 import android.preference.PreferenceManager
+import com.splunk.mint.Mint
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -11,6 +12,9 @@ object PidifrkySettings {
 
   def init(context: Context) = {
     preferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    //when initializing
+    Mint.setUserIdentifier(PidifrkySettings.UUID)
   }
 
   lazy val UUID: String = {
