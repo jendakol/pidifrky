@@ -1,8 +1,9 @@
 package cz.jenda.pidifrky.data.pojo
 
 import android.location.Location
-import cz.jenda.pidifrky.data.CardTiles
+import cz.jenda.pidifrky.data.{CardOwnedState, CardState, CardTiles, CardWantedState}
 import cz.jenda.pidifrky.logic.Application
+import cz.jenda.pidifrky.logic.map.{CardMapMarker, MapMarker}
 
 /**
  * Created <b>15.3.13</b><br>
@@ -20,6 +21,7 @@ object Card {
 
 case class Card(id: Int, number: Int, name: String, nameRaw: String, gps: Option[Location], image: String, neighbours: String) extends Entity {
 
+  private var state: Option[CardState] = Some(CardWantedState) //TODO
 
   //  def getFullImage: Bitmap = {
   //    try {
@@ -64,6 +66,21 @@ case class Card(id: Int, number: Int, name: String, nameRaw: String, gps: Option
 
   def getDistance: Option[Double] = gps.map(gps => gps.distanceTo(gps)) //TODO
 
+  def getState: CardState = state.getOrElse {
+    CardWantedState //TODO: cardsdao
+  }
+
+  def isOwner: Boolean = {
+    state.getOrElse {
+      CardWantedState //TODO: cardsdao
+    } == CardOwnedState
+  }
+
+  def isWanted: Boolean = {
+    state.getOrElse {
+      CardWantedState //TODO: cardsdao
+    } == CardWantedState
+  }
 
   //
   //
@@ -134,4 +151,6 @@ case class Card(id: Int, number: Int, name: String, nameRaw: String, gps: Option
     //    result = 31 * result + (if (merchants != null) merchants.hashCode else 0)
     result
   }
+
+  override def toMarker: Option[MapMarker] = gps.map(_ => CardMapMarker(this))
 }

@@ -2,6 +2,7 @@ package cz.jenda.pidifrky.data.pojo
 
 import android.location.Location
 import cz.jenda.pidifrky.data.IMapPoint
+import cz.jenda.pidifrky.logic.map.MapMarker
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -20,4 +21,6 @@ trait Entity extends IMapPoint {
   def getDistance(location: Location): Option[Double]
 
   def toString: String
+
+  def toMarker: Option[MapMarker]
 }
