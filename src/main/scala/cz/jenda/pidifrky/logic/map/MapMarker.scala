@@ -17,7 +17,7 @@ sealed trait MapMarker {
   def getMarker: MarkerOptions = new MarkerOptions()
     .title(title)
     .icon(BitmapDescriptorFactory.fromResource(drawableId))
-    .position(LocationConversions.toLatLng(location))
+    .position(LocationHelper.toLatLng(location))
 }
 
 case class CardMapMarker(card: Card) extends MapMarker {

@@ -8,6 +8,8 @@ import android.location.Location
 trait IMapPoint {
   val gps: Option[Location]
 
+  val name: String
+
   override def toString: String = {
     "IMapPoint {" + gps + "}"
   }
