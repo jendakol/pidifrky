@@ -1,16 +1,18 @@
 package cz.jenda.pidifrky.ui
 
 import android.graphics.Color
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.{CameraUpdateFactory, GoogleMap}
 import cz.jenda.pidifrky.data.pojo.Card
+import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.logic.map.LocationHelper
 import cz.jenda.pidifrky.ui.api.{BasicMapActivity, LineOptions}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-class MapActivity extends BasicMapActivity {
+class MapActivity extends BasicMapActivity with OnMapLongClickListener {
   override def onMapReady(map: GoogleMap): Unit = {
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(49.8401903, 15.3693800), 8f))
 
@@ -21,9 +23,15 @@ class MapActivity extends BasicMapActivity {
     //    addLine(LineOptions(Color.RED, 5), card, card2)
 
     addDistanceLine(LineOptions(Color.RED, 5), card)
+
+    map.setOnMapLongClickListener(this)
   }
 
   override protected def upButtonClicked(): Unit = {
     this.finish() //go back!
+  }
+
+  override def onMapLongClick(latLng: LatLng): Unit = {
+    LocationHandler.mockLocation(latLng)
   }
 }

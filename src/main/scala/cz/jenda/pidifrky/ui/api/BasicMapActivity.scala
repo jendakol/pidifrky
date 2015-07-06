@@ -7,7 +7,7 @@ import com.google.maps.android.ui.IconGenerator
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.IMapPoint
 import cz.jenda.pidifrky.data.pojo.Entity
-import cz.jenda.pidifrky.logic.map.{LocationHelper, MapType}
+import cz.jenda.pidifrky.logic.map.{LocationHelper, MapLocationSource, MapType}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -26,6 +26,8 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
           map = Some(googleMap)
 
           googleMap.setIndoorEnabled(false)
+          googleMap.setMyLocationEnabled(true)
+          googleMap.setLocationSource(MapLocationSource)
 
           BasicMapActivity.this.onMapReady(googleMap)
         }

@@ -10,7 +10,7 @@ import com.splunk.mint.Mint
 object PidifrkySettings {
   private var preferences: SharedPreferences = _
 
-  def init(context: Context) = {
+  def init(context: Context): Unit = {
     preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     //when initializing
@@ -29,4 +29,6 @@ object PidifrkySettings {
   }
 
   def isTrackingEnabled: Boolean = true //TODO
+
+  def gpsUpdateInterval: Int = 2000 //TODO
 }

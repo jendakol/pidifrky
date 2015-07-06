@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.logic.{DebugReporter, Utils}
+import cz.jenda.pidifrky.logic.{DebugReporter, Toast}
 import cz.jenda.pidifrky.ui.api.BasicActivity
 
 /**
@@ -25,12 +25,12 @@ class StartActivity extends BasicActivity {
           case _ => new scala.Exception(ex)
         })
 
-        Utils.toast(ex.getMessage)
+        Toast(ex.getMessage, Toast.Long)
       }
     })
 
     setContentView(R.layout.main)
-    findView(R.id.button, classOf[Button]).foreach(_.setText(R.string.hello_world))
+    findView(R.id.button, classOf[Button]).foreach(_.setText(R.string.app_author))
   }
 
   def click(v: View): Unit = {

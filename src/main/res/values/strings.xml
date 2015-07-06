@@ -1,5 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <plurals name="cards">
+        <item quantity="one">pidifrk</item>
+        <item quantity="few">pidifrky</item>
+        <item quantity="other">pidifrků</item>
+    </plurals>
+
+    <plurals name="merchants">
+        <item quantity="one">prodejce</item>
+        <item quantity="few">prodejci</item>
+        <item quantity="other">prodejců</item>
+    </plurals>
+
+    <plurals name="displayedCards">
+        <item quantity="one">Zobrazen</item>
+        <item quantity="few">Zobrazeny</item>
+        <item quantity="other">Zobrazeno</item>
+    </plurals>
+
+    <plurals name="displayedMerchants">
+        <item quantity="one">Zobrazen</item>
+        <item quantity="few">Zobrazeni</item>
+        <item quantity="other">Zobrazeno</item>
+    </plurals>
+
+    <plurals name="nearest">
+        <item quantity="one">nejbližší</item>
+        <item quantity="few">nejbližší</item>
+        <item quantity="other">nejbližších</item>
+    </plurals>
+
     <string name="app_name">Pidifrky</string>
-    <string name="hello_world">Hello World!</string>
+    <string name="number">č.</string>
+    <string name="ok">OK</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="cancel">Zrušit</string>
+    <string name="search">Hledat</string>
+    <string name="later">Později</string>
+    <string name="error">Chyba</string>
+    <string name="button_info">Více info</string>
+    <string name="button_download_xml_short">Stáhnout databázi</string>
+    <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně</string>
+    <string name="downloading_xml">Stahuji databázi…</string>
+    <string name="downloading_images">Stahuji náhledy…</string>
+    <string name="download_complete">Databáze byla aktualizována!\n(za %1$.1fs, staženo %2$s)!</string>
+    <string name="processing_merchants">Zpracovávám prodejce…</string>
+    <string name="processing_cards">Zpracovávám pidifrky…</string>
+    <string name="button_show_nearest">Nejbližší pidifrky</string>
+    <string name="button_show_all">Všechny pidifrky</string>
+    <string name="position_approx">Současná poloha je určena pouze přibližně…</string>
+    <string name="position_exact">Nalezena přesná poloha (GPS)!</string>
+    <string name="question_exit">Opravdu chceš ukončit aplikaci Pidifrky?</string>
+    <string name="question_minimize">Opravdu chceš minimalizovat aplikaci Pidifrky?</string>
+    <string name="locating">Hledám polohu…</string>
+    <string name="loading">Načítání</string>
+    <string name="saving">Ukládání…</string>
+    <string name="preparing">Připravuji…</string>
+    <string name="waiting">Čekej prosím…</string>
+    <string name="showing_cards">Zobrazuji pidifrky…</string>
+    <string name="loading_cards">Načítám pidifrky…</string>
+    <string name="loading_map">Načítám mapu…</string>
+    <string name="creating_trip">Počítám výlet…</string>
+    <string name="loading_card">Načítám pidifrk…</string>
+    <string name="showing_merchants">Zobrazuji prodejce…</string>
+    <string name="loading_merchants">Načítám prodejce…</string>
+    <string name="loading_merchant">Načítám prodejce…</string>
+    <string name="distance">Vzdálenost</string>
+    <string name="trip_select_cards">Vyber prosím ze seznamu 1–8 pidifrků, ze kterých chceš sestavit výlet.</string>
+    <string name="map_info">Vzdálenosti mezi pidifrky a prodejci jsou pouze přibližné (vzdušnou čarou).</string>
+    <string name="trip_info">Vzdálenosti mezi pidifrky (geografické i časové) byly získány ze služby Google Maps a jde
+        tedy o reálné hodnoty dojezdu.
+    </string>
+    <string name="email_address">Emailová adresa</string>
+    <string name="accountEmail_address">Účet/Emailová adresa</string>
+    <string name="backup_completed">Záloha dokončena!</string>
+    <string name="backup_started">Zálohování započalo…</string>
+    <string name="restore_available_question">Chceš obnovit sbírku pidifrků a seznam přání za zálohy?</string>
+    <string name="delete_current_entries">Chceš před obnovením zálohy smazat aktuální záznamy o sbírce pidifrků a seznamu přání?</string>
+    <string name="restore_failed">Obnova se nepodařila, záloha je nedostupná nebo poškozená!</string>
+    <string name="restore_not_available_owned">Obnova sbírky není dostupná - záloha neexistuje!</string>
+    <string name="restore_not_available_wanted">Obnova seznamu přání není dostupná - záloha neexistuje!</string>
+    <string name="restore_completed">Obnova ze zálohy dokončena!</string>
+    <string name="restore_completed_owned">Obnova sbírky ze zálohy dokončena!</string>
+    <string name="restore_completed_wanted">Obnova seznamu přání ze zálohy dokončena!</string>
+    <string name="restore_started">Obnovuji ze zálohy…</string>
+    <string name="backuping_images">Zálohuji náhledy…</string>
+    <string name="report_sending">Odesílám…</string>
+    <string name="report_received">Zpráva odeslána, díky!</string>
+    <string name="database_info">První stažení databáze (včetně obrázků) trvá cca 3 minuty (v závislosti na rychlosti připojení) a spotřebuje 80MB dat.
+        Průběžný update databáze je již výrazně rychlejší a netrvá většinou déle než 30s.
+    </string>
+    <string name="database_upgrade">Před pokračováním je třeba znovu stáhnout databázi.</string>
+    <string name="database_update">Je k dispozici aktualizace databáze. Přeješ si ji stáhnout?</string>
+    <string name="database_update_not_available">Máš aktuální verzi databáze!</string>
+    <string name="error_no_location_data_merchant">Prodejce bohužel nemá udanou polohu a nelze jej proto zobrazit na mapě ani k němu navigovat!</string>
+    <string name="error_no_location_data_card">Pidifrk bohužel nemá udanou polohu a nelze jej proto zobrazit na mapě ani k němu navigovat!</string>
+    <string name="error_no_gps_data">Prodejce nemá GPS polohu a bude proto na mapě zobrazen pouze přibližně!</string>
+    <string name="error_host_not_reachable">Připojení k internetu není funkční!</string>
+    <string name="error_update_not_available">Služba pro update databáze není dostupná. Zkus to prosím znovu později.</string>
+    <string name="error_no_nearest_cards_found">V zadané vzdálenosti %.1f km nebyly nalezeny žádné pidifrky, nebo žádné
+        neodpovídají filtru/výsledku hledání.
+    </string>
+    <string name="error_no_nearest_merchants_found">V zadané vzdálenosti %.1f km nebyli nalezeni žádní prodejci.</string>
+    <string name="error_no_cards_found">Žádné pidifrky neodpovídají filtru/výsledku hledání.</string>
+    <string name="error_database">Před pokračováním je třeba stáhnout databázi, protože stará je poškozená, nebo vůbec neexistuje.</string>
+    <string name="error_no_localization_services">V přístroji není povolena žádná metoda získání aktuální pozice!
+        Povol, prosím, systém GPS, nebo pokračuj bez možnosti zobrazit nejbližší pidifrky a prodejce.
+    </string>
+    <string name="error_localization_not_working">Nepodařilo se zjistit pozici telefonu! Aplikace bude přepnuta do módu bez lokalizace.</string>
+    <string name="error_no_ram">Aplikace bohužel nemá dostatek paměti pro svou činnost.</string>
+    <string name="error_activity_cannot_be_displayed_localization">V přístroji není povolena žádná metoda získání
+        aktuální pozice a proto nemůže být zobrazen seznam nejbližších pidifrků ani prodejců!
+    </string>
+    <string name="error_sort_distance_localization_not_available">Seznam nemůže být seřazen podle vzdálenosti, jelikož v
+        přístroji není povolena žádná metoda získání aktuální pozice!
+    </string>
+    <string name="error_no_image">Náhled bohužel není k dispozici!</string>
+    <string name="error_no_diskspace">Na disku není dostatek místa k dokončení operace!</string>
+    <string name="error_memory_not_writable">Operaci se nepodařilo dokončit, neboť v úložišti zřejmě není dostatek místa
+        nebo do něj nelze zapisovat!
+    </string>
+    <string name="error_memory_not_accessible">Operaci se nepodařilo dokončit, neboť úložiště není dostupné!</string>
+    <string name="error_no_map">Nelze zobrazit mapu.\nPro zobrazení mapy musí být nainstalována aplikace Google Maps. Pokud nainstalována je a přesto se
+        zobrazila tato chyba, dej to prosím vědět vývojářům. Děkujeme.
+    </string>
+    <string name="error_gps">Lokalizace pomocí GPS není povolena, určená poloha tedy bude pouze přibližná…</string>
+    <string name="error_no_internet_connection">Připojení k internetu není funkční! Povol, prosím, přístup k internetu.</string>
+    <string name="error_download_failed">Stažení aktualizace se nepodařilo. Zkuste to prosím znovu.</string>
+    <string name="error_no_space_for_update">V úložišti není dostatek místa pro stažení aktualizace!</string>
+    <string name="error_exception">V aplikaci nastala chyba. Vydavatel již byl informován. Děkujeme za pochopení.</string>
+    <string name="error_empty_message">Musí vyplnit zprávu!</string>
+    <string name="error_report_failed">Zprávu se bohužel nepodařilo odeslat!</string>
+    <string name="error_report_failed_no_connection">Pro odeslání zprávy musí být telefon připojen k internetu!</string>
+    <string name="error_trip_failed_no_connection">Pro vytvoření výletu musí být telefon připojen k internetu!</string>
+    <string name="error_trip_failed_no_gps">Pro vytvoření výletu musí být dostupná aktuální poloha telefonu!</string>
+    <string name="error_trip_failed">Výlet se bohužel nepodařilo naplánovat z důvodu neznámé chyby!</string>
+    <string name="error_trip_failed_noResult">Výlet se bohužel nepodařilo naplánovat (Google tvrdí, že to nejde).</string>
+    <string name="error_enter_email_account">Před pokračováním je třeba nastavit emailovou adresu!</string>
+
+    <string name="menu_showCardsList">Zobrazit seznam</string>
+    <string name="menu_showCardOnMap">Zobrazit pidifrk na mapě</string>
+    <string name="menu_showMerchantOnMap">Zobrazit prodejce na mapě</string>
+    <string name="menu_showAllOnMap">Zobrazit vše na mapě</string>
+    <string name="menu_newTrip">Vytvořit výlet</string>
+    <string name="menu_showTrip">Zobrazit trasu</string>
+    <string name="menu_showCardsOnMap">Zobrazit pidifrky na mapě</string>
+    <string name="menu_navigate">Navigovat</string>
+    <string name="menu_navigate_with">Spustit navigaci</string>
+    <string name="menu_sendReport">Odeslat hlášení</string>
+    <string name="menu_map_showNormal">Standardní mapa</string>
+    <string name="menu_map_showPhoto">Fotomapa</string>
+    <string name="menu_map_reloadDisplay">Obnovit zobrazení</string>
+    <string name="menu_map_followPosition">Sledovat akt. polohu</string>
+    <string name="menu_help">Nápověda</string>
+    <string name="menu_card_markFound_true">Přidat do sbírky</string>
+    <string name="menu_card_markFound_false">Odebrat se sbírky</string>
+    <string name="menu_card_markWanted_true">Přidat na seznam přání</string>
+    <string name="menu_card_markWanted_false">Odebrat ze seznamu přání</string>
+    <string name="menu_card_showTiles">Zobrazit pidifrkmapu</string>
+    <string name="menu_display_options_with_arrow">Volby zobrazení ></string>
+    <string name="menu_display_options">Volby zobrazení</string>
+    <string name="menu_filter">Filtr</string>
+    <string name="menu_display">Zobrazit pidifrky:</string>
+    <string name="menu_filter_all">Všechny</string>
+    <string name="menu_filter_found">Pouze ze sbírky</string>
+    <string name="menu_filter_wanted">Pouze ze seznamu přání</string>
+    <string name="menu_filter_owned_or_wanted">Ze sbírky a/nebo seznamu přání</string>
+    <string name="menu_filter_other">Pouze mimo sbírku i seznamu přání</string>
+    <string name="menu_search">Hledání</string>
+    <string name="menu_show_all">Zobrazit vše</string>
+    <string name="menu_sort">Řazení</string>
+    <string name="menu_sort_name">Podle jména</string>
+    <string name="menu_sort_distance">Podle vzdálenosti</string>
+    <string name="menu_sort_number">Podle čísla</string>
+    <string name="menu_tile_showCard">Zobrazit pidifrk</string>
+    <string name="menu_tile_center">Vycentrovat</string>
+    <string name="menu_tile_report">Nahlásit chybu v této mapě</string>
+
+    <string name="showOnWeb">Zobrazit na webu</string>
+    <string name="gps_on">Zapnout GPS</string>
+    <string name="gps_off">Vypnout GPS</string>
+
+    <string name="map_showNeighbourhood_cards">Zobrazit pidifrky v okolí</string>
+    <string name="map_neighbourhoodCenter">Virtuální pozice</string>
+    <string name="map_card_showDetail">Zobrazit detail pidifrku</string>
+    <string name="map_card_showMapWithMerchants">Zobrazit na mapě s prodejci</string>
+    <string name="map_card_showTiles">Zobrazit pidifrkmapu</string>
+    <string name="map_merchant_showDetail">Zobrazit prodejce</string>
+    <string name="map_merchant_showMapWithCards">Zobrazit s pidifrky</string>
+    <string name="map_following_off">Sledování pozice vypnuto</string>
+    <string name="map_following_on">Sledování pozice zapnuto</string>
+
+    <string name="button_exit">Ukončit</string>
+    <string name="button_settings">Nastavení</string>
+    <string name="button_continue">Pokračovat</string>
+    <string name="button_stats">Statistiky</string>
+    <string name="button_about">O pidifrcích</string>
+    <string name="button_about_me">O autorovi</string>
+    <string name="button_rate">Ohodnotit aplikaci</string>
+    <string name="button_improvement">Navrhnout vylepšení</string>
+
+    <string name="cards">Pidifrky:</string>
+    <string name="merchants">Prodejci:</string>
+    <string name="card">Pidifrk</string>
+    <string name="merchant">Prodejce</string>
+    <string name="current_position">Vaše aktuální poloha</string>
+    <string name="button_show_nearest_merchants">Nejbližší prodejci</string>
+    <string name="settings_basic">Základní nastavení</string>
+    <string name="settings_tiles">Nastavení pidifrkmapy</string>
+    <string name="settings_list">Nastavení seznamu</string>
+    <string name="settings_distance_title">Vzdálenost</string>
+    <string name="settings_distance">Vzdálenost pro vyhledání nejbližších pidifrků</string>
+    <string name="settings_gps_off_title">Vypnutí GPS</string>
+    <string name="settings_gps_off">Prodleva mezi deaktivací aplikace a vypnutím GPS lokalizace</string>
+    <string name="settings_backup">Zálohování</string>
+    <string name="settings_backup_ownedCards_short">Zálohování sbírky</string>
+    <string name="settings_restore_ownedCards">Obnovení sbírky a seznamu přání</string>
+    <string name="settings_backup_ownedCards">Zálohování sbírky pidifrků a seznamu přání, aby mohly být po přeinstalaci obnoveny</string>
+    <string name="settings_backup_images_short">Zálohování obrázků</string>
+    <string name="settings_backup_images">Zálohování obrázků pidifrků, aby se po přeinstalaci nemusely znvou stahovat</string>
+    <string name="settings_localization">Nastavení lokalizace</string>
+    <string name="settings_localization_hint">Menší interval znamená lepší funkci ale větší spotřebu baterie</string>
+    <string name="settings_localization_list">Obnova pozice v seznamu</string>
+    <string name="settings_localization_detail">Obnova pozice v detailu</string>
+    <string name="settings_localization_map">Obnova pozice v mapě</string>
+    <string name="settings_other">Ostatní</string>
+    <string name="settings_tracking_short">Anonymní statistiky užívání</string>
+    <string name="settings_tracking">Odesílat anonymní statistiky užívání. Nech tuto volbu prosím povolenou, sledování pomáhá při dalším vylepšování
+        aplikace.
+    </string>
+    <string name="settings_showTilesNumbers_short">Zobrazit čísla na pidifrkmapě</string>
+    <string name="settings_showTilesNumbers">Zobrazit na pidifrkmapě čísla přes náhledy</string>
+    <string name="settings_showTilesFound_short">Zobrazit nalezené</string>
+    <string name="settings_showTilesFound">Označit na pidifrkmapě nalezené pidifrky</string>
+    <string name="settings_showCardsNumbers_short">Zobrazit čísla pidifrků</string>
+    <string name="settings_showCardsNumbers">Zobrazit v seznamu pidifrků jejich čísla vedle názvu</string>
+
+    <string name="settings_debug_title">Debug informace</string>
+    <string name="settings_debug_send">Odeslat zaznamenané debug informace</string>
+    <string name="settings_debug_sent">Informace odeslány, díky!</string>
+    <string name="settings_debug_autoSend_short">Povolit automatické odesílání debug informací</string>
+    <string name="settings_debug_autoSend">Zaznamenané informace budou odesílány automaticky</string>
+    <string name="settings_debug_allow">Pokud máš s aplikací problémy, povol tuto možnost, abychom mohli lépe pomoct s vyřešením problémů.</string>
+    <string name="settings_debug_allow_short">Povolit záznam debug informací</string>
+
+    <string name="title_activity_extra">Extra</string>
+
+    <string name="stats_cards_total">Celkem pidifrků:</string>
+    <string name="stats_cards_owned">Nasbíráno:</string>
+    <string name="stats_cards_wanted">Na seznamu přání:</string>
+    <string name="stats_cards_missing">Ještě mi jich chybí:</string>
+    <string name="report_improvement">Vylepšení aplikace</string>
+    <string name="report_greeting">Pozdrav</string>
+    <string name="stats_whatelse">Co dalšího bys tu chtěl vidět?</string>
+    <string name="about_desc">Tato aplikace je výhradně mým dílem.\nJe podporována vydavatelem pidifrků p. Rillichem, nicméně nejedná se o oficiální aplikaci.
+        Aplikace je vytvářena ve volném čase a bez nároku na jakýkoli honorář, čistě pro radost.
+    </string>
+
+    <string name="rating_request_title">Ohodnoť naši aplikaci!</string>
+    <string name="rating_request">
+        <![CDATA[
+        <center>
+            <font color="white">
+                <font size="5">
+                    Zřejmě už naši aplikaci používáš nějakou dobu.<br>
+                    Věnuj prosím dvě minutky času ohodnocení této aplikace na Google Play - pomůže nám to v dalším rozvoji.<br>
+                    Díky!!!<br>
+                    <img src=\"file:///android_res/drawable/man_happy.png\" alt=\"\"/>
+                </font>
+            </font>
+        </center>
+        ]]>
+    </string>
+    <string name="news_in_version">Novinky ve verzi</string>
+    <string name="version_news">
+        <![CDATA[
+        <font color="white">
+        <ul>
+            <li>Vyhledávání v seznamu podle čísla a bez diakritiky</li>
+            <li>Možnost zobrazení čísel v seznamu a na pidifrkmapě</li>
+            <li>Možnost zobrazení nalezených pidifrků na pidifrkmapě</li>
+            <li>Možnost řazení seznamu podle čísel</li>
+            <li>Možnost záznamu ladících informací</li>
+            <li>"Extra" funkce - statistiky a další</li>
+        </ul>
+        </font>
+        ]]>
+    </string>
+    <string name="message">Zpráva</string>
+    <string name="tiles_code">
+        <![CDATA[
+        <html><head>
+        <style type=\"text/css\">
+        td { padding: 0; margin: 0; border: none; position: relative; }
+        div {
+        background-size: 400px 279px;
+        width: 400px;
+        height: 214px;
+        color: #111111;
+        font-size: 140px;
+        font-weight: bold;
+        text-align: center;
+
+        padding-top: 65px;
+        }
+
+        a { text-decoration: none; padding: 0; margin: 0; border: none; text-align: center; vertical-align: middle; display: block; width: 400px; height: 279px; }
+        </style>
+        </head><body>
+        <table cellspacing=\"0\" celpadding=\"0\">
+            <tr>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>+
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+            </tr>
+            <tr>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+            </tr>
+            <tr>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+            </tr>
+            <tr>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+            </tr>
+            <tr>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+                <td><a href=\"\"><div style=\"background-image: url;\"></div></a></td>
+            </tr>
+        </table>
+        </body></html>
+        ]]>
+    </string>
+    <string name="app_author">Jenda Kolena</string>
+
 </resources>

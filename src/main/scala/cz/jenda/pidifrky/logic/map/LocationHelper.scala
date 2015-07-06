@@ -16,6 +16,10 @@ object LocationHelper {
     l
   }
 
+  def toLocation(latLng: LatLng): Location = {
+    toLocation(latLng.latitude, latLng.longitude, MockedSource)
+  }
+
   def getCenter(location1: Location, location2: Location): LatLng = {
     val center: Location = new Location(GpsSource.name)
 
@@ -30,10 +34,32 @@ sealed trait LocationSource {
   val name: String
 }
 
+object LocationSource {
+  final val Fused = "fused"
+  final val Mocked = "mocked"
+
+  import LocationManager._
+
+  def apply(name: String) = name match {
+    case GPS_PROVIDER => GpsSource
+    case NETWORK_PROVIDER | PASSIVE_PROVIDER => NetworkSource
+    case Fused => FusedSource
+    case Mocked => MockedSource
+  }
+}
+
 case object GpsSource extends LocationSource {
   override val name: String = LocationManager.GPS_PROVIDER
 }
 
 case object NetworkSource extends LocationSource {
   override val name: String = LocationManager.NETWORK_PROVIDER
+}
+
+case object FusedSource extends LocationSource {
+  override val name: String = LocationSource.Fused
+}
+
+case object MockedSource extends LocationSource {
+  override val name: String = LocationSource.Mocked
 }

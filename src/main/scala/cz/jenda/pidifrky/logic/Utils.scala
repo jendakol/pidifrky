@@ -8,12 +8,9 @@ import java.util.zip.DeflaterOutputStream
 import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
 import android.content.{Context, Intent}
-import android.graphics.Color
 import android.os.Debug
-import android.view.{Display, Gravity}
-import android.widget.{TextView, Toast}
+import android.view.Display
 import com.splunk.mint.Mint
-import cz.jenda.pidifrky.R
 
 import scala.util.Try
 
@@ -27,8 +24,6 @@ import scala.util.Try
 @SuppressWarnings(Array("deprecated")) object Utils {
   @volatile
   private var orientation: Int = 0
-  @volatile
-  private var toast: Toast = null
 
   def copy(src: File, dst: File): Try[Unit] = Try {
     val in: InputStream = new FileInputStream(src)
@@ -158,37 +153,6 @@ import scala.util.Try
   def setOrientation(orientation: Int) {
     Utils.orientation = orientation
   }
-
-
-  def toast(text: String, duration: Int)(implicit ctx: Activity): Unit = {
-    try {
-      DebugReporter.debug(s"Toast showing ('$text')")
-      if (toast != null) toast.cancel()
-      ctx.runOnUiThread(new Runnable() {
-        def run() {
-          toast = new Toast(ctx)
-          toast.setDuration(duration)
-          val tv: TextView = new TextView(ctx)
-          tv.setGravity(Gravity.CENTER_HORIZONTAL)
-          tv.setText(text)
-          tv.setBackgroundResource(R.drawable.rounded_border)
-          tv.setTextColor(Color.WHITE)
-          tv.setTextSize(20)
-          toast.setView(tv)
-          toast.show()
-        }
-      })
-    }
-    catch {
-      case e: Exception => DebugReporter.debugAndReport(e)
-    }
-  }
-
-  def toast(text: String)(implicit ctx: Activity): Unit = toast(text, Toast.LENGTH_LONG)
-
-  def toast(textId: Int, duration: Int)(implicit ctx: Activity): Unit = toast(ctx.getString(textId), duration)
-
-  def toast(textId: Int)(implicit ctx: Activity): Unit = toast(textId, Toast.LENGTH_LONG)
 
   def runOnUiThread(action: => Unit)(implicit ctx: Activity) {
     ctx.runOnUiThread(new Runnable {

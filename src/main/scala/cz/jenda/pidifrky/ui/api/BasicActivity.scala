@@ -8,6 +8,7 @@ import com.google.android.gms.analytics.{GoogleAnalytics, HitBuilders, Tracker}
 import com.splunk.mint.Mint
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
+import cz.jenda.pidifrky.logic.location.LocationHandler
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -24,6 +25,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   private var tracker: Option[Tracker] = None
 
+  private var mockLocation: Boolean = _
+
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     DebugReporter.debug("Creating activity " + getLocalClassName)
@@ -37,9 +40,17 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     Mint.initAndStartSession(this, PidifrkyConstants.MINT_API_KEY)
     Mint.setUserIdentifier(PidifrkySettings.UUID)
 
+    mockLocation = Option(savedInstanceState).exists { bundle =>
+      bundle.getBoolean("mockLocation")
+    }
+
+    if (!mockLocation) {
+      LocationHandler.start(PidifrkySettings.gpsUpdateInterval)
+    }
+
+    Toast.onRestoreState(savedInstanceState)
+
     val actionBar = getSupportActionBar
-    //    actionBar.setIcon(R.drawable.app_icon_bar)
-    //    actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME)
     actionBar.setHomeButtonEnabled(hasParentActivity)
     actionBar.setDisplayHomeAsUpEnabled(hasParentActivity)
 
@@ -81,6 +92,11 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     catch {
       case e: Exception => DebugReporter.debug(e)
     }
+  }
+
+  override def onSaveInstanceState(outState: Bundle): Unit = {
+    super.onSaveInstanceState(outState)
+    Toast.onSaveState(outState)
   }
 
   override protected def onStop(): Unit = {
