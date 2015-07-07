@@ -29,7 +29,7 @@ class StartActivity extends BasicActivity {
       }
     })
 
-    setContentView(R.layout.main)
+    setContentView(R.layout.activity_start)
     findView(R.id.button, classOf[Button]).foreach(_.setText(R.string.app_author))
   }
 
@@ -39,5 +39,9 @@ class StartActivity extends BasicActivity {
 
   def goToMap(v: View): Unit = {
     goTo(classOf[MapActivity])
+  }
+
+  def goToGpsLog(v: View): Unit = {
+    goTo(classOf[GpsLogActivity])
   }
 }

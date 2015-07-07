@@ -50,8 +50,7 @@
     <string name="processing_cards">Zpracovávám pidifrky…</string>
     <string name="button_show_nearest">Nejbližší pidifrky</string>
     <string name="button_show_all">Všechny pidifrky</string>
-    <string name="position_approx">Současná poloha je určena pouze přibližně…</string>
-    <string name="position_exact">Nalezena přesná poloha (GPS)!</string>
+    <string name="location_found">Nalezena poloha!</string>
     <string name="question_exit">Opravdu chceš ukončit aplikaci Pidifrky?</string>
     <string name="question_minimize">Opravdu chceš minimalizovat aplikaci Pidifrky?</string>
     <string name="locating">Hledám polohu…</string>
@@ -351,5 +350,9 @@
         ]]>
     </string>
     <string name="app_author">Jenda Kolena</string>
+    <string name="title_activity_gps_log">GpsLogActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -3,8 +3,9 @@ package cz.jenda.pidifrky.logic.location
 import android.app.Activity
 import android.location.Location
 import com.google.android.gms.maps.model.LatLng
-import cz.jenda.pidifrky.logic.map.{LocationHelper, LocationSource}
-import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings, Toast, ToastButton}
+import cz.jenda.pidifrky.R
+import cz.jenda.pidifrky.logic._
+import cz.jenda.pidifrky.logic.map.{LocationHelper, LocationSource, StoredSource}
 import io.nlopez.smartlocation.location.providers.LocationBasedOnActivityProvider
 import io.nlopez.smartlocation.{OnLocationUpdatedListener, SmartLocation}
 
@@ -12,6 +13,7 @@ import io.nlopez.smartlocation.{OnLocationUpdatedListener, SmartLocation}
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object LocationHandler {
+  type LocationListener = Location => Unit
 
   private var listeners: Set[LocationListener] = Set()
 
@@ -19,13 +21,16 @@ object LocationHandler {
 
   private var mocking = false
 
-  private var interval: Option[Int] = None
   private var lastSource: Option[LocationSource] = None
 
   private val activityProvider = new LocationBasedOnActivityProvider(ActivityLocationResolver)
 
-  def start(interval: Int)(implicit ctx: Activity): Unit = {
-    this.interval = Some(interval)
+  def start(implicit ctx: Activity): Unit = {
+
+    if (currentLocation.isEmpty) {
+      //probably first attempt to lock
+      Toast(R.string.locating, Toast.Short)
+    }
 
     mocking = false
 
@@ -34,7 +39,15 @@ object LocationHandler {
       .location()
       .provider(activityProvider)
 
+    //TODO: check if any provider is available
+
     currentLocation = Option(control.getLastLocation) //can be null!
+      .map(loc => {
+      loc.setAccuracy(1000) //last known location, can be not precise
+      loc
+    })
+
+    currentLocation.foreach(updateLocation)
 
     control.start(new OnLocationUpdatedListener {
       override def onLocationUpdated(location: Location): Unit = updateLocation(location)
@@ -42,32 +55,32 @@ object LocationHandler {
   }
 
   protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = if (location != null) {
-    DebugReporter.debug("Received location: " + location)
+    GpsLogger.addEvent("Location: " + Format(location, 4))
+
+    val locationSource = LocationSource(location.getProvider)
 
     lastSource match {
       case Some(source) if source.name != location.getProvider =>
-        lastSource = Some(LocationSource(location.getProvider))
-      case None => lastSource = Some(LocationSource(location.getProvider))
+        lastSource = Some(locationSource)
+      case None =>
+        lastSource = Some(locationSource)
+        if (locationSource != StoredSource) Toast(R.string.location_found, Toast.Medium)
       case _ =>
     }
 
-    //    Toast("Location has been changed to " + location)
-
     listeners.foreach { listener =>
-      listener.onLocationChanged(location)
+      listener(location)
     }
   }
   else {
     DebugReporter.debug("Received null location")
   }
 
-  def getSetInterval: Option[Int] = interval
-
   def mockLocation(latLng: LatLng)(implicit ctx: Activity): Unit = {
     SmartLocation.`with`(ctx).location().stop()
     mocking = true
     val location = LocationHelper.toLocation(latLng)
-    DebugReporter.debug("Mocking location " + location)
+    GpsLogger.addEvent("Mocking: " + Format(location))
     Toast("Mocking location " + location, ToastButton.UNDO {
       disableMocking
     }, Toast.Short)
@@ -75,7 +88,7 @@ object LocationHandler {
     updateLocation(location)
   }
 
-  def disableMocking(implicit ctx: Activity): Unit = start(interval.getOrElse(PidifrkySettings.gpsUpdateInterval))
+  def disableMocking(implicit ctx: Activity): Unit = start
 
   def isMockingLocation: Boolean = mocking
 
@@ -86,10 +99,4 @@ object LocationHandler {
   def removeListener(listener: LocationListener): Unit = {
     listeners = listeners - listener
   }
-
-
-}
-
-trait LocationListener {
-  def onLocationChanged(location: Location): Unit
 }

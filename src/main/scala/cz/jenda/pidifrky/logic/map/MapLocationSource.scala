@@ -2,7 +2,8 @@ package cz.jenda.pidifrky.logic.map
 
 import android.location.Location
 import com.google.android.gms.maps.LocationSource.OnLocationChangedListener
-import cz.jenda.pidifrky.logic.location.{LocationHandler, LocationListener}
+import cz.jenda.pidifrky.logic.location.LocationHandler
+import cz.jenda.pidifrky.logic.location.LocationHandler.LocationListener
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -19,5 +20,5 @@ object MapLocationSource extends com.google.android.gms.maps.LocationSource with
 
   }
 
-  override def onLocationChanged(location: Location): Unit = listener.foreach(_.onLocationChanged(location))
+  override def apply(location: Location): Unit = listener.foreach(_.onLocationChanged(location))
 }

@@ -37,14 +37,16 @@ sealed trait LocationSource {
 object LocationSource {
   final val Fused = "fused"
   final val Mocked = "mocked"
+  final val Stored = "LocationStore"
 
   import LocationManager._
 
-  def apply(name: String) = name match {
+  def apply(name: String): LocationSource = name match {
     case GPS_PROVIDER => GpsSource
     case NETWORK_PROVIDER | PASSIVE_PROVIDER => NetworkSource
     case Fused => FusedSource
     case Mocked => MockedSource
+    case Stored => StoredSource
   }
 }
 
@@ -62,4 +64,8 @@ case object FusedSource extends LocationSource {
 
 case object MockedSource extends LocationSource {
   override val name: String = LocationSource.Mocked
+}
+
+case object StoredSource extends LocationSource {
+  override val name: String = LocationSource.Stored
 }

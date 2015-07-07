@@ -15,13 +15,15 @@ import cz.jenda.pidifrky.logic.location.LocationHandler
  */
 abstract class BasicActivity extends AppCompatActivity with ViewHandler with ActivityNavigator {
 
-  protected val hasParentActivity = true
+  protected def hasParentActivity = true
 
   private var activityState: ActivityState = _
 
   protected final implicit val ctx: AppCompatActivity = this
 
   private var appStart = false
+
+  protected def actionBarMenu(): Option[Int] = None
 
   private var tracker: Option[Tracker] = None
 
@@ -45,7 +47,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     }
 
     if (!mockLocation) {
-      LocationHandler.start(PidifrkySettings.gpsUpdateInterval)
+      LocationHandler.start
     }
 
     Toast.onRestoreState(savedInstanceState)
@@ -106,8 +108,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     activityState = StoppedState
     Application.currentActivity = None
   }
-
-  protected def actionBarMenu(): Option[Int] = None
 
   protected def onActionBarClicked: PartialFunction[Int, Boolean] = {
     case _ => false

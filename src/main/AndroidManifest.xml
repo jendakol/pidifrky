@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="cz.jenda.pidifrky">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="cz.jenda.pidifrky">
 
     <uses-sdk/>
 
@@ -13,21 +14,25 @@
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
-    <permission android:name="cz.jenda.pidifrky.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+    <permission
+            android:name="cz.jenda.pidifrky.permission.MAPS_RECEIVE"
+            android:protectionLevel="signature"/>
 
     <uses-permission android:name="cz.jenda.pidifrky.permission.MAPS_RECEIVE"/>
 
-    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true"/>
 
     <application
-            android:theme="@style/Theme.AppCompat"
             android:allowBackup="true"
             android:icon="@drawable/app_icon"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat">
         <activity android:name=".ui.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -38,17 +43,25 @@
                     android:value=".ui.StartActivity"/>
         </activity>
 
-        <activity android:name=".ui.MapActivity"></activity>
+        <activity android:name=".ui.MapActivity"/>
+
+        <activity
+                android:name=".ui.GpsLogActivity"
+                android:label="@string/title_activity_gps_log">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="cz.jenda.pidifrky.ui.StartActivity"/>
+        </activity>
+
+        <!-- ### -->
 
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyCIvJZ__7yhIwQZ6sQsjhdWZcYXHarx4VY"/>
-
-
         <meta-data
-                tools:replace="android:value"
                 android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"/>
-
+                android:value="@integer/google_play_services_version"
+                tools:replace="android:value"/>
     </application>
+
 </manifest>
