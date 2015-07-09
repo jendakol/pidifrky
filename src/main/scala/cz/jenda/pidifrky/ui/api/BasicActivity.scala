@@ -1,5 +1,6 @@
 package cz.jenda.pidifrky.ui.api
 
+import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.{NavUtils, TaskStackBuilder}
 import android.support.v7.app.AppCompatActivity
@@ -27,7 +28,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   private var tracker: Option[Tracker] = None
 
-  private var mockLocation: Boolean = _
+  protected var mockLocation: Boolean = _
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -74,6 +75,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     DebugReporter.debug("Starting activity " + getLocalClassName)
     Application.currentActivity = Some(this)
 
+    LocationHandler.addListener(onLocationChanged)
+
     tracker.foreach(_.send(new HitBuilders.ScreenViewBuilder().build))
   }
 
@@ -81,6 +84,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     super.onPause()
     activityState = PausedState
     DebugReporter.debug("Pausing activity " + getLocalClassName)
+
+    LocationHandler.removeListener(onLocationChanged)
   }
 
 
@@ -144,10 +149,16 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     }
     else {
       actionBarMenu()
-        .map { _ => onActionBarClicked.apply(id) }
+        .map { _ => if (onActionBarClicked.isDefinedAt(id)) onActionBarClicked.apply(id) else false }
         .getOrElse(super.onOptionsItemSelected(item))
     }
   }
+
+  protected def runOnUiThread(block: => Unit): Unit = runOnUiThread(new Runnable {
+    override def run(): Unit = block
+  })
+
+  protected def onLocationChanged(location: Location): Unit = {}
 
   protected def onApplicationStart(): Unit = {}
 

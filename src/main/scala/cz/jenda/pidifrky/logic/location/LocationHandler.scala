@@ -57,10 +57,13 @@ object LocationHandler {
   protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = if (location != null) {
     GpsLogger.addEvent("Location: " + Format(location, 4))
 
+    currentLocation = Some(location)
+
     val locationSource = LocationSource(location.getProvider)
 
     lastSource match {
       case Some(source) if source.name != location.getProvider =>
+        if (source == StoredSource) Toast(R.string.location_found, Toast.Medium) //loaded first "not stored" location
         lastSource = Some(locationSource)
       case None =>
         lastSource = Some(locationSource)
@@ -91,6 +94,8 @@ object LocationHandler {
   def disableMocking(implicit ctx: Activity): Unit = start
 
   def isMockingLocation: Boolean = mocking
+
+  def getCurrentLocation: Option[Location] = currentLocation
 
   def addListener(listener: LocationListener): Unit = {
     listeners = listeners + listener

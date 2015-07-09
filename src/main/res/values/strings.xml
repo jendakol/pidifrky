@@ -151,6 +151,7 @@
     <string name="menu_sendReport">Odeslat hlášení</string>
     <string name="menu_map_showNormal">Standardní mapa</string>
     <string name="menu_map_showPhoto">Fotomapa</string>
+    <string name="menu_map_showHybrid">Hybridní mapa</string>
     <string name="menu_map_reloadDisplay">Obnovit zobrazení</string>
     <string name="menu_map_followPosition">Sledovat akt. polohu</string>
     <string name="menu_help">Nápověda</string>

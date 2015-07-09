@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:pidifrky="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/menu_map_gpsOn"
+            android:title="@string/gps_on"
+            android:icon="@drawable/gps_on"
+            pidifrky:showAsAction="always"/>
+    <item
+            android:id="@+id/menu_map_showList"
+            android:title="@string/menu_showCardsList"
+            android:icon="@drawable/list"
+            pidifrky:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/menu_map_showNormal"
+            android:title="@string/menu_map_showNormal"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_showSattelite"
+            android:title="@string/menu_map_showPhoto"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_showHybrid"
+            android:title="@string/menu_map_showHybrid"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_reloadDisplay"
+            android:title="@string/menu_map_reloadDisplay"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_followPosition"
+            android:title="@string/menu_map_followPosition"
+            android:checkable="true"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_info"
+            android:title="@string/menu_help"
+            pidifrky:showAsAction="never"/>
+    <item
+            android:id="@+id/menu_map_showSettings"
+            android:title="@string/button_settings"
+            pidifrky:showAsAction="never"/>
+</menu>
