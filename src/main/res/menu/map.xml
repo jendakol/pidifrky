@@ -6,12 +6,12 @@
     <item
             android:id="@+id/menu_map_gpsOn"
             android:title="@string/gps_on"
-            android:icon="@drawable/gps_on"
+            android:icon="@drawable/ic_gps_fixed_white_36dp"
             pidifrky:showAsAction="always"/>
     <item
             android:id="@+id/menu_map_showList"
             android:title="@string/menu_showCardsList"
-            android:icon="@drawable/list"
+            android:icon="@drawable/ic_view_list_white_36dp"
             pidifrky:showAsAction="ifRoom"/>
     <item
             android:id="@+id/menu_map_showNormal"

@@ -29,6 +29,7 @@ object DebugReporter {
   }
 
   def breadcrumb(msg: String): Unit = {
+    debug(msg)
     Mint.leaveBreadcrumb(msg)
   }
 }

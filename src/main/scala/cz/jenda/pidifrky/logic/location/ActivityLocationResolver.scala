@@ -12,8 +12,8 @@ object ActivityLocationResolver extends LocationBasedOnActivityListener {
   //TODO: default values
   protected final val BaseDistance = 100
 
-  protected final val DefaultIntervalCoef = 1
-  protected final val DefaultDistanceCoef = 1
+  protected final val DefaultIntervalCoef = 1.0
+  protected final val DefaultDistanceCoef = 1.0
 
   protected var lastActivity: Option[DetectedActivity] = None
 
@@ -43,7 +43,7 @@ object ActivityLocationResolver extends LocationBasedOnActivityListener {
       import DetectedActivity._
 
       detectedActivity.getType match {
-        case IN_VEHICLE => (1 / 2.5, 1)
+        case IN_VEHICLE => (1 / 2.5, 1.0)
         case ON_BICYCLE => (1 / 2.5, 0.5)
         case ON_FOOT | WALKING | RUNNING => (0.5, 0.2)
         case STILL => (1.0, 0.2)

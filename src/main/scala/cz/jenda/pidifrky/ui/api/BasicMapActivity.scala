@@ -55,6 +55,10 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
 
           setMapType(PidifrkySettings.mapType, save = false)
 
+          val uiSettings = googleMap.getUiSettings
+          uiSettings.setZoomControlsEnabled(true)
+          uiSettings.setCompassEnabled(true)
+
           BasicMapActivity.this.onMapReady(googleMap)
 
           LocationHandler.getCurrentLocation.foreach(MapLocationSource.apply) //show the position immediately!

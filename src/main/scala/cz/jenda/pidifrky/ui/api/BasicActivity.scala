@@ -1,5 +1,7 @@
 package cz.jenda.pidifrky.ui.api
 
+import java.util.concurrent.Executors
+
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.{NavUtils, TaskStackBuilder}
@@ -10,6 +12,8 @@ import com.splunk.mint.Mint
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.location.LocationHandler
+
+import scala.concurrent.ExecutionContext
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -29,6 +33,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
   private var tracker: Option[Tracker] = None
 
   protected var mockLocation: Boolean = _
+
+  protected val ec = ExecutionContext.fromExecutor(Executors.newCachedThreadPool())
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -111,7 +117,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     DebugReporter.debug("Stopping activity " + getLocalClassName)
 
     activityState = StoppedState
-    Application.currentActivity = None
   }
 
   protected def onActionBarClicked: PartialFunction[Int, Boolean] = {
@@ -155,6 +160,10 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
   }
 
   protected def runOnUiThread(block: => Unit): Unit = runOnUiThread(new Runnable {
+    override def run(): Unit = block
+  })
+
+  protected def runAsync(block: => Unit): Unit = ec.execute(new Runnable {
     override def run(): Unit = block
   })
 

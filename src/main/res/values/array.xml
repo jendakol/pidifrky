@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="distanceOptions">
+        <item>10 km</item>
+        <item>20 km</item>
+        <item>30 km</item>
+        <item>40 km</item>
+        <item>50 km</item>
+        <item>70 km</item>
+        <item>100 km</item>
+    </string-array>
+
+    <string-array name="distanceValues">
+        <item>10000</item>
+        <item>20000</item>
+        <item>30000</item>
+        <item>40000</item>
+        <item>50000</item>
+        <item>70000</item>
+        <item>100000</item>
+    </string-array>
+
+    <string-array name="refreshOptions">
+        <item>1 s</item>
+        <item>3 s</item>
+        <item>5 s</item>
+        <item>10 s</item>
+        <item>20 s</item>
+        <item>30 s</item>
+        <item>60 s</item>
+    </string-array>
+
+    <string-array name="refreshValues">
+        <item>1000</item>
+        <item>3000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>20000</item>
+        <item>30000</item>
+        <item>60000</item>
+    </string-array>
+
+    <string-array name="filterTypes">
+        <item>@string/menu_filter_all</item>
+        <item>@string/menu_filter_found</item>
+        <item>@string/menu_filter_wanted</item>
+        <item>@string/menu_filter_owned_or_wanted</item>
+        <item>@string/menu_filter_other</item>
+    </string-array>
+
+    <string-array name="filterFoundTypes">
+        <item>@string/menu_filter_all</item>
+        <item>@string/yes</item>
+        <item>@string/no</item>
+    </string-array>
+
+    <string-array name="filterWantedTypes">
+        <item>@string/menu_filter_all</item>
+        <item>@string/yes</item>
+        <item>@string/no</item>
+    </string-array>
+
+    <string-array name="sortTypes">
+        <item>@string/menu_sort_name</item>
+        <item>@string/menu_sort_distance</item>
+        <item>@string/menu_sort_number</item>
+    </string-array>
+
+    <string-array name="tileActions">
+        <item>@string/menu_tile_center</item>
+        <item>@string/menu_tile_showCard</item>
+        <item>@string/menu_showCardOnMap</item>
+        <item>@string/menu_tile_report</item>
+    </string-array>
+
+    <string-array name="mapCardActions">
+        <item>@string/map_card_showDetail</item>
+        <item>@string/map_card_showMapWithMerchants</item>
+        <item>@string/map_card_showTiles</item>
+        <item>@string/map_showNeighbourhood_cards</item>
+        <item>@string/menu_card_markFound_true</item>
+        <item>@string/menu_card_markWanted_true</item>
+    </string-array>
+
+    <string-array name="mapMerchantActions">
+        <item>@string/map_merchant_showDetail</item>
+        <item>@string/map_merchant_showMapWithCards</item>
+        <item>@string/map_showNeighbourhood_cards</item>
+    </string-array>
+</resources>
