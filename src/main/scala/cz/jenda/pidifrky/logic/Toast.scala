@@ -15,16 +15,16 @@ import scala.util.Random
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object Toast {
-  final val Short = 2000
-  final val Medium = 3000
+  final val Short = 1500
+  final val Medium = 2500
   final val Long = 4000
 
-  private var toast: Option[ToastAndWrapper] = None
+  private var toast: Option[ToastAndWrapper[_]] = None
 
   def apply(text: String, duration: Int)(implicit ctx: Activity): Unit = Toast.synchronized {
     dismiss()
 
-    val toast = createToast(text, duration, SuperToast.Type.STANDARD)
+    val toast = createSimpleToast(text, duration)
 
     toast.show()
     this.toast = Some(ToastAndWrapper(toast))
@@ -35,7 +35,7 @@ object Toast {
   def apply(text: String, button: ToastButton, duration: Int)(implicit ctx: Activity): Unit = Toast.synchronized {
     dismiss()
 
-    val toast = createToast(text, duration, SuperToast.Type.BUTTON)
+    val toast = createSuperToast(text, duration, SuperToast.Type.BUTTON)
     toast.setButtonIcon(button.icon, button.text)
 
     val onClickWrapper = new OnClickWrapper(System.currentTimeMillis() + "_" + Random.nextFloat(), new OnClickListener {
@@ -48,9 +48,12 @@ object Toast {
     this.toast = Some(ToastAndWrapper(toast, Some(onClickWrapper)))
   }
 
+  def apply(textId: Int, button: ToastButton, duration: Int)(implicit ctx: Activity): Unit =
+    apply(ctx.getString(textId), button, duration)
+
   /* ---- */
 
-  protected def createToast(text: String, duration: Int, toastType: SuperToast.Type)(implicit ctx: Activity): SuperActivityToast = {
+  protected def createSuperToast(text: String, duration: Int, toastType: SuperToast.Type)(implicit ctx: Activity): SuperActivityToast = {
     val toast = new SuperActivityToast(ctx, toastType)
     toast.setDuration(duration)
     toast.setTouchToDismiss(true)
@@ -60,9 +63,19 @@ object Toast {
     toast
   }
 
+  protected def createSimpleToast(text: String, duration: Int)(implicit ctx: Activity): SuperToast = {
+    val toast = new SuperToast(ctx)
+    toast.setDuration(duration)
+    toast.setText(text)
+    toast.setBackground(SuperToast.Background.BLACK)
+    toast.setTextColor(Color.WHITE)
+    toast
+  }
+
   def dismiss(): Unit = {
+    SuperActivityToast.cancelAllSuperActivityToasts()
     toast.foreach(toast => try {
-      toast.toast.dismiss()
+      toast.dismiss()
     }
     catch {
       case e: Exception => DebugReporter.debug(e, "Error while dismissing the toast")
@@ -78,7 +91,12 @@ object Toast {
   }
 }
 
-case class ToastAndWrapper(toast: SuperActivityToast, onClickWrapper: Option[OnClickWrapper] = None)
+case class ToastAndWrapper[T](someToast: T, onClickWrapper: Option[OnClickWrapper] = None)(implicit ev: (SuperActivityToast with SuperToast) <:< T) {
+  def dismiss(): Unit = someToast match {
+    case t: SuperActivityToast => t.dismiss()
+    case t: SuperToast => t.dismiss()
+  }
+}
 
 trait ToastButton {
   val icon: Int
@@ -93,4 +111,3 @@ object ToastButton {
     override val icon: Int = SuperToast.Icon.Dark.UNDO
   }
 }
-

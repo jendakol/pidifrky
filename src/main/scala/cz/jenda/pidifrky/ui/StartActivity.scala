@@ -60,7 +60,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
     //    }
 
 
-    SingleChoiceDialog('testDialog, R.string.menu_display, R.array.filterTypes).show()
+    //    SingleChoiceDialog('testDialog, R.string.menu_display, R.array.filterTypes).show()
 
   }
 

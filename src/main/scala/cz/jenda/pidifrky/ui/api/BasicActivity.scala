@@ -28,13 +28,15 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   private var appStart = false
 
+  private var rotating = false
+
   protected def actionBarMenu(): Option[Int] = None
 
   private var tracker: Option[Tracker] = None
 
   protected var mockLocation: Boolean = _
 
-  protected val ec = ExecutionContext.fromExecutor(Executors.newCachedThreadPool())
+  protected implicit final val ec = ExecutionContext.fromExecutor(Executors.newCachedThreadPool())
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -43,6 +45,10 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     activityState = CreatedState
 
     appStart = Application.currentActivity.isEmpty
+
+    rotating = Application.currentActivity.exists(_.equals(BasicActivity.this)) && Application.currentOrientation != getOrientation
+
+    Application.currentOrientation = getOrientation
 
     PidifrkySettings.init(this)
 
@@ -103,7 +109,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
       if (appStart) onApplicationStart()
     }
     catch {
-      case e: Exception => DebugReporter.debug(e)
+      case e: Exception => DebugReporter.debugAndReport(e, "Error while executing onApplicationStart")
     }
   }
 
@@ -115,6 +121,15 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
   override protected def onStop(): Unit = {
     super.onStop()
     DebugReporter.debug("Stopping activity " + getLocalClassName)
+
+    if (Application.currentActivity.exists(_.equals(BasicActivity.this)) && Application.currentOrientation == getOrientation) {
+      try {
+        onApplicationMinimize()
+      }
+      catch {
+        case e: Exception => DebugReporter.debugAndReport(e, "Error while minimizing the app")
+      }
+    }
 
     activityState = StoppedState
   }
@@ -169,11 +184,19 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   protected def onLocationChanged(location: Location): Unit = {}
 
-  protected def onApplicationStart(): Unit = {}
+  protected def onApplicationStart(): Unit = {
+    DebugReporter.debug("Application has started")
+  }
 
-  protected def onApplicationMinimize(): Unit = {}
+  protected def onApplicationMinimize(): Unit = {
+    DebugReporter.debug("Application has been minimized")
+  }
 
   /* --- */
+
+  protected def isRotating: Boolean = rotating
+
+  def getOrientation: Orientation = Orientation(getWindowManager.getDefaultDisplay.getRotation)
 
   def getTracker: Option[Tracker] = tracker
 }
