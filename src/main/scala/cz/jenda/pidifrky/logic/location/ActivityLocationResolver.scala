@@ -9,11 +9,10 @@ import io.nlopez.smartlocation.location.providers.LocationBasedOnActivityProvide
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object ActivityLocationResolver extends LocationBasedOnActivityListener {
-  //TODO: default values
   protected final val BaseDistance = 100
 
-  protected final val DefaultIntervalCoef = 1.0
-  protected final val DefaultDistanceCoef = 1.0
+  protected final val DefaultIntervalCoef = 0.75
+  protected final val DefaultDistanceCoef = 0.5
 
   protected var lastActivity: Option[DetectedActivity] = None
 
@@ -54,7 +53,12 @@ object ActivityLocationResolver extends LocationBasedOnActivityListener {
     val interval = baseInterval * intervalCoef
     val distance = BaseDistance * distanceCoef
 
-    if (changed) DebugReporter.debug(s"Location settings: interval=$interval, distance=$distance")
+    if (changed) {
+      GpsLogger.addEvent(s"Location settings: interval=$interval, distance=$distance")
+    }
+    else {
+      DebugReporter.debug(s"Location settings: interval=$interval, distance=$distance")
+    }
 
     new LocationParams.Builder()
       .setAccuracy(LocationAccuracy.HIGH)
