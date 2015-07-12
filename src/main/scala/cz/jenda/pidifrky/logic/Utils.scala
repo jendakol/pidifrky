@@ -212,55 +212,54 @@ import scala.util.Try
 
   //
   //  def toStringArray(selectionArgs: AnyRef*): Array[String] = {
-  //    val args: Array[String] = new Array[String](if (selectionArgs != null) selectionArgs.length else 0) {
+  //    val args = new Array[String](if (selectionArgs != null) selectionArgs.length else 0) {
   //      var i: Int = 0
-  //      while (i < args.length) {
-  //        args(i) = if (selectionArgs != null) (if (selectionArgs(i) != null) selectionArgs(i).toString else "") else null
-  //        ({
+  //      while (i < args.) {
+  //        args(i) = if (selectionArgs != null) if (selectionArgs(i) != null) selectionArgs(i).toString else "" else null
+  //        {
   //          i += 1;
   //          i - 1
-  //        })
+  //        }
   //      }
   //    }
   //    return args
   //  }
-  //
-  //  def convertStreamToString(is: InputStream): String = {
-  //    try {
-  //      val reader: BufferedReader = new BufferedReader(new InputStreamReader(is))
-  //      val sb: StringBuilder = new StringBuilder
-  //      var line: String = null
-  //      while ((({
-  //        line = reader.readLine;
-  //        line
-  //      })) != null) {
-  //        sb.append(line).append("\n")
-  //      }
-  //      reader.close
-  //      return sb.toString
-  //    }
-  //    catch {
-  //      case e: IOException => {
-  //        DebugReporter.debugAndReport("", e)
-  //        return ""
-  //      }
-  //    }
-  //  }
-  //
-  //  def getStringFromFile(fl: File): String = {
-  //    try {
-  //      val fin: FileInputStream = new FileInputStream(fl)
-  //      val ret: String = convertStreamToString(fin)
-  //      fin.close
-  //      return ret
-  //    }
-  //    catch {
-  //      case e: IOException => {
-  //        DebugReporter.debugAndReport("", e)
-  //        return ""
-  //      }
-  //    }
-  //  }
+
+  def convertStreamToString(is: InputStream): String = {
+    try {
+      val reader: BufferedReader = new BufferedReader(new InputStreamReader(is))
+      val sb: StringBuilder = new StringBuilder
+      var line: String = null
+      while ( {
+                line = reader.readLine
+                line
+              } != null) {
+        sb.append(line).append("\n")
+      }
+      reader.close()
+      sb.toString()
+    }
+    catch {
+      case e: IOException =>
+        DebugReporter.debugAndReport(e)
+        ""
+    }
+  }
+
+  def getStringFromFile(fl: File): String = {
+    try {
+      val fin: FileInputStream = new FileInputStream(fl)
+      val ret: String = convertStreamToString(fin)
+      fin.close()
+      ret
+    }
+    catch {
+      case e: IOException =>
+        DebugReporter.debugAndReport(e)
+        ""
+    }
+  }
+
   //
   //  def openBrowserIntent(url: String): Intent = {
   //    DebugReporter.debug("Opening browser (%s)", url)

@@ -62,6 +62,21 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
 
     //    SingleChoiceDialog('testDialog, R.string.menu_display, R.array.filterTypes).show()
 
+    //    runAsync {
+    //      val http = new HttpRequester("https://google.com")
+    //
+    //      try {
+    //        val r = http.execute()
+    //
+    //        DebugReporter.debug(r.asString())
+    //      }
+    //      catch {
+    //        case e: Exception =>
+    //          e.printStackTrace()
+    //          DebugReporter.debug(e)
+    //      }
+    //    }
+
   }
 
   def click(v: View): Unit = {

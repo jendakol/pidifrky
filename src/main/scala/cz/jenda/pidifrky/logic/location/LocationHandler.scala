@@ -41,13 +41,11 @@ object LocationHandler {
 
     //TODO: check if any provider is available
 
-    currentLocation = Option(control.getLastLocation) //can be null!
+    Option(control.getLastLocation) //can be null!
       .map(loc => {
       loc.setAccuracy(1000) //last known location, can be not precise
       loc
-    })
-
-    currentLocation.foreach(updateLocation)
+    }).foreach(updateLocation)
 
     control.start(new OnLocationUpdatedListener {
       override def onLocationUpdated(location: Location): Unit = updateLocation(location)
@@ -59,7 +57,7 @@ object LocationHandler {
     currentLocation match {
       case Some(oldLocation) =>
         val dist = location.distanceTo(oldLocation)
-        if (!(Math.abs(location.getAccuracy - oldLocation.getAccuracy) * 2 < dist && dist > 10)) {
+        if (!(Math.abs(location.getAccuracy - oldLocation.getAccuracy) * 2 < dist && dist > 5)) {
           GpsLogger.addEvent("Location: " + Format(location, dist))
           GpsLogger.addEvent("Found location does NOT have sufficient accuracy")
           return
