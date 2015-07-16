@@ -15,6 +15,6 @@ object Format {
 
   def apply(location: Location, distance: Float): String = {
     //TODO: check if it has all properties
-    s"%.4f N, %.4f E, acc %d, dist %.4f, %d°, %.0f km/h".formatLocal(Locale.US, location.getLatitude, location.getLongitude, location.getAccuracy.toInt, distance, location.getBearing.toInt, location.getSpeed * 3.6)
+    s"%.4fN, %.4fE, acc %d, dist %.1f, %.0f km/h".formatLocal(Locale.US, location.getLatitude, location.getLongitude, location.getAccuracy.toInt, distance, location.getSpeed * 3.6)
   }
 }

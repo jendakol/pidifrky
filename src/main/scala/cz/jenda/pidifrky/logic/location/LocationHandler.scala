@@ -53,11 +53,10 @@ object LocationHandler {
   }
 
   protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = if (location != null) {
-
     currentLocation match {
       case Some(oldLocation) =>
         val dist = location.distanceTo(oldLocation)
-        if (!(Math.abs(location.getAccuracy - oldLocation.getAccuracy) * 2 < dist && dist > 5)) {
+        if (Math.abs(location.getAccuracy - oldLocation.getAccuracy) > dist && dist < 5) {
           GpsLogger.addEvent("Location: " + Format(location, dist))
           GpsLogger.addEvent("Found location does NOT have sufficient accuracy")
           return
