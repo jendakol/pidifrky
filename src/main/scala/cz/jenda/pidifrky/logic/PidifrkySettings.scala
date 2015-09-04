@@ -11,7 +11,7 @@ import cz.jenda.pidifrky.logic.map.MapType
 object PidifrkySettings {
   private var preferences: SharedPreferences = _
 
-  def init(context: Context): Unit = {
+  def init(implicit context: Context): Unit = {
     preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     //when initializing
@@ -29,15 +29,63 @@ object PidifrkySettings {
     }
   }
 
-  def isTrackingEnabled: Boolean = true //TODO
+  def trackingEnabled: Boolean = readBoolean(PidifrkyConstants.PREF_TRACKING, default = false)
 
-  def gpsUpdateIntervals: GpsIntervalSettings = GpsIntervalSettings(3000, 3000, 2000) //TODO
+  def gpsUpdateIntervals: GpsIntervalSettings = GpsIntervalSettings(
+    readInt(PidifrkyConstants.PREF_REFRESH_LIST, 3000),
+    readInt(PidifrkyConstants.PREF_REFRESH_DETAIL, 3000),
+    readInt(PidifrkyConstants.PREF_REFRESH_MAP, 2000)
+  )
 
-  def followLocationOnMap: Boolean = true //TODO
+  def followLocationOnMap: Boolean = readBoolean(PidifrkyConstants.PREF_MAP_FOLLOW_LOCATION, default = false)
 
-  def mapType: MapType = MapType(preferences.getInt("mapType", 1))
+  def mapType: MapType = MapType(readInt(PidifrkyConstants.PREF_MAP_TYPE, 1))
+
+  def closestDistance: Int = readInt(PidifrkyConstants.PREF_DISTANCE_CLOSEST, 30000)
+
+  def gpsTimeout: Int = readInt(PidifrkyConstants.PREF_GPS_OFF_TIMEOUT, 5000)
+
+  def markAndGetStarts: Int = try {
+    val started: Int = preferences.getInt(PidifrkyConstants.STARTED_COUNT, 0) + 1
+    preferences.edit.putInt(PidifrkyConstants.STARTED_COUNT, started).apply()
+    started
+  }
+  catch {
+    case e: Exception =>
+      DebugReporter.debug(e)
+      1
+  }
+
+  def starts: Int = readInt(PidifrkyConstants.STARTED_COUNT, 0)
+
+  def ratedApp: Boolean = readBoolean(PidifrkyConstants.RATED, default = false)
+
+  def ratedApp(rated: Boolean): Unit = editor.putBoolean(PidifrkyConstants.RATED, rated).apply()
+
+  def databaseHashes: DatabaseHashes =
+    DatabaseHashes(preferences.getString(PidifrkyConstants.DATABASE_HASH_CARDS, "_"), preferences.getString(PidifrkyConstants.DATABASE_HASH_MERCHANTS, "_"))
 
   def editor: SharedPreferences.Editor = preferences.edit()
+
+  protected def readInt(name: String, default: Int): Int = try {
+    preferences.getInt(name, default)
+  }
+  catch {
+    case e: Exception =>
+      DebugReporter.debug(e)
+      default
+  }
+
+  protected def readBoolean(name: String, default: Boolean): Boolean = try {
+    preferences.getBoolean(name, default)
+  }
+  catch {
+    case e: Exception =>
+      DebugReporter.debug(e)
+      default
+  }
 }
 
 case class GpsIntervalSettings(list: Int, detail: Int, map: Int)
+
+case class DatabaseHashes(cards: String, merchants: String)

@@ -50,7 +50,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
     Application.currentOrientation = getOrientation
 
-    PidifrkySettings.init(this)
+    PidifrkySettings.init
 
     Mint.initAndStartSession(this, PidifrkyConstants.MINT_API_KEY)
     Mint.setUserIdentifier(PidifrkySettings.UUID)
@@ -69,7 +69,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     actionBar.setHomeButtonEnabled(hasParentActivity)
     actionBar.setDisplayHomeAsUpEnabled(hasParentActivity)
 
-    if (PidifrkySettings.isTrackingEnabled) {
+    if (PidifrkySettings.trackingEnabled) {
       val analytics = GoogleAnalytics.getInstance(this)
       val tracker = analytics.newTracker(R.xml.app_tracker)
 
