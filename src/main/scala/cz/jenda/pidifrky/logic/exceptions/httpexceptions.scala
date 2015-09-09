@@ -8,7 +8,7 @@ import retrofit.client.Response
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 class HttpException(message: String, cause: Throwable = null) extends PidifrkyException(message, cause) {
-  override def toString: String = getClass.getSimpleName + s"{'$message', cause by ${if (cause != null) Format(cause) else "<nothing>"}}"
+  override def toString: String = getClass.getSimpleName + s"{'$message', caused by ${if (cause != null) Format(cause) else "<nothing>"}}"
 }
 
 object HttpException {
