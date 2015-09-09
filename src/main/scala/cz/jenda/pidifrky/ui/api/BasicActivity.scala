@@ -1,7 +1,5 @@
 package cz.jenda.pidifrky.ui.api
 
-import java.util.concurrent.Executors
-
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.{NavUtils, TaskStackBuilder}
@@ -13,8 +11,6 @@ import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.location.LocationHandler
 
-import scala.concurrent.ExecutionContext
-
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
@@ -22,7 +18,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   protected def hasParentActivity = true
 
-  private var activityState: ActivityState = _
+  private var activityState: ActivityState = CreatedState //default
 
   protected final implicit val ctx: AppCompatActivity = this
 
@@ -34,9 +30,9 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   private var tracker: Option[Tracker] = None
 
-  protected var mockLocation: Boolean = _
+  protected var mockLocation: Boolean = false //default
 
-  protected implicit final val ec = ExecutionContext.fromExecutor(Executors.newCachedThreadPool())
+  protected implicit final val ec = Application.executionContext
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)

@@ -21,13 +21,13 @@ import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings, Toast}
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
-  private val iconGenerator = new IconGenerator(this)
+  private lazy val iconGenerator = new IconGenerator(this)
 
   private var map: Option[GoogleMap] = None
 
   private var cameraMoved = false
-  private var followLocation: Boolean = _
 
+  private var followLocation: Boolean = true //default
 
   override protected def actionBarMenu(): Option[Int] = Some(R.menu.map)
 
