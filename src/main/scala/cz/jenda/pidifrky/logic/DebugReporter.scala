@@ -11,13 +11,15 @@ import org.apache.commons.lang3.StringUtils
 object DebugReporter {
   final val DEBUG_TAG = "PIDIFRKY"
 
-  def debug(e: Throwable, msg: String = ""): Unit = Log.d(DEBUG_TAG, if (StringUtils.isNotBlank(msg)) msg else "")
+  def debug(e: Throwable, msg: String = ""): Unit = debug(
+    Format(e) + (if (StringUtils.isNotBlank(msg)) s"($msg)" else "")
+  )
 
   def debug(msg: String): Unit = Log.d(DEBUG_TAG, msg)
 
   def debugAndReport(e: Throwable, msg: String = ""): Unit = {
     debug(e, msg)
-    Mint.addExtraData("ignored", "true")
+    Mint.addExtraData("Ignored", "true")
 
     Application.currentActivity.foreach { ctx =>
       val description = new StandardExceptionParser(ctx, null).getDescription(Thread.currentThread.getName, e)

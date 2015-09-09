@@ -26,7 +26,10 @@ object Toast {
 
     val toast = createSimpleToast(text, duration)
 
-    toast.show()
+    Utils.runOnUiThread {
+      toast.show()
+    }
+
     this.toast = Some(ToastAndWrapper(toast))
   }
 
@@ -93,8 +96,13 @@ object Toast {
 
 case class ToastAndWrapper[T](someToast: T, onClickWrapper: Option[OnClickWrapper] = None)(implicit ev: (SuperActivityToast with SuperToast) <:< T) {
   def dismiss(): Unit = someToast match {
-    case t: SuperActivityToast => t.dismiss()
-    case t: SuperToast => t.dismiss()
+    case t: SuperActivityToast => if (t.isShowing) t.dismiss()
+    case t: SuperToast => if (t.isShowing) t.dismiss()
+  }
+
+  def isShowing: Boolean = someToast match {
+    case t: SuperActivityToast => t.isShowing
+    case t: SuperToast => t.isShowing
   }
 }
 
