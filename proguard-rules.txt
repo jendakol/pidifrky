@@ -7,3 +7,8 @@
 -keep class scala.collection.SeqLike {
     public protected *;
 }
+
+-dontwarn retrofit.**
+-keep class retrofit.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions

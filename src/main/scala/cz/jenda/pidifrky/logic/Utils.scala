@@ -114,15 +114,15 @@ import scala.util.Try
   def updateOnlineStatus(): Unit = {
     executorService.submit(new Runnable() {
       def run() {
-        try {
+        online = try {
           InetAddress.getAllByName("maps.google.com")
-          online = true
+          true
         }
         catch {
-          case e: UnknownHostException => online = false
+          case e: UnknownHostException => false
           case e: Exception =>
             DebugReporter.debugAndReport(e)
-            online = false
+            false
         }
         DebugReporter.debug("Online status: " + online)
         try {
@@ -148,7 +148,6 @@ import scala.util.Try
   }
 
   def getOrientation: Int = orientation
-
 
   def setOrientation(orientation: Int) {
     Utils.orientation = orientation
@@ -304,8 +303,8 @@ import scala.util.Try
   //  }
 
   def gzip(data: Array[Byte]): Try[Array[Byte]] = Try {
-    val os: ByteArrayOutputStream = new ByteArrayOutputStream
-    val gos: DeflaterOutputStream = new DeflaterOutputStream(os)
+    val os = new ByteArrayOutputStream
+    val gos = new DeflaterOutputStream(os)
     gos.write(data)
     gos.close()
     os.toByteArray
