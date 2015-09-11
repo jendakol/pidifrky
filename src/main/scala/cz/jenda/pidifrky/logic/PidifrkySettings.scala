@@ -31,6 +31,10 @@ object PidifrkySettings {
 
   def trackingEnabled: Boolean = readBoolean(PidifrkyConstants.PREF_TRACKING, default = false)
 
+  def debugCollecting: Boolean = readBoolean(PidifrkyConstants.PREF_DEBUG_ALLOWED, default = false)
+
+  def debugAutoSend: Boolean = readBoolean(PidifrkyConstants.PREF_DEBUG_AUTOSEND, default = true)
+
   def gpsUpdateIntervals: GpsIntervalSettings = GpsIntervalSettings(
     readInt(PidifrkyConstants.PREF_REFRESH_LIST, 3000),
     readInt(PidifrkyConstants.PREF_REFRESH_DETAIL, 3000),
@@ -84,6 +88,8 @@ object PidifrkySettings {
       DebugReporter.debug(e)
       default
   }
+
+  def sharedPreferences: Option[SharedPreferences] = Option(preferences)
 }
 
 case class GpsIntervalSettings(list: Int, detail: Int, map: Int)

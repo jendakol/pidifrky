@@ -8,7 +8,7 @@ import java.util.zip.DeflaterOutputStream
 import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
 import android.content.{Context, Intent}
-import android.os.Debug
+import android.os.{Build, Debug}
 import android.view.Display
 import com.splunk.mint.Mint
 
@@ -288,19 +288,22 @@ import scala.util.Try
   //    return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase
   //  }
   //
-  //  def getDeviceInfo: String = {
-  //    var info: String = "UUID=" + PidifrkySettings.getInstance(getContext).getUUID + "\n" + "ID=" + Build.ID + "\n" + "DEVICE=" + Build.DEVICE + "\n" + "SDK=" + Build.VERSION.RELEASE + "\n" + "HARDWARE=" + Build.HARDWARE + "\n" + "MANUFACTURER=" + Build.MANUFACTURER + "\n" + "MODEL=" + Build.MODEL + "\n" + "SCREEN=" + Arrays.toString(Utils.getScreenSize(Utils.getContext)) + "\n"
-  //    try {
-  //      val packageInfo: PackageInfo = Utils.getContext.getPackageManager.getPackageInfo(Utils.getContext.getPackageName, 0)
-  //      info += "appVersion=" + packageInfo.versionName + "/" + packageInfo.versionCode + "\n\n\n"
-  //    }
-  //    catch {
-  //      case e: PackageManager.NameNotFoundException => {
-  //        DebugReporter.debugAndReport("", e)
-  //      }
-  //    }
-  //    return info
-  //  }
+  def getDeviceInfo(implicit activity: Activity): String = {
+    var info: String = "UUID=" + PidifrkySettings.UUID + "\n" + "ID=" + Build.ID + "\n" +
+                       "DEVICE=" + Build.DEVICE + "\n" + "SDK=" + Build.VERSION.RELEASE + "\n" + "HARDWARE=" + Build.HARDWARE + "\n" +
+                       "MANUFACTURER=" + Build.MANUFACTURER + "\n" + "MODEL=" + Build.MODEL + "\n" + "SCREEN=" + Utils.getScreenSize(activity) + "\n"
+    try {
+      Application.currentActivity.foreach { ctx =>
+        val packageInfo = ctx.getPackageManager.getPackageInfo(ctx.getPackageName, 0)
+        info += "appVersion=" + packageInfo.versionName + "/" + packageInfo.versionCode + "\n\n\n"
+      }
+
+    }
+    catch {
+      case e: PackageManager.NameNotFoundException => DebugReporter.debugAndReport(e)
+    }
+    info
+  }
 
   def gzip(data: Array[Byte]): Try[Array[Byte]] = Try {
     val os = new ByteArrayOutputStream
