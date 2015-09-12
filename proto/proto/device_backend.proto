@@ -1,0 +1,32 @@
+option optimize_for = SPEED;
+option java_package = "cz.jenda.pidifrky.proto";
+
+message Envelope {
+    required string uuid = 1;
+    required string app_version = 2;
+    optional bool debug = 3;
+
+    required DeviceInfo device_info = 4;
+
+    message DeviceInfo {
+        optional string id = 1;
+        optional string device = 2;
+        optional int32 sdk = 3;
+        optional string hardware = 4;
+        optional string manufacturer = 5;
+        optional string model = 6;
+        optional ScreenSize screen_size = 7;
+
+        message ScreenSize {
+            required int32 width = 1;
+            required int32 height = 2;
+        }
+    }
+
+    required bytes data = 1000;
+}
+
+message DebugReportRequest {
+    optional string contact = 1;
+    required bytes content = 2; //GZIPped
+}

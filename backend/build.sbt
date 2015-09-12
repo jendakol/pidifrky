@@ -11,6 +11,7 @@ lazy val server = (project in file("server")).settings(
   libraryDependencies ++= Seq(
     "com.vmunier" %% "play-scalajs-scripts" % "0.3.0",
     "org.webjars" % "jquery" % "1.11.1",
+    "com.typesafe.play" % "play-mailer_2.11" % "3.0.1",
     specs2 % Test
   )
 ).enablePlugins(PlayScala).
@@ -28,8 +29,12 @@ lazy val client = (project in file("client-js")).settings(
   dependsOn(sharedJs)
 
 lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared")).
-  settings(scalaVersion := scalaV).
-  jsConfigure(_ enablePlugins ScalaJSPlay)
+  settings(
+    scalaVersion := scalaV,
+    libraryDependencies ++= Seq(
+      "com.google.protobuf" % "protobuf-java" % "2.6.1"
+    )
+  ).jsConfigure(_ enablePlugins ScalaJSPlay)
 
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
@@ -37,3 +42,6 @@ lazy val sharedJs = shared.js
 // loads the Play project at sbt startup
 onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
 
+// allow circular dependencies for test sources
+compileOrder in Compile := CompileOrder.Mixed
+compileOrder in Test := CompileOrder.Mixed

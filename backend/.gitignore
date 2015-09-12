@@ -25,3 +25,5 @@ shared/.jvm
 *.orig
 
 project-readme.md
+server/conf/application.conf
+server/conf/logback.properties

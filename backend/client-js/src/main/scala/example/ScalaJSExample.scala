@@ -1,11 +1,10 @@
 package example
 
 import scala.scalajs.js
-import org.scalajs.dom
-import shared.SharedMessages
 
 object ScalaJSExample extends js.JSApp {
   def main(): Unit = {
-    dom.document.getElementById("scalajsShoutOut").textContent = "JS: "+SharedMessages.itWorks
+    //TODO - main JS class
+    //    dom.document.getElementById("scalajsShoutOut").textContent = "JS dynamic text"
   }
 }
