@@ -3,15 +3,14 @@ package cz.jenda.pidifrky.logic.http
 import java.security.cert.CertificateException
 import java.security.{KeyManagementException, KeyStoreException, NoSuchAlgorithmException}
 
-import android.content.pm.PackageManager
 import com.squareup.okhttp.OkHttpClient
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.exceptions._
-import retrofit.RequestInterceptor.RequestFacade
+import cz.jenda.pidifrky.proto.DeviceBackend.DebugReportRequest
 import retrofit.RestAdapter.Builder
 import retrofit.client.{OkClient, Response}
-import retrofit.http.GET
-import retrofit.{Callback, RequestInterceptor, RetrofitError}
+import retrofit.http.{Body, POST}
+import retrofit.{Callback, RetrofitError}
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success, Try}
@@ -25,43 +24,42 @@ object HttpRequester {
 
   import cz.jenda.pidifrky.logic.Application._
 
-
-  private lazy val requestInterceptor: RequestInterceptor = new RequestInterceptor {
-    override def intercept(request: RequestFacade): Unit = {
-      request.addHeader("secret", "a4e4924865e9d745d4ad8e") //since the source is public, it loses much of its sense, but it can still be used for filtering of some bullshit requests...
-      request.addHeader("uuid", PidifrkySettings.UUID)
-      request.addHeader("debug", Utils.isDebug.toString)
-
-      try Application.currentActivity.foreach { ctx =>
-        val packageInfo = ctx.getPackageManager.getPackageInfo(ctx.getPackageName, 0)
-        request.addHeader("appVersion", packageInfo.versionName + "/" + packageInfo.versionCode)
-      }
-      catch {
-        case e: PackageManager.NameNotFoundException =>
-          //ignore...
-          DebugReporter.debugAndReport(e)
-      }
-    }
-  }
   private lazy val client: OkClient = new OkClient(new OkHttpClient())
 
   protected lazy val httpsClient = new Builder()
     .setEndpoint(PidifrkyConstants.BASE_URL.replaceAll("http://", "https://"))
     .setClient(client)
-    .setRequestInterceptor(requestInterceptor)
+    .setConverter(DeviceEnvelopeConverter)
     .build().create(classOf[PidifrkyService])
 
   protected lazy val httpClient = new Builder()
     .setEndpoint(PidifrkyConstants.BASE_URL.replaceAll("https://", "http://"))
     .setClient(client)
+    .setConverter(DeviceEnvelopeConverter)
     .build().create(classOf[PidifrkyService])
 
 
-  def ping: Future[String] = exec(httpsClient.ping, httpClient.ping, PlainResponseDecoder) { r =>
-    r.status.toString
+  def debugReport(report: DebugReportRequest): Try[Unit] = exec(httpsClient.debugReport(report), httpClient.debugReport(report), PlainResponseDecoder) flatMap {
+    case r if r.getStatus == 200 => Success(())
+    case r => Failure(WrongHttpStatusException(r.getStatus))
   }
 
-  private def exec[T](https: Callback[Response] => Unit, http: Callback[Response] => Unit, responseType: ResponseDecoder)(toFinalResponse: HttpResponse => T): Future[T] = {
+  private def exec[T](https: () => T, http: () => T, responseType: ResponseDecoder): Try[T] =
+    Try {
+      https()
+    } transform(r => Success(r), t => Failure(t.getCause match {
+      case e@(_: KeyStoreException | _: NoSuchAlgorithmException | _: CertificateException | _: KeyManagementException | _: javax.net.ssl.SSLException) =>
+        DebugReporter.debug(e, "Error in SSL connection")
+        SSLException(e)
+      case e => HttpException(e)
+    })) recover {
+      case SSLException(t) =>
+        DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
+
+        http()
+    }
+
+  private def execAsync[T](https: Callback[Response] => Unit, http: Callback[Response] => Unit, responseType: ResponseDecoder)(toFinalResponse: HttpResponse => T): Future[T] = {
     val httpsPromise = Promise[Response]()
 
     https(new Callback[Response] {
@@ -110,7 +108,7 @@ object HttpRequester {
 }
 
 trait PidifrkyService {
-  @GET("/")
-  def ping(callback: Callback[Response])
+  @POST("/debugReport")
+  def debugReport(@Body report: DebugReportRequest)(): Response
 
 }

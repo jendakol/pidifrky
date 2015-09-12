@@ -12,7 +12,7 @@ class HttpException(message: String, cause: Throwable = null) extends PidifrkyEx
 }
 
 object HttpException {
-  def apply(cause: Throwable): HttpException = new HttpException(cause.getMessage, cause) {}
+  def apply(cause: Throwable): HttpException = new HttpException(Option(cause).map(_.getMessage).getOrElse(""), cause) {}
 }
 
 case class SSLException(cause: Throwable) extends HttpException(s"SSL connection has failed", cause)

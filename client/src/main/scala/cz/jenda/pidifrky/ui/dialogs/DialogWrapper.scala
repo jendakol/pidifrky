@@ -2,6 +2,8 @@ package cz.jenda.pidifrky.ui.dialogs
 
 import cz.jenda.pidifrky.logic.DebugReporter
 
+import scala.reflect.ClassTag
+
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
@@ -11,8 +13,8 @@ trait DialogWrapper[D <: BaseDialog] {
 
   DialogWrapper.registerWrapper(this)
 
-  private[dialogs] def updateDialog(dialog: BaseDialog): Unit = dialog match {
-    case d: D => this.dialog = d
+  private[dialogs] def updateDialog(dialog: BaseDialog)(implicit ct: ClassTag[D]): Unit = dialog match {
+    case d if ct.runtimeClass.isInstance(d) => this.dialog = d.asInstanceOf[D]
     case _ => DebugReporter.debug("Requested dialog has different type")
   }
 

@@ -29,9 +29,15 @@ object PidifrkySettings {
     }
   }
 
+  def contact: Option[String] =
+    if (preferences.contains(PidifrkyConstants.PREF_ACCOUNT_EMAIL))
+      Option(preferences.getString(PidifrkyConstants.PREF_ACCOUNT_EMAIL, ""))
+    else
+      None
+
   def trackingEnabled: Boolean = readBoolean(PidifrkyConstants.PREF_TRACKING, default = false)
 
-  def debugCollecting: Boolean = readBoolean(PidifrkyConstants.PREF_DEBUG_ALLOWED, default = false)
+  def debugCollecting: Boolean = Utils.isDebug || readBoolean(PidifrkyConstants.PREF_DEBUG_ALLOWED, default = false)
 
   def debugAutoSend: Boolean = readBoolean(PidifrkyConstants.PREF_DEBUG_AUTOSEND, default = true)
 

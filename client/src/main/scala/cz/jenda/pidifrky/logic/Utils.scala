@@ -3,14 +3,16 @@ package cz.jenda.pidifrky.logic
 import java.io._
 import java.net.{InetAddress, UnknownHostException}
 import java.util.concurrent.{Executors, ScheduledExecutorService, TimeUnit}
-import java.util.zip.DeflaterOutputStream
+import java.util.zip.{GZIPOutputStream, DeflaterOutputStream}
 
 import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.NameNotFoundException
 import android.content.{Context, Intent}
 import android.os.{Build, Debug}
 import android.view.Display
 import com.splunk.mint.Mint
+import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
 import scala.util.Try
 
@@ -31,9 +33,9 @@ import scala.util.Try
     val buf: Array[Byte] = new Array[Byte](1024)
     var len: Int = 0
     while ( {
-              len = in.read(buf)
-              len
-            } > 0) {
+      len = in.read(buf)
+      len
+    } > 0) {
       out.write(buf, 0, len)
     }
     in.close()
@@ -61,8 +63,15 @@ import scala.util.Try
   //    return Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "images_full" + File.separator + card.getImage.substring(card.getImage.lastIndexOf("/") + 1)))
   //  }
 
-  case class ScreenSize(width: Int, height: Int)
+  case class ScreenSize(width: Int, height: Int) {
+    def toGpb: cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo.ScreenSize =
+      cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo.ScreenSize.newBuilder()
+        .setWidth(width)
+        .setHeight(height)
+        .build()
+  }
 
+  //noinspection ScalaDeprecation
   def getScreenSize(activity: Activity): ScreenSize = {
     val display: Display = activity.getWindowManager.getDefaultDisplay
 
@@ -230,9 +239,9 @@ import scala.util.Try
       val sb: StringBuilder = new StringBuilder
       var line: String = null
       while ( {
-                line = reader.readLine
-                line
-              } != null) {
+        line = reader.readLine
+        line
+      } != null) {
         sb.append(line).append("\n")
       }
       reader.close()
@@ -288,26 +297,36 @@ import scala.util.Try
   //    return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase
   //  }
   //
-  def getDeviceInfo(implicit activity: Activity): String = {
-    var info: String = "UUID=" + PidifrkySettings.UUID + "\n" + "ID=" + Build.ID + "\n" +
-                       "DEVICE=" + Build.DEVICE + "\n" + "SDK=" + Build.VERSION.RELEASE + "\n" + "HARDWARE=" + Build.HARDWARE + "\n" +
-                       "MANUFACTURER=" + Build.MANUFACTURER + "\n" + "MODEL=" + Build.MODEL + "\n" + "SCREEN=" + Utils.getScreenSize(activity) + "\n"
-    try {
-      Application.currentActivity.foreach { ctx =>
-        val packageInfo = ctx.getPackageManager.getPackageInfo(ctx.getPackageName, 0)
-        info += "appVersion=" + packageInfo.versionName + "/" + packageInfo.versionCode + "\n\n\n"
-      }
 
-    }
-    catch {
-      case e: PackageManager.NameNotFoundException => DebugReporter.debugAndReport(e)
-    }
-    info
+  def getAppVersion: String =
+    Application.currentActivity.map { ctx =>
+      try {
+        val packageInfo = ctx.getPackageManager.getPackageInfo(ctx.getPackageName, 0)
+        packageInfo.versionName + "/" + packageInfo.versionCode
+      }
+      catch {
+        case e: NameNotFoundException =>
+          //ignore...
+          DebugReporter.debugAndReport(e)
+          "unknown"
+      }
+    }.getOrElse("unknown")
+
+  def getDeviceInfo(implicit activity: Activity): DeviceInfo = {
+    DeviceInfo.newBuilder()
+      .setDevice(Build.DEVICE)
+      .setId(Build.ID)
+      .setManufacturer(Build.MANUFACTURER)
+      .setModel(Build.MODEL)
+      .setHardware(Build.HARDWARE)
+      .setScreenSize(Utils.getScreenSize(activity).toGpb)
+      .setSdk(Build.VERSION.SDK_INT)
+      .build()
   }
 
   def gzip(data: Array[Byte]): Try[Array[Byte]] = Try {
     val os = new ByteArrayOutputStream
-    val gos = new DeflaterOutputStream(os)
+    val gos = new GZIPOutputStream(os)
     gos.write(data)
     gos.close()
     os.toByteArray

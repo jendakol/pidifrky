@@ -7,6 +7,10 @@
 -keep class scala.collection.SeqLike {
     public protected *;
 }
+-keep public class * extends com.google.protobuf.GeneratedMessage { *; }
+-keep public class cz.jenda.pidifrky.proto.** {
+    public protected *;
+}
 
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }

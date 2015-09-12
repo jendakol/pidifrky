@@ -11,7 +11,8 @@ object PidifrkyConstants {
   val DATABASE_VERSION = 8
   val DATABASE_NAME = "pidifrky.db"
 
-  val BASE_URL = "https://pidifrky.jenda.eu"
+//  val BASE_URL = "https://pidifrky.jenda.eu"
+  val BASE_URL = "http://192.168.56.1:9000" //for testing in Genymotion
   val URL_DATABASE = BASE_URL + "/getupdate.php"
   val URL_REPORT = BASE_URL + "/report.php"
   val URL_ROUTE = "http://maps.googleapis.com/maps/api/directions/json"

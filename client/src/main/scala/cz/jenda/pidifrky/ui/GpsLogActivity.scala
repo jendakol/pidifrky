@@ -3,6 +3,7 @@ package cz.jenda.pidifrky.ui
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import cz.jenda.pidifrky.R
+import cz.jenda.pidifrky.logic.DebugReporter
 import cz.jenda.pidifrky.logic.http.HttpRequester
 import cz.jenda.pidifrky.logic.location.GpsLogger
 import cz.jenda.pidifrky.ui.api.BasicActivity
@@ -31,9 +32,7 @@ class GpsLogActivity extends BasicActivity {
   override protected def onStart(): Unit = {
     super.onStart()
 
-    HttpRequester.ping andThen { case r =>
-      GpsLogger.addEvent("PING1: " + r.toString)
-    }
+    DebugReporter.sendIfAllowed()
   }
 
   override def onSaveInstanceState(outState: Bundle): Unit = {
