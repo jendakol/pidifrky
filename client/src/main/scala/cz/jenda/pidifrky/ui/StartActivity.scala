@@ -27,7 +27,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
           case _ => new scala.Exception(ex)
         })
 
-        Toast(ex.getMessage, Toast.Long)
+        System.exit(1)
       }
     })
 

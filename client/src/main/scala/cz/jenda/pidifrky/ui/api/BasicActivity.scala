@@ -20,7 +20,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   private var activityState: ActivityState = CreatedState //default
 
-  protected final implicit val ctx: AppCompatActivity = this
+  protected final implicit val ctx: BasicActivity = this
 
   private var appStart = false
 

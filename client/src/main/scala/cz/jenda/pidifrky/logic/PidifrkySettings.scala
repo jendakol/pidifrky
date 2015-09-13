@@ -75,6 +75,12 @@ object PidifrkySettings {
   def databaseHashes: DatabaseHashes =
     DatabaseHashes(preferences.getString(PidifrkyConstants.DATABASE_HASH_CARDS, "_"), preferences.getString(PidifrkyConstants.DATABASE_HASH_MERCHANTS, "_"))
 
+  /* ----- ----- ----- ----- ----- */
+
+  def showCardsNumbers: Boolean = readBoolean(PidifrkyConstants.PREF_SHOW_CARDS_NUMBERS, default = false)
+
+  /* ----- ----- ----- ----- ----- */
+
   def editor: SharedPreferences.Editor = preferences.edit()
 
   protected def readInt(name: String, default: Int): Int = try {

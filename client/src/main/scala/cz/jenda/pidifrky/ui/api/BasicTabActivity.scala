@@ -39,6 +39,6 @@ class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: List[TabFragm
   override def getPageTitle(position: Int): CharSequence = tabs(position).title
 }
 
-trait TabFragment extends Fragment {
+trait TabFragment extends BasicFragment {
   val title: String
 }

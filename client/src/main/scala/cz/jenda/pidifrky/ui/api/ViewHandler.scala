@@ -1,5 +1,6 @@
 package cz.jenda.pidifrky.ui.api
 
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
@@ -57,5 +58,23 @@ object ViewHandler {
   }
 
   def findTextView(view: View, id: Int): Option[TextView] = findView(view, id, classOf[TextView])
+
+  def findView(fragment: Fragment, id: Int): Option[View] = Option(fragment.getView).map(_.findViewById(id))
+
+  def findView[T <: View](fragment: Fragment, id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = findView(fragment, id) flatMap {
+    case v: View =>
+      if (ct.runtimeClass.isInstance(v)) {
+        Some(v.asInstanceOf[T])
+      }
+      else {
+        DebugReporter.debugAndReport(AnotherTypeOfViewException)
+        None
+      }
+    case _ =>
+      DebugReporter.debugAndReport(CannotFindViewException)
+      None
+  }
+
+  def findTextView(fragment: Fragment, id: Int): Option[TextView] = findView(fragment, id, classOf[TextView])
 
 }

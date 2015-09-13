@@ -32,7 +32,6 @@ class GpsLogActivity extends BasicActivity {
   override protected def onStart(): Unit = {
     super.onStart()
 
-    DebugReporter.sendIfAllowed()
   }
 
   override def onSaveInstanceState(outState: Bundle): Unit = {

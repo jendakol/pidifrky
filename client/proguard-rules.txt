@@ -3,15 +3,18 @@
 -dontpreverify
 -dontwarn scala.**
 -ignorewarnings
+
 # temporary workaround; see Scala issue SI-5397
 -keep class scala.collection.SeqLike {
     public protected *;
 }
+
 -keep public class * extends com.google.protobuf.GeneratedMessage { *; }
 -keep public class cz.jenda.pidifrky.proto.** {
     public protected *;
 }
 
+-dontwarn com.malinskiy.superrecyclerview.SwipeDismissRecyclerViewTouchListener*
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
 -keepattributes Signature
