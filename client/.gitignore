@@ -1,0 +1,5 @@
+local.properties
+build
+dep.txt
+app_tracker.xml
+src/main/res/values/config.xml

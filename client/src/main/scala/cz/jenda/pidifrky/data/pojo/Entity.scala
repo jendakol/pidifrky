@@ -1,8 +1,11 @@
 package cz.jenda.pidifrky.data.pojo
 
+import android.database.Cursor
 import android.location.Location
 import cz.jenda.pidifrky.data.IMapPoint
 import cz.jenda.pidifrky.logic.map.MapMarker
+
+import scala.util.Try
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -14,7 +17,7 @@ trait Entity extends IMapPoint {
 
   val nameRaw: String
 
-  val gps: Option[Location]
+  val location: Option[Location]
 
   def getDistance: Option[Double]
 
@@ -23,4 +26,8 @@ trait Entity extends IMapPoint {
   def toString: String
 
   def toMarker: Option[MapMarker]
+}
+
+trait EntityFactory[E <: Entity] {
+  def create(c: Cursor): Try[E]
 }

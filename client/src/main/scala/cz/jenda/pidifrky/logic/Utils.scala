@@ -3,12 +3,13 @@ package cz.jenda.pidifrky.logic
 import java.io._
 import java.net.{InetAddress, UnknownHostException}
 import java.util.concurrent.{Executors, ScheduledExecutorService, TimeUnit}
-import java.util.zip.{GZIPOutputStream, DeflaterOutputStream}
+import java.util.zip.GZIPOutputStream
 
 import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.{Context, Intent}
+import android.net.Uri
 import android.os.{Build, Debug}
 import android.view.Display
 import com.splunk.mint.Mint
@@ -23,9 +24,7 @@ import scala.util.Try
  * @version 0.1
  * @since 0.2
  */
-@SuppressWarnings(Array("deprecated")) object Utils {
-  @volatile
-  private var orientation: Int = 0
+object Utils {
 
   def copy(src: File, dst: File): Try[Unit] = Try {
     val in: InputStream = new FileInputStream(src)
@@ -42,12 +41,7 @@ import scala.util.Try
     out.close()
   }
 
-  //
-  //  def getThumbUri(card: Nothing): Uri = {
-  //    if (context == null || card.getImage == null) return null
-  //    return Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "thumbs" + File.separator + card.getImage.substring(card.getImage.lastIndexOf("/") + 1)))
-  //  }
-  //
+
   //  def getThumbUri(number: Int): Uri = {
   //    if (context == null || number <= 0) return null
   //    return getThumbUri(CardsDao.getInstance(context).getByNumber(number).asInstanceOf[Nothing])
@@ -57,11 +51,15 @@ import scala.util.Try
   //    if (context == null || number <= 0) return null
   //    return getFullImageUri(CardsDao.getInstance(context).getByNumber(number).asInstanceOf[Nothing])
   //  }
-  //
-  //  def getFullImageUri(card: Nothing): Uri = {
-  //    if (context == null || card.getImage == null) return null
-  //    return Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "images_full" + File.separator + card.getImage.substring(card.getImage.lastIndexOf("/") + 1)))
-  //  }
+
+  def getThumbImageUri(image: String): Option[Uri] = Application.currentActivity.map { context =>
+    Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "thumbs" + File.separator + image.substring(image.lastIndexOf("/") + 1)))
+  }
+
+
+  def getFullImageUri(image: String): Option[Uri] = Application.currentActivity.map { context =>
+    Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "images_full" + File.separator + image.substring(image.lastIndexOf("/") + 1)))
+  }
 
   case class ScreenSize(width: Int, height: Int) {
     def toGpb: cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo.ScreenSize =
@@ -154,12 +152,6 @@ import scala.util.Try
     DebugReporter.debug("Is debug: " + debug)
     if (debug) Mint.enableDebug()
     debug
-  }
-
-  def getOrientation: Int = orientation
-
-  def setOrientation(orientation: Int) {
-    Utils.orientation = orientation
   }
 
   def runOnUiThread(action: => Unit)(implicit ctx: Activity) {

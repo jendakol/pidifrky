@@ -1,6 +1,11 @@
 package cz.jenda.pidifrky.ui.fragments
 
+import cz.jenda.pidifrky.data.CardOrdering
+import cz.jenda.pidifrky.data.dao.CardsDao
 import cz.jenda.pidifrky.data.pojo.Card
+import cz.jenda.pidifrky.logic.Application.executionContext
+import cz.jenda.pidifrky.logic.FutureImplicits._
+import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 
@@ -11,8 +16,20 @@ class CardsListFragment(implicit ctx: BasicActivity) extends EntityListTabFragme
   override val title: String = "test Tab"
 
   override protected def listAdapter: BasicListAdapter[Card] = {
-    val card: Card = Card(1, 1, "Main", "main", None, "", "")
-    val data = List(card, card, card, card, card, card, card, card, card, card, card, card, card, card, card)
-    new CardsListAdapter(ctx, data, false)
+    implicit val ordering = CardOrdering.ByName
+
+    val adapter = new CardsListAdapter(false)
+
+    LocationHandler.getCurrentLocation.foreach { loc =>
+      CardsDao.getNearest(loc, 100000) foreachOnUIThread { cards =>
+        adapter.updateData(cards)
+      }
+    }
+
+    //    CardsDao.getAll foreachOnUIThread { cards =>
+    //      adapter.updateData(cards)
+    //    }
+
+    adapter
   }
 }

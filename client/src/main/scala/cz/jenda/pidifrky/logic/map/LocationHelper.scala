@@ -3,11 +3,15 @@ package cz.jenda.pidifrky.logic.map
 import android.location.{Location, LocationManager}
 import com.google.android.gms.maps.model.LatLng
 
+import scala.language.implicitConversions
+
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object LocationHelper {
-  def toLatLng(location: Location): LatLng = new LatLng(location.getLatitude, location.getLongitude)
+  val DEGREES_90: Double = 90 * 72080//meters
+
+  implicit def toLatLng(location: Location): LatLng = new LatLng(location.getLatitude, location.getLongitude)
 
   def toLocation(latitude: Double, longitude: Double, source: LocationSource = GpsSource): Location = {
     val l = new Location(source.name)
@@ -16,7 +20,7 @@ object LocationHelper {
     l
   }
 
-  def toLocation(latLng: LatLng): Location = {
+  implicit def toLocation(latLng: LatLng): Location = {
     toLocation(latLng.latitude, latLng.longitude, MockedSource)
   }
 
@@ -27,6 +31,10 @@ object LocationHelper {
     center.setLongitude(if (location1 != null && location2 != null) (location1.getLongitude + location2.getLongitude) / 2.0 else if (location1 != null) location1.getLongitude else location2.getLongitude)
 
     toLatLng(center)
+  }
+
+  def toDegrees(meters: Double): Double = {
+    meters * 90.0 / DEGREES_90
   }
 }
 

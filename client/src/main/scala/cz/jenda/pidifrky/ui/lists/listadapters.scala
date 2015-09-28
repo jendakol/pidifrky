@@ -6,13 +6,15 @@ import android.view.{LayoutInflater, View, ViewGroup}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.{Card, Entity}
 
+import scala.collection.SortedSet
+
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicListAdapter[E <: Entity](ctx: Context, showLocation: Boolean) extends RecyclerView.Adapter[AbstractViewHolder[E]] {
+abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx: Context) extends RecyclerView.Adapter[AbstractViewHolder[E]] {
   protected var data: List[E]
 
-  def updateData(data: Set[E]): Unit = {
+  def updateData(data: SortedSet[E]): Unit = {
     this.data = data.toList
     notifyDataSetChanged()
   }
@@ -37,7 +39,9 @@ abstract class BasicListAdapter[E <: Entity](ctx: Context, showLocation: Boolean
 
 }
 
-class CardsListAdapter(ctx: Context, var data: List[Card], showLocation: Boolean) extends BasicListAdapter[Card](ctx, showLocation) {
+class CardsListAdapter(protected var data: List[Card], showLocation: Boolean)(implicit ctx: Context) extends BasicListAdapter[Card](showLocation) {
+
+  def this(showLocation: Boolean)(implicit ctx: Context) = this(List(), showLocation)
 
   override protected val layoutId: Int = R.layout.cards_list_item
 

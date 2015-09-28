@@ -44,8 +44,8 @@ object DebugReporter {
     Format(e) + (if (StringUtils.isNotBlank(msg)) s"($msg)" else "")
   )
 
-  def debug(msg: String, args: Any*): Unit = {
-    val s = msg.format(args)
+  def debug(msg: => String, args: Any*): Unit = {
+    lazy val s = msg.format(args)
     if (Utils.isDebug) {
       Log.d(DEBUG_TAG, s)
     }

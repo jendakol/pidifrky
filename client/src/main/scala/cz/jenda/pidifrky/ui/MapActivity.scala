@@ -17,13 +17,13 @@ class MapActivity extends BasicMapActivity with OnMapLongClickListener {
   override def onMapReady(map: GoogleMap): Unit = {
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(PidifrkyConstants.MAP_CENTER, 8f))
 
-    val card: Card = Card(1, 1, "Main", "main", Some(LocationHelper.toLocation(49.8401903, 15.3693800)), "", "")
-    val card2: Card = Card(1, 1, "Main", "main", Some(LocationHelper.toLocation(49, 15.3693800)), "", "")
+//    val card: Card = Card(1, 1, "Main", "main", Some(LocationHelper.toLocation(49.8401903, 15.3693800)), "", "")
+//    val card2: Card = Card(1, 1, "Main", "main", Some(LocationHelper.toLocation(49, 15.3693800)), "", "")
 
     //    addMarkers(card, card2)
     //    addLine(LineOptions(Color.RED, 5), card, card2)
 
-    addDistanceLine(LineOptions(Color.RED, 5), card)
+//    addDistanceLine(LineOptions(Color.RED, 5), card)
 
     map.setOnMapLongClickListener(this)
   }

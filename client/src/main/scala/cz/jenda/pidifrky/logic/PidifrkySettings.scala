@@ -96,6 +96,9 @@ object PidifrkySettings {
     preferences.getBoolean(name, default)
   }
   catch {
+    case e: NullPointerException =>
+      //some weird bug, trying to avoid stack overflow
+      default
     case e: Exception =>
       DebugReporter.debug(e)
       default

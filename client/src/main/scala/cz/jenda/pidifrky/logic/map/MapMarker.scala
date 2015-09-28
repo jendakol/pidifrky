@@ -3,8 +3,7 @@ package cz.jenda.pidifrky.logic.map
 import android.location.Location
 import com.google.android.gms.maps.model.{BitmapDescriptorFactory, MarkerOptions}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.data.pojo.Card
-import cz.jenda.pidifrky.data.{CardNormalState, CardOwnedState, CardWantedState}
+import cz.jenda.pidifrky.data.pojo.{CardState, Card}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -21,11 +20,13 @@ sealed trait MapMarker {
 }
 
 case class CardMapMarker(card: Card) extends MapMarker {
-  override val drawableId: Int = card.getState match {
-    case CardNormalState => R.drawable.card
-    case CardOwnedState => R.drawable.card_found
-    case CardWantedState => R.drawable.card_wanted
+  override val drawableId: Int = card.state match {
+    case CardState.NONE => R.drawable.card
+    case CardState.OWNED => R.drawable.card_found
+    case CardState.WANTED => R.drawable.card_wanted
   }
-  override val location: Location = card.gps.get
+  override val location: Location = card.location.get
   override val title: String = card.name //TODO
 }
+
+//TODO merchant map marker

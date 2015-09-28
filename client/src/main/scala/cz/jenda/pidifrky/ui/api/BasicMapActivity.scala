@@ -172,14 +172,14 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
 
   def addLine(options: LineOptions, points: IMapPoint*): Unit = map foreach { map =>
     import scala.collection.JavaConverters._
-    val seq = points.map(_.gps.map(LocationHelper.toLatLng)).filter(_.isDefined).map(_.get)
+    val seq = points.map(_.location.map(LocationHelper.toLatLng)).filter(_.isDefined).map(_.get)
     val polyline = new PolylineOptions().addAll(seq.asJava).width(options.width).color(options.color)
     map.addPolyline(polyline)
   }
 
   def addDistanceLine(options: LineOptions, entity: Entity): Unit = for {
     map <- getMap
-    location <- entity.gps
+    location <- entity.location
     marker <- entity.toMarker
     currentLocation <- Some(LocationHelper.toLocation(49, 15.3693800))
   } yield {

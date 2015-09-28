@@ -36,6 +36,9 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
+
+    Application.appContext = Some(getApplicationContext)
+
     DebugReporter.debug("Creating activity " + getLocalClassName)
 
     activityState = CreatedState
@@ -48,7 +51,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
     PidifrkySettings.init
 
-    Mint.initAndStartSession(this, PidifrkyConstants.MINT_API_KEY)
+    Mint.initAndStartSession(this, getString(R.string.MINT_API_KEY))
     Mint.setUserIdentifier(PidifrkySettings.UUID)
 
     mockLocation = Option(savedInstanceState).exists { bundle =>

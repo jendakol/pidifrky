@@ -8,13 +8,9 @@ import cz.jenda.pidifrky.logic.map.LocationHelper
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 trait IMapPoint {
-  val gps: Option[Location]
+  val location: Option[Location]
 
   val name: String
 
-  def toLatLng: Option[LatLng] = gps.map(LocationHelper.toLatLng)
-
-  override def toString: String = {
-    "IMapPoint {" + gps + "}"
-  }
+  def toLatLng: Option[LatLng] = location.map(LocationHelper.toLatLng)
 }

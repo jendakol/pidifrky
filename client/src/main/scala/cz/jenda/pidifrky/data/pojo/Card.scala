@@ -1,44 +1,33 @@
 package cz.jenda.pidifrky.data.pojo
 
-import android.location.Location
-import cz.jenda.pidifrky.data.{CardOwnedState, CardState, CardTiles, CardWantedState}
-import cz.jenda.pidifrky.logic.Application
+import android.database.Cursor
+import android.graphics.{Bitmap, BitmapFactory}
+import android.location.{Location, LocationManager}
+import com.google.common.primitives.Ints
+import cz.jenda.pidifrky.data.CardTiles
+import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.logic.map.{CardMapMarker, MapMarker}
+import cz.jenda.pidifrky.logic.{Application, Utils}
+import org.apache.commons.lang3.StringUtils
+
+import scala.util.Try
 
 /**
- * Created <b>15.3.13</b><br>
- *
  * @author Jenda Kolena, jendakolena@gmail.com
- * @version 0.1
- * @since 0.2
  */
-object Card {
-  //  def getCard(cursor: Cursor): Card = {
-  //    if (cursor != null && cursor.getCount > 0) new Card(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getDouble(4), cursor.getDouble(5), cursor.getString(6), cursor.getString(7)) else null
-  //  }
+case class Card(id: Int, number: Int, name: String, nameRaw: String, state: CardState, location: Option[Location], image: Option[String], neighboursIds: List[Option[Int]], merchantsIds: List[Int]) extends Entity {
 
-}
-
-case class Card(id: Int, number: Int, name: String, nameRaw: String, gps: Option[Location], image: String, neighbours: String) extends Entity {
-
-  private var state: Option[CardState] = Some(CardWantedState) //TODO
-
-  //  def getFullImage: Bitmap = {
-  //    try {
-  //      return BitmapFactory.decodeFile(Utils.getFullImageUri(this).getEncodedPath)
-  //    }
-  //    catch {
-  //      case e: NullPointerException => {
-  //        return null
-  //      }
-  //    }
-  //  }
+  def getFullImage: Option[Bitmap] = image.flatMap(Utils.getFullImageUri).map { im =>
+    try {
+      BitmapFactory.decodeFile(im.getEncodedPath)
+    }
+    catch {
+      case e: NullPointerException =>
+        null
+    }
+  }
 
 
-  //  def getMerchants: String = {
-  //    return merchants
-  //  }
-  //
   //  def getMerchantsList: ArrayList[Merchant] = {
   //    val merchants: ArrayList[Merchant] = new ArrayList[Merchant]
   //    for (idS <- this.merchants.split(",")) {
@@ -62,95 +51,63 @@ case class Card(id: Int, number: Int, name: String, nameRaw: String, gps: Option
   //  }
 
 
-  def getDistance(location: Location): Option[Double] = gps.map(location.distanceTo)
+  def getDistance(destLocation: Location): Option[Double] = location.map(destLocation.distanceTo)
 
-  def getDistance: Option[Double] = gps.map(gps => gps.distanceTo(gps)) //TODO
+  def getDistance: Option[Double] = for {
+    loc <- location
+    current <- LocationHandler.getCurrentLocation
+  } yield loc.distanceTo(current)
 
-  def getState: CardState = state.getOrElse {
-    CardWantedState //TODO: cardsdao
-  }
 
   def isOwner: Boolean = {
-    state.getOrElse {
-      CardWantedState //TODO: cardsdao
-    } == CardOwnedState
+    state == CardState.OWNED
   }
 
   def isWanted: Boolean = {
-    state.getOrElse {
-      CardWantedState //TODO: cardsdao
-    } == CardWantedState
+    state == CardState.WANTED
   }
-
-  //
-  //
-  //  def isOwner: Boolean = {
-  //    return if (owner == null) {
-  //      ({
-  //        owner = CardsDao.getInstance(Utils.getContext).isOwner(this);
-  //        owner
-  //      })
-  //    }
-  //    else {
-  //      owner
-  //    }
-  //  }
-  //
-  //  def isOwner(refreshState: Boolean): Boolean = {
-  //    if (refreshState) owner = null
-  //    return isOwner
-  //  }
-  //
-  //  def setOwner(owner: Boolean) {
-  //    CardsDao.getInstance(Utils.getContext).setOwner(this, owner)
-  //    if (owner) setWanted(false)
-  //    this.owner = owner
-  //  }
-  //
-  //  def isWanted: Boolean = {
-  //    return if (wanted == null) {
-  //      ({
-  //        wanted = CardsDao.getInstance(Utils.getContext).isWanted(this);
-  //        wanted
-  //      })
-  //    }
-  //    else {
-  //      wanted
-  //    }
-  //  }
-  //
-  //  def isWanted(refreshState: Boolean): Boolean = {
-  //    if (refreshState) wanted = null
-  //    return isWanted
-  //  }
-  //
-  //  def setWanted(wanted: Boolean) {
-  //    CardsDao.getInstance(Utils.getContext).setWanted(this, wanted)
-  //    this.wanted = wanted
-  //  }
-
 
   def getNeighboursTable: Option[CardTiles] = Application.currentActivity.map(new CardTiles(_, this))
 
+  override def toMarker: Option[MapMarker] = location.map(_ => CardMapMarker(this))
+}
 
-  override def equals(o: Any): Boolean = {
-    if (this == o) return true
-    if (o == null || (getClass ne o.getClass)) return false
-    val card = o.asInstanceOf[Card]
-    id == card.id && number == card.number && !(if (gps != null) !(gps == card.gps) else card.gps != null) && !(if (image != null) !(image == card.image) else card.image != null)
-    //    && !(if (merchants != null) !(merchants == card.merchants) else card.merchants != null)
-    //    && ! (if (neighbours != null) !(neighbours == card.neighbours) else card.neighbours != null) && (name == card.name)
+object Card extends EntityFactory[Card] {
+  override def create(cursor: Cursor): Try[Card] = Try {
+    Card(
+      id = cursor.getInt(0),
+      number = cursor.getInt(1),
+      name = cursor.getString(2),
+      nameRaw = cursor.getString(3),
+      location = toLocation(5, 6)(cursor),
+      image = Some(cursor.getString(4)), //TODO: while programming "start without downloading files", this won't be automatically Some() anymore
+      merchantsIds = parseIds(cursor.getString(7)),
+      neighboursIds = parseIdsOption(cursor.getString(8)),
+      state = toState(9)(cursor)
+    )
   }
 
-  override def hashCode: Int = {
-    var result: Int = id
-    result = 31 * result + number
-    result = 31 * result + name.hashCode
-    result = 31 * result + (if (image != null) image.hashCode else 0)
-    result = 31 * result + (if (gps != null) gps.hashCode else 0)
-    //    result = 31 * result + (if (merchants != null) merchants.hashCode else 0)
-    result
+  private def toState(index: Int)(cursor: Cursor): CardState = {
+    CardState.values()(if (cursor.getType(index) == Cursor.FIELD_TYPE_INTEGER) cursor.getInt(index) else 0)
   }
 
-  override def toMarker: Option[MapMarker] = gps.map(_ => CardMapMarker(this))
+  private def toLocation(latIndex: Int, lonIndex: Int)(implicit cursor: Cursor): Option[Location] = {
+    if (cursor.getType(latIndex) != Cursor.FIELD_TYPE_NULL && cursor.getType(lonIndex) != Cursor.FIELD_TYPE_NULL) {
+      val l = new Location(LocationManager.GPS_PROVIDER)
+      l.setLatitude(cursor.getDouble(latIndex))
+      l.setLongitude(cursor.getDouble(lonIndex))
+      Some(l)
+    } else None
+  }
+
+  private def parseIdsOption(t: String): List[Option[Int]] =
+    t.split(",").toList
+      .map(i =>
+      if (StringUtils.isNotBlank(i))
+        Try(Ints.tryParse(i).toInt).toOption
+      else
+        None
+      )
+
+  private def parseIds(t: String): List[Int] = parseIdsOption(t).flatten
 }

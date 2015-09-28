@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import com.afollestad.materialdialogs.MaterialDialog
 import cz.jenda.pidifrky.R
+import cz.jenda.pidifrky.data.Database
 import cz.jenda.pidifrky.logic.{DebugReporter, Toast}
 import cz.jenda.pidifrky.ui.api.BasicActivity
 import cz.jenda.pidifrky.ui.dialogs._
@@ -47,6 +48,10 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
 
   override protected def onApplicationStart(): Unit = {
     super.onApplicationStart()
+
+    //noinspection ScalaUselessExpression
+    Database // init the database
+
 
     //    val dialog = NormalProgressDialog('testDialog, R.string.menu_display, R.string.menu_display, 100, cancellable = false)
     //
