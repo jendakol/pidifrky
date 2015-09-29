@@ -27,8 +27,11 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
       db execSQL
         s"""CREATE TABLE IF NOT EXISTS ${MerchantsTable.NAME} (
          ${MerchantsTable.COL_ID} INTEGER PRIMARY KEY ASC,
-         ${MerchantsTable.COL_NAME} TEXT, ${MerchantsTable.COL_ADDRESS} TEXT,
-         ${MerchantsTable.COL_GPS_LAT} REAL, ${MerchantsTable.COL_GPS_LON} REAL,
+         ${MerchantsTable.COL_NAME} TEXT,
+         ${MerchantsTable.COL_NAME_RAW} TEXT,
+         ${MerchantsTable.COL_ADDRESS} TEXT,
+         ${MerchantsTable.COL_GPS_LAT} REAL,
+         ${MerchantsTable.COL_GPS_LON} REAL,
          ${MerchantsTable.COL_GPS_PRECISE} INTEGER
          )"""
 
@@ -73,6 +76,10 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
     if (oldVersion < 10) {
       //old Pidifrky app!
 
+      db execSQL "drop table " + CardsTable.NAME
+      db execSQL "drop table " + MerchantsTable.NAME
+      db execSQL "drop table " + CardStatusTable.NAME
+
       onCreate(db)
       //TODO - DB upgrade from old app!
     } else {
@@ -88,7 +95,7 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
     db.execSQL("analyze " + CardStatusTable.NAME)
   }
 
-  def truncate(table: EntityTable): Try[Unit] = Try {
+  def truncate(table: EntityTable): Try[Unit] = Transaction("truncate-" + table.NAME) {
     db.execSQL("delete from " + table.NAME)
   }
 
@@ -107,7 +114,7 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
   }
 
   def selectFrom(table: EntityTable, columns: Array[String])(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = Future {
-    DebugReporter.debug(s"DB select from $table, columns ${columns.mkString("(", ", ", ")")}")
+    DebugReporter.debug(s"DB select from ${table.NAME}, columns ${columns.mkString("(", ", ", ")")}")
 
     val selection = selectionSeq.keys map { key =>
       s"$key = ?"
@@ -128,10 +135,11 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
 
 
   def executeTransactionally(commands: InsertCommand*): Try[Unit] = Transaction("db-transaction") {
-    DebugReporter.debug("Executing DB transaction with %d commands", commands.length)
+    DebugReporter.debug(s"Executing DB transaction with ${commands.length} commands")
 
     db.beginTransaction()
     commands foreach { command =>
+      DebugReporter.debug(s"Executing on DB: ${command.query} (${command.args.mkString(", ")}})")
       db.execSQL(command.query, command.args)
     }
     db.setTransactionSuccessful()

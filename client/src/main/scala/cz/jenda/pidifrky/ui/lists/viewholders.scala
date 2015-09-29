@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.ui.lists
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.data.pojo.{Card, Entity}
+import cz.jenda.pidifrky.data.pojo.{Card, Entity, Merchant}
 import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.ui.api.ViewHandler
 
@@ -57,4 +57,9 @@ class CardViewHolder(view: View, showLocation: Boolean) extends AbstractViewHold
   }
 }
 
-//TODO - merchant view
+class MerchantViewHolder(view: View, showLocation: Boolean) extends AbstractViewHolder[Merchant](view) {
+  override def updateWith(merchant: Merchant): Unit = {
+    ViewHandler.findTextView(view, R.id.name).foreach(_.setText(merchant.name))
+    //TODO - merchant view
+  }
+}

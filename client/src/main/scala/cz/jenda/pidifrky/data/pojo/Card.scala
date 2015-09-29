@@ -50,15 +50,6 @@ case class Card(id: Int, number: Int, name: String, nameRaw: String, state: Card
   //    merchants
   //  }
 
-
-  def getDistance(destLocation: Location): Option[Double] = location.map(destLocation.distanceTo)
-
-  def getDistance: Option[Double] = for {
-    loc <- location
-    current <- LocationHandler.getCurrentLocation
-  } yield loc.distanceTo(current)
-
-
   def isOwner: Boolean = {
     state == CardState.OWNED
   }
@@ -90,24 +81,4 @@ object Card extends EntityFactory[Card] {
   private def toState(index: Int)(cursor: Cursor): CardState = {
     CardState.values()(if (cursor.getType(index) == Cursor.FIELD_TYPE_INTEGER) cursor.getInt(index) else 0)
   }
-
-  private def toLocation(latIndex: Int, lonIndex: Int)(implicit cursor: Cursor): Option[Location] = {
-    if (cursor.getType(latIndex) != Cursor.FIELD_TYPE_NULL && cursor.getType(lonIndex) != Cursor.FIELD_TYPE_NULL) {
-      val l = new Location(LocationManager.GPS_PROVIDER)
-      l.setLatitude(cursor.getDouble(latIndex))
-      l.setLongitude(cursor.getDouble(lonIndex))
-      Some(l)
-    } else None
-  }
-
-  private def parseIdsOption(t: String): List[Option[Int]] =
-    t.split(",").toList
-      .map(i =>
-      if (StringUtils.isNotBlank(i))
-        Try(Ints.tryParse(i).toInt).toOption
-      else
-        None
-      )
-
-  private def parseIds(t: String): List[Int] = parseIdsOption(t).flatten
 }

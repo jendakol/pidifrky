@@ -1,5 +1,7 @@
 package cz.jenda.pidifrky.data
 
+import java.io.Closeable
+
 import android.database.Cursor
 import cz.jenda.pidifrky.data.pojo.{Entity, EntityFactory}
 import cz.jenda.pidifrky.logic.DebugReporter
@@ -11,7 +13,7 @@ import scala.util.{Failure, Success, Try}
 /**
  * @author Jenda Kolena, kolena@avast.com
  */
-class CursorWrapper(cursor: Cursor) {
+class CursorWrapper(cursor: Cursor) extends Closeable {
   DebugReporter.debug("Loaded cursor with size " + cursor.getCount)
 
   def mapTo[E <: Entity](ef: EntityFactory[E])(implicit ct: ClassTag[E]): Try[E] = if (nonEmpty) {
@@ -41,4 +43,6 @@ class CursorWrapper(cursor: Cursor) {
   def isEmpty: Boolean = cursor == null || cursor.getCount <= 0
 
   def nonEmpty: Boolean = !isEmpty
+
+  override def close(): Unit = cursor.close()
 }

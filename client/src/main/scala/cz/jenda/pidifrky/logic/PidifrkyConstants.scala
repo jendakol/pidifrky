@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object PidifrkyConstants {
-  val DATABASE_VERSION = 3
+  val DATABASE_VERSION = 4
   val DATABASE_NAME = "pidifrky.db"
 
 //  val BASE_URL = "https://pidifrky.jenda.eu"

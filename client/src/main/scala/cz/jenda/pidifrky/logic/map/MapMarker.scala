@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.logic.map
 import android.location.Location
 import com.google.android.gms.maps.model.{BitmapDescriptorFactory, MarkerOptions}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.data.pojo.{CardState, Card}
+import cz.jenda.pidifrky.data.pojo.{Card, CardState, Merchant}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -25,8 +25,14 @@ case class CardMapMarker(card: Card) extends MapMarker {
     case CardState.OWNED => R.drawable.card_found
     case CardState.WANTED => R.drawable.card_wanted
   }
+
   override val location: Location = card.location.get
+
   override val title: String = card.name //TODO
 }
 
-//TODO merchant map marker
+case class MerchantMapMarker(merchant: Merchant) extends MapMarker {
+  override val drawableId: Int = R.drawable.merchant
+  override val location: Location = merchant.location.get
+  override val title: String = merchant.name
+}

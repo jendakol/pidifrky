@@ -15,21 +15,34 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 class CardsListFragment(implicit ctx: BasicActivity) extends EntityListTabFragment[Card] {
   override val title: String = "test Tab"
 
-  override protected def listAdapter: BasicListAdapter[Card] = {
-    implicit val ordering = CardOrdering.ByName
+  protected lazy val listAdapter: BasicListAdapter[Card] = new CardsListAdapter(false)
 
-    val adapter = new CardsListAdapter(false)
+  protected implicit val ordering = CardOrdering.ByName
 
+
+  //  override protected def listAdapter: BasicListAdapter[Card] = {
+  //
+  //    val adapter = new CardsListAdapter(false)
+  //
+  //    LocationHandler.getCurrentLocation.foreach { loc =>
+  //      CardsDao.getNearest(loc, 100000) foreachOnUIThread { cards =>
+  //        adapter.updateData(cards)
+  //      }
+  //    }
+  //
+  //    //    CardsDao.getAll foreachOnUIThread { cards =>
+  //    //      adapter.updateData(cards)
+  //    //    }
+  //
+  //    adapter
+  //  }
+
+
+  override def onShow(): Unit = {
     LocationHandler.getCurrentLocation.foreach { loc =>
       CardsDao.getNearest(loc, 100000) foreachOnUIThread { cards =>
-        adapter.updateData(cards)
+        listAdapter.updateData(cards)
       }
     }
-
-    //    CardsDao.getAll foreachOnUIThread { cards =>
-    //      adapter.updateData(cards)
-    //    }
-
-    adapter
   }
 }

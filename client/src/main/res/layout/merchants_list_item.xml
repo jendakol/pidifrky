@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        android:textSize="22dip"
+        android:textStyle="bold"
+        android:text="name"
+        />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_marginRight="5dip"
+        android:textSize="16dip"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="address"
+        android:layout_below="@+id/name"/>
+
+    <TextView
+        android:id="@+id/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_marginRight="5dip"
+        android:textSize="16dip"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="gps"
+        android:layout_below="@+id/address"/>
+</RelativeLayout>
