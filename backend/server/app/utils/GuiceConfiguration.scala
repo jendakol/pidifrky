@@ -12,7 +12,6 @@ class GuiceConfiguration extends AbstractModule {
 
   override def configure(): Unit = {
 
-
     bindConfig(config, "")(binder())
   }
 

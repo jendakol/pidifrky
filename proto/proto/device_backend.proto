@@ -1,4 +1,5 @@
 option optimize_for = SPEED;
+
 option java_package = "cz.jenda.pidifrky.proto";
 
 message Envelope {
@@ -29,4 +30,50 @@ message Envelope {
 message DebugReportRequest {
     optional string contact = 1;
     required bytes content = 2; //GZIPped
+}
+
+message DatabaseUpdateRequest {
+    optional string cards_hash = 1;
+    optional string merchants_hash = 2;
+}
+
+message DatabaseUpdateResponse {
+    optional Cards cards = 1;
+    optional Merchants merchants = 2;
+
+    message Location {
+        required float latitude = 1;
+        required float longitude = 2;
+        required bool precise = 3 [default = true];
+    }
+
+    message Cards {
+        required string hash = 1;
+        required uint64 time = 2;
+        repeated Card cards = 3;
+
+        message Card {
+            required string name = 1;
+            required string name_raw = 2;
+            required int32 id = 3;
+            required int32 number = 4;
+            optional Location location = 5;
+            repeated int32 merchant_ids = 6;
+            repeated int32 neighbours = 7;
+        }
+    }
+
+    message Merchants {
+        required string hash = 1;
+        required uint64 time = 2;
+        repeated Merchant merchants = 3;
+
+        message Merchant {
+            required string name = 1;
+            required string name_raw = 2;
+            required int32 id = 3;
+            required string address = 4;
+            optional Location location = 5;
+        }
+    }
 }

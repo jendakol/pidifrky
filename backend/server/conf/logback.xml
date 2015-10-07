@@ -63,7 +63,7 @@
     <root level="WARN">
         <appender-ref ref="ASYNCFILE" />
         <appender-ref ref="ASYNCSTDOUT" />
-        <appender-ref ref="SMTP" />
+        <!--<appender-ref ref="SMTP" />-->
     </root>
 
 </configuration>

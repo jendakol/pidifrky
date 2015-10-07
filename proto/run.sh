@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 
 rm -rf java
 mkdir java

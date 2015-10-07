@@ -40,7 +40,7 @@ object DeviceControllerImplicits extends Results {
 
   implicit val gpbWriteable: Writeable[Message] = new Writeable(e => e.toByteArray, Some("application/x-protobuf"))
 
-  implicit class TryToResponse[C <: Message](t: Try[C]) {
+  implicit class TryToResponse[C <: Message](val t: Try[C]) extends AnyVal{
     def toResponse: Result = t match {
       case Success(r) =>
         Logger.debug("Returning OK")
