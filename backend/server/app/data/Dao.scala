@@ -72,9 +72,8 @@ class Dao @Inject()(override protected val dbConfigProvider: DatabaseConfigProvi
     db.run(Merchants.delete).map(_ => ())
   }
 
-  def deleteAllCardMerchantLinks(): Future[Unit] = {
-    db.run(Cards_x_Merchants.delete).map(_ => ())
-  }
+  def deleteAllCardMerchantLinks(): Future[Unit] =
+    db.run(sqlu"TRUNCATE TABLE cards_x_merchants").map(_ => ())
 
   class CardsTable(tag: Tag) extends Table[CardPojo](tag, "cards") {
 
