@@ -11,7 +11,7 @@ import play.api.mvc.Action
  */
 class DatabaseDownloadController @Inject()() extends DeviceController {
 
-  def download = Action { implicit request =>
+  def download = Action.async { implicit request =>
     //TODO
     deviceRequest(DatabaseUpdateRequest.PARSER).map(toUnit).toResponse
   }

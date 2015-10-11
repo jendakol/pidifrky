@@ -4,17 +4,19 @@ import javax.inject.Inject
 
 import play.api.libs.mailer._
 import play.twirl.api.HtmlFormat
-import utils.ConfigProperty
+import utils.{ConfigProperty, Logging}
 
-import scala.util.{Failure, Success, Try}
+import scala.concurrent.Future
+import scala.util.{Failure, Success}
 
 /**
  * @author Jenda Kolena, kolena@avast.com
  */
-class EmailHelper @Inject()(mailerClient: MailerClient, @ConfigProperty("play.mailer.from") fromEmail: String) {
-  implicit val Logger = play.api.Logger(getClass)
+class EmailHelper @Inject()(mailerClient: MailerClient, @ConfigProperty("play.mailer.from") fromEmail: String) extends Logging {
 
-  def sendMail(subject: String, dest: String)(htmlContent: Option[HtmlFormat.Appendable], textContent: Option[String] = None): Try[String] = Try {
+  import logic.AppModule._
+
+  def sendMail(subject: String, dest: String)(htmlContent: Option[HtmlFormat.Appendable], textContent: Option[String] = None): Future[String] = Future {
     val email = Email(
       subject,
       fromEmail,
@@ -28,11 +30,8 @@ class EmailHelper @Inject()(mailerClient: MailerClient, @ConfigProperty("play.ma
     )
 
     mailerClient.send(email)
-  }.transform(id => {
-    Logger.debug(s"Successfully sent email id $id to $dest")
-    Success(id)
-  }, t => {
-    Logger.debug(s"Email could not be sent", t)
-    Failure(t)
-  })
+  }(blockingExecutor).andThen {
+    case Success(id) => Logger.debug(s"Successfully sent email id $id to $dest")
+    case Failure(t) => Logger.debug(s"Email could not be sent", t)
+  }
 }
