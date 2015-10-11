@@ -8,6 +8,7 @@ import play.api.http.Writeable
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
 import play.mvc.Controller
+import utils.Logging
 
 import scala.language.implicitConversions
 import scala.util.{Failure, Success, Try}
@@ -15,9 +16,7 @@ import scala.util.{Failure, Success, Try}
 /**
  * @author Jenda Kolena, kolena@avast.com
  */
-trait DeviceController extends Controller with Results {
-
-  implicit val Logger = play.api.Logger(getClass)
+trait DeviceController extends Controller with Results with Logging {
 
   //noinspection AccessorLikeMethodIsUnit
   protected def toUnit(a: Any) = ()
