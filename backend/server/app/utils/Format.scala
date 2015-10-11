@@ -1,5 +1,6 @@
 package utils
 
+import java.text.Normalizer
 import java.util.Locale
 
 /**
@@ -9,6 +10,8 @@ object Format {
 
   def apply(t: Throwable): String = t.getClass.getSimpleName + ": " + t.getMessage
 
+  def nameRaw(name: String): String =
+    Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase
 
   /**
    * Formats file size according to given locale.

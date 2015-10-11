@@ -33,13 +33,14 @@ message DebugReportRequest {
 }
 
 message DatabaseUpdateRequest {
-    optional string cards_hash = 1;
-    optional string merchants_hash = 2;
+    repeated int32 known_cards_ids = 1;
+    required uint64 last_update = 2;
 }
 
 message DatabaseUpdateResponse {
-    optional Cards cards = 1;
-    optional Merchants merchants = 2;
+    repeated Card cards = 1;
+    repeated Merchant merchants = 2;
+    optional UpdatedLinks updated_links = 3;
 
     message Location {
         required float latitude = 1;
@@ -47,33 +48,37 @@ message DatabaseUpdateResponse {
         required bool precise = 3 [default = true];
     }
 
-    message Cards {
-        required string hash = 1;
-        required uint64 time = 2;
-        repeated Card cards = 3;
-
-        message Card {
-            required string name = 1;
-            required string name_raw = 2;
-            required int32 id = 3;
-            required int32 number = 4;
-            optional Location location = 5;
-            repeated int32 merchant_ids = 6;
-            repeated int32 neighbours = 7;
-        }
+    message Card {
+        required string name = 1;
+        required string name_raw = 2;
+        required int32 id = 3;
+        required int32 number = 4;
+        optional Location location = 5;
+        repeated int32 merchants_ids = 6;
+        repeated int32 neighbours = 7;
     }
 
-    message Merchants {
-        required string hash = 1;
-        required uint64 time = 2;
-        repeated Merchant merchants = 3;
+    message Merchant {
+        required string name = 1;
+        required string name_raw = 2;
+        required int32 id = 3;
+        required string address = 4;
+        optional Location location = 5;
+        repeated int32 cards_ids = 6;
+    }
 
-        message Merchant {
-            required string name = 1;
-            required string name_raw = 2;
-            required int32 id = 3;
-            required string address = 4;
-            optional Location location = 5;
+    message UpdatedLinks {
+        repeated CardToMerchants card_merchants_links = 1;
+        repeated MerchantToCards merchant_cards_links = 2;
+
+        message CardToMerchants {
+            required int32 card_id = 1;
+            repeated int32 merchants_ids = 2;
+        }
+
+        message MerchantToCards {
+            required int32 merchant_id = 1;
+            repeated int32 cards_ids = 2;
         }
     }
 }

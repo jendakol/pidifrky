@@ -93,6 +93,19 @@ class Dao @Inject()(override protected val dbConfigProvider: DatabaseConfigProvi
     } yield ()
   }
 
+  def getUpdatedTimestamps: Future[UpdatedTimestamps] = for {
+    links <- db.run(sql"SELECT time FROM hashes WHERE type = 'links'".as[Long]).map(_.head)
+    merchants <- db.run(sql"SELECT time FROM hashes WHERE type = 'merchants'".as[Long]).map(_.head)
+  } yield UpdatedTimestamps(merchants, links)
+
+  def getUnknownCards(knownCards: Seq[Int]): Future[Seq[CardPojo]] =
+    db.run(Cards.filterNot(_.id inSet knownCards).result)
+
+  def getAllLinks: Future[Seq[Card_x_MerchantPojo]] =
+    db.run(Cards_x_Merchants.result)
+
+  def getAllMerchants: Future[Seq[MerchantPojo]] =
+    db.run(Merchants.result)
 
   class CardsTable(tag: Tag) extends Table[CardPojo](tag, "cards") {
 
@@ -147,3 +160,5 @@ class Dao @Inject()(override protected val dbConfigProvider: DatabaseConfigProvi
   }
 
 }
+
+case class UpdatedTimestamps(merchants: Long, links: Long)
