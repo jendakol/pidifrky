@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext
 class TestController @Inject()(cardsDao: Dao, updater: Updater, @CallbackExecutor implicit val ec: ExecutionContext) extends Controller {
   def test = Action.async { request =>
     updater.update().map(_ => Ok("ok")).recover {
-      case t: Exception => InternalServerError(Format(t))
+      case t: Exception => InternalServerError(Format(t) + "\nat " + t.getStackTrace.mkString("\nat "))
     }
   }
 }

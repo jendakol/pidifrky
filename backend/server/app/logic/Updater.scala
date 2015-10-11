@@ -37,6 +37,7 @@ class Updater @Inject()(dao: Dao, @BlockingExecutor blocking: ExecutionContext, 
       _ <- dao.deleteAllCardMerchantLinks()
       _ <- dao.insertCardsWithLinks(cards)
       _ <- dao.deleteUnusedMerchants()
+      _ <- dao.updateHashes()
     } yield ()
   }
 
@@ -55,6 +56,7 @@ class Updater @Inject()(dao: Dao, @BlockingExecutor blocking: ExecutionContext, 
 
       (CardPojo(id, number, name, lat, lon, neighbours), merchantIds)
     }
+    //TODO: filter ??? etc.
   }(blocking)
 
   protected def parseMerchants(xml: Elem): Future[Seq[MerchantPojo]] = Future {

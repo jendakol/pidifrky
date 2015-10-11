@@ -75,6 +75,25 @@ class Dao @Inject()(override protected val dbConfigProvider: DatabaseConfigProvi
   def deleteAllCardMerchantLinks(): Future[Unit] =
     db.run(sqlu"TRUNCATE TABLE cards_x_merchants").map(_ => ())
 
+  def updateHashes(): Future[Unit] = {
+    for {
+      crcMerchants <- db.run(sql"CHECKSUM TABLE merchants EXTENDED".as[(String, Double)]).map(_.head._2)
+      crcLinks <- db.run(sql"CHECKSUM TABLE cards_x_merchants EXTENDED".as[(String, Double)]).map(_.head._2)
+
+      oldCrcMerchants <- db.run(sql"SELECT hash FROM hashes WHERE type = 'merchants'".as[Double]).map(_.headOption)
+      oldCrcLinks <- db.run(sql"SELECT hash FROM hashes WHERE type = 'links'".as[Double]).map(_.headOption)
+
+      _ <- if (!oldCrcMerchants.contains(crcMerchants))
+        db.run(sqlu"INSERT INTO hashes VALUES (NULL, 'merchants', $crcMerchants, now()) ON DUPLICATE KEY UPDATE hash = $crcMerchants")
+      else Future.successful(())
+
+      _ <- if (!oldCrcLinks.contains(crcLinks))
+        db.run(sqlu"INSERT INTO hashes VALUES (NULL, 'links', $crcLinks, now()) ON DUPLICATE KEY UPDATE hash = $crcLinks")
+      else Future.successful(())
+    } yield ()
+  }
+
+
   class CardsTable(tag: Tag) extends Table[CardPojo](tag, "cards") {
 
     def id = column[Int]("id", O.PrimaryKey)
