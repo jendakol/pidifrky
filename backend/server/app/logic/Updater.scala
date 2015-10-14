@@ -4,24 +4,19 @@ import javax.inject.Inject
 
 import annots.{BlockingExecutor, CallbackExecutor}
 import data.{CardPojo, Dao, MerchantPojo}
-import utils.Logging
+import utils.{ConfigProperty, Logging}
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.xml.Elem
+import scala.xml.{Elem, XML}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
- */
-class Updater @Inject()(dao: Dao, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
+  * @author Jenda Kolena, kolena@avast.com
+  */
+class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl: String, geoCoder: GeoCoder, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
   protected final val Gps = "(\\d{1,2}\\.\\d+), ?(\\d{1,2}\\.\\d+)".r
 
-  def update(): Future[Unit] = Future {
-    //TODO - download
-
-    import scala.xml.XML
-
-    XML.load(Updater.this.getClass.getClassLoader.getResourceAsStream("temp/android.xml"))
-
+  def update(): Future[Unit] = HttpClient.get(xmlDataUrl).map { resp =>
+    XML.load(resp.asStream)
   }(blocking) flatMap { xml =>
     for {
       merchants <- parseMerchants(xml)
@@ -52,7 +47,9 @@ class Updater @Inject()(dao: Dao, @BlockingExecutor blocking: ExecutionContext, 
 
       val gps = (card \\ "gps").text
 
-      val (lat, lon) = extractGps(gps)
+      val (lat, lon) = extractGps(gps).map { case (la, lo) => (Option(la), Option(lo)) }.getOrElse((None, None))
+
+      //TODO: guess location for cards
 
       (CardPojo(id, number, name, lat, lon, neighbours), merchantIds)
     }
@@ -68,24 +65,26 @@ class Updater @Inject()(dao: Dao, @BlockingExecutor blocking: ExecutionContext, 
 
       val gps = (merchant \\ "@gps").text
 
-      val (lat, lon) = extractGps(gps)
-
-      //TODO - try to get GPS from address if it's not included
-
-      MerchantPojo(id, name, address, lat, lon, 1)
+      extractGps(gps) match {
+        case Some((lat, lon)) => Future.successful(MerchantPojo(id, name, address, Option(lat), Option(lon), gps = 1))
+        case None => geoCoder.getLocation(address).map {
+          case Some((lat, lon)) => MerchantPojo(id, name, address, Option(lat), Option(lon), gps = 0)
+          case None => MerchantPojo(id, name, address, None, None, gps = 0)
+        }
+      }
     }
-  }(blocking)
+  }(blocking).flatMap(Future.sequence(_))
 
-  protected def extractGps(gps: String): (Option[Float], Option[Float]) = gps match {
+  protected def extractGps(gps: String): Option[(Float, Float)] = gps match {
     case Gps(la, lo) => try {
-      (Some(la.toFloat), Some(lo.toFloat))
+      Some(la.toFloat, lo.toFloat)
     }
     catch {
       case e: Exception =>
         Logger.warn("Error while parsing GPS")
-        (None, None)
+        None
     }
 
-    case _ => (None, None)
+    case _ => None
   }
 }

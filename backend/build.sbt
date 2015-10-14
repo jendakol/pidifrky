@@ -12,8 +12,9 @@ lazy val server = (project in file("server")).settings(
     "com.vmunier" %% "play-scalajs-scripts" % "0.3.0",
     "org.webjars" % "jquery" % "1.11.1",
     "com.typesafe.play" % "play-mailer_2.11" % "3.0.1",
-
     "com.typesafe.play" % "play-slick_2.11" % "1.0.1",
+
+    "com.ning" % "async-http-client" % "1.9.31",
     "mysql" % "mysql-connector-java" % "5.1.34",
     "com.propensive" % "rapture-json-jackson_2.11" % "1.1.0",
     specs2 % Test

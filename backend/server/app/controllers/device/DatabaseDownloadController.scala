@@ -79,7 +79,7 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
       lat <- merchant.latitude
       lon <- merchant.longitude
     } yield {
-      Location.newBuilder().setLatitude(lat).setLongitude(lon).build()
+      Location.newBuilder().setLatitude(lat).setLongitude(lon).setPrecise(merchant.gps > 0).build()
     }
 
     loc.foreach(builder.setLocation)
