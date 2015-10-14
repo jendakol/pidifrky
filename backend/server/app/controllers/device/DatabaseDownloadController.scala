@@ -14,8 +14,8 @@ import scala.collection.JavaConverters._
 import scala.concurrent.Future
 
 /**
- * @author Jenda Kolena, kolena@avast.com
- */
+  * @author Jenda Kolena, kolena@avast.com
+  */
 class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
 
   def download = Action.async { implicit request =>
@@ -58,8 +58,8 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
         lat <- card.latitude
         lon <- card.longitude
       } yield {
-          Location.newBuilder().setLatitude(lat).setLongitude(lon).build()
-        }
+        Location.newBuilder().setLatitude(lat).setLongitude(lon).build()
+      }
 
       loc.foreach(builder.setLocation)
 
@@ -68,15 +68,33 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
       builder.build()
     })
 
-  protected def getAllMerchants(mappedLinks: MappedLinks): Future[Seq[Merchant]] = dao.getAllMerchants.map(_.map{merchant =>
+  protected def getAllMerchants(mappedLinks: MappedLinks): Future[Seq[Merchant]] = dao.getAllMerchants.map(_.map { merchant =>
     val builder = Merchant.newBuilder()
+      .setId(merchant.id)
+      .setName(merchant.name)
+      .setNameRaw(Format.nameRaw(merchant.name))
+      .setAddress(merchant.address)
 
-    //TODO
+    val loc = for {
+      lat <- merchant.latitude
+      lon <- merchant.longitude
+    } yield {
+      Location.newBuilder().setLatitude(lat).setLongitude(lon).build()
+    }
+
+    loc.foreach(builder.setLocation)
+
+    mappedLinks.cardToMerchants.get(merchant.id).foreach(ids => builder.addAllCardsIds(ids.map(int2Integer).asJava))
 
     builder.build()
   })
 
-  protected def toMappedLinks(links: Seq[Card_x_MerchantPojo]): MappedLinks = ???
+  protected def toMappedLinks(links: Seq[Card_x_MerchantPojo]): MappedLinks = {
+    val cardToMerchants = links.groupBy(_.merchantId).mapValues(_.map(_.cardId))
+    val merchantToCards = links.groupBy(_.cardId).mapValues(_.map(_.merchantId))
+
+    MappedLinks(cardToMerchants, merchantToCards)
+  }
 
   protected def toUpdatedLinks(links: MappedLinks): UpdatedLinks = {
     val cardToMerchants = links.cardToMerchants.map { case (card, merchants) =>
