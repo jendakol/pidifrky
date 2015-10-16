@@ -1,13 +1,11 @@
 package logic
 
-import java.util.concurrent.Semaphore
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 /**
- * @author Jenda Kolena, kolena@avast.com
- */
+  * @author Jenda Kolena, kolena@avast.com
+  */
 object DataLock {
   private val mutex = new Mutex
   private val lock = new Mutex
@@ -33,15 +31,28 @@ object DataLock {
   }
 }
 
-class Mutex {
-  private val s = new Semaphore(1)
+class Semaphore(capacity: Int) {
+  private val s = new java.util.concurrent.Semaphore(capacity)
 
   def withLock[T](f: => T): T = try {
     s.acquire()
     f
   } finally s.release()
 
+  def withLockAsync[T](f: => Future[T]): Future[T] = try {
+    s.acquire()
+    f.andThen {
+      case _ => s.release()
+    }
+  } catch {
+    case e: Exception =>
+      s.release()
+      Future.failed(e)
+  }
+
   def lock(): Unit = s.acquire()
 
   def unlock(): Unit = s.release()
 }
+
+class Mutex extends Semaphore(1)

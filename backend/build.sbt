@@ -39,7 +39,9 @@ lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared")).
     libraryDependencies ++= Seq(
       "com.google.protobuf" % "protobuf-java" % "2.6.1",
       "com.google.guava" % "guava" % "18.0",
-      "org.apache.commons" % "commons-lang3" % "3.4"
+      "org.apache.commons" % "commons-lang3" % "3.4",
+      "org.scalatestplus" % "play_2.11" % "1.4.0-M4",
+      "org.scalatest" % "scalatest_2.11" % "2.2.5"
     )
   ).jsConfigure(_ enablePlugins ScalaJSPlay)
 

@@ -3,7 +3,7 @@ package logic
 import javax.inject.Inject
 
 import annots.{BlockingExecutor, CallbackExecutor}
-import data.{CardPojo, Dao, MerchantPojo}
+import data.{CardPojo, Dao, MerchantPojo, PojoFactory}
 import utils.{ConfigProperty, Logging}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -37,7 +37,7 @@ class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl:
   }
 
   protected def parseCards(xml: Elem): Future[Seq[(CardPojo, Seq[Int])]] = Future {
-    (xml \\ "pidifrky" \\ "pidifrk").toSeq.map { card =>
+    (xml \\ "pidifrky" \\ "pidifrk").toSeq.flatMap { card =>
       val id = (card \\ "@id").text.toInt
       val number = (card \\ "@cislo").text.toInt
       val name = (card \\ "nazev").text
@@ -47,13 +47,13 @@ class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl:
 
       val gps = (card \\ "gps").text
 
-      val (lat, lon) = extractGps(gps).map { case (la, lo) => (Option(la), Option(lo)) }.getOrElse((None, None))
+      val loc = extractGps(gps).orElse(UpdateHelper.positionForCard(id))
 
-      //TODO: guess location for cards
-
-      (CardPojo(id, number, name, lat, lon, neighbours), merchantIds)
+      if (name == "???")
+        None
+      else
+        Some((PojoFactory.createCard(id, number, name, loc, neighbours), merchantIds))
     }
-    //TODO: filter ??? etc.
   }(blocking)
 
   protected def parseMerchants(xml: Elem): Future[Seq[MerchantPojo]] = Future {
@@ -61,16 +61,16 @@ class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl:
       val id = (merchant \\ "@id").text.toInt
       val name = merchant.text
 
-      val address = (merchant \\ "@adresa").text
+      val address = UpdateHelper.fixAddress((merchant \\ "@adresa").text)
 
       val gps = (merchant \\ "@gps").text
 
-      extractGps(gps) match {
-        case Some((lat, lon)) => Future.successful(MerchantPojo(id, name, address, Option(lat), Option(lon), gps = 1))
-        case None => geoCoder.getLocation(address).map {
-          case Some((lat, lon)) => MerchantPojo(id, name, address, Option(lat), Option(lon), gps = 0)
-          case None => MerchantPojo(id, name, address, None, None, gps = 0)
-        }
+      extractGps(gps).orElse(UpdateHelper.positionForMerchant(id)) match {
+        case Some((lat, lon)) => Future.successful(PojoFactory.createMerchant(id, name, address, Some(lat, lon), precise = true))
+        case None =>
+          geoCoder.getLocation(address).map { loc =>
+            PojoFactory.createMerchant(id, name, address, loc, precise = false)
+          }
       }
     }
   }(blocking).flatMap(Future.sequence(_))
