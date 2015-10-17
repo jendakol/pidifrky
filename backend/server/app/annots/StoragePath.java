@@ -1,4 +1,4 @@
-package utils;
+package annots;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.Documented;
@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Retention(RUNTIME)
 @SuppressWarnings("unused")
-public @interface ConfigProperty {
+public @interface StoragePath {
 
     /**
      * The name.

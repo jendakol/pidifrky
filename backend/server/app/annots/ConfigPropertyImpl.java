@@ -1,4 +1,4 @@
-package utils;
+package annots;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

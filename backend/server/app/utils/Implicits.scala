@@ -21,7 +21,7 @@ object Implicits {
       override def onFailure(t: Throwable) = p.failure(t)
 
       override def onSuccess(result: Response) = {
-        val response = HttpResponse(result.getResponseBodyAsBytes)
+        val response = HttpResponse(result.getResponseBodyAsStream, Option(result.getHeader("Content-Length")).map(_.toLong))
 
         p.success(response)
       }

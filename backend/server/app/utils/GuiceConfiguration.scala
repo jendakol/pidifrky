@@ -1,18 +1,24 @@
 package utils
 
+import java.nio.file.{Path, Paths}
+
+import annots.{StoragePathImpl, ConfigPropertyImpl, ConfigProperty, StoragePath}
 import com.google.inject.AbstractModule
 import com.typesafe.config.ConfigFactory
 
+import scala.collection.JavaConverters._
+
 /**
- * @author Jenda Kolena, kolena@avast.com
- */
-class GuiceConfiguration extends AbstractModule {
+  * @author Jenda Kolena, kolena@avast.com
+  */
+class GuiceConfiguration extends AbstractModule with Logging {
 
   private lazy val config = ConfigFactory.load().root()
 
   override def configure(): Unit = {
 
     bindConfig(config, "")(binder())
+    bindStoragePaths(config.toConfig, binder())
   }
 
   import java.lang.{Boolean => JBoolean}
@@ -28,7 +34,7 @@ class GuiceConfiguration extends AbstractModule {
       val configObj = obj.asInstanceOf[ConfigObject]
       // Bind the config from the object.
       binder
-        .bind(Key.get(classOf[Config], initProperty(bindingPath)))
+        .bind(Key.get(classOf[Config], initConfigProperty(bindingPath)))
         .toInstance(configObj.toConfig)
       // Bind any nested values.
       configObj.entrySet().foreach(me => {
@@ -45,25 +51,53 @@ class GuiceConfiguration extends AbstractModule {
       // Bind as string and rely on guice's conversion code when the value is used.
       binder
         .bindConstant()
-        .annotatedWith(initProperty(bindingPath))
+        .annotatedWith(initConfigProperty(bindingPath))
         .to(obj.unwrapped()
-        .asInstanceOf[Number].toString)
+          .asInstanceOf[Number].toString)
     case ConfigValueType.BOOLEAN =>
       binder
         .bindConstant()
-        .annotatedWith(initProperty(bindingPath))
+        .annotatedWith(initConfigProperty(bindingPath))
         .to(obj.unwrapped()
-        .asInstanceOf[JBoolean])
+          .asInstanceOf[JBoolean])
     case ConfigValueType.NULL =>
     // NULL values are ignored.
     case ConfigValueType.STRING =>
       binder
         .bindConstant()
-        .annotatedWith(initProperty(bindingPath))
+        .annotatedWith(initConfigProperty(bindingPath))
         .to(obj.unwrapped()
-        .asInstanceOf[String])
+          .asInstanceOf[String])
   }
 
-  private def initProperty(name: String): ConfigProperty =
+  private def bindStoragePaths(config: Config, binder: Binder): Unit = {
+    val root = config.getString("play.server.dir")
+
+    config.getConfig("paths").entrySet().asScala.foreach { entry =>
+      val key = entry.getKey
+      val value = entry.getValue.unwrapped().toString
+
+      val path = Paths.get(root, value).toAbsolutePath
+
+      Logger.info(s"Binding StoragePath('$key') to $path")
+
+      binder.bind(classOf[Path])
+        .annotatedWith(initStoragePath(key))
+        .toInstance(path)
+
+      binder.bind(classOf[StorageDir])
+        .annotatedWith(initStoragePath(key))
+        .toInstance(StorageDir(path))
+
+      binder.bindConstant()
+        .annotatedWith(initStoragePath(key))
+        .to(path.toString)
+    }
+  }
+
+  private def initStoragePath(name: String): StoragePath =
+    new StoragePathImpl(name)
+
+  private def initConfigProperty(name: String): ConfigProperty =
     new ConfigPropertyImpl(if (!name.isEmpty) name.substring(1) else "root")
 }

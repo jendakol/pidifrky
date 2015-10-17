@@ -2,9 +2,10 @@ package utils.helpers
 
 import javax.inject.Inject
 
+import annots.ConfigProperty
 import play.api.libs.mailer._
 import play.twirl.api.HtmlFormat
-import utils.{ConfigProperty, Logging}
+import utils.Logging
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success}

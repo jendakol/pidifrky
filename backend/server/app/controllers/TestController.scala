@@ -8,7 +8,7 @@ import logic.Updater
 import play.api.mvc.{Action, Controller}
 import utils.Format
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{Future, ExecutionContext}
 
 /**
  * @author Jenda Kolena, kolena@avast.com
@@ -18,5 +18,7 @@ class TestController @Inject()(cardsDao: Dao, updater: Updater, @CallbackExecuto
     updater.update().map(_ => Ok("ok")).recover {
       case t: Exception => InternalServerError(Format(t) + "\nat " + t.getStackTrace.mkString("\nat "))
     }
+//
+//    Future.successful(Ok("ok"))
   }
 }

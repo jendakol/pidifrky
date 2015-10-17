@@ -3,13 +3,13 @@ package logic
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-import annots.{BlockingExecutor, CallbackExecutor}
+import annots.{ConfigProperty, BlockingExecutor, CallbackExecutor}
 import com.google.common.util.concurrent.RateLimiter
 import exceptions.InvalidPayloadException
 import rapture.core.modes.returnTry._
 import rapture.json.jsonBackends.jackson._
 import rapture.json.{Json, _}
-import utils.{ConfigProperty, Logging}
+import utils.Logging
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
@@ -32,9 +32,8 @@ class GeoCoder @Inject()(@ConfigProperty("url.google.geocoding") googleUrlGeocod
         }
         else {
           HttpClient.get(googleUrlGeocoding, "address" -> address, "key" -> googleGeocodingKey)
-            .map(r => new String(r.payload))
             .map { resp =>
-              val json = Json.parse(resp)
+              val json = Json.parse(resp.asString)
 
               json.map(_.status).flatMap(_.as[String]) match {
                 case Success(status: String) => status match {

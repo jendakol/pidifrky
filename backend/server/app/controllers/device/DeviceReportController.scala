@@ -2,10 +2,10 @@ package controllers.device
 
 import javax.inject.Inject
 
+import annots.ConfigProperty
 import controllers.device.DeviceControllerImplicits._
 import cz.jenda.pidifrky.proto.DeviceBackend.DebugReportRequest
 import play.api.mvc._
-import utils.ConfigProperty
 import utils.helpers.{EmailHelper, GZipHelper}
 
 import scala.concurrent.Future

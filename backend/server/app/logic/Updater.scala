@@ -2,9 +2,9 @@ package logic
 
 import javax.inject.Inject
 
-import annots.{BlockingExecutor, CallbackExecutor}
+import annots.{ConfigProperty, BlockingExecutor, CallbackExecutor}
 import data.{CardPojo, Dao, MerchantPojo, PojoFactory}
-import utils.{ConfigProperty, Logging}
+import utils.Logging
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.xml.{Elem, XML}
@@ -12,22 +12,27 @@ import scala.xml.{Elem, XML}
 /**
   * @author Jenda Kolena, kolena@avast.com
   */
-class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl: String, geoCoder: GeoCoder, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
+class Updater @Inject()(dao: Dao, imageHelper: ImageHelper, @ConfigProperty("url.pidifrk.xml") xmlDataUrl: String, geoCoder: GeoCoder, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
   protected final val Gps = "(\\d{1,2}\\.\\d+), ?(\\d{1,2}\\.\\d+)".r
 
   def update(): Future[Unit] = HttpClient.get(xmlDataUrl).map { resp =>
-    XML.load(resp.asStream)
+    XML.load(resp.stream)
   }(blocking) flatMap { xml =>
+    val merchantsF = parseMerchants(xml)
+    val cardsF = parseCards(xml)
+
+    val imagesF = cardsF.map(_.map(_._1.number)).flatMap(imageHelper.downloadImagesForCards)
+
     for {
-      merchants <- parseMerchants(xml)
-      cards <- parseCards(xml)
+      merchants <- merchantsF
+      cards <- cardsF
       _ <- performUpdate(merchants, cards)
+      _ <- imagesF
     } yield ()
   }
 
   protected def performUpdate(merchants: Seq[MerchantPojo], cards: Seq[(CardPojo, Seq[Int])]): Future[Unit] = DataLock.withWriteLock {
     for {
-    //TODO download all missing images
       _ <- dao.deleteAllMerchants()
       _ <- dao.insertMerchants(merchants)
       _ <- dao.deleteAllCardMerchantLinks()
