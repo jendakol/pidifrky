@@ -27,6 +27,7 @@ class Updater @Inject()(dao: Dao, @ConfigProperty("url.pidifrk.xml") xmlDataUrl:
 
   protected def performUpdate(merchants: Seq[MerchantPojo], cards: Seq[(CardPojo, Seq[Int])]): Future[Unit] = DataLock.withWriteLock {
     for {
+    //TODO download all missing images
       _ <- dao.deleteAllMerchants()
       _ <- dao.insertMerchants(merchants)
       _ <- dao.deleteAllCardMerchantLinks()

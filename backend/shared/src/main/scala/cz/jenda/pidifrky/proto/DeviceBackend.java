@@ -4274,11 +4274,11 @@ public final class DeviceBackend {
       float getLongitude();
 
       /**
-       * <code>required bool precise = 3 [default = true];</code>
+       * <code>optional bool precise = 3 [default = true];</code>
        */
       boolean hasPrecise();
       /**
-       * <code>required bool precise = 3 [default = true];</code>
+       * <code>optional bool precise = 3 [default = true];</code>
        */
       boolean getPrecise();
     }
@@ -4422,13 +4422,13 @@ public final class DeviceBackend {
       public static final int PRECISE_FIELD_NUMBER = 3;
       private boolean precise_;
       /**
-       * <code>required bool precise = 3 [default = true];</code>
+       * <code>optional bool precise = 3 [default = true];</code>
        */
       public boolean hasPrecise() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bool precise = 3 [default = true];</code>
+       * <code>optional bool precise = 3 [default = true];</code>
        */
       public boolean getPrecise() {
         return precise_;
@@ -4450,10 +4450,6 @@ public final class DeviceBackend {
           return false;
         }
         if (!hasLongitude()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        if (!hasPrecise()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -4695,10 +4691,6 @@ public final class DeviceBackend {
             
             return false;
           }
-          if (!hasPrecise()) {
-            
-            return false;
-          }
           return true;
         }
 
@@ -4787,19 +4779,19 @@ public final class DeviceBackend {
 
         private boolean precise_ = true;
         /**
-         * <code>required bool precise = 3 [default = true];</code>
+         * <code>optional bool precise = 3 [default = true];</code>
          */
         public boolean hasPrecise() {
           return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
-         * <code>required bool precise = 3 [default = true];</code>
+         * <code>optional bool precise = 3 [default = true];</code>
          */
         public boolean getPrecise() {
           return precise_;
         }
         /**
-         * <code>required bool precise = 3 [default = true];</code>
+         * <code>optional bool precise = 3 [default = true];</code>
          */
         public Builder setPrecise(boolean value) {
           bitField0_ |= 0x00000004;
@@ -4808,7 +4800,7 @@ public final class DeviceBackend {
           return this;
         }
         /**
-         * <code>required bool precise = 3 [default = true];</code>
+         * <code>optional bool precise = 3 [default = true];</code>
          */
         public Builder clearPrecise() {
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -10756,7 +10748,7 @@ public final class DeviceBackend {
       "se.Merchant\022;\n\rupdated_links\030\003 \001(\0132$.Dat" +
       "abaseUpdateResponse.UpdatedLinks\032F\n\010Loca" +
       "tion\022\020\n\010latitude\030\001 \002(\002\022\021\n\tlongitude\030\002 \002(" +
-      "\002\022\025\n\007precise\030\003 \002(\010:\004true\032\241\001\n\004Card\022\014\n\004nam" +
+      "\002\022\025\n\007precise\030\003 \001(\010:\004true\032\241\001\n\004Card\022\014\n\004nam" +
       "e\030\001 \002(\t\022\020\n\010name_raw\030\002 \002(\t\022\n\n\002id\030\003 \002(\005\022\016\n",
       "\006number\030\004 \002(\005\0222\n\010location\030\005 \001(\0132 .Databa" +
       "seUpdateResponse.Location\022\025\n\rmerchants_i" +

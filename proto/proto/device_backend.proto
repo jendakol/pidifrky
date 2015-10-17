@@ -45,7 +45,7 @@ message DatabaseUpdateResponse {
     message Location {
         required float latitude = 1;
         required float longitude = 2;
-        required bool precise = 3 [default = true];
+        optional bool precise = 3 [default = true];
     }
 
     message Card {

@@ -17,6 +17,7 @@ lazy val server = (project in file("server")).settings(
     "com.ning" % "async-http-client" % "1.9.31",
     "mysql" % "mysql-connector-java" % "5.1.34",
     "com.propensive" % "rapture-json-jackson_2.11" % "1.1.0",
+    jdbc,
     specs2 % Test
   )
 ).enablePlugins(PlayScala).

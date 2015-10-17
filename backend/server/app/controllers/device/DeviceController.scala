@@ -14,8 +14,8 @@ import scala.language.implicitConversions
 import scala.util.control.NonFatal
 
 /**
- * @author Jenda Kolena, kolena@avast.com
- */
+  * @author Jenda Kolena, kolena@avast.com
+  */
 trait DeviceController extends Controller with Results with Logging {
 
   import logic.AppModule._
@@ -50,13 +50,13 @@ object DeviceControllerImplicits extends Results with Logging {
         Ok(r)
       } recover {
         case e: ClientException =>
-          Logger.debug("Returning BadRequest with message " + e.getMessage)
+          Logger.debug("Returning BadRequest with message " + e.getMessage, e)
           BadRequest(e.getMessage)
         case e: ServerException =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage)
+          Logger.debug("Returning InternalServerError with message " + e.getMessage, e)
           InternalServerError(e.getMessage)
         case NonFatal(e) =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage)
+          Logger.debug("Returning InternalServerError with message " + e.getMessage, e)
           InternalServerError(e.getMessage)
       }
   }

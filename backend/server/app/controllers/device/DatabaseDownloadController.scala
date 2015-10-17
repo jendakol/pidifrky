@@ -26,7 +26,7 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
     } yield update).toResponse
   }
 
-  protected def handleUpdate(request: DatabaseUpdateRequest, updatedTimestamps: UpdatedTimestamps): Future[DatabaseUpdateResponse] =
+  protected[controllers] def handleUpdate(request: DatabaseUpdateRequest, updatedTimestamps: UpdatedTimestamps): Future[DatabaseUpdateResponse] =
     for {
       links <- dao.getAllLinks.map(toMappedLinks)
       newCards <- getNewCards(request.getKnownCardsIdsList.asScala.map(_.toInt), links)
@@ -43,7 +43,7 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
     }
 
 
-  protected def getNewCards(knownCards: Seq[Int], mappedLinks: MappedLinks): Future[Seq[Card]] =
+  protected[controllers] def getNewCards(knownCards: Seq[Int], mappedLinks: MappedLinks): Future[Seq[Card]] =
     dao.getUnknownCards(knownCards).map(_.map { card =>
       val builder = Card.newBuilder()
 
@@ -68,7 +68,7 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
       builder.build()
     })
 
-  protected def getAllMerchants(mappedLinks: MappedLinks): Future[Seq[Merchant]] = dao.getAllMerchants.map(_.map { merchant =>
+  protected[controllers] def getAllMerchants(mappedLinks: MappedLinks): Future[Seq[Merchant]] = dao.getAllMerchants.map(_.map { merchant =>
     val builder = Merchant.newBuilder()
       .setId(merchant.id)
       .setName(merchant.name)
@@ -84,19 +84,19 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
 
     loc.foreach(builder.setLocation)
 
-    mappedLinks.cardToMerchants.get(merchant.id).foreach(ids => builder.addAllCardsIds(ids.map(int2Integer).asJava))
+    mappedLinks.merchantToCards.get(merchant.id).foreach(ids => builder.addAllCardsIds(ids.map(int2Integer).asJava))
 
     builder.build()
   })
 
-  protected def toMappedLinks(links: Seq[Card_x_MerchantPojo]): MappedLinks = {
-    val cardToMerchants = links.groupBy(_.merchantId).mapValues(_.map(_.cardId))
-    val merchantToCards = links.groupBy(_.cardId).mapValues(_.map(_.merchantId))
+  protected[controllers] def toMappedLinks(links: Seq[Card_x_MerchantPojo]): MappedLinks = {
+    val merchantToCards = links.groupBy(_.merchantId).mapValues(_.map(_.cardId))
+    val cardToMerchants = links.groupBy(_.cardId).mapValues(_.map(_.merchantId))
 
     MappedLinks(cardToMerchants, merchantToCards)
   }
 
-  protected def toUpdatedLinks(links: MappedLinks): UpdatedLinks = {
+  protected[controllers] def toUpdatedLinks(links: MappedLinks): UpdatedLinks = {
     val cardToMerchants = links.cardToMerchants.map { case (card, merchants) =>
       CardToMerchants.newBuilder().setCardId(card).addAllMerchantsIds(merchants.map(int2Integer).asJava).build()
     }.asJava
