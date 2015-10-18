@@ -123,26 +123,35 @@ object Utils {
 
 
   private val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(2)
+  executorService.scheduleAtFixedRate(new Runnable {
+    override def run(): Unit = updateOnlineStatus()
+  }, 0, 1, TimeUnit.MINUTES)
+
+  @volatile
   private var online: Boolean = true
 
   def updateOnlineStatus(): Future[Boolean] = Future {
     online = try {
-      InetAddress.getAllByName("maps.google.com")
+      InetAddress.getByName("google.com")
       true
     }
     catch {
-      case e: UnknownHostException => false
+      case e: UnknownHostException =>
+        DebugReporter.debug(e, "Offline")
+        false
       case e: Exception =>
         DebugReporter.debugAndReport(e)
         false
     }
+
     DebugReporter.debug("Online status: " + online)
     try {
-      InetAddress.getAllByName("pidifrky.jenda.eu")
+      InetAddress.getByName("pidifrky.jenda.eu")
       true
     }
     catch {
-      case e: Exception => DebugReporter.debugAndReport(e, "Cannot connect to service point")
+      case e: Exception =>
+        DebugReporter.debugAndReport(e, "Cannot connect to service point")
         false
     }
   }(Application.executionContext)

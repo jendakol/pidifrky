@@ -19,6 +19,8 @@ object Toast {
   final val Medium = 2500
   final val Long = 4000
 
+  //TODO use another library for toasts - https://github.com/code-mc/loadtoast ?
+
   private var toast: Option[ToastAndWrapper[_]] = None
 
   def apply(text: String, duration: Int)(implicit ctx: Activity): Unit = Toast.synchronized {

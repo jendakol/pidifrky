@@ -1,6 +1,6 @@
 package cz.jenda.pidifrky.logic.http
 
-import java.net.SocketTimeoutException
+import java.net.{SocketException, SocketTimeoutException}
 import java.security.cert.CertificateException
 import java.security.{KeyManagementException, KeyStoreException, NoSuchAlgorithmException}
 import java.util.concurrent.TimeUnit
@@ -29,8 +29,8 @@ object HttpRequester {
 
   private lazy val client: OkClient = new OkClient({
     val okHttpClient = new OkHttpClient()
-    okHttpClient.setConnectTimeout(1, TimeUnit.SECONDS)
-    okHttpClient.setReadTimeout(10, TimeUnit.SECONDS)
+    okHttpClient.setConnectTimeout(2, TimeUnit.SECONDS)
+    okHttpClient.setReadTimeout(2, TimeUnit.SECONDS)
 
     okHttpClient
   })
@@ -65,15 +65,39 @@ object HttpRequester {
       case e@(_: KeyStoreException | _: NoSuchAlgorithmException | _: CertificateException | _: KeyManagementException | _: javax.net.ssl.SSLException) =>
         DebugReporter.debug(e, "Error in SSL connection")
         SSLException(e)
-      case e: RetrofitError if e.getMessage.startsWith("SSL") =>
+      case e@(_: SocketTimeoutException | _: SocketException) =>
         DebugReporter.debug(e, "Error in SSL connection")
         SSLException(e)
       case _ => GenericHttpException(t.getMessage, t)
-    })) recover {
+    })) recoverWith {
       case SSLException(t) =>
-        DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
+        if (Utils.isDebug)
+          DebugReporter.debug(t, "HTTPS connection failed, fallback to HTTP")
+        else
+          DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
 
-        http()
+        Try {
+          http()
+          //TODO log and handle success case, wrong HTTP code etc. - like in async
+        }.transform(r => Success(r), t => Failure(t match {
+          case error: RetrofitError =>
+            t.getCause match {
+              case e@(_: SocketTimeoutException | _: SocketException) =>
+                GenericHttpException(e.getMessage, error)
+              case e: Exception =>
+                val msg = Option(error.getResponse) match {
+                  case Some(response) =>
+                    "HTTP " + response.getStatus + " " + response.getReason + (Try(response.getBody).map(b => ByteStreams.toByteArray(b.in)) match {
+                      case Success(bytes) => " (" + new String(bytes) + ")"
+                      case Failure(_) => ""
+                    })
+                  case None => e.getMessage
+                }
+
+                GenericHttpException(msg, error)
+            }
+          case e: Exception => e
+        }))
     }
 
   private def execAsync[T](https: Callback[Response] => Unit, http: Callback[Response] => Unit, responseType: ResponseDecoder)(toFinalResponse: HttpResponse => T): Future[T] = {
@@ -88,7 +112,7 @@ object HttpRequester {
           case e@(_: KeyStoreException | _: NoSuchAlgorithmException | _: CertificateException | _: KeyManagementException | _: javax.net.ssl.SSLException) =>
             DebugReporter.debug(e, "Error in SSL connection")
             SSLException(e)
-          case e: SocketTimeoutException =>
+          case e@(_: SocketTimeoutException | _: SocketException) =>
             DebugReporter.debug(e, "Error in SSL connection")
             SSLException(e)
           case _ => GenericHttpException(error.getMessage, error.getCause)
@@ -97,21 +121,31 @@ object HttpRequester {
 
     httpsPromise.future recoverWith {
       case SSLException(t) =>
-        DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
+        if (Utils.isDebug)
+          DebugReporter.debug(t, "HTTPS connection failed, fallback to HTTP")
+        else
+          DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
+
         val httpPromise = Promise[Response]()
 
         http(new Callback[Response] {
           override def success(t: Response, response: Response): Unit =
             httpPromise.complete(Success(t))
 
-          override def failure(error: RetrofitError): Unit = {
-            val response = error.getResponse
-            val msg = "HTTP " + response.getStatus + " " + response.getReason + (Try(response.getBody).map(b => ByteStreams.toByteArray(b.in)) match {
-              case Success(bytes) => " (" + new String(bytes) + ")"
-              case Failure(_) => ""
-            })
+          override def failure(error: RetrofitError): Unit = error.getCause match {
+            case e@(_: SocketTimeoutException | _: SocketException) =>
+              httpPromise.complete(Failure(GenericHttpException(e.getMessage, error)))
+            case e: Exception =>
+              val msg = Option(error.getResponse) match {
+                case Some(response) =>
+                  "HTTP " + response.getStatus + " " + response.getReason + (Try(response.getBody).map(b => ByteStreams.toByteArray(b.in)) match {
+                    case Success(bytes) => " (" + new String(bytes) + ")"
+                    case Failure(_) => ""
+                  })
+                case None => e.getMessage
+              }
 
-            httpPromise.complete(Failure(GenericHttpException(msg, error)))
+              httpPromise.complete(Failure(GenericHttpException(msg, error)))
           }
         })
         httpPromise.future
@@ -122,12 +156,15 @@ object HttpRequester {
         Future.failed(exception)
       }
       else {
-        DebugReporter.debug(s"Downloaded ${Format.formatSize(r.getBody.length())}")
+        val length = Option(r.getBody).map(_.length()).getOrElse(0l)
+        DebugReporter.debug(s"Downloaded ${Format.formatSize(length)}")
 
         Future.fromTry(Try {
           responseType.decode(r)
         }) map toFinalResponse recoverWith {
-          case e: Exception => Future.failed(DecodeHttpException(r, e))
+          case e: Exception =>
+            DebugReporter.debugAndReport(e)
+            Future.failed(DecodeHttpException(r, e))
         }
       }
     }

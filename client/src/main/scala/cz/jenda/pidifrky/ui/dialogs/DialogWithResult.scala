@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentActivity
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 trait DialogWithResult[R <: DialogResult] extends BaseDialog {
-  protected var dialogResultCallback: Option[DialogResultCallback[R]] = None
+  protected var dialogResultCallback: Seq[DialogResultCallback[R]] = Seq()
 
   def withResultCallback(callback: DialogResultCallback[R]): this.type = {
-    dialogResultCallback = Some(callback)
+    dialogResultCallback = dialogResultCallback :+ callback
     this
   }
 
@@ -17,7 +17,7 @@ trait DialogWithResult[R <: DialogResult] extends BaseDialog {
     super.withActivity(ctx)
 
     ctx match {
-      case x: DialogResultCallback[R] => dialogResultCallback = Some(x)
+      case x: DialogResultCallback[R] => dialogResultCallback = dialogResultCallback :+ x
       case _ =>
     }
 

@@ -9,12 +9,12 @@ object PidifrkyConstants {
   val DATABASE_VERSION = 4
   val DATABASE_NAME = "pidifrky.db"
 
-//  val BASE_URL = "https://pidifrky.jenda.eu"
-  val BASE_URL = "http://192.168.56.1:9000/device" //for testing in Genymotion
+  val BASE_URL = "https://pidifrky.jenda.eu:9000/device" //port 9000 for testing in Genymotion; it's needed to overwrite hosts file on device
   val URL_ROUTE = "http://maps.googleapis.com/maps/api/directions/json"
   val URL_CARD_DETAIL = "http://pidifrk.cz/pidifrk-detail.php?pid=%d"
   val URL_MERCHANT_DETAIL = "http://pidifrk.cz/prodejce-pidifrku.php?idp=%d"
 
+  val STORAGE_TYPE = "storageType"
   val PATH_IMAGES_FULL = "images_full"
   val PATH_IMAGES_THUMBS = "images_thumbs"
 

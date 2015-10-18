@@ -1,5 +1,7 @@
 package cz.jenda.pidifrky.logic.location
 
+import java.util.concurrent.atomic.AtomicBoolean
+
 import android.app.Activity
 import android.location.Location
 import com.google.android.gms.maps.model.LatLng
@@ -25,7 +27,10 @@ object LocationHandler {
 
   private val activityProvider = new LocationBasedOnActivityProvider(ActivityLocationResolver)
 
-  def start(implicit ctx: Activity): Unit = {
+  private val tracking = new AtomicBoolean(false)
+
+  def start(implicit ctx: Activity): Unit = tracking.synchronized {
+    if (tracking.get()) return //already tracking
 
     if (currentLocation.isEmpty) {
       //probably first attempt to lock
@@ -50,6 +55,16 @@ object LocationHandler {
     control.start(new OnLocationUpdatedListener {
       override def onLocationUpdated(location: Location): Unit = updateLocation(location)
     })
+
+    tracking.set(true)
+  }
+
+  def stop(implicit ctx: Activity): Unit = tracking.synchronized {
+    if (!tracking.get()) return
+
+    SmartLocation.`with`(ctx).location().stop()
+
+    tracking.set(false)
   }
 
   protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = if (location != null) {

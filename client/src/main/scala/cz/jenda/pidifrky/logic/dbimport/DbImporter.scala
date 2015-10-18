@@ -1,5 +1,6 @@
 package cz.jenda.pidifrky.logic.dbimport
 
+import cz.jenda.pidifrky.MerchantsTable
 import cz.jenda.pidifrky.data.Database
 import cz.jenda.pidifrky.data.dao._
 import cz.jenda.pidifrky.data.pojo.{Card, CardState, Merchant, MerchantLocation}
@@ -57,8 +58,15 @@ object DbImporter {
 
         progressListener(80)
 
+        if (merchants.nonEmpty) {
+          //delete all merchants in order to insert new ones
+          Database.truncate(MerchantsTable)
+        }
+
         Database.executeTransactionally(commands).andThen {
-          case _ => progressListener(100)
+          case _ =>
+            PidifrkySettings.markDatabaseUpdate()
+            progressListener(100)
         }
       }
     }

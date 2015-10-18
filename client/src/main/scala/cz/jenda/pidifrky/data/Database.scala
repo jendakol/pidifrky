@@ -17,7 +17,7 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
   null
 }), PidifrkyConstants.DATABASE_NAME, null, PidifrkyConstants.DATABASE_VERSION) {
 
-  lazy val db: SQLiteDatabase = getWritableDatabase
+  protected lazy val db: SQLiteDatabase = getWritableDatabase
 
   override def onCreate(db: SQLiteDatabase): Unit = {
     try {

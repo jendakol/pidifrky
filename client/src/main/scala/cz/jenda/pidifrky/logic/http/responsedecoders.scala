@@ -15,25 +15,26 @@ sealed trait ResponseDecoder {
 
 case object PlainResponseDecoder extends ResponseDecoder {
   override def decode(r: Response): HttpResponse = {
-    val body = r.getBody
+    val body = Option(r.getBody)
 
     val content = body match {
-      case b: TypedByteArray => b.getBytes
-      case f =>
+      case Some(b: TypedByteArray) => b.getBytes
+      case Some(f) =>
         ByteStreams.toByteArray(f.in())
+      case None => Array[Byte]()
     }
 
-    HttpResponse(r.getStatus, content, body.length().toInt)
+    HttpResponse(r.getStatus, content, body.map(_.length().toInt).getOrElse(0))
   }
 }
 
 case object GZIPResponseDecoder extends ResponseDecoder {
   override def decode(r: Response): HttpResponse = {
-    val body = r.getBody
+    val body = Option(r.getBody)
 
     //missing error handling - it's handled in HttpRequester
-    val content = ByteStreams.toByteArray(new GZIPInputStream(body.in()))
+    val content = body.map(b => ByteStreams.toByteArray(new GZIPInputStream(b.in()))).getOrElse(Array[Byte]())
 
-    HttpResponse(r.getStatus, content, body.length().toInt)
+    HttpResponse(r.getStatus, content, body.map(_.length().toInt).getOrElse(0))
   }
 }

@@ -14,11 +14,18 @@
                 android:layout_height="wrap_content"
                 android:text="New Button"
                 android:id="@+id/button" android:layout_weight="0.43" android:onClick="click"/>
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP" android:id="@+id/button2"
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP"
+                android:id="@+id/button2"
                 android:layout_weight="0.43" android:onClick="goToMap"/>
     </TableRow>
     <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GpsLog" android:id="@+id/button6"
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GpsLog"
+                android:id="@+id/button6"
                 android:layout_weight="0.43" android:onClick="goToGpsLog" android:layout_gravity="center_vertical"/>
+    </TableRow>
+    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UPDATE"
+                android:id="@+id/button3"
+                android:layout_weight="0.43" android:onClick="update"/>
     </TableRow>
 </TableLayout>

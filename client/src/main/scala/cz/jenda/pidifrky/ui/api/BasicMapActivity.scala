@@ -76,7 +76,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
                   if (!isVisibleOnMap(location)) {
                     followLocation = false
 
-                    PidifrkySettings.editor.putBoolean("mapFollowPosition", followLocation).commit
+                    PidifrkySettings.withEditor(_.putBoolean("mapFollowPosition", followLocation))
                     Toast(R.string.map_following_off, Toast.Short)
                     runOnUiThread(invalidateOptionsMenu())
                   }
@@ -109,7 +109,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
   override protected def onActionBarClicked: PartialFunction[Int, Boolean] = {
     case R.id.menu_map_followPosition =>
       followLocation = !followLocation
-      PidifrkySettings.editor.putBoolean("mapFollowPosition", followLocation).apply()
+      PidifrkySettings.withEditor(_.putBoolean("mapFollowPosition", followLocation))
 
       runOnUiThread(invalidateOptionsMenu())
 
@@ -141,7 +141,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
   def clearMap(): Unit = map.foreach(_.clear)
 
   def setMapType(mapType: MapType, save: Boolean = true): Unit = {
-    if (save) PidifrkySettings.editor.putInt("mapType", mapType.id).apply()
+    if (save) PidifrkySettings.withEditor(_.putInt("mapType", mapType.id))
 
     map.foreach(_.setMapType(mapType.id))
   }

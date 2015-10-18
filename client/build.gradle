@@ -13,6 +13,9 @@ repositories {
     mavenCentral()
     maven { url "https://mint.splunk.com/gradle/" }
     maven { url "http://nexus.antczak.org/content/repositories/thirdparty/" }
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 apply plugin: "com.android.application"
@@ -47,6 +50,11 @@ android {
     }
 }
 
+//noinspection GroovyAssignabilityCheck
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     compile 'com.google.android.gms:play-services:8.1.0'
@@ -75,4 +83,8 @@ dependencies {
     compile 'com.splunk.mint:mint:4.3.0'
 
     compile 'org.scala-lang:scala-library:2.11.7'
+
+    compile (name: 'simple-storage-library-1.0.0', ext: 'aar') {
+        changing = true
+    }
 }

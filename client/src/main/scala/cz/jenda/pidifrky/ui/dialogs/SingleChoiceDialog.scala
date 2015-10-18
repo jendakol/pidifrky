@@ -44,12 +44,13 @@ class SingleChoiceDialog extends DialogWithResult[IndexDialogResult] {
 }
 
 object SingleChoiceDialog {
-  def apply(dialogId: Symbol, title: Int, items: Int)(implicit ctx: AppCompatActivity) =
+  def apply(dialogId: Symbol, title: Int, items: Int, callback: DialogResultCallback[IndexDialogResult])(implicit ctx: AppCompatActivity) =
     new SingleChoiceDialogWrapper(dialogId,
       new SingleChoiceDialog()
         .withActivity(ctx)
         .withDialogId(dialogId)
         .withCancellable(false)
         .withTitle(title)
-        .withItems(items))
+        .withItems(items)
+        .withResultCallback(callback))
 }

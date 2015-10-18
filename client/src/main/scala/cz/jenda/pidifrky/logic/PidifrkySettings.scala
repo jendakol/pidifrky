@@ -1,31 +1,33 @@
 package cz.jenda.pidifrky.logic
 
-import android.content.{Context, SharedPreferences}
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.splunk.mint.Mint
+import com.sromku.simple.storage.SimpleStorage.StorageType
 import cz.jenda.pidifrky.logic.map.MapType
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object PidifrkySettings {
-  private var preferences: SharedPreferences = _
-
-  def init(implicit context: Context): Unit = {
-    preferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-    //when initializing
-    Mint.setUserIdentifier(PidifrkySettings.UUID)
-  }
+  private lazy val preferences: SharedPreferences = Application.appContext.map { context =>
+    PreferenceManager.getDefaultSharedPreferences(context)
+  }.getOrElse({
+    DebugReporter.debugAndReport(new Exception("Missing context for settings"))
+    null
+  })
 
   lazy val UUID: String = {
     if (!preferences.contains(PidifrkyConstants.PREF_UUID)) {
       val uuid: String = java.util.UUID.randomUUID.toString
       preferences.edit.putString(PidifrkyConstants.PREF_UUID, uuid).apply()
+      Mint.setUserIdentifier(uuid)
       uuid
     }
     else {
-      preferences.getString(PidifrkyConstants.PREF_UUID, java.util.UUID.randomUUID.toString)
+      val uuid = preferences.getString(PidifrkyConstants.PREF_UUID, java.util.UUID.randomUUID.toString)
+      Mint.setUserIdentifier(uuid)
+      uuid
     }
   }
 
@@ -57,7 +59,7 @@ object PidifrkySettings {
 
   def markAndGetStarts: Int = try {
     val started: Int = preferences.getInt(PidifrkyConstants.STARTED_COUNT, 0) + 1
-    preferences.edit.putInt(PidifrkyConstants.STARTED_COUNT, started).apply()
+    withEditor(_.putInt(PidifrkyConstants.STARTED_COUNT, started))
     started
   }
   catch {
@@ -70,11 +72,20 @@ object PidifrkySettings {
 
   def ratedApp: Boolean = readBoolean(PidifrkyConstants.RATED, default = false)
 
-  def ratedApp(rated: Boolean): Unit = editor.putBoolean(PidifrkyConstants.RATED, rated).apply()
+  def ratedApp(rated: Boolean): Unit = withEditor(_.putBoolean(PidifrkyConstants.RATED, rated))
 
-  def lastDatabaseUpdateTimestamp: Long = readInt(PidifrkyConstants.DATABASE_LAST_UPDATE, 0)
+  def lastDatabaseUpdateTimestamp: Long = readLong(PidifrkyConstants.DATABASE_LAST_UPDATE, 0)
 
-  def markDatabaseUpdate(): Unit = editor.putLong(PidifrkyConstants.DATABASE_LAST_UPDATE, System.currentTimeMillis()).apply()
+  def markDatabaseUpdate(): Unit = withEditor(_.putLong(PidifrkyConstants.DATABASE_LAST_UPDATE, System.currentTimeMillis()))
+
+  def storageType: Option[StorageType] = {
+    val i = preferences.getInt(PidifrkyConstants.STORAGE_TYPE, -1)
+
+    (if (i >= 0) Some(i) else None).map(StorageType.values())
+  }
+
+  def setStorageType(storageType: StorageType): Unit =
+    withEditor(_.putInt(PidifrkyConstants.STORAGE_TYPE, storageType.ordinal()))
 
   /* ----- ----- ----- ----- ----- */
 
@@ -82,7 +93,12 @@ object PidifrkySettings {
 
   /* ----- ----- ----- ----- ----- */
 
-  def editor: SharedPreferences.Editor = preferences.edit()
+  def withEditor[T](f: SharedPreferences.Editor => T): T = {
+    val editor = preferences.edit()
+    val result = f(editor)
+    editor.apply()
+    result
+  }
 
   protected def readInt(name: String, default: Int): Int = try {
     preferences.getInt(name, default)

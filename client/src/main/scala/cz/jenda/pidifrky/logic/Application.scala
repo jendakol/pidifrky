@@ -1,6 +1,9 @@
 package cz.jenda.pidifrky.logic
 
+import java.util.concurrent.atomic.AtomicBoolean
+
 import android.content.Context
+import cz.jenda.pidifrky.data.Database
 import cz.jenda.pidifrky.logic.exceptions.OfflineException
 import cz.jenda.pidifrky.ui.api.{BasicActivity, Orientation, PortraitOrientation}
 
@@ -15,8 +18,10 @@ object Application {
   var currentActivity: Option[BasicActivity] = None
   var currentOrientation: Orientation = PortraitOrientation
 
+  private val initialized = new AtomicBoolean(false)
+
   implicit val executionContext: ExecutionContextExecutorService = ExecutionContext.fromExecutorService(
-    new ForkJoinPool(math.max(2, Runtime.getRuntime.availableProcessors()))
+    new ForkJoinPool(math.max(4, Runtime.getRuntime.availableProcessors()))
   )
 
   def withOnlineStatus[T](block: => Future[T]): Future[T] =
@@ -25,4 +30,27 @@ object Application {
       else
         block
     }
+
+  //noinspection ScalaUselessExpression
+  def init(implicit act: BasicActivity): Future[Boolean] = initialized.synchronized {
+    if (!initialized.get()) appContext.map { implicit ctx =>
+      DebugReporter.debug("Running Application.init")
+      initialized.set(true)
+
+      for {
+        _ <- Future {
+          Database
+          PidifrkySettings.markAndGetStarts
+        }
+        _ <- StorageHandler.init
+      } yield {
+        DebugReporter.debug("Application has been initialized")
+        true
+      }
+    }.getOrElse(Future.failed(new IllegalStateException("AppContext is not set yet")))
+    else {
+      DebugReporter.debug("Application is already initialized")
+      Future.successful(false)
+    }
+  }
 }

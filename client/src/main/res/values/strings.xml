@@ -51,6 +51,9 @@
     <string name="button_show_nearest">Nejbližší pidifrky</string>
     <string name="button_show_all">Všechny pidifrky</string>
     <string name="location_found">Nalezena poloha!</string>
+    <string name="storage_title_select">Vyberte úložiště pro obrázky:</string>
+    <string name="storage_internal">Vnitřní úložiště</string>
+    <string name="storage_external">SD karta</string>
     <string name="question_exit">Opravdu chceš ukončit aplikaci Pidifrky?</string>
     <string name="question_minimize">Opravdu chceš minimalizovat aplikaci Pidifrky?</string>
     <string name="locating">Hledám polohu…</string>

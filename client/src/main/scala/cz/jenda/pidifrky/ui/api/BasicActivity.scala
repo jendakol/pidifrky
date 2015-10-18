@@ -11,6 +11,8 @@ import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.location.LocationHandler
 
+import scala.concurrent.Future
+
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
@@ -34,10 +36,14 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
   protected implicit final val ec = Application.executionContext
 
+  protected var initFuture: Future[Boolean] = _
+
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
 
     Application.appContext = Some(getApplicationContext)
+
+    initFuture = Application.init
 
     DebugReporter.debug("Creating activity " + getLocalClassName)
 
@@ -48,8 +54,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     rotating = Application.currentActivity.exists(_.equals(BasicActivity.this)) && Application.currentOrientation != getOrientation
 
     Application.currentOrientation = getOrientation
-
-    PidifrkySettings.init
 
     Mint.initAndStartSession(this, getString(R.string.MINT_API_KEY))
     Mint.setUserIdentifier(PidifrkySettings.UUID)
@@ -96,19 +100,24 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     activityState = PausedState
     DebugReporter.debug("Pausing activity " + getLocalClassName)
 
+    LocationHandler.stop
     LocationHandler.removeListener(onLocationChanged)
   }
-
 
   override protected def onPostResume(): Unit = {
     super.onPostResume()
     DebugReporter.debug("Resuming activity " + getLocalClassName)
 
-    try {
-      if (appStart) onApplicationStart()
-    }
-    catch {
-      case e: Exception => DebugReporter.debugAndReport(e, "Error while executing onApplicationStart")
+    initFuture.foreach { init =>
+      try {
+        if (init && appStart) {
+          DebugReporter.debug("Running onApplicationStart")
+          onApplicationStart()
+        }
+      }
+      catch {
+        case e: Exception => DebugReporter.debugAndReport(e, "Error while executing onApplicationStart")
+      }
     }
   }
 
