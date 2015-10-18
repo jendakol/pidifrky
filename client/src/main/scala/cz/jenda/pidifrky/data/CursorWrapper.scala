@@ -39,6 +39,24 @@ class CursorWrapper(cursor: Cursor) extends Closeable {
     }
   } else Failure(EntityNotFoundException(ct.runtimeClass.getSimpleName))
 
+  def map[A](f: Cursor => A): Try[Seq[A]] = if (nonEmpty) Try {
+    cursor.moveToFirst()
+
+    val builder = Seq.newBuilder[Try[A]]
+
+    while (!cursor.isAfterLast) {
+      builder += Try(f(cursor))
+      cursor.moveToNext()
+    }
+
+    builder.result().flatMap {
+      case Success(e) => Some(e)
+      case Failure(ex) =>
+        DebugReporter.debugAndReport(ex, s"Cannot map cursor")
+        None
+    }
+  } else Success(Seq())
+
 
   def isEmpty: Boolean = cursor == null || cursor.getCount <= 0
 

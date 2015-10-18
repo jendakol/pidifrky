@@ -36,8 +36,8 @@ object LocationHandler {
 
     val control = SmartLocation
       .`with`(ctx)
-      .location()
-      .provider(activityProvider)
+      .location(activityProvider)
+      .continuous()
 
     //TODO: check if any provider is available
 

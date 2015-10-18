@@ -26,6 +26,9 @@ object CardsDao extends EntityDao[Card] {
   override def getAll(implicit ord: Ordering[Card]): Future[SortedSet[Card]] =
     toEntityList(Database.rawQuery(DbQueries.getCards))
 
+  def getAllIds: Future[Seq[Int]] =
+    Database.rawQuery(DbQueries.getAllCardsIds).flatMap(s => Future.fromTry(s.map(_.getInt(0))))
+
   private var lastNearest: Option[NearestCards] = None
 
   override def getNearest(location: Location, perimeter: Double)(implicit ord: Ordering[Card]): Future[SortedSet[Card]] =
@@ -35,10 +38,10 @@ object CardsDao extends EntityDao[Card] {
       .map(n => Future.successful(n.cards))
       .getOrElse {
 
-      getNearestEntity(location, perimeter)(DbQueries.getNearestCards) andThen {
-        case Success(cards) => lastNearest = Some(NearestCards(cards, System.currentTimeMillis()))
+        getNearestEntity(location, perimeter)(DbQueries.getNearestCards) andThen {
+          case Success(cards) => lastNearest = Some(NearestCards(cards, System.currentTimeMillis()))
+        }
       }
-    }
 }
 
 case class NearestCards(cards: SortedSet[Card], time: Long)

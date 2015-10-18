@@ -1,12 +1,15 @@
 package cz.jenda.pidifrky.logic.http
 
+import java.net.SocketTimeoutException
 import java.security.cert.CertificateException
 import java.security.{KeyManagementException, KeyStoreException, NoSuchAlgorithmException}
+import java.util.concurrent.TimeUnit
 
+import com.google.common.io.ByteStreams
 import com.squareup.okhttp.OkHttpClient
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.exceptions._
-import cz.jenda.pidifrky.proto.DeviceBackend.DebugReportRequest
+import cz.jenda.pidifrky.proto.DeviceBackend.{DatabaseUpdateRequest, DatabaseUpdateResponse, DebugReportRequest}
 import retrofit.RestAdapter.Builder
 import retrofit.client.{OkClient, Response}
 import retrofit.http.{Body, POST}
@@ -24,7 +27,13 @@ object HttpRequester {
 
   import cz.jenda.pidifrky.logic.Application._
 
-  private lazy val client: OkClient = new OkClient(new OkHttpClient())
+  private lazy val client: OkClient = new OkClient({
+    val okHttpClient = new OkHttpClient()
+    okHttpClient.setConnectTimeout(1, TimeUnit.SECONDS)
+    okHttpClient.setReadTimeout(10, TimeUnit.SECONDS)
+
+    okHttpClient
+  })
 
   protected lazy val httpsClient = new Builder()
     .setEndpoint(PidifrkyConstants.BASE_URL.replaceAll("http://", "https://"))
@@ -44,6 +53,11 @@ object HttpRequester {
     case r => Failure(WrongHttpStatusException(r.getStatus))
   }
 
+  def databaseUpdate(request: DatabaseUpdateRequest): Future[DatabaseUpdateResponse] =
+    execAsync(httpsClient.databaseUpdate(request), httpClient.databaseUpdate(request), PlainResponseDecoder) { resp =>
+      DatabaseUpdateResponse.parseFrom(resp.bytes)
+    }
+
   private def exec[T](https: () => T, http: () => T, responseType: ResponseDecoder): Try[T] =
     Try {
       https()
@@ -51,7 +65,10 @@ object HttpRequester {
       case e@(_: KeyStoreException | _: NoSuchAlgorithmException | _: CertificateException | _: KeyManagementException | _: javax.net.ssl.SSLException) =>
         DebugReporter.debug(e, "Error in SSL connection")
         SSLException(e)
-      case e => HttpException(e)
+      case e: RetrofitError if e.getMessage.startsWith("SSL") =>
+        DebugReporter.debug(e, "Error in SSL connection")
+        SSLException(e)
+      case _ => GenericHttpException(t.getMessage, t)
     })) recover {
       case SSLException(t) =>
         DebugReporter.debugAndReport(t, "HTTPS connection failed, fallback to HTTP")
@@ -71,7 +88,10 @@ object HttpRequester {
           case e@(_: KeyStoreException | _: NoSuchAlgorithmException | _: CertificateException | _: KeyManagementException | _: javax.net.ssl.SSLException) =>
             DebugReporter.debug(e, "Error in SSL connection")
             SSLException(e)
-          case _ => HttpException(error)
+          case e: SocketTimeoutException =>
+            DebugReporter.debug(e, "Error in SSL connection")
+            SSLException(e)
+          case _ => GenericHttpException(error.getMessage, error.getCause)
         }))
     })
 
@@ -84,8 +104,15 @@ object HttpRequester {
           override def success(t: Response, response: Response): Unit =
             httpPromise.complete(Success(t))
 
-          override def failure(error: RetrofitError): Unit =
-            httpPromise.complete(Failure(HttpException(error)))
+          override def failure(error: RetrofitError): Unit = {
+            val response = error.getResponse
+            val msg = "HTTP " + response.getStatus + " " + response.getReason + (Try(response.getBody).map(b => ByteStreams.toByteArray(b.in)) match {
+              case Success(bytes) => " (" + new String(bytes) + ")"
+              case Failure(_) => ""
+            })
+
+            httpPromise.complete(Failure(GenericHttpException(msg, error)))
+          }
         })
         httpPromise.future
     } flatMap { r =>
@@ -108,7 +135,12 @@ object HttpRequester {
 }
 
 trait PidifrkyService {
+  /* the /device prefix is already in BASE URL!!! */
+
   @POST("/debugReport")
   def debugReport(@Body report: DebugReportRequest)(): Response
+
+  @POST("/updateDatabase")
+  def databaseUpdate(@Body report: DatabaseUpdateRequest)(callback: Callback[Response]): Unit
 
 }

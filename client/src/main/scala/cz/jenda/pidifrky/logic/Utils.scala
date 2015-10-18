@@ -9,12 +9,14 @@ import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.{Context, Intent}
+import android.location.{Location, LocationManager}
 import android.net.Uri
 import android.os.{Build, Debug}
 import android.view.Display
 import com.splunk.mint.Mint
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
+import scala.concurrent.Future
 import scala.util.Try
 
 /**
@@ -52,13 +54,18 @@ object Utils {
   //    return getFullImageUri(CardsDao.getInstance(context).getByNumber(number).asInstanceOf[Nothing])
   //  }
 
-  def getThumbImageUri(image: String): Option[Uri] = Application.currentActivity.map { context =>
-    Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "thumbs" + File.separator + image.substring(image.lastIndexOf("/") + 1)))
+  def getThumbImageUri(cardId: Int): Option[Uri] = Application.currentActivity.map { context =>
+    val file = new File(context.getExternalFilesDir(null) + File.separator + PidifrkyConstants.PATH_IMAGES_THUMBS + File.separator + cardId + ".jpg")
+    if (!file.exists()) return None
+
+    Uri.fromFile(file)
   }
 
+  def getFullImageUri(cardId: Int): Option[Uri] = Application.currentActivity.map { context =>
+    val file = new File(context.getExternalFilesDir(null) + File.separator + PidifrkyConstants.PATH_IMAGES_FULL + File.separator + cardId + ".jpg")
+    if (!file.exists()) return None
 
-  def getFullImageUri(image: String): Option[Uri] = Application.currentActivity.map { context =>
-    Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator + "images_full" + File.separator + image.substring(image.lastIndexOf("/") + 1)))
+    Uri.fromFile(file)
   }
 
   case class ScreenSize(width: Int, height: Int) {
@@ -118,29 +125,27 @@ object Utils {
   private val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(2)
   private var online: Boolean = true
 
-  def updateOnlineStatus(): Unit = {
-    executorService.submit(new Runnable() {
-      def run() {
-        online = try {
-          InetAddress.getAllByName("maps.google.com")
-          true
-        }
-        catch {
-          case e: UnknownHostException => false
-          case e: Exception =>
-            DebugReporter.debugAndReport(e)
-            false
-        }
-        DebugReporter.debug("Online status: " + online)
-        try {
-          InetAddress.getAllByName("pidifrky.jenda.eu")
-        }
-        catch {
-          case e: Exception => DebugReporter.debugAndReport(e, "Cannot connect to service point")
-        }
-      }
-    })
-  }
+  def updateOnlineStatus(): Future[Boolean] = Future {
+    online = try {
+      InetAddress.getAllByName("maps.google.com")
+      true
+    }
+    catch {
+      case e: UnknownHostException => false
+      case e: Exception =>
+        DebugReporter.debugAndReport(e)
+        false
+    }
+    DebugReporter.debug("Online status: " + online)
+    try {
+      InetAddress.getAllByName("pidifrky.jenda.eu")
+      true
+    }
+    catch {
+      case e: Exception => DebugReporter.debugAndReport(e, "Cannot connect to service point")
+        false
+    }
+  }(Application.executionContext)
 
   def isOnline: Boolean = online
 
@@ -289,6 +294,13 @@ object Utils {
   //    return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase
   //  }
   //
+
+  def toLocation(lat: Double, lon: Double): Location = {
+    val l = new Location(LocationManager.GPS_PROVIDER)
+    l.setLatitude(lat)
+    l.setLongitude(lon)
+    l
+  }
 
   def getAppVersion: String =
     Application.currentActivity.map { ctx =>

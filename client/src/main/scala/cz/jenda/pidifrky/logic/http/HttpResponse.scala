@@ -7,7 +7,7 @@ import cz.jenda.pidifrky.logic.DebugReporter
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-case class HttpResponse(status: Int, protected val bytes: Array[Byte], originalSize: Int) {
+case class HttpResponse(status: Int, bytes: Array[Byte], originalSize: Int) {
 
   def asInputStream: InputStream = new ByteArrayInputStream(bytes)
 

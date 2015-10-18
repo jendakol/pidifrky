@@ -11,10 +11,12 @@ object DbQueries {
     "from " + CardsTable.NAME
 
   def getCards(ids: Int*): String = {
-    val q = ids.map(i => "id = " + i).mkString(" where ", " OR ", "")
+    val q = if (ids.nonEmpty) ids.map(i => "id = " + i).mkString(" where ", " OR ", "") else ""
 
     getCards + q
   }
+
+  val getAllCardsIds = s"select id from ${CardsTable.NAME}"
 
   def getNearestCards(latMin: Double, latMax: Double, lonMin: Double, lonMax: Double): String = getCards +
     s" where (${CardsTable.COL_GPS_LAT} between $latMin and $latMax) " +
@@ -23,7 +25,7 @@ object DbQueries {
   /* ----- ----- ----- */
 
   def getMerchants(ids: Int*): String = {
-    val q = ids.map(i => "id = " + i).mkString(" where ", " OR ", "")
+    val q = if (ids.nonEmpty) ids.map(i => "id = " + i).mkString(" where ", " OR ", "") else ""
 
     s"select ${MerchantsTable.getColumns.mkString(", ")} from ${MerchantsTable.NAME} $q"
   }

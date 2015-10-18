@@ -18,10 +18,10 @@ object CardsTable extends EntityTable {
   val COL_IMAGE = "image"
   val COL_GPS_LAT = "gps_lat"
   val COL_GPS_LON = "gps_lon"
-  val COL_MERCHANTS = "merchants"
+  val COL_MERCHANTS_IDS = "merchants"
   val COL_NEIGHBOURS = "neighbours"
 
-  override def getColumns: Array[String] = Array(COL_ID, COL_NUMBER, COL_NAME, COL_NAME_RAW, COL_IMAGE, COL_GPS_LAT, COL_GPS_LON, COL_MERCHANTS, COL_NEIGHBOURS)
+  override def getColumns: Array[String] = Array(COL_ID, COL_NUMBER, COL_NAME, COL_NAME_RAW, COL_IMAGE, COL_GPS_LAT, COL_GPS_LON, COL_MERCHANTS_IDS, COL_NEIGHBOURS)
 }
 
 object CardStatusTable extends EntityTable {
@@ -44,7 +44,8 @@ object MerchantsTable extends EntityTable {
   val COL_GPS_LAT = "gps_lat"
   val COL_GPS_LON = "gps_lon"
   val COL_GPS_PRECISE = "gps_precise"
+  val COL_CARDS_IDS = "cards"
 
-  override def getColumns: Array[String] = Array(COL_ID, COL_NAME, COL_NAME_RAW, COL_ADDRESS, COL_GPS_LAT, COL_GPS_LON, COL_GPS_PRECISE)
+  override def getColumns: Array[String] = Array(COL_ID, COL_NAME, COL_NAME_RAW, COL_ADDRESS, COL_GPS_LAT, COL_GPS_LON, COL_GPS_PRECISE, COL_CARDS_IDS)
 }
 

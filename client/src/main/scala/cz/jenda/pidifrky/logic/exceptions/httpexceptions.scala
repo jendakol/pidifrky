@@ -11,9 +11,7 @@ class HttpException(message: String, cause: Throwable = null) extends PidifrkyEx
   override def toString: String = getClass.getSimpleName + s"{'$message', caused by ${if (cause != null) Format(cause) else "<nothing>"}}"
 }
 
-object HttpException {
-  def apply(cause: Throwable): HttpException = new HttpException(Option(cause).map(_.getMessage).getOrElse(""), cause) {}
-}
+case class GenericHttpException(message: String, cause: Throwable = null) extends HttpException(message, cause)
 
 case class SSLException(cause: Throwable) extends HttpException(s"SSL connection has failed", cause)
 

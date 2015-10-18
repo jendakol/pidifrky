@@ -72,8 +72,9 @@ object PidifrkySettings {
 
   def ratedApp(rated: Boolean): Unit = editor.putBoolean(PidifrkyConstants.RATED, rated).apply()
 
-  def databaseHashes: DatabaseHashes =
-    DatabaseHashes(preferences.getString(PidifrkyConstants.DATABASE_HASH_CARDS, "_"), preferences.getString(PidifrkyConstants.DATABASE_HASH_MERCHANTS, "_"))
+  def lastDatabaseUpdateTimestamp: Long = readInt(PidifrkyConstants.DATABASE_LAST_UPDATE, 0)
+
+  def markDatabaseUpdate(): Unit = editor.putLong(PidifrkyConstants.DATABASE_LAST_UPDATE, System.currentTimeMillis()).apply()
 
   /* ----- ----- ----- ----- ----- */
 
@@ -85,6 +86,15 @@ object PidifrkySettings {
 
   protected def readInt(name: String, default: Int): Int = try {
     preferences.getInt(name, default)
+  }
+  catch {
+    case e: Exception =>
+      DebugReporter.debug(e)
+      default
+  }
+
+  protected def readLong(name: String, default: Long): Long = try {
+    preferences.getLong(name, default)
   }
   catch {
     case e: Exception =>
@@ -108,5 +118,3 @@ object PidifrkySettings {
 }
 
 case class GpsIntervalSettings(list: Int, detail: Int, map: Int)
-
-case class DatabaseHashes(cards: String, merchants: String)

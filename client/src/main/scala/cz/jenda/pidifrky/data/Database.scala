@@ -7,7 +7,7 @@ import cz.jenda.pidifrky.logic.Application.executionContext
 import cz.jenda.pidifrky.logic.{Application, DebugReporter, PidifrkyConstants, Transaction}
 
 import scala.concurrent.Future
-import scala.util.Try
+import scala.util.{Failure, Try}
 
 /**
  * @author Jenda Kolena, kolena@avast.com
@@ -32,7 +32,8 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
          ${MerchantsTable.COL_ADDRESS} TEXT,
          ${MerchantsTable.COL_GPS_LAT} REAL,
          ${MerchantsTable.COL_GPS_LON} REAL,
-         ${MerchantsTable.COL_GPS_PRECISE} INTEGER
+         ${MerchantsTable.COL_GPS_PRECISE} INTEGER,
+         ${MerchantsTable.COL_CARDS_IDS} TEXT
          )"""
 
       //cards table
@@ -45,7 +46,7 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
           ${CardsTable.COL_IMAGE} TEXT,
           ${CardsTable.COL_GPS_LAT} REAL,
           ${CardsTable.COL_GPS_LON} REAL,
-          ${CardsTable.COL_MERCHANTS} TEXT,
+          ${CardsTable.COL_MERCHANTS_IDS} TEXT,
           ${CardsTable.COL_NEIGHBOURS} TEXT
         )"""
 
@@ -111,9 +112,11 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
     val args = selectionSeq.values.map(_.toString).toArray
 
     new CursorWrapper(db.rawQuery(query + selection, args))
+  }.andThen {
+    case Failure(e) => DebugReporter.debugAndReport(e, "Error in raw query")
   }
 
-  def selectFrom(table: EntityTable, columns: Array[String])(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = Future {
+  protected def selectFrom(table: EntityTable, columns: Array[String])(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = Future {
     DebugReporter.debug(s"DB select from ${table.NAME}, columns ${columns.mkString("(", ", ", ")")}")
 
     val selection = selectionSeq.keys map { key =>
@@ -125,24 +128,31 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
     new CursorWrapper(db.query(table.NAME, columns, selection, args, null, null, orderBy.orNull, limit.orNull))
   }
 
-  def selectFrom(table: EntityTable)(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = table match {
+  //missing error log in method above; is called only from method below
+
+  def selectFrom(table: EntityTable)(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = (table match {
     case MerchantsTable | CardsTable | CardStatusTable =>
       selectFrom(table, table.getColumns)(selectionSeq, orderBy, limit)
     case _ =>
       DebugReporter.debugAndReport(new IllegalArgumentException(s"Unsupported table '$table'"))
       Future.successful(new CursorWrapper(null))
+  }).andThen {
+    case Failure(e) => DebugReporter.debugAndReport(e, "Error in DB select query")
   }
 
+  def executeTransactionally(commands: Seq[InsertCommand]): Future[Unit] = Transaction.async("db-transaction") {
+    Future {
+      DebugReporter.debug(s"Executing DB transaction with ${commands.length} commands")
 
-  def executeTransactionally(commands: InsertCommand*): Try[Unit] = Transaction("db-transaction") {
-    DebugReporter.debug(s"Executing DB transaction with ${commands.length} commands")
-
-    db.beginTransaction()
-    commands foreach { command =>
-      DebugReporter.debug(s"Executing on DB: ${command.query} (${command.args.mkString(", ")}})")
-      db.execSQL(command.query, command.args)
+      db.beginTransaction()
+      commands foreach { command =>
+        DebugReporter.debug(s"Executing on DB: ${command.query} (${command.args.mkString(", ")}})")
+        db.execSQL(command.query, command.args)
+      }
+      db.setTransactionSuccessful()
+      db.endTransaction()
+    }(Application.executionContext).andThen {
+      case Failure(e) => DebugReporter.debugAndReport(e, "Error in DB transaction")
     }
-    db.setTransactionSuccessful()
-    db.endTransaction()
   }
 }

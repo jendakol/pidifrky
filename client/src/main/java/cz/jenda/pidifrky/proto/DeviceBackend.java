@@ -3500,6 +3500,8909 @@ public final class DeviceBackend {
     // @@protoc_insertion_point(class_scope:DebugReportRequest)
   }
 
+  public interface DatabaseUpdateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DatabaseUpdateRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    java.util.List<java.lang.Integer> getKnownCardsIdsList();
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    int getKnownCardsIdsCount();
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    int getKnownCardsIds(int index);
+
+    /**
+     * <code>required uint64 last_update = 2;</code>
+     */
+    boolean hasLastUpdate();
+    /**
+     * <code>required uint64 last_update = 2;</code>
+     */
+    long getLastUpdate();
+  }
+  /**
+   * Protobuf type {@code DatabaseUpdateRequest}
+   */
+  public static final class DatabaseUpdateRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:DatabaseUpdateRequest)
+      DatabaseUpdateRequestOrBuilder {
+    // Use DatabaseUpdateRequest.newBuilder() to construct.
+    private DatabaseUpdateRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private DatabaseUpdateRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final DatabaseUpdateRequest defaultInstance;
+    public static DatabaseUpdateRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public DatabaseUpdateRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DatabaseUpdateRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                knownCardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              knownCardsIds_.add(input.readInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                knownCardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                knownCardsIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000001;
+              lastUpdate_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          knownCardsIds_ = java.util.Collections.unmodifiableList(knownCardsIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<DatabaseUpdateRequest> PARSER =
+        new com.google.protobuf.AbstractParser<DatabaseUpdateRequest>() {
+      public DatabaseUpdateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DatabaseUpdateRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DatabaseUpdateRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int KNOWN_CARDS_IDS_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> knownCardsIds_;
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getKnownCardsIdsList() {
+      return knownCardsIds_;
+    }
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    public int getKnownCardsIdsCount() {
+      return knownCardsIds_.size();
+    }
+    /**
+     * <code>repeated int32 known_cards_ids = 1;</code>
+     */
+    public int getKnownCardsIds(int index) {
+      return knownCardsIds_.get(index);
+    }
+
+    public static final int LAST_UPDATE_FIELD_NUMBER = 2;
+    private long lastUpdate_;
+    /**
+     * <code>required uint64 last_update = 2;</code>
+     */
+    public boolean hasLastUpdate() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 last_update = 2;</code>
+     */
+    public long getLastUpdate() {
+      return lastUpdate_;
+    }
+
+    private void initFields() {
+      knownCardsIds_ = java.util.Collections.emptyList();
+      lastUpdate_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasLastUpdate()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < knownCardsIds_.size(); i++) {
+        output.writeInt32(1, knownCardsIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(2, lastUpdate_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < knownCardsIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(knownCardsIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getKnownCardsIdsList().size();
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, lastUpdate_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DatabaseUpdateRequest)
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.Builder.class);
+      }
+
+      // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        knownCardsIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        lastUpdate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateRequest_descriptor;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest getDefaultInstanceForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.getDefaultInstance();
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest build() {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest buildPartial() {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          knownCardsIds_ = java.util.Collections.unmodifiableList(knownCardsIds_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.knownCardsIds_ = knownCardsIds_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.lastUpdate_ = lastUpdate_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest) {
+          return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest other) {
+        if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest.getDefaultInstance()) return this;
+        if (!other.knownCardsIds_.isEmpty()) {
+          if (knownCardsIds_.isEmpty()) {
+            knownCardsIds_ = other.knownCardsIds_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureKnownCardsIdsIsMutable();
+            knownCardsIds_.addAll(other.knownCardsIds_);
+          }
+          onChanged();
+        }
+        if (other.hasLastUpdate()) {
+          setLastUpdate(other.getLastUpdate());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasLastUpdate()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<java.lang.Integer> knownCardsIds_ = java.util.Collections.emptyList();
+      private void ensureKnownCardsIdsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          knownCardsIds_ = new java.util.ArrayList<java.lang.Integer>(knownCardsIds_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getKnownCardsIdsList() {
+        return java.util.Collections.unmodifiableList(knownCardsIds_);
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public int getKnownCardsIdsCount() {
+        return knownCardsIds_.size();
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public int getKnownCardsIds(int index) {
+        return knownCardsIds_.get(index);
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public Builder setKnownCardsIds(
+          int index, int value) {
+        ensureKnownCardsIdsIsMutable();
+        knownCardsIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public Builder addKnownCardsIds(int value) {
+        ensureKnownCardsIdsIsMutable();
+        knownCardsIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public Builder addAllKnownCardsIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureKnownCardsIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, knownCardsIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 known_cards_ids = 1;</code>
+       */
+      public Builder clearKnownCardsIds() {
+        knownCardsIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private long lastUpdate_ ;
+      /**
+       * <code>required uint64 last_update = 2;</code>
+       */
+      public boolean hasLastUpdate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 last_update = 2;</code>
+       */
+      public long getLastUpdate() {
+        return lastUpdate_;
+      }
+      /**
+       * <code>required uint64 last_update = 2;</code>
+       */
+      public Builder setLastUpdate(long value) {
+        bitField0_ |= 0x00000002;
+        lastUpdate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 last_update = 2;</code>
+       */
+      public Builder clearLastUpdate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        lastUpdate_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:DatabaseUpdateRequest)
+    }
+
+    static {
+      defaultInstance = new DatabaseUpdateRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:DatabaseUpdateRequest)
+  }
+
+  public interface DatabaseUpdateResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> 
+        getCardsList();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card getCards(int index);
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    int getCardsCount();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder> 
+        getCardsOrBuilderList();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder getCardsOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> 
+        getMerchantsList();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant getMerchants(int index);
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    int getMerchantsCount();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder> 
+        getMerchantsOrBuilderList();
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder getMerchantsOrBuilder(
+        int index);
+
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    boolean hasUpdatedLinks();
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks getUpdatedLinks();
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder getUpdatedLinksOrBuilder();
+  }
+  /**
+   * Protobuf type {@code DatabaseUpdateResponse}
+   */
+  public static final class DatabaseUpdateResponse extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse)
+      DatabaseUpdateResponseOrBuilder {
+    // Use DatabaseUpdateResponse.newBuilder() to construct.
+    private DatabaseUpdateResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private DatabaseUpdateResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final DatabaseUpdateResponse defaultInstance;
+    public static DatabaseUpdateResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public DatabaseUpdateResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DatabaseUpdateResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                cards_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              cards_.add(input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                merchants_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              merchants_.add(input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = updatedLinks_.toBuilder();
+              }
+              updatedLinks_ = input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(updatedLinks_);
+                updatedLinks_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          cards_ = java.util.Collections.unmodifiableList(cards_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          merchants_ = java.util.Collections.unmodifiableList(merchants_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<DatabaseUpdateResponse> PARSER =
+        new com.google.protobuf.AbstractParser<DatabaseUpdateResponse>() {
+      public DatabaseUpdateResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DatabaseUpdateResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DatabaseUpdateResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public interface LocationOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.Location)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required float latitude = 1;</code>
+       */
+      boolean hasLatitude();
+      /**
+       * <code>required float latitude = 1;</code>
+       */
+      float getLatitude();
+
+      /**
+       * <code>required float longitude = 2;</code>
+       */
+      boolean hasLongitude();
+      /**
+       * <code>required float longitude = 2;</code>
+       */
+      float getLongitude();
+
+      /**
+       * <code>optional bool precise = 3 [default = true];</code>
+       */
+      boolean hasPrecise();
+      /**
+       * <code>optional bool precise = 3 [default = true];</code>
+       */
+      boolean getPrecise();
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateResponse.Location}
+     */
+    public static final class Location extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.Location)
+        LocationOrBuilder {
+      // Use Location.newBuilder() to construct.
+      private Location(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private Location(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final Location defaultInstance;
+      public static Location getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public Location getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Location(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 13: {
+                bitField0_ |= 0x00000001;
+                latitude_ = input.readFloat();
+                break;
+              }
+              case 21: {
+                bitField0_ |= 0x00000002;
+                longitude_ = input.readFloat();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                precise_ = input.readBool();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Location_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Location_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<Location> PARSER =
+          new com.google.protobuf.AbstractParser<Location>() {
+        public Location parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Location(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Location> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      public static final int LATITUDE_FIELD_NUMBER = 1;
+      private float latitude_;
+      /**
+       * <code>required float latitude = 1;</code>
+       */
+      public boolean hasLatitude() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required float latitude = 1;</code>
+       */
+      public float getLatitude() {
+        return latitude_;
+      }
+
+      public static final int LONGITUDE_FIELD_NUMBER = 2;
+      private float longitude_;
+      /**
+       * <code>required float longitude = 2;</code>
+       */
+      public boolean hasLongitude() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required float longitude = 2;</code>
+       */
+      public float getLongitude() {
+        return longitude_;
+      }
+
+      public static final int PRECISE_FIELD_NUMBER = 3;
+      private boolean precise_;
+      /**
+       * <code>optional bool precise = 3 [default = true];</code>
+       */
+      public boolean hasPrecise() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool precise = 3 [default = true];</code>
+       */
+      public boolean getPrecise() {
+        return precise_;
+      }
+
+      private void initFields() {
+        latitude_ = 0F;
+        longitude_ = 0F;
+        precise_ = true;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasLatitude()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasLongitude()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeFloat(1, latitude_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeFloat(2, longitude_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBool(3, precise_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeFloatSize(1, latitude_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeFloatSize(2, longitude_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBoolSize(3, precise_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.Location}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.Location)
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Location_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Location_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder.class);
+        }
+
+        // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          latitude_ = 0F;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          longitude_ = 0F;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          precise_ = true;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Location_descriptor;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getDefaultInstanceForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location build() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location buildPartial() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.latitude_ = latitude_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.longitude_ = longitude_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.precise_ = precise_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location) {
+            return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location other) {
+          if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance()) return this;
+          if (other.hasLatitude()) {
+            setLatitude(other.getLatitude());
+          }
+          if (other.hasLongitude()) {
+            setLongitude(other.getLongitude());
+          }
+          if (other.hasPrecise()) {
+            setPrecise(other.getPrecise());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasLatitude()) {
+            
+            return false;
+          }
+          if (!hasLongitude()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private float latitude_ ;
+        /**
+         * <code>required float latitude = 1;</code>
+         */
+        public boolean hasLatitude() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required float latitude = 1;</code>
+         */
+        public float getLatitude() {
+          return latitude_;
+        }
+        /**
+         * <code>required float latitude = 1;</code>
+         */
+        public Builder setLatitude(float value) {
+          bitField0_ |= 0x00000001;
+          latitude_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required float latitude = 1;</code>
+         */
+        public Builder clearLatitude() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          latitude_ = 0F;
+          onChanged();
+          return this;
+        }
+
+        private float longitude_ ;
+        /**
+         * <code>required float longitude = 2;</code>
+         */
+        public boolean hasLongitude() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required float longitude = 2;</code>
+         */
+        public float getLongitude() {
+          return longitude_;
+        }
+        /**
+         * <code>required float longitude = 2;</code>
+         */
+        public Builder setLongitude(float value) {
+          bitField0_ |= 0x00000002;
+          longitude_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required float longitude = 2;</code>
+         */
+        public Builder clearLongitude() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          longitude_ = 0F;
+          onChanged();
+          return this;
+        }
+
+        private boolean precise_ = true;
+        /**
+         * <code>optional bool precise = 3 [default = true];</code>
+         */
+        public boolean hasPrecise() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional bool precise = 3 [default = true];</code>
+         */
+        public boolean getPrecise() {
+          return precise_;
+        }
+        /**
+         * <code>optional bool precise = 3 [default = true];</code>
+         */
+        public Builder setPrecise(boolean value) {
+          bitField0_ |= 0x00000004;
+          precise_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional bool precise = 3 [default = true];</code>
+         */
+        public Builder clearPrecise() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          precise_ = true;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.Location)
+      }
+
+      static {
+        defaultInstance = new Location(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.Location)
+    }
+
+    public interface CardOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.Card)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required string name = 1;</code>
+       */
+      boolean hasName();
+      /**
+       * <code>required string name = 1;</code>
+       */
+      java.lang.String getName();
+      /**
+       * <code>required string name = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameBytes();
+
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      boolean hasNameRaw();
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      java.lang.String getNameRaw();
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameRawBytes();
+
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      boolean hasId();
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      int getId();
+
+      /**
+       * <code>required int32 number = 4;</code>
+       */
+      boolean hasNumber();
+      /**
+       * <code>required int32 number = 4;</code>
+       */
+      int getNumber();
+
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      boolean hasLocation();
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation();
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder();
+
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      java.util.List<java.lang.Integer> getMerchantsIdsList();
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      int getMerchantsIdsCount();
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      int getMerchantsIds(int index);
+
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      java.util.List<java.lang.Integer> getNeighboursList();
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      int getNeighboursCount();
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      int getNeighbours(int index);
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateResponse.Card}
+     */
+    public static final class Card extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.Card)
+        CardOrBuilder {
+      // Use Card.newBuilder() to construct.
+      private Card(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private Card(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final Card defaultInstance;
+      public static Card getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public Card getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Card(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000001;
+                name_ = bs;
+                break;
+              }
+              case 18: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000002;
+                nameRaw_ = bs;
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                id_ = input.readInt32();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                number_ = input.readInt32();
+                break;
+              }
+              case 42: {
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder subBuilder = null;
+                if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                  subBuilder = location_.toBuilder();
+                }
+                location_ = input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(location_);
+                  location_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00000010;
+                break;
+              }
+              case 48: {
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                  merchantsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                merchantsIds_.add(input.readInt32());
+                break;
+              }
+              case 50: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                  merchantsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  merchantsIds_.add(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
+              case 56: {
+                if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                  neighbours_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000040;
+                }
+                neighbours_.add(input.readInt32());
+                break;
+              }
+              case 58: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
+                  neighbours_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000040;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  neighbours_.add(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            merchantsIds_ = java.util.Collections.unmodifiableList(merchantsIds_);
+          }
+          if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+            neighbours_ = java.util.Collections.unmodifiableList(neighbours_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Card_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Card_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<Card> PARSER =
+          new com.google.protobuf.AbstractParser<Card>() {
+        public Card parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Card(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Card> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      public static final int NAME_FIELD_NUMBER = 1;
+      private java.lang.Object name_;
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int NAME_RAW_FIELD_NUMBER = 2;
+      private java.lang.Object nameRaw_;
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public boolean hasNameRaw() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public java.lang.String getNameRaw() {
+        java.lang.Object ref = nameRaw_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nameRaw_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameRawBytes() {
+        java.lang.Object ref = nameRaw_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nameRaw_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int ID_FIELD_NUMBER = 3;
+      private int id_;
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      public int getId() {
+        return id_;
+      }
+
+      public static final int NUMBER_FIELD_NUMBER = 4;
+      private int number_;
+      /**
+       * <code>required int32 number = 4;</code>
+       */
+      public boolean hasNumber() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 number = 4;</code>
+       */
+      public int getNumber() {
+        return number_;
+      }
+
+      public static final int LOCATION_FIELD_NUMBER = 5;
+      private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location location_;
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public boolean hasLocation() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation() {
+        return location_;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder() {
+        return location_;
+      }
+
+      public static final int MERCHANTS_IDS_FIELD_NUMBER = 6;
+      private java.util.List<java.lang.Integer> merchantsIds_;
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getMerchantsIdsList() {
+        return merchantsIds_;
+      }
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      public int getMerchantsIdsCount() {
+        return merchantsIds_.size();
+      }
+      /**
+       * <code>repeated int32 merchants_ids = 6;</code>
+       */
+      public int getMerchantsIds(int index) {
+        return merchantsIds_.get(index);
+      }
+
+      public static final int NEIGHBOURS_FIELD_NUMBER = 7;
+      private java.util.List<java.lang.Integer> neighbours_;
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getNeighboursList() {
+        return neighbours_;
+      }
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      public int getNeighboursCount() {
+        return neighbours_.size();
+      }
+      /**
+       * <code>repeated int32 neighbours = 7;</code>
+       */
+      public int getNeighbours(int index) {
+        return neighbours_.get(index);
+      }
+
+      private void initFields() {
+        name_ = "";
+        nameRaw_ = "";
+        id_ = 0;
+        number_ = 0;
+        location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+        merchantsIds_ = java.util.Collections.emptyList();
+        neighbours_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasName()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasNameRaw()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasNumber()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (hasLocation()) {
+          if (!getLocation().isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getNameBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getNameRawBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, id_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(4, number_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeMessage(5, location_);
+        }
+        for (int i = 0; i < merchantsIds_.size(); i++) {
+          output.writeInt32(6, merchantsIds_.get(i));
+        }
+        for (int i = 0; i < neighbours_.size(); i++) {
+          output.writeInt32(7, neighbours_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getNameBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getNameRawBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, id_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(4, number_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(5, location_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < merchantsIds_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(merchantsIds_.get(i));
+          }
+          size += dataSize;
+          size += 1 * getMerchantsIdsList().size();
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < neighbours_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(neighbours_.get(i));
+          }
+          size += dataSize;
+          size += 1 * getNeighboursList().size();
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.Card}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.Card)
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Card_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Card_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder.class);
+        }
+
+        // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getLocationFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          name_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          nameRaw_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          id_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          number_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          if (locationBuilder_ == null) {
+            location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+          } else {
+            locationBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000010);
+          merchantsIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          neighbours_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Card_descriptor;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card getDefaultInstanceForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.getDefaultInstance();
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card build() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card buildPartial() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.name_ = name_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.nameRaw_ = nameRaw_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.id_ = id_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.number_ = number_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          if (locationBuilder_ == null) {
+            result.location_ = location_;
+          } else {
+            result.location_ = locationBuilder_.build();
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            merchantsIds_ = java.util.Collections.unmodifiableList(merchantsIds_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.merchantsIds_ = merchantsIds_;
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            neighbours_ = java.util.Collections.unmodifiableList(neighbours_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.neighbours_ = neighbours_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card) {
+            return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card other) {
+          if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.getDefaultInstance()) return this;
+          if (other.hasName()) {
+            bitField0_ |= 0x00000001;
+            name_ = other.name_;
+            onChanged();
+          }
+          if (other.hasNameRaw()) {
+            bitField0_ |= 0x00000002;
+            nameRaw_ = other.nameRaw_;
+            onChanged();
+          }
+          if (other.hasId()) {
+            setId(other.getId());
+          }
+          if (other.hasNumber()) {
+            setNumber(other.getNumber());
+          }
+          if (other.hasLocation()) {
+            mergeLocation(other.getLocation());
+          }
+          if (!other.merchantsIds_.isEmpty()) {
+            if (merchantsIds_.isEmpty()) {
+              merchantsIds_ = other.merchantsIds_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureMerchantsIdsIsMutable();
+              merchantsIds_.addAll(other.merchantsIds_);
+            }
+            onChanged();
+          }
+          if (!other.neighbours_.isEmpty()) {
+            if (neighbours_.isEmpty()) {
+              neighbours_ = other.neighbours_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureNeighboursIsMutable();
+              neighbours_.addAll(other.neighbours_);
+            }
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasName()) {
+            
+            return false;
+          }
+          if (!hasNameRaw()) {
+            
+            return false;
+          }
+          if (!hasId()) {
+            
+            return false;
+          }
+          if (!hasNumber()) {
+            
+            return false;
+          }
+          if (hasLocation()) {
+            if (!getLocation().isInitialized()) {
+              
+              return false;
+            }
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object name_ = "";
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public boolean hasName() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public java.lang.String getName() {
+          java.lang.Object ref = name_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              name_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameBytes() {
+          java.lang.Object ref = name_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            name_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder setName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          name_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder clearName() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          name_ = getDefaultInstance().getName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          name_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object nameRaw_ = "";
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public boolean hasNameRaw() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public java.lang.String getNameRaw() {
+          java.lang.Object ref = nameRaw_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              nameRaw_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameRawBytes() {
+          java.lang.Object ref = nameRaw_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            nameRaw_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder setNameRaw(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          nameRaw_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder clearNameRaw() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          nameRaw_ = getDefaultInstance().getNameRaw();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder setNameRawBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          nameRaw_ = value;
+          onChanged();
+          return this;
+        }
+
+        private int id_ ;
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public boolean hasId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public int getId() {
+          return id_;
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public Builder setId(int value) {
+          bitField0_ |= 0x00000004;
+          id_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public Builder clearId() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          id_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private int number_ ;
+        /**
+         * <code>required int32 number = 4;</code>
+         */
+        public boolean hasNumber() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>required int32 number = 4;</code>
+         */
+        public int getNumber() {
+          return number_;
+        }
+        /**
+         * <code>required int32 number = 4;</code>
+         */
+        public Builder setNumber(int value) {
+          bitField0_ |= 0x00000008;
+          number_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 number = 4;</code>
+         */
+        public Builder clearNumber() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          number_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder> locationBuilder_;
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public boolean hasLocation() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation() {
+          if (locationBuilder_ == null) {
+            return location_;
+          } else {
+            return locationBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder setLocation(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location value) {
+          if (locationBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            location_ = value;
+            onChanged();
+          } else {
+            locationBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder setLocation(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder builderForValue) {
+          if (locationBuilder_ == null) {
+            location_ = builderForValue.build();
+            onChanged();
+          } else {
+            locationBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder mergeLocation(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location value) {
+          if (locationBuilder_ == null) {
+            if (((bitField0_ & 0x00000010) == 0x00000010) &&
+                location_ != cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance()) {
+              location_ =
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            } else {
+              location_ = value;
+            }
+            onChanged();
+          } else {
+            locationBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder clearLocation() {
+          if (locationBuilder_ == null) {
+            location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+            onChanged();
+          } else {
+            locationBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder getLocationBuilder() {
+          bitField0_ |= 0x00000010;
+          onChanged();
+          return getLocationFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder() {
+          if (locationBuilder_ != null) {
+            return locationBuilder_.getMessageOrBuilder();
+          } else {
+            return location_;
+          }
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder> 
+            getLocationFieldBuilder() {
+          if (locationBuilder_ == null) {
+            locationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder>(
+                    getLocation(),
+                    getParentForChildren(),
+                    isClean());
+            location_ = null;
+          }
+          return locationBuilder_;
+        }
+
+        private java.util.List<java.lang.Integer> merchantsIds_ = java.util.Collections.emptyList();
+        private void ensureMerchantsIdsIsMutable() {
+          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+            merchantsIds_ = new java.util.ArrayList<java.lang.Integer>(merchantsIds_);
+            bitField0_ |= 0x00000020;
+           }
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getMerchantsIdsList() {
+          return java.util.Collections.unmodifiableList(merchantsIds_);
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public int getMerchantsIdsCount() {
+          return merchantsIds_.size();
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public int getMerchantsIds(int index) {
+          return merchantsIds_.get(index);
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public Builder setMerchantsIds(
+            int index, int value) {
+          ensureMerchantsIdsIsMutable();
+          merchantsIds_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public Builder addMerchantsIds(int value) {
+          ensureMerchantsIdsIsMutable();
+          merchantsIds_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public Builder addAllMerchantsIds(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureMerchantsIdsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, merchantsIds_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 6;</code>
+         */
+        public Builder clearMerchantsIds() {
+          merchantsIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+          return this;
+        }
+
+        private java.util.List<java.lang.Integer> neighbours_ = java.util.Collections.emptyList();
+        private void ensureNeighboursIsMutable() {
+          if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+            neighbours_ = new java.util.ArrayList<java.lang.Integer>(neighbours_);
+            bitField0_ |= 0x00000040;
+           }
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getNeighboursList() {
+          return java.util.Collections.unmodifiableList(neighbours_);
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public int getNeighboursCount() {
+          return neighbours_.size();
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public int getNeighbours(int index) {
+          return neighbours_.get(index);
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public Builder setNeighbours(
+            int index, int value) {
+          ensureNeighboursIsMutable();
+          neighbours_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public Builder addNeighbours(int value) {
+          ensureNeighboursIsMutable();
+          neighbours_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public Builder addAllNeighbours(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureNeighboursIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, neighbours_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 neighbours = 7;</code>
+         */
+        public Builder clearNeighbours() {
+          neighbours_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.Card)
+      }
+
+      static {
+        defaultInstance = new Card(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.Card)
+    }
+
+    public interface MerchantOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.Merchant)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required string name = 1;</code>
+       */
+      boolean hasName();
+      /**
+       * <code>required string name = 1;</code>
+       */
+      java.lang.String getName();
+      /**
+       * <code>required string name = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameBytes();
+
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      boolean hasNameRaw();
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      java.lang.String getNameRaw();
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameRawBytes();
+
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      boolean hasId();
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      int getId();
+
+      /**
+       * <code>required string address = 4;</code>
+       */
+      boolean hasAddress();
+      /**
+       * <code>required string address = 4;</code>
+       */
+      java.lang.String getAddress();
+      /**
+       * <code>required string address = 4;</code>
+       */
+      com.google.protobuf.ByteString
+          getAddressBytes();
+
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      boolean hasLocation();
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation();
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder();
+
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      java.util.List<java.lang.Integer> getCardsIdsList();
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      int getCardsIdsCount();
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      int getCardsIds(int index);
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateResponse.Merchant}
+     */
+    public static final class Merchant extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.Merchant)
+        MerchantOrBuilder {
+      // Use Merchant.newBuilder() to construct.
+      private Merchant(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private Merchant(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final Merchant defaultInstance;
+      public static Merchant getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public Merchant getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Merchant(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000001;
+                name_ = bs;
+                break;
+              }
+              case 18: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000002;
+                nameRaw_ = bs;
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                id_ = input.readInt32();
+                break;
+              }
+              case 34: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000008;
+                address_ = bs;
+                break;
+              }
+              case 42: {
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder subBuilder = null;
+                if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                  subBuilder = location_.toBuilder();
+                }
+                location_ = input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(location_);
+                  location_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00000010;
+                break;
+              }
+              case 48: {
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                  cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                cardsIds_.add(input.readInt32());
+                break;
+              }
+              case 50: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                  cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  cardsIds_.add(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Merchant_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Merchant_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<Merchant> PARSER =
+          new com.google.protobuf.AbstractParser<Merchant>() {
+        public Merchant parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Merchant(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Merchant> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      public static final int NAME_FIELD_NUMBER = 1;
+      private java.lang.Object name_;
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int NAME_RAW_FIELD_NUMBER = 2;
+      private java.lang.Object nameRaw_;
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public boolean hasNameRaw() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public java.lang.String getNameRaw() {
+        java.lang.Object ref = nameRaw_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nameRaw_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string name_raw = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameRawBytes() {
+        java.lang.Object ref = nameRaw_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nameRaw_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int ID_FIELD_NUMBER = 3;
+      private int id_;
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 id = 3;</code>
+       */
+      public int getId() {
+        return id_;
+      }
+
+      public static final int ADDRESS_FIELD_NUMBER = 4;
+      private java.lang.Object address_;
+      /**
+       * <code>required string address = 4;</code>
+       */
+      public boolean hasAddress() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string address = 4;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            address_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string address = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int LOCATION_FIELD_NUMBER = 5;
+      private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location location_;
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public boolean hasLocation() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation() {
+        return location_;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder() {
+        return location_;
+      }
+
+      public static final int CARDS_IDS_FIELD_NUMBER = 6;
+      private java.util.List<java.lang.Integer> cardsIds_;
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getCardsIdsList() {
+        return cardsIds_;
+      }
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      public int getCardsIdsCount() {
+        return cardsIds_.size();
+      }
+      /**
+       * <code>repeated int32 cards_ids = 6;</code>
+       */
+      public int getCardsIds(int index) {
+        return cardsIds_.get(index);
+      }
+
+      private void initFields() {
+        name_ = "";
+        nameRaw_ = "";
+        id_ = 0;
+        address_ = "";
+        location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+        cardsIds_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasName()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasNameRaw()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasAddress()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (hasLocation()) {
+          if (!getLocation().isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getNameBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getNameRawBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, id_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeBytes(4, getAddressBytes());
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeMessage(5, location_);
+        }
+        for (int i = 0; i < cardsIds_.size(); i++) {
+          output.writeInt32(6, cardsIds_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getNameBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getNameRawBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, id_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(4, getAddressBytes());
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(5, location_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < cardsIds_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(cardsIds_.get(i));
+          }
+          size += dataSize;
+          size += 1 * getCardsIdsList().size();
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.Merchant}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.Merchant)
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Merchant_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Merchant_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder.class);
+        }
+
+        // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getLocationFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          name_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          nameRaw_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          id_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          address_ = "";
+          bitField0_ = (bitField0_ & ~0x00000008);
+          if (locationBuilder_ == null) {
+            location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+          } else {
+            locationBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000010);
+          cardsIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_Merchant_descriptor;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant getDefaultInstanceForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.getDefaultInstance();
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant build() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant buildPartial() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.name_ = name_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.nameRaw_ = nameRaw_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.id_ = id_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.address_ = address_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          if (locationBuilder_ == null) {
+            result.location_ = location_;
+          } else {
+            result.location_ = locationBuilder_.build();
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.cardsIds_ = cardsIds_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant) {
+            return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant other) {
+          if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.getDefaultInstance()) return this;
+          if (other.hasName()) {
+            bitField0_ |= 0x00000001;
+            name_ = other.name_;
+            onChanged();
+          }
+          if (other.hasNameRaw()) {
+            bitField0_ |= 0x00000002;
+            nameRaw_ = other.nameRaw_;
+            onChanged();
+          }
+          if (other.hasId()) {
+            setId(other.getId());
+          }
+          if (other.hasAddress()) {
+            bitField0_ |= 0x00000008;
+            address_ = other.address_;
+            onChanged();
+          }
+          if (other.hasLocation()) {
+            mergeLocation(other.getLocation());
+          }
+          if (!other.cardsIds_.isEmpty()) {
+            if (cardsIds_.isEmpty()) {
+              cardsIds_ = other.cardsIds_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureCardsIdsIsMutable();
+              cardsIds_.addAll(other.cardsIds_);
+            }
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasName()) {
+            
+            return false;
+          }
+          if (!hasNameRaw()) {
+            
+            return false;
+          }
+          if (!hasId()) {
+            
+            return false;
+          }
+          if (!hasAddress()) {
+            
+            return false;
+          }
+          if (hasLocation()) {
+            if (!getLocation().isInitialized()) {
+              
+              return false;
+            }
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object name_ = "";
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public boolean hasName() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public java.lang.String getName() {
+          java.lang.Object ref = name_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              name_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameBytes() {
+          java.lang.Object ref = name_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            name_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder setName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          name_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder clearName() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          name_ = getDefaultInstance().getName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name = 1;</code>
+         */
+        public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          name_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object nameRaw_ = "";
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public boolean hasNameRaw() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public java.lang.String getNameRaw() {
+          java.lang.Object ref = nameRaw_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              nameRaw_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameRawBytes() {
+          java.lang.Object ref = nameRaw_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            nameRaw_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder setNameRaw(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          nameRaw_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder clearNameRaw() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          nameRaw_ = getDefaultInstance().getNameRaw();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string name_raw = 2;</code>
+         */
+        public Builder setNameRawBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          nameRaw_ = value;
+          onChanged();
+          return this;
+        }
+
+        private int id_ ;
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public boolean hasId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public int getId() {
+          return id_;
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public Builder setId(int value) {
+          bitField0_ |= 0x00000004;
+          id_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 id = 3;</code>
+         */
+        public Builder clearId() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          id_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object address_ = "";
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public boolean hasAddress() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public java.lang.String getAddress() {
+          java.lang.Object ref = address_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              address_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public com.google.protobuf.ByteString
+            getAddressBytes() {
+          java.lang.Object ref = address_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            address_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public Builder setAddress(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+          address_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public Builder clearAddress() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          address_ = getDefaultInstance().getAddress();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string address = 4;</code>
+         */
+        public Builder setAddressBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+          address_ = value;
+          onChanged();
+          return this;
+        }
+
+        private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder> locationBuilder_;
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public boolean hasLocation() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location getLocation() {
+          if (locationBuilder_ == null) {
+            return location_;
+          } else {
+            return locationBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder setLocation(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location value) {
+          if (locationBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            location_ = value;
+            onChanged();
+          } else {
+            locationBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder setLocation(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder builderForValue) {
+          if (locationBuilder_ == null) {
+            location_ = builderForValue.build();
+            onChanged();
+          } else {
+            locationBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder mergeLocation(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location value) {
+          if (locationBuilder_ == null) {
+            if (((bitField0_ & 0x00000010) == 0x00000010) &&
+                location_ != cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance()) {
+              location_ =
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            } else {
+              location_ = value;
+            }
+            onChanged();
+          } else {
+            locationBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00000010;
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public Builder clearLocation() {
+          if (locationBuilder_ == null) {
+            location_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.getDefaultInstance();
+            onChanged();
+          } else {
+            locationBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder getLocationBuilder() {
+          bitField0_ |= 0x00000010;
+          onChanged();
+          return getLocationFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder getLocationOrBuilder() {
+          if (locationBuilder_ != null) {
+            return locationBuilder_.getMessageOrBuilder();
+          } else {
+            return location_;
+          }
+        }
+        /**
+         * <code>optional .DatabaseUpdateResponse.Location location = 5;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder> 
+            getLocationFieldBuilder() {
+          if (locationBuilder_ == null) {
+            locationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Location.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.LocationOrBuilder>(
+                    getLocation(),
+                    getParentForChildren(),
+                    isClean());
+            location_ = null;
+          }
+          return locationBuilder_;
+        }
+
+        private java.util.List<java.lang.Integer> cardsIds_ = java.util.Collections.emptyList();
+        private void ensureCardsIdsIsMutable() {
+          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+            cardsIds_ = new java.util.ArrayList<java.lang.Integer>(cardsIds_);
+            bitField0_ |= 0x00000020;
+           }
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getCardsIdsList() {
+          return java.util.Collections.unmodifiableList(cardsIds_);
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public int getCardsIdsCount() {
+          return cardsIds_.size();
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public int getCardsIds(int index) {
+          return cardsIds_.get(index);
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public Builder setCardsIds(
+            int index, int value) {
+          ensureCardsIdsIsMutable();
+          cardsIds_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public Builder addCardsIds(int value) {
+          ensureCardsIdsIsMutable();
+          cardsIds_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public Builder addAllCardsIds(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureCardsIdsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cardsIds_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 cards_ids = 6;</code>
+         */
+        public Builder clearCardsIds() {
+          cardsIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.Merchant)
+      }
+
+      static {
+        defaultInstance = new Merchant(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.Merchant)
+    }
+
+    public interface UpdatedLinksOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.UpdatedLinks)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> 
+          getCardMerchantsLinksList();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants getCardMerchantsLinks(int index);
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      int getCardMerchantsLinksCount();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder> 
+          getCardMerchantsLinksOrBuilderList();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder getCardMerchantsLinksOrBuilder(
+          int index);
+
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> 
+          getMerchantCardsLinksList();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards getMerchantCardsLinks(int index);
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      int getMerchantCardsLinksCount();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder> 
+          getMerchantCardsLinksOrBuilderList();
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder getMerchantCardsLinksOrBuilder(
+          int index);
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks}
+     */
+    public static final class UpdatedLinks extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.UpdatedLinks)
+        UpdatedLinksOrBuilder {
+      // Use UpdatedLinks.newBuilder() to construct.
+      private UpdatedLinks(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private UpdatedLinks(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final UpdatedLinks defaultInstance;
+      public static UpdatedLinks getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public UpdatedLinks getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private UpdatedLinks(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                  cardMerchantsLinks_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants>();
+                  mutable_bitField0_ |= 0x00000001;
+                }
+                cardMerchantsLinks_.add(input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.PARSER, extensionRegistry));
+                break;
+              }
+              case 18: {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  merchantCardsLinks_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                merchantCardsLinks_.add(input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.PARSER, extensionRegistry));
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+            cardMerchantsLinks_ = java.util.Collections.unmodifiableList(cardMerchantsLinks_);
+          }
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            merchantCardsLinks_ = java.util.Collections.unmodifiableList(merchantCardsLinks_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<UpdatedLinks> PARSER =
+          new com.google.protobuf.AbstractParser<UpdatedLinks>() {
+        public UpdatedLinks parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new UpdatedLinks(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<UpdatedLinks> getParserForType() {
+        return PARSER;
+      }
+
+      public interface CardToMerchantsOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        boolean hasCardId();
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        int getCardId();
+
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        java.util.List<java.lang.Integer> getMerchantsIdsList();
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        int getMerchantsIdsCount();
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        int getMerchantsIds(int index);
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks.CardToMerchants}
+       */
+      public static final class CardToMerchants extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)
+          CardToMerchantsOrBuilder {
+        // Use CardToMerchants.newBuilder() to construct.
+        private CardToMerchants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+          super(builder);
+          this.unknownFields = builder.getUnknownFields();
+        }
+        private CardToMerchants(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+        private static final CardToMerchants defaultInstance;
+        public static CardToMerchants getDefaultInstance() {
+          return defaultInstance;
+        }
+
+        public CardToMerchants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+
+        private final com.google.protobuf.UnknownFieldSet unknownFields;
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+            getUnknownFields() {
+          return this.unknownFields;
+        }
+        private CardToMerchants(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          initFields();
+          int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  cardId_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                    merchantsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  merchantsIds_.add(input.readInt32());
+                  break;
+                }
+                case 18: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                    merchantsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    merchantsIds_.add(input.readInt32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+          } finally {
+            if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              merchantsIds_ = java.util.Collections.unmodifiableList(merchantsIds_);
+            }
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder.class);
+        }
+
+        public static com.google.protobuf.Parser<CardToMerchants> PARSER =
+            new com.google.protobuf.AbstractParser<CardToMerchants>() {
+          public CardToMerchants parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new CardToMerchants(input, extensionRegistry);
+          }
+        };
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<CardToMerchants> getParserForType() {
+          return PARSER;
+        }
+
+        private int bitField0_;
+        public static final int CARD_ID_FIELD_NUMBER = 1;
+        private int cardId_;
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public boolean hasCardId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public int getCardId() {
+          return cardId_;
+        }
+
+        public static final int MERCHANTS_IDS_FIELD_NUMBER = 2;
+        private java.util.List<java.lang.Integer> merchantsIds_;
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getMerchantsIdsList() {
+          return merchantsIds_;
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        public int getMerchantsIdsCount() {
+          return merchantsIds_.size();
+        }
+        /**
+         * <code>repeated int32 merchants_ids = 2;</code>
+         */
+        public int getMerchantsIds(int index) {
+          return merchantsIds_.get(index);
+        }
+
+        private void initFields() {
+          cardId_ = 0;
+          merchantsIds_ = java.util.Collections.emptyList();
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          if (!hasCardId()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, cardId_);
+          }
+          for (int i = 0; i < merchantsIds_.size(); i++) {
+            output.writeInt32(2, merchantsIds_.get(i));
+          }
+          getUnknownFields().writeTo(output);
+        }
+
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, cardId_);
+          }
+          {
+            int dataSize = 0;
+            for (int i = 0; i < merchantsIds_.size(); i++) {
+              dataSize += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(merchantsIds_.get(i));
+            }
+            size += dataSize;
+            size += 1 * getMerchantsIdsList().size();
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks.CardToMerchants}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder.class);
+          }
+
+          // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+
+          public Builder clear() {
+            super.clear();
+            cardId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            merchantsIds_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor;
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants getDefaultInstanceForType() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.getDefaultInstance();
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants build() {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants buildPartial() {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.cardId_ = cardId_;
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              merchantsIds_ = java.util.Collections.unmodifiableList(merchantsIds_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.merchantsIds_ = merchantsIds_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants) {
+              return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants other) {
+            if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.getDefaultInstance()) return this;
+            if (other.hasCardId()) {
+              setCardId(other.getCardId());
+            }
+            if (!other.merchantsIds_.isEmpty()) {
+              if (merchantsIds_.isEmpty()) {
+                merchantsIds_ = other.merchantsIds_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureMerchantsIdsIsMutable();
+                merchantsIds_.addAll(other.merchantsIds_);
+              }
+              onChanged();
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            if (!hasCardId()) {
+              
+              return false;
+            }
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants) e.getUnfinishedMessage();
+              throw e;
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          private int cardId_ ;
+          /**
+           * <code>required int32 card_id = 1;</code>
+           */
+          public boolean hasCardId() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          /**
+           * <code>required int32 card_id = 1;</code>
+           */
+          public int getCardId() {
+            return cardId_;
+          }
+          /**
+           * <code>required int32 card_id = 1;</code>
+           */
+          public Builder setCardId(int value) {
+            bitField0_ |= 0x00000001;
+            cardId_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>required int32 card_id = 1;</code>
+           */
+          public Builder clearCardId() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            cardId_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private java.util.List<java.lang.Integer> merchantsIds_ = java.util.Collections.emptyList();
+          private void ensureMerchantsIdsIsMutable() {
+            if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+              merchantsIds_ = new java.util.ArrayList<java.lang.Integer>(merchantsIds_);
+              bitField0_ |= 0x00000002;
+             }
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public java.util.List<java.lang.Integer>
+              getMerchantsIdsList() {
+            return java.util.Collections.unmodifiableList(merchantsIds_);
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public int getMerchantsIdsCount() {
+            return merchantsIds_.size();
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public int getMerchantsIds(int index) {
+            return merchantsIds_.get(index);
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public Builder setMerchantsIds(
+              int index, int value) {
+            ensureMerchantsIdsIsMutable();
+            merchantsIds_.set(index, value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public Builder addMerchantsIds(int value) {
+            ensureMerchantsIdsIsMutable();
+            merchantsIds_.add(value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public Builder addAllMerchantsIds(
+              java.lang.Iterable<? extends java.lang.Integer> values) {
+            ensureMerchantsIdsIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, merchantsIds_);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 merchants_ids = 2;</code>
+           */
+          public Builder clearMerchantsIds() {
+            merchantsIds_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+            return this;
+          }
+
+          // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)
+        }
+
+        static {
+          defaultInstance = new CardToMerchants(true);
+          defaultInstance.initFields();
+        }
+
+        // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.UpdatedLinks.CardToMerchants)
+      }
+
+      public interface MerchantToCardsOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>required int32 merchant_id = 1;</code>
+         */
+        boolean hasMerchantId();
+        /**
+         * <code>required int32 merchant_id = 1;</code>
+         */
+        int getMerchantId();
+
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        java.util.List<java.lang.Integer> getCardsIdsList();
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        int getCardsIdsCount();
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        int getCardsIds(int index);
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks.MerchantToCards}
+       */
+      public static final class MerchantToCards extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)
+          MerchantToCardsOrBuilder {
+        // Use MerchantToCards.newBuilder() to construct.
+        private MerchantToCards(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+          super(builder);
+          this.unknownFields = builder.getUnknownFields();
+        }
+        private MerchantToCards(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+        private static final MerchantToCards defaultInstance;
+        public static MerchantToCards getDefaultInstance() {
+          return defaultInstance;
+        }
+
+        public MerchantToCards getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+
+        private final com.google.protobuf.UnknownFieldSet unknownFields;
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+            getUnknownFields() {
+          return this.unknownFields;
+        }
+        private MerchantToCards(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          initFields();
+          int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  merchantId_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                    cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  cardsIds_.add(input.readInt32());
+                  break;
+                }
+                case 18: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                    cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    cardsIds_.add(input.readInt32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+          } finally {
+            if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+            }
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder.class);
+        }
+
+        public static com.google.protobuf.Parser<MerchantToCards> PARSER =
+            new com.google.protobuf.AbstractParser<MerchantToCards>() {
+          public MerchantToCards parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new MerchantToCards(input, extensionRegistry);
+          }
+        };
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<MerchantToCards> getParserForType() {
+          return PARSER;
+        }
+
+        private int bitField0_;
+        public static final int MERCHANT_ID_FIELD_NUMBER = 1;
+        private int merchantId_;
+        /**
+         * <code>required int32 merchant_id = 1;</code>
+         */
+        public boolean hasMerchantId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required int32 merchant_id = 1;</code>
+         */
+        public int getMerchantId() {
+          return merchantId_;
+        }
+
+        public static final int CARDS_IDS_FIELD_NUMBER = 2;
+        private java.util.List<java.lang.Integer> cardsIds_;
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getCardsIdsList() {
+          return cardsIds_;
+        }
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        public int getCardsIdsCount() {
+          return cardsIds_.size();
+        }
+        /**
+         * <code>repeated int32 cards_ids = 2;</code>
+         */
+        public int getCardsIds(int index) {
+          return cardsIds_.get(index);
+        }
+
+        private void initFields() {
+          merchantId_ = 0;
+          cardsIds_ = java.util.Collections.emptyList();
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          if (!hasMerchantId()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, merchantId_);
+          }
+          for (int i = 0; i < cardsIds_.size(); i++) {
+            output.writeInt32(2, cardsIds_.get(i));
+          }
+          getUnknownFields().writeTo(output);
+        }
+
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, merchantId_);
+          }
+          {
+            int dataSize = 0;
+            for (int i = 0; i < cardsIds_.size(); i++) {
+              dataSize += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(cardsIds_.get(i));
+            }
+            size += dataSize;
+            size += 1 * getCardsIdsList().size();
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input, extensionRegistry);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks.MerchantToCards}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder.class);
+          }
+
+          // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+
+          public Builder clear() {
+            super.clear();
+            merchantId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            cardsIds_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor;
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards getDefaultInstanceForType() {
+            return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.getDefaultInstance();
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards build() {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards buildPartial() {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.merchantId_ = merchantId_;
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.cardsIds_ = cardsIds_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards) {
+              return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards other) {
+            if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.getDefaultInstance()) return this;
+            if (other.hasMerchantId()) {
+              setMerchantId(other.getMerchantId());
+            }
+            if (!other.cardsIds_.isEmpty()) {
+              if (cardsIds_.isEmpty()) {
+                cardsIds_ = other.cardsIds_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureCardsIdsIsMutable();
+                cardsIds_.addAll(other.cardsIds_);
+              }
+              onChanged();
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            if (!hasMerchantId()) {
+              
+              return false;
+            }
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards) e.getUnfinishedMessage();
+              throw e;
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          private int merchantId_ ;
+          /**
+           * <code>required int32 merchant_id = 1;</code>
+           */
+          public boolean hasMerchantId() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          /**
+           * <code>required int32 merchant_id = 1;</code>
+           */
+          public int getMerchantId() {
+            return merchantId_;
+          }
+          /**
+           * <code>required int32 merchant_id = 1;</code>
+           */
+          public Builder setMerchantId(int value) {
+            bitField0_ |= 0x00000001;
+            merchantId_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>required int32 merchant_id = 1;</code>
+           */
+          public Builder clearMerchantId() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            merchantId_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private java.util.List<java.lang.Integer> cardsIds_ = java.util.Collections.emptyList();
+          private void ensureCardsIdsIsMutable() {
+            if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+              cardsIds_ = new java.util.ArrayList<java.lang.Integer>(cardsIds_);
+              bitField0_ |= 0x00000002;
+             }
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public java.util.List<java.lang.Integer>
+              getCardsIdsList() {
+            return java.util.Collections.unmodifiableList(cardsIds_);
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public int getCardsIdsCount() {
+            return cardsIds_.size();
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public int getCardsIds(int index) {
+            return cardsIds_.get(index);
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public Builder setCardsIds(
+              int index, int value) {
+            ensureCardsIdsIsMutable();
+            cardsIds_.set(index, value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public Builder addCardsIds(int value) {
+            ensureCardsIdsIsMutable();
+            cardsIds_.add(value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public Builder addAllCardsIds(
+              java.lang.Iterable<? extends java.lang.Integer> values) {
+            ensureCardsIdsIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, cardsIds_);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 cards_ids = 2;</code>
+           */
+          public Builder clearCardsIds() {
+            cardsIds_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+            return this;
+          }
+
+          // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)
+        }
+
+        static {
+          defaultInstance = new MerchantToCards(true);
+          defaultInstance.initFields();
+        }
+
+        // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.UpdatedLinks.MerchantToCards)
+      }
+
+      public static final int CARD_MERCHANTS_LINKS_FIELD_NUMBER = 1;
+      private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> cardMerchantsLinks_;
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> getCardMerchantsLinksList() {
+        return cardMerchantsLinks_;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder> 
+          getCardMerchantsLinksOrBuilderList() {
+        return cardMerchantsLinks_;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      public int getCardMerchantsLinksCount() {
+        return cardMerchantsLinks_.size();
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants getCardMerchantsLinks(int index) {
+        return cardMerchantsLinks_.get(index);
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder getCardMerchantsLinksOrBuilder(
+          int index) {
+        return cardMerchantsLinks_.get(index);
+      }
+
+      public static final int MERCHANT_CARDS_LINKS_FIELD_NUMBER = 2;
+      private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> merchantCardsLinks_;
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> getMerchantCardsLinksList() {
+        return merchantCardsLinks_;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder> 
+          getMerchantCardsLinksOrBuilderList() {
+        return merchantCardsLinks_;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      public int getMerchantCardsLinksCount() {
+        return merchantCardsLinks_.size();
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards getMerchantCardsLinks(int index) {
+        return merchantCardsLinks_.get(index);
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder getMerchantCardsLinksOrBuilder(
+          int index) {
+        return merchantCardsLinks_.get(index);
+      }
+
+      private void initFields() {
+        cardMerchantsLinks_ = java.util.Collections.emptyList();
+        merchantCardsLinks_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        for (int i = 0; i < getCardMerchantsLinksCount(); i++) {
+          if (!getCardMerchantsLinks(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        for (int i = 0; i < getMerchantCardsLinksCount(); i++) {
+          if (!getMerchantCardsLinks(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        for (int i = 0; i < cardMerchantsLinks_.size(); i++) {
+          output.writeMessage(1, cardMerchantsLinks_.get(i));
+        }
+        for (int i = 0; i < merchantCardsLinks_.size(); i++) {
+          output.writeMessage(2, merchantCardsLinks_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        for (int i = 0; i < cardMerchantsLinks_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, cardMerchantsLinks_.get(i));
+        }
+        for (int i = 0; i < merchantCardsLinks_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, merchantCardsLinks_.get(i));
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code DatabaseUpdateResponse.UpdatedLinks}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse.UpdatedLinks)
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder.class);
+        }
+
+        // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getCardMerchantsLinksFieldBuilder();
+            getMerchantCardsLinksFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          if (cardMerchantsLinksBuilder_ == null) {
+            cardMerchantsLinks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            cardMerchantsLinksBuilder_.clear();
+          }
+          if (merchantCardsLinksBuilder_ == null) {
+            merchantCardsLinks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            merchantCardsLinksBuilder_.clear();
+          }
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks getDefaultInstanceForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance();
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks build() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks buildPartial() {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks(this);
+          int from_bitField0_ = bitField0_;
+          if (cardMerchantsLinksBuilder_ == null) {
+            if (((bitField0_ & 0x00000001) == 0x00000001)) {
+              cardMerchantsLinks_ = java.util.Collections.unmodifiableList(cardMerchantsLinks_);
+              bitField0_ = (bitField0_ & ~0x00000001);
+            }
+            result.cardMerchantsLinks_ = cardMerchantsLinks_;
+          } else {
+            result.cardMerchantsLinks_ = cardMerchantsLinksBuilder_.build();
+          }
+          if (merchantCardsLinksBuilder_ == null) {
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              merchantCardsLinks_ = java.util.Collections.unmodifiableList(merchantCardsLinks_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.merchantCardsLinks_ = merchantCardsLinks_;
+          } else {
+            result.merchantCardsLinks_ = merchantCardsLinksBuilder_.build();
+          }
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks) {
+            return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks other) {
+          if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance()) return this;
+          if (cardMerchantsLinksBuilder_ == null) {
+            if (!other.cardMerchantsLinks_.isEmpty()) {
+              if (cardMerchantsLinks_.isEmpty()) {
+                cardMerchantsLinks_ = other.cardMerchantsLinks_;
+                bitField0_ = (bitField0_ & ~0x00000001);
+              } else {
+                ensureCardMerchantsLinksIsMutable();
+                cardMerchantsLinks_.addAll(other.cardMerchantsLinks_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.cardMerchantsLinks_.isEmpty()) {
+              if (cardMerchantsLinksBuilder_.isEmpty()) {
+                cardMerchantsLinksBuilder_.dispose();
+                cardMerchantsLinksBuilder_ = null;
+                cardMerchantsLinks_ = other.cardMerchantsLinks_;
+                bitField0_ = (bitField0_ & ~0x00000001);
+                cardMerchantsLinksBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getCardMerchantsLinksFieldBuilder() : null;
+              } else {
+                cardMerchantsLinksBuilder_.addAllMessages(other.cardMerchantsLinks_);
+              }
+            }
+          }
+          if (merchantCardsLinksBuilder_ == null) {
+            if (!other.merchantCardsLinks_.isEmpty()) {
+              if (merchantCardsLinks_.isEmpty()) {
+                merchantCardsLinks_ = other.merchantCardsLinks_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureMerchantCardsLinksIsMutable();
+                merchantCardsLinks_.addAll(other.merchantCardsLinks_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.merchantCardsLinks_.isEmpty()) {
+              if (merchantCardsLinksBuilder_.isEmpty()) {
+                merchantCardsLinksBuilder_.dispose();
+                merchantCardsLinksBuilder_ = null;
+                merchantCardsLinks_ = other.merchantCardsLinks_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+                merchantCardsLinksBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getMerchantCardsLinksFieldBuilder() : null;
+              } else {
+                merchantCardsLinksBuilder_.addAllMessages(other.merchantCardsLinks_);
+              }
+            }
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          for (int i = 0; i < getCardMerchantsLinksCount(); i++) {
+            if (!getCardMerchantsLinks(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          for (int i = 0; i < getMerchantCardsLinksCount(); i++) {
+            if (!getMerchantCardsLinks(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> cardMerchantsLinks_ =
+          java.util.Collections.emptyList();
+        private void ensureCardMerchantsLinksIsMutable() {
+          if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+            cardMerchantsLinks_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants>(cardMerchantsLinks_);
+            bitField0_ |= 0x00000001;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder> cardMerchantsLinksBuilder_;
+
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> getCardMerchantsLinksList() {
+          if (cardMerchantsLinksBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(cardMerchantsLinks_);
+          } else {
+            return cardMerchantsLinksBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public int getCardMerchantsLinksCount() {
+          if (cardMerchantsLinksBuilder_ == null) {
+            return cardMerchantsLinks_.size();
+          } else {
+            return cardMerchantsLinksBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants getCardMerchantsLinks(int index) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            return cardMerchantsLinks_.get(index);
+          } else {
+            return cardMerchantsLinksBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder setCardMerchantsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants value) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.set(index, value);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder setCardMerchantsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder builderForValue) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder addCardMerchantsLinks(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants value) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.add(value);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder addCardMerchantsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants value) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.add(index, value);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder addCardMerchantsLinks(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder builderForValue) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.add(builderForValue.build());
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder addCardMerchantsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder builderForValue) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder addAllCardMerchantsLinks(
+            java.lang.Iterable<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants> values) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            ensureCardMerchantsLinksIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, cardMerchantsLinks_);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder clearCardMerchantsLinks() {
+          if (cardMerchantsLinksBuilder_ == null) {
+            cardMerchantsLinks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000001);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public Builder removeCardMerchantsLinks(int index) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            ensureCardMerchantsLinksIsMutable();
+            cardMerchantsLinks_.remove(index);
+            onChanged();
+          } else {
+            cardMerchantsLinksBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder getCardMerchantsLinksBuilder(
+            int index) {
+          return getCardMerchantsLinksFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder getCardMerchantsLinksOrBuilder(
+            int index) {
+          if (cardMerchantsLinksBuilder_ == null) {
+            return cardMerchantsLinks_.get(index);  } else {
+            return cardMerchantsLinksBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder> 
+             getCardMerchantsLinksOrBuilderList() {
+          if (cardMerchantsLinksBuilder_ != null) {
+            return cardMerchantsLinksBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(cardMerchantsLinks_);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder addCardMerchantsLinksBuilder() {
+          return getCardMerchantsLinksFieldBuilder().addBuilder(
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder addCardMerchantsLinksBuilder(
+            int index) {
+          return getCardMerchantsLinksFieldBuilder().addBuilder(
+              index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.CardToMerchants card_merchants_links = 1;</code>
+         */
+        public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder> 
+             getCardMerchantsLinksBuilderList() {
+          return getCardMerchantsLinksFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder> 
+            getCardMerchantsLinksFieldBuilder() {
+          if (cardMerchantsLinksBuilder_ == null) {
+            cardMerchantsLinksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchants.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.CardToMerchantsOrBuilder>(
+                    cardMerchantsLinks_,
+                    ((bitField0_ & 0x00000001) == 0x00000001),
+                    getParentForChildren(),
+                    isClean());
+            cardMerchantsLinks_ = null;
+          }
+          return cardMerchantsLinksBuilder_;
+        }
+
+        private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> merchantCardsLinks_ =
+          java.util.Collections.emptyList();
+        private void ensureMerchantCardsLinksIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            merchantCardsLinks_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards>(merchantCardsLinks_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder> merchantCardsLinksBuilder_;
+
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> getMerchantCardsLinksList() {
+          if (merchantCardsLinksBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(merchantCardsLinks_);
+          } else {
+            return merchantCardsLinksBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public int getMerchantCardsLinksCount() {
+          if (merchantCardsLinksBuilder_ == null) {
+            return merchantCardsLinks_.size();
+          } else {
+            return merchantCardsLinksBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards getMerchantCardsLinks(int index) {
+          if (merchantCardsLinksBuilder_ == null) {
+            return merchantCardsLinks_.get(index);
+          } else {
+            return merchantCardsLinksBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder setMerchantCardsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards value) {
+          if (merchantCardsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.set(index, value);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder setMerchantCardsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder builderForValue) {
+          if (merchantCardsLinksBuilder_ == null) {
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder addMerchantCardsLinks(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards value) {
+          if (merchantCardsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.add(value);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder addMerchantCardsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards value) {
+          if (merchantCardsLinksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.add(index, value);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder addMerchantCardsLinks(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder builderForValue) {
+          if (merchantCardsLinksBuilder_ == null) {
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.add(builderForValue.build());
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder addMerchantCardsLinks(
+            int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder builderForValue) {
+          if (merchantCardsLinksBuilder_ == null) {
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder addAllMerchantCardsLinks(
+            java.lang.Iterable<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards> values) {
+          if (merchantCardsLinksBuilder_ == null) {
+            ensureMerchantCardsLinksIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, merchantCardsLinks_);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder clearMerchantCardsLinks() {
+          if (merchantCardsLinksBuilder_ == null) {
+            merchantCardsLinks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public Builder removeMerchantCardsLinks(int index) {
+          if (merchantCardsLinksBuilder_ == null) {
+            ensureMerchantCardsLinksIsMutable();
+            merchantCardsLinks_.remove(index);
+            onChanged();
+          } else {
+            merchantCardsLinksBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder getMerchantCardsLinksBuilder(
+            int index) {
+          return getMerchantCardsLinksFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder getMerchantCardsLinksOrBuilder(
+            int index) {
+          if (merchantCardsLinksBuilder_ == null) {
+            return merchantCardsLinks_.get(index);  } else {
+            return merchantCardsLinksBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder> 
+             getMerchantCardsLinksOrBuilderList() {
+          if (merchantCardsLinksBuilder_ != null) {
+            return merchantCardsLinksBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(merchantCardsLinks_);
+          }
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder addMerchantCardsLinksBuilder() {
+          return getMerchantCardsLinksFieldBuilder().addBuilder(
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder addMerchantCardsLinksBuilder(
+            int index) {
+          return getMerchantCardsLinksFieldBuilder().addBuilder(
+              index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .DatabaseUpdateResponse.UpdatedLinks.MerchantToCards merchant_cards_links = 2;</code>
+         */
+        public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder> 
+             getMerchantCardsLinksBuilderList() {
+          return getMerchantCardsLinksFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder> 
+            getMerchantCardsLinksFieldBuilder() {
+          if (merchantCardsLinksBuilder_ == null) {
+            merchantCardsLinksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCards.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.MerchantToCardsOrBuilder>(
+                    merchantCardsLinks_,
+                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    getParentForChildren(),
+                    isClean());
+            merchantCardsLinks_ = null;
+          }
+          return merchantCardsLinksBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse.UpdatedLinks)
+      }
+
+      static {
+        defaultInstance = new UpdatedLinks(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse.UpdatedLinks)
+    }
+
+    private int bitField0_;
+    public static final int CARDS_FIELD_NUMBER = 1;
+    private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> cards_;
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> getCardsList() {
+      return cards_;
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder> 
+        getCardsOrBuilderList() {
+      return cards_;
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    public int getCardsCount() {
+      return cards_.size();
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card getCards(int index) {
+      return cards_.get(index);
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder getCardsOrBuilder(
+        int index) {
+      return cards_.get(index);
+    }
+
+    public static final int MERCHANTS_FIELD_NUMBER = 2;
+    private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> merchants_;
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> getMerchantsList() {
+      return merchants_;
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder> 
+        getMerchantsOrBuilderList() {
+      return merchants_;
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    public int getMerchantsCount() {
+      return merchants_.size();
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant getMerchants(int index) {
+      return merchants_.get(index);
+    }
+    /**
+     * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder getMerchantsOrBuilder(
+        int index) {
+      return merchants_.get(index);
+    }
+
+    public static final int UPDATED_LINKS_FIELD_NUMBER = 3;
+    private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks updatedLinks_;
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    public boolean hasUpdatedLinks() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks getUpdatedLinks() {
+      return updatedLinks_;
+    }
+    /**
+     * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder getUpdatedLinksOrBuilder() {
+      return updatedLinks_;
+    }
+
+    private void initFields() {
+      cards_ = java.util.Collections.emptyList();
+      merchants_ = java.util.Collections.emptyList();
+      updatedLinks_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getCardsCount(); i++) {
+        if (!getCards(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getMerchantsCount(); i++) {
+        if (!getMerchants(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasUpdatedLinks()) {
+        if (!getUpdatedLinks().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < cards_.size(); i++) {
+        output.writeMessage(1, cards_.get(i));
+      }
+      for (int i = 0; i < merchants_.size(); i++) {
+        output.writeMessage(2, merchants_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(3, updatedLinks_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < cards_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, cards_.get(i));
+      }
+      for (int i = 0; i < merchants_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, merchants_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, updatedLinks_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DatabaseUpdateResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DatabaseUpdateResponse)
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.class, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Builder.class);
+      }
+
+      // Construct using cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCardsFieldBuilder();
+          getMerchantsFieldBuilder();
+          getUpdatedLinksFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (cardsBuilder_ == null) {
+          cards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          cardsBuilder_.clear();
+        }
+        if (merchantsBuilder_ == null) {
+          merchants_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          merchantsBuilder_.clear();
+        }
+        if (updatedLinksBuilder_ == null) {
+          updatedLinks_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance();
+        } else {
+          updatedLinksBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_DatabaseUpdateResponse_descriptor;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse getDefaultInstanceForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.getDefaultInstance();
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse build() {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse buildPartial() {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse result = new cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (cardsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            cards_ = java.util.Collections.unmodifiableList(cards_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.cards_ = cards_;
+        } else {
+          result.cards_ = cardsBuilder_.build();
+        }
+        if (merchantsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            merchants_ = java.util.Collections.unmodifiableList(merchants_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.merchants_ = merchants_;
+        } else {
+          result.merchants_ = merchantsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (updatedLinksBuilder_ == null) {
+          result.updatedLinks_ = updatedLinks_;
+        } else {
+          result.updatedLinks_ = updatedLinksBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse) {
+          return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse other) {
+        if (other == cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.getDefaultInstance()) return this;
+        if (cardsBuilder_ == null) {
+          if (!other.cards_.isEmpty()) {
+            if (cards_.isEmpty()) {
+              cards_ = other.cards_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureCardsIsMutable();
+              cards_.addAll(other.cards_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.cards_.isEmpty()) {
+            if (cardsBuilder_.isEmpty()) {
+              cardsBuilder_.dispose();
+              cardsBuilder_ = null;
+              cards_ = other.cards_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              cardsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getCardsFieldBuilder() : null;
+            } else {
+              cardsBuilder_.addAllMessages(other.cards_);
+            }
+          }
+        }
+        if (merchantsBuilder_ == null) {
+          if (!other.merchants_.isEmpty()) {
+            if (merchants_.isEmpty()) {
+              merchants_ = other.merchants_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureMerchantsIsMutable();
+              merchants_.addAll(other.merchants_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.merchants_.isEmpty()) {
+            if (merchantsBuilder_.isEmpty()) {
+              merchantsBuilder_.dispose();
+              merchantsBuilder_ = null;
+              merchants_ = other.merchants_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              merchantsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMerchantsFieldBuilder() : null;
+            } else {
+              merchantsBuilder_.addAllMessages(other.merchants_);
+            }
+          }
+        }
+        if (other.hasUpdatedLinks()) {
+          mergeUpdatedLinks(other.getUpdatedLinks());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getCardsCount(); i++) {
+          if (!getCards(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getMerchantsCount(); i++) {
+          if (!getMerchants(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasUpdatedLinks()) {
+          if (!getUpdatedLinks().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> cards_ =
+        java.util.Collections.emptyList();
+      private void ensureCardsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          cards_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card>(cards_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder> cardsBuilder_;
+
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> getCardsList() {
+        if (cardsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(cards_);
+        } else {
+          return cardsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public int getCardsCount() {
+        if (cardsBuilder_ == null) {
+          return cards_.size();
+        } else {
+          return cardsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card getCards(int index) {
+        if (cardsBuilder_ == null) {
+          return cards_.get(index);
+        } else {
+          return cardsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder setCards(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card value) {
+        if (cardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsIsMutable();
+          cards_.set(index, value);
+          onChanged();
+        } else {
+          cardsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder setCards(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder builderForValue) {
+        if (cardsBuilder_ == null) {
+          ensureCardsIsMutable();
+          cards_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          cardsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder addCards(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card value) {
+        if (cardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsIsMutable();
+          cards_.add(value);
+          onChanged();
+        } else {
+          cardsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder addCards(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card value) {
+        if (cardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsIsMutable();
+          cards_.add(index, value);
+          onChanged();
+        } else {
+          cardsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder addCards(
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder builderForValue) {
+        if (cardsBuilder_ == null) {
+          ensureCardsIsMutable();
+          cards_.add(builderForValue.build());
+          onChanged();
+        } else {
+          cardsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder addCards(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder builderForValue) {
+        if (cardsBuilder_ == null) {
+          ensureCardsIsMutable();
+          cards_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          cardsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder addAllCards(
+          java.lang.Iterable<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card> values) {
+        if (cardsBuilder_ == null) {
+          ensureCardsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cards_);
+          onChanged();
+        } else {
+          cardsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder clearCards() {
+        if (cardsBuilder_ == null) {
+          cards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          cardsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public Builder removeCards(int index) {
+        if (cardsBuilder_ == null) {
+          ensureCardsIsMutable();
+          cards_.remove(index);
+          onChanged();
+        } else {
+          cardsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder getCardsBuilder(
+          int index) {
+        return getCardsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder getCardsOrBuilder(
+          int index) {
+        if (cardsBuilder_ == null) {
+          return cards_.get(index);  } else {
+          return cardsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder> 
+           getCardsOrBuilderList() {
+        if (cardsBuilder_ != null) {
+          return cardsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(cards_);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder addCardsBuilder() {
+        return getCardsFieldBuilder().addBuilder(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder addCardsBuilder(
+          int index) {
+        return getCardsFieldBuilder().addBuilder(
+            index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Card cards = 1;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder> 
+           getCardsBuilderList() {
+        return getCardsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder> 
+          getCardsFieldBuilder() {
+        if (cardsBuilder_ == null) {
+          cardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Card.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.CardOrBuilder>(
+                  cards_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          cards_ = null;
+        }
+        return cardsBuilder_;
+      }
+
+      private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> merchants_ =
+        java.util.Collections.emptyList();
+      private void ensureMerchantsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          merchants_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant>(merchants_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder> merchantsBuilder_;
+
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> getMerchantsList() {
+        if (merchantsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(merchants_);
+        } else {
+          return merchantsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public int getMerchantsCount() {
+        if (merchantsBuilder_ == null) {
+          return merchants_.size();
+        } else {
+          return merchantsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant getMerchants(int index) {
+        if (merchantsBuilder_ == null) {
+          return merchants_.get(index);
+        } else {
+          return merchantsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder setMerchants(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant value) {
+        if (merchantsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMerchantsIsMutable();
+          merchants_.set(index, value);
+          onChanged();
+        } else {
+          merchantsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder setMerchants(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder builderForValue) {
+        if (merchantsBuilder_ == null) {
+          ensureMerchantsIsMutable();
+          merchants_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          merchantsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder addMerchants(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant value) {
+        if (merchantsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMerchantsIsMutable();
+          merchants_.add(value);
+          onChanged();
+        } else {
+          merchantsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder addMerchants(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant value) {
+        if (merchantsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMerchantsIsMutable();
+          merchants_.add(index, value);
+          onChanged();
+        } else {
+          merchantsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder addMerchants(
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder builderForValue) {
+        if (merchantsBuilder_ == null) {
+          ensureMerchantsIsMutable();
+          merchants_.add(builderForValue.build());
+          onChanged();
+        } else {
+          merchantsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder addMerchants(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder builderForValue) {
+        if (merchantsBuilder_ == null) {
+          ensureMerchantsIsMutable();
+          merchants_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          merchantsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder addAllMerchants(
+          java.lang.Iterable<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant> values) {
+        if (merchantsBuilder_ == null) {
+          ensureMerchantsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, merchants_);
+          onChanged();
+        } else {
+          merchantsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder clearMerchants() {
+        if (merchantsBuilder_ == null) {
+          merchants_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          merchantsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public Builder removeMerchants(int index) {
+        if (merchantsBuilder_ == null) {
+          ensureMerchantsIsMutable();
+          merchants_.remove(index);
+          onChanged();
+        } else {
+          merchantsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder getMerchantsBuilder(
+          int index) {
+        return getMerchantsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder getMerchantsOrBuilder(
+          int index) {
+        if (merchantsBuilder_ == null) {
+          return merchants_.get(index);  } else {
+          return merchantsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder> 
+           getMerchantsOrBuilderList() {
+        if (merchantsBuilder_ != null) {
+          return merchantsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(merchants_);
+        }
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder addMerchantsBuilder() {
+        return getMerchantsFieldBuilder().addBuilder(
+            cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder addMerchantsBuilder(
+          int index) {
+        return getMerchantsFieldBuilder().addBuilder(
+            index, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .DatabaseUpdateResponse.Merchant merchants = 2;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder> 
+           getMerchantsBuilderList() {
+        return getMerchantsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder> 
+          getMerchantsFieldBuilder() {
+        if (merchantsBuilder_ == null) {
+          merchantsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.Merchant.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.MerchantOrBuilder>(
+                  merchants_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          merchants_ = null;
+        }
+        return merchantsBuilder_;
+      }
+
+      private cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks updatedLinks_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder> updatedLinksBuilder_;
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public boolean hasUpdatedLinks() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks getUpdatedLinks() {
+        if (updatedLinksBuilder_ == null) {
+          return updatedLinks_;
+        } else {
+          return updatedLinksBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public Builder setUpdatedLinks(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks value) {
+        if (updatedLinksBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          updatedLinks_ = value;
+          onChanged();
+        } else {
+          updatedLinksBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public Builder setUpdatedLinks(
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder builderForValue) {
+        if (updatedLinksBuilder_ == null) {
+          updatedLinks_ = builderForValue.build();
+          onChanged();
+        } else {
+          updatedLinksBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public Builder mergeUpdatedLinks(cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks value) {
+        if (updatedLinksBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              updatedLinks_ != cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance()) {
+            updatedLinks_ =
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.newBuilder(updatedLinks_).mergeFrom(value).buildPartial();
+          } else {
+            updatedLinks_ = value;
+          }
+          onChanged();
+        } else {
+          updatedLinksBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public Builder clearUpdatedLinks() {
+        if (updatedLinksBuilder_ == null) {
+          updatedLinks_ = cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.getDefaultInstance();
+          onChanged();
+        } else {
+          updatedLinksBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder getUpdatedLinksBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getUpdatedLinksFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder getUpdatedLinksOrBuilder() {
+        if (updatedLinksBuilder_ != null) {
+          return updatedLinksBuilder_.getMessageOrBuilder();
+        } else {
+          return updatedLinks_;
+        }
+      }
+      /**
+       * <code>optional .DatabaseUpdateResponse.UpdatedLinks updated_links = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder> 
+          getUpdatedLinksFieldBuilder() {
+        if (updatedLinksBuilder_ == null) {
+          updatedLinksBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinks.Builder, cz.jenda.pidifrky.proto.DeviceBackend.DatabaseUpdateResponse.UpdatedLinksOrBuilder>(
+                  getUpdatedLinks(),
+                  getParentForChildren(),
+                  isClean());
+          updatedLinks_ = null;
+        }
+        return updatedLinksBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:DatabaseUpdateResponse)
+    }
+
+    static {
+      defaultInstance = new DatabaseUpdateResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:DatabaseUpdateResponse)
+  }
+
+  public interface ImageDownloadRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageDownloadRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    java.util.List<java.lang.Integer> getCardsIdsList();
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    int getCardsIdsCount();
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    int getCardsIds(int index);
+  }
+  /**
+   * Protobuf type {@code ImageDownloadRequest}
+   */
+  public static final class ImageDownloadRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:ImageDownloadRequest)
+      ImageDownloadRequestOrBuilder {
+    // Use ImageDownloadRequest.newBuilder() to construct.
+    private ImageDownloadRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ImageDownloadRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ImageDownloadRequest defaultInstance;
+    public static ImageDownloadRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ImageDownloadRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageDownloadRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              cardsIds_.add(input.readInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                cardsIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                cardsIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ImageDownloadRequest> PARSER =
+        new com.google.protobuf.AbstractParser<ImageDownloadRequest>() {
+      public ImageDownloadRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageDownloadRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageDownloadRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public static final int CARDS_IDS_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> cardsIds_;
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getCardsIdsList() {
+      return cardsIds_;
+    }
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    public int getCardsIdsCount() {
+      return cardsIds_.size();
+    }
+    /**
+     * <code>repeated int32 cards_ids = 1;</code>
+     */
+    public int getCardsIds(int index) {
+      return cardsIds_.get(index);
+    }
+
+    private void initFields() {
+      cardsIds_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < cardsIds_.size(); i++) {
+        output.writeInt32(1, cardsIds_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < cardsIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(cardsIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getCardsIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ImageDownloadRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageDownloadRequest)
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.Builder.class);
+      }
+
+      // Construct using cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        cardsIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadRequest_descriptor;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest getDefaultInstanceForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.getDefaultInstance();
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest build() {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest buildPartial() {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest result = new cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.cardsIds_ = cardsIds_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest) {
+          return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest other) {
+        if (other == cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest.getDefaultInstance()) return this;
+        if (!other.cardsIds_.isEmpty()) {
+          if (cardsIds_.isEmpty()) {
+            cardsIds_ = other.cardsIds_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureCardsIdsIsMutable();
+            cardsIds_.addAll(other.cardsIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<java.lang.Integer> cardsIds_ = java.util.Collections.emptyList();
+      private void ensureCardsIdsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          cardsIds_ = new java.util.ArrayList<java.lang.Integer>(cardsIds_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getCardsIdsList() {
+        return java.util.Collections.unmodifiableList(cardsIds_);
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public int getCardsIdsCount() {
+        return cardsIds_.size();
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public int getCardsIds(int index) {
+        return cardsIds_.get(index);
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public Builder setCardsIds(
+          int index, int value) {
+        ensureCardsIdsIsMutable();
+        cardsIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public Builder addCardsIds(int value) {
+        ensureCardsIdsIsMutable();
+        cardsIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public Builder addAllCardsIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureCardsIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, cardsIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 cards_ids = 1;</code>
+       */
+      public Builder clearCardsIds() {
+        cardsIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ImageDownloadRequest)
+    }
+
+    static {
+      defaultInstance = new ImageDownloadRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageDownloadRequest)
+  }
+
+  public interface ImageDownloadResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageDownloadResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> 
+        getCardsImagesList();
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage getCardsImages(int index);
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    int getCardsImagesCount();
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder> 
+        getCardsImagesOrBuilderList();
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder getCardsImagesOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ImageDownloadResponse}
+   */
+  public static final class ImageDownloadResponse extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:ImageDownloadResponse)
+      ImageDownloadResponseOrBuilder {
+    // Use ImageDownloadResponse.newBuilder() to construct.
+    private ImageDownloadResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ImageDownloadResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ImageDownloadResponse defaultInstance;
+    public static ImageDownloadResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ImageDownloadResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageDownloadResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                cardsImages_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              cardsImages_.add(input.readMessage(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          cardsImages_ = java.util.Collections.unmodifiableList(cardsImages_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ImageDownloadResponse> PARSER =
+        new com.google.protobuf.AbstractParser<ImageDownloadResponse>() {
+      public ImageDownloadResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageDownloadResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageDownloadResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public interface CardImageOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:ImageDownloadResponse.CardImage)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required int32 card_id = 1;</code>
+       */
+      boolean hasCardId();
+      /**
+       * <code>required int32 card_id = 1;</code>
+       */
+      int getCardId();
+
+      /**
+       * <code>required bytes full_image_bytes = 2;</code>
+       */
+      boolean hasFullImageBytes();
+      /**
+       * <code>required bytes full_image_bytes = 2;</code>
+       */
+      com.google.protobuf.ByteString getFullImageBytes();
+
+      /**
+       * <code>required bytes thumbnail_bytes = 3;</code>
+       */
+      boolean hasThumbnailBytes();
+      /**
+       * <code>required bytes thumbnail_bytes = 3;</code>
+       */
+      com.google.protobuf.ByteString getThumbnailBytes();
+    }
+    /**
+     * Protobuf type {@code ImageDownloadResponse.CardImage}
+     */
+    public static final class CardImage extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:ImageDownloadResponse.CardImage)
+        CardImageOrBuilder {
+      // Use CardImage.newBuilder() to construct.
+      private CardImage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private CardImage(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final CardImage defaultInstance;
+      public static CardImage getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public CardImage getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private CardImage(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                cardId_ = input.readInt32();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                fullImageBytes_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000004;
+                thumbnailBytes_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_CardImage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_CardImage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<CardImage> PARSER =
+          new com.google.protobuf.AbstractParser<CardImage>() {
+        public CardImage parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CardImage(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<CardImage> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      public static final int CARD_ID_FIELD_NUMBER = 1;
+      private int cardId_;
+      /**
+       * <code>required int32 card_id = 1;</code>
+       */
+      public boolean hasCardId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 card_id = 1;</code>
+       */
+      public int getCardId() {
+        return cardId_;
+      }
+
+      public static final int FULL_IMAGE_BYTES_FIELD_NUMBER = 2;
+      private com.google.protobuf.ByteString fullImageBytes_;
+      /**
+       * <code>required bytes full_image_bytes = 2;</code>
+       */
+      public boolean hasFullImageBytes() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes full_image_bytes = 2;</code>
+       */
+      public com.google.protobuf.ByteString getFullImageBytes() {
+        return fullImageBytes_;
+      }
+
+      public static final int THUMBNAIL_BYTES_FIELD_NUMBER = 3;
+      private com.google.protobuf.ByteString thumbnailBytes_;
+      /**
+       * <code>required bytes thumbnail_bytes = 3;</code>
+       */
+      public boolean hasThumbnailBytes() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes thumbnail_bytes = 3;</code>
+       */
+      public com.google.protobuf.ByteString getThumbnailBytes() {
+        return thumbnailBytes_;
+      }
+
+      private void initFields() {
+        cardId_ = 0;
+        fullImageBytes_ = com.google.protobuf.ByteString.EMPTY;
+        thumbnailBytes_ = com.google.protobuf.ByteString.EMPTY;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasCardId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasFullImageBytes()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasThumbnailBytes()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt32(1, cardId_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, fullImageBytes_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBytes(3, thumbnailBytes_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, cardId_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, fullImageBytes_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, thumbnailBytes_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code ImageDownloadResponse.CardImage}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:ImageDownloadResponse.CardImage)
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_CardImage_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_CardImage_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder.class);
+        }
+
+        // Construct using cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          cardId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          fullImageBytes_ = com.google.protobuf.ByteString.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          thumbnailBytes_ = com.google.protobuf.ByteString.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_CardImage_descriptor;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage getDefaultInstanceForType() {
+          return cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.getDefaultInstance();
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage build() {
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage buildPartial() {
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage result = new cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.cardId_ = cardId_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.fullImageBytes_ = fullImageBytes_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.thumbnailBytes_ = thumbnailBytes_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage) {
+            return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage other) {
+          if (other == cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.getDefaultInstance()) return this;
+          if (other.hasCardId()) {
+            setCardId(other.getCardId());
+          }
+          if (other.hasFullImageBytes()) {
+            setFullImageBytes(other.getFullImageBytes());
+          }
+          if (other.hasThumbnailBytes()) {
+            setThumbnailBytes(other.getThumbnailBytes());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasCardId()) {
+            
+            return false;
+          }
+          if (!hasFullImageBytes()) {
+            
+            return false;
+          }
+          if (!hasThumbnailBytes()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private int cardId_ ;
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public boolean hasCardId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public int getCardId() {
+          return cardId_;
+        }
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public Builder setCardId(int value) {
+          bitField0_ |= 0x00000001;
+          cardId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 card_id = 1;</code>
+         */
+        public Builder clearCardId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          cardId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.ByteString fullImageBytes_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>required bytes full_image_bytes = 2;</code>
+         */
+        public boolean hasFullImageBytes() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required bytes full_image_bytes = 2;</code>
+         */
+        public com.google.protobuf.ByteString getFullImageBytes() {
+          return fullImageBytes_;
+        }
+        /**
+         * <code>required bytes full_image_bytes = 2;</code>
+         */
+        public Builder setFullImageBytes(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          fullImageBytes_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required bytes full_image_bytes = 2;</code>
+         */
+        public Builder clearFullImageBytes() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          fullImageBytes_ = getDefaultInstance().getFullImageBytes();
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.ByteString thumbnailBytes_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>required bytes thumbnail_bytes = 3;</code>
+         */
+        public boolean hasThumbnailBytes() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required bytes thumbnail_bytes = 3;</code>
+         */
+        public com.google.protobuf.ByteString getThumbnailBytes() {
+          return thumbnailBytes_;
+        }
+        /**
+         * <code>required bytes thumbnail_bytes = 3;</code>
+         */
+        public Builder setThumbnailBytes(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          thumbnailBytes_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required bytes thumbnail_bytes = 3;</code>
+         */
+        public Builder clearThumbnailBytes() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          thumbnailBytes_ = getDefaultInstance().getThumbnailBytes();
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:ImageDownloadResponse.CardImage)
+      }
+
+      static {
+        defaultInstance = new CardImage(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:ImageDownloadResponse.CardImage)
+    }
+
+    public static final int CARDS_IMAGES_FIELD_NUMBER = 1;
+    private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> cardsImages_;
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> getCardsImagesList() {
+      return cardsImages_;
+    }
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder> 
+        getCardsImagesOrBuilderList() {
+      return cardsImages_;
+    }
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    public int getCardsImagesCount() {
+      return cardsImages_.size();
+    }
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage getCardsImages(int index) {
+      return cardsImages_.get(index);
+    }
+    /**
+     * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+     */
+    public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder getCardsImagesOrBuilder(
+        int index) {
+      return cardsImages_.get(index);
+    }
+
+    private void initFields() {
+      cardsImages_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getCardsImagesCount(); i++) {
+        if (!getCardsImages(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < cardsImages_.size(); i++) {
+        output.writeMessage(1, cardsImages_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < cardsImages_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, cardsImages_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ImageDownloadResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageDownloadResponse)
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.class, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.Builder.class);
+      }
+
+      // Construct using cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCardsImagesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (cardsImagesBuilder_ == null) {
+          cardsImages_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          cardsImagesBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.internal_static_ImageDownloadResponse_descriptor;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse getDefaultInstanceForType() {
+        return cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.getDefaultInstance();
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse build() {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse buildPartial() {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse result = new cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse(this);
+        int from_bitField0_ = bitField0_;
+        if (cardsImagesBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            cardsImages_ = java.util.Collections.unmodifiableList(cardsImages_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.cardsImages_ = cardsImages_;
+        } else {
+          result.cardsImages_ = cardsImagesBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse) {
+          return mergeFrom((cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse other) {
+        if (other == cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.getDefaultInstance()) return this;
+        if (cardsImagesBuilder_ == null) {
+          if (!other.cardsImages_.isEmpty()) {
+            if (cardsImages_.isEmpty()) {
+              cardsImages_ = other.cardsImages_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureCardsImagesIsMutable();
+              cardsImages_.addAll(other.cardsImages_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.cardsImages_.isEmpty()) {
+            if (cardsImagesBuilder_.isEmpty()) {
+              cardsImagesBuilder_.dispose();
+              cardsImagesBuilder_ = null;
+              cardsImages_ = other.cardsImages_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              cardsImagesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getCardsImagesFieldBuilder() : null;
+            } else {
+              cardsImagesBuilder_.addAllMessages(other.cardsImages_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getCardsImagesCount(); i++) {
+          if (!getCardsImages(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> cardsImages_ =
+        java.util.Collections.emptyList();
+      private void ensureCardsImagesIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          cardsImages_ = new java.util.ArrayList<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage>(cardsImages_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder> cardsImagesBuilder_;
+
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> getCardsImagesList() {
+        if (cardsImagesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(cardsImages_);
+        } else {
+          return cardsImagesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public int getCardsImagesCount() {
+        if (cardsImagesBuilder_ == null) {
+          return cardsImages_.size();
+        } else {
+          return cardsImagesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage getCardsImages(int index) {
+        if (cardsImagesBuilder_ == null) {
+          return cardsImages_.get(index);
+        } else {
+          return cardsImagesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder setCardsImages(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage value) {
+        if (cardsImagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsImagesIsMutable();
+          cardsImages_.set(index, value);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder setCardsImages(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder builderForValue) {
+        if (cardsImagesBuilder_ == null) {
+          ensureCardsImagesIsMutable();
+          cardsImages_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          cardsImagesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder addCardsImages(cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage value) {
+        if (cardsImagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsImagesIsMutable();
+          cardsImages_.add(value);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder addCardsImages(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage value) {
+        if (cardsImagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCardsImagesIsMutable();
+          cardsImages_.add(index, value);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder addCardsImages(
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder builderForValue) {
+        if (cardsImagesBuilder_ == null) {
+          ensureCardsImagesIsMutable();
+          cardsImages_.add(builderForValue.build());
+          onChanged();
+        } else {
+          cardsImagesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder addCardsImages(
+          int index, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder builderForValue) {
+        if (cardsImagesBuilder_ == null) {
+          ensureCardsImagesIsMutable();
+          cardsImages_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          cardsImagesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder addAllCardsImages(
+          java.lang.Iterable<? extends cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage> values) {
+        if (cardsImagesBuilder_ == null) {
+          ensureCardsImagesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cardsImages_);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder clearCardsImages() {
+        if (cardsImagesBuilder_ == null) {
+          cardsImages_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public Builder removeCardsImages(int index) {
+        if (cardsImagesBuilder_ == null) {
+          ensureCardsImagesIsMutable();
+          cardsImages_.remove(index);
+          onChanged();
+        } else {
+          cardsImagesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder getCardsImagesBuilder(
+          int index) {
+        return getCardsImagesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder getCardsImagesOrBuilder(
+          int index) {
+        if (cardsImagesBuilder_ == null) {
+          return cardsImages_.get(index);  } else {
+          return cardsImagesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public java.util.List<? extends cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder> 
+           getCardsImagesOrBuilderList() {
+        if (cardsImagesBuilder_ != null) {
+          return cardsImagesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(cardsImages_);
+        }
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder addCardsImagesBuilder() {
+        return getCardsImagesFieldBuilder().addBuilder(
+            cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder addCardsImagesBuilder(
+          int index) {
+        return getCardsImagesFieldBuilder().addBuilder(
+            index, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ImageDownloadResponse.CardImage cards_images = 1;</code>
+       */
+      public java.util.List<cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder> 
+           getCardsImagesBuilderList() {
+        return getCardsImagesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder> 
+          getCardsImagesFieldBuilder() {
+        if (cardsImagesBuilder_ == null) {
+          cardsImagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage.Builder, cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImageOrBuilder>(
+                  cardsImages_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          cardsImages_ = null;
+        }
+        return cardsImagesBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ImageDownloadResponse)
+    }
+
+    static {
+      defaultInstance = new ImageDownloadResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageDownloadResponse)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Envelope_descriptor;
   private static
@@ -3520,6 +12423,61 @@ public final class DeviceBackend {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_DebugReportRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_Location_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_Location_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_Card_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_Card_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_Merchant_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_Merchant_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_UpdatedLinks_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageDownloadRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ImageDownloadRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageDownloadResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ImageDownloadResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageDownloadResponse_CardImage_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ImageDownloadResponse_CardImage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3539,8 +12497,36 @@ public final class DeviceBackend {
       "\0132\037.Envelope.DeviceInfo.ScreenSize\032+\n\nSc" +
       "reenSize\022\r\n\005width\030\001 \002(\005\022\016\n\006height\030\002 \002(\005\"" +
       "6\n\022DebugReportRequest\022\017\n\007contact\030\001 \001(\t\022\017",
-      "\n\007content\030\002 \002(\014B\033\n\027cz.jenda.pidifrky.pro" +
-      "toH\001"
+      "\n\007content\030\002 \002(\014\"E\n\025DatabaseUpdateRequest" +
+      "\022\027\n\017known_cards_ids\030\001 \003(\005\022\023\n\013last_update" +
+      "\030\002 \002(\004\"\343\006\n\026DatabaseUpdateResponse\022+\n\005car" +
+      "ds\030\001 \003(\0132\034.DatabaseUpdateResponse.Card\0223" +
+      "\n\tmerchants\030\002 \003(\0132 .DatabaseUpdateRespon" +
+      "se.Merchant\022;\n\rupdated_links\030\003 \001(\0132$.Dat" +
+      "abaseUpdateResponse.UpdatedLinks\032F\n\010Loca" +
+      "tion\022\020\n\010latitude\030\001 \002(\002\022\021\n\tlongitude\030\002 \002(" +
+      "\002\022\025\n\007precise\030\003 \001(\010:\004true\032\241\001\n\004Card\022\014\n\004nam" +
+      "e\030\001 \002(\t\022\020\n\010name_raw\030\002 \002(\t\022\n\n\002id\030\003 \002(\005\022\016\n",
+      "\006number\030\004 \002(\005\0222\n\010location\030\005 \001(\0132 .Databa" +
+      "seUpdateResponse.Location\022\025\n\rmerchants_i" +
+      "ds\030\006 \003(\005\022\022\n\nneighbours\030\007 \003(\005\032\216\001\n\010Merchan" +
+      "t\022\014\n\004name\030\001 \002(\t\022\020\n\010name_raw\030\002 \002(\t\022\n\n\002id\030" +
+      "\003 \002(\005\022\017\n\007address\030\004 \002(\t\0222\n\010location\030\005 \001(\013" +
+      "2 .DatabaseUpdateResponse.Location\022\021\n\tca" +
+      "rds_ids\030\006 \003(\005\032\254\002\n\014UpdatedLinks\022R\n\024card_m" +
+      "erchants_links\030\001 \003(\01324.DatabaseUpdateRes" +
+      "ponse.UpdatedLinks.CardToMerchants\022R\n\024me" +
+      "rchant_cards_links\030\002 \003(\01324.DatabaseUpdat",
+      "eResponse.UpdatedLinks.MerchantToCards\0329" +
+      "\n\017CardToMerchants\022\017\n\007card_id\030\001 \002(\005\022\025\n\rme" +
+      "rchants_ids\030\002 \003(\005\0329\n\017MerchantToCards\022\023\n\013" +
+      "merchant_id\030\001 \002(\005\022\021\n\tcards_ids\030\002 \003(\005\")\n\024" +
+      "ImageDownloadRequest\022\021\n\tcards_ids\030\001 \003(\005\"" +
+      "\240\001\n\025ImageDownloadResponse\0226\n\014cards_image" +
+      "s\030\001 \003(\0132 .ImageDownloadResponse.CardImag" +
+      "e\032O\n\tCardImage\022\017\n\007card_id\030\001 \002(\005\022\030\n\020full_" +
+      "image_bytes\030\002 \002(\014\022\027\n\017thumbnail_bytes\030\003 \002" +
+      "(\014B\033\n\027cz.jenda.pidifrky.protoH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3578,6 +12564,72 @@ public final class DeviceBackend {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_DebugReportRequest_descriptor,
         new java.lang.String[] { "Contact", "Content", });
+    internal_static_DatabaseUpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_DatabaseUpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateRequest_descriptor,
+        new java.lang.String[] { "KnownCardsIds", "LastUpdate", });
+    internal_static_DatabaseUpdateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_DatabaseUpdateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_descriptor,
+        new java.lang.String[] { "Cards", "Merchants", "UpdatedLinks", });
+    internal_static_DatabaseUpdateResponse_Location_descriptor =
+      internal_static_DatabaseUpdateResponse_descriptor.getNestedTypes().get(0);
+    internal_static_DatabaseUpdateResponse_Location_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_Location_descriptor,
+        new java.lang.String[] { "Latitude", "Longitude", "Precise", });
+    internal_static_DatabaseUpdateResponse_Card_descriptor =
+      internal_static_DatabaseUpdateResponse_descriptor.getNestedTypes().get(1);
+    internal_static_DatabaseUpdateResponse_Card_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_Card_descriptor,
+        new java.lang.String[] { "Name", "NameRaw", "Id", "Number", "Location", "MerchantsIds", "Neighbours", });
+    internal_static_DatabaseUpdateResponse_Merchant_descriptor =
+      internal_static_DatabaseUpdateResponse_descriptor.getNestedTypes().get(2);
+    internal_static_DatabaseUpdateResponse_Merchant_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_Merchant_descriptor,
+        new java.lang.String[] { "Name", "NameRaw", "Id", "Address", "Location", "CardsIds", });
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor =
+      internal_static_DatabaseUpdateResponse_descriptor.getNestedTypes().get(3);
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor,
+        new java.lang.String[] { "CardMerchantsLinks", "MerchantCardsLinks", });
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor =
+      internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor.getNestedTypes().get(0);
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_UpdatedLinks_CardToMerchants_descriptor,
+        new java.lang.String[] { "CardId", "MerchantsIds", });
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor =
+      internal_static_DatabaseUpdateResponse_UpdatedLinks_descriptor.getNestedTypes().get(1);
+    internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DatabaseUpdateResponse_UpdatedLinks_MerchantToCards_descriptor,
+        new java.lang.String[] { "MerchantId", "CardsIds", });
+    internal_static_ImageDownloadRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_ImageDownloadRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ImageDownloadRequest_descriptor,
+        new java.lang.String[] { "CardsIds", });
+    internal_static_ImageDownloadResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_ImageDownloadResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ImageDownloadResponse_descriptor,
+        new java.lang.String[] { "CardsImages", });
+    internal_static_ImageDownloadResponse_CardImage_descriptor =
+      internal_static_ImageDownloadResponse_descriptor.getNestedTypes().get(0);
+    internal_static_ImageDownloadResponse_CardImage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ImageDownloadResponse_CardImage_descriptor,
+        new java.lang.String[] { "CardId", "FullImageBytes", "ThumbnailBytes", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

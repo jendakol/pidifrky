@@ -24,7 +24,7 @@ object MerchantsDao extends EntityDao[Merchant] {
     toEntityList(Database.rawQuery(DbQueries.getMerchants(Seq(id) ++ ids: _*)))
 
   override def getAll(implicit ord: Ordering[Merchant]): Future[SortedSet[Merchant]] =
-    toEntityList(Database.selectFrom(MerchantsTable)(Map(), None, None))
+    toEntityList(Database.rawQuery(DbQueries.getMerchants()))
 
   override def getNearest(location: Location, perimeter: Double)(implicit ord: Ordering[Merchant]): Future[SortedSet[Merchant]] =
     getNearestEntity(location, perimeter)(DbQueries.getNearestMerchants)

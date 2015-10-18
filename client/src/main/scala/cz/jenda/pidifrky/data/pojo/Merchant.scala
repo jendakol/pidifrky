@@ -9,7 +9,7 @@ import scala.util.Try
 /**
  * @author Jenda Kolena, kolena@avast.com
  */
-case class Merchant(id: Int, name: String, nameRaw: String, address: String, merchantLocation: MerchantLocation) extends Entity {
+case class Merchant(id: Int, name: String, nameRaw: String, address: String, merchantLocation: MerchantLocation, cardsIds: Seq[Int]) extends Entity {
 
   val location: Option[Location] = merchantLocation.location
 
@@ -25,7 +25,8 @@ object Merchant extends EntityFactory[Merchant] {
       name = c.getString(1),
       nameRaw = c.getString(2),
       address = c.getString(3),
-      MerchantLocation(toLocation(4, 5)(c), c.getInt(6) > 0)
+      merchantLocation = MerchantLocation(toLocation(4, 5)(c), c.getInt(6) > 0),
+      cardsIds = parseIds(c.getString(7))
     )
   }
 }

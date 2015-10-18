@@ -2,22 +2,19 @@ package cz.jenda.pidifrky.data.pojo
 
 import android.database.Cursor
 import android.graphics.{Bitmap, BitmapFactory}
-import android.location.{Location, LocationManager}
-import com.google.common.primitives.Ints
+import android.location.Location
 import cz.jenda.pidifrky.data.CardTiles
-import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.logic.map.{CardMapMarker, MapMarker}
 import cz.jenda.pidifrky.logic.{Application, Utils}
-import org.apache.commons.lang3.StringUtils
 
 import scala.util.Try
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-case class Card(id: Int, number: Int, name: String, nameRaw: String, state: CardState, location: Option[Location], image: Option[String], neighboursIds: List[Option[Int]], merchantsIds: List[Int]) extends Entity {
+case class Card(id: Int, number: Int, name: String, nameRaw: String, state: CardState, location: Option[Location], hasImage: Boolean, neighboursIds: Seq[Option[Int]], merchantsIds: Seq[Int]) extends Entity {
 
-  def getFullImage: Option[Bitmap] = image.flatMap(Utils.getFullImageUri).map { im =>
+  def getFullImage: Option[Bitmap] = if (hasImage) Utils.getFullImageUri(id).map { im =>
     try {
       BitmapFactory.decodeFile(im.getEncodedPath)
     }
@@ -25,7 +22,7 @@ case class Card(id: Int, number: Int, name: String, nameRaw: String, state: Card
       case e: NullPointerException =>
         null
     }
-  }
+  } else None
 
 
   //  def getMerchantsList: ArrayList[Merchant] = {
@@ -71,7 +68,7 @@ object Card extends EntityFactory[Card] {
       name = cursor.getString(2),
       nameRaw = cursor.getString(3),
       location = toLocation(5, 6)(cursor),
-      image = Some(cursor.getString(4)), //TODO: while programming "start without downloading files", this won't be automatically Some() anymore
+      hasImage = cursor.getInt(4) > 0, //TODO: while programming "start without downloading files", this won't be automatically Some() anymore
       merchantsIds = parseIds(cursor.getString(7)),
       neighboursIds = parseIdsOption(cursor.getString(8)),
       state = toState(9)(cursor)

@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.afollestad.materialdialogs.MaterialDialog
-import cz.jenda.pidifrky.{CardStatusTable, MerchantsTable, CardsTable, R}
 import cz.jenda.pidifrky.data.Database
-import cz.jenda.pidifrky.data.dao.{CardInsertCommand, MerchantInsertCommand}
-import cz.jenda.pidifrky.logic.{DebugReporter, Toast}
+import cz.jenda.pidifrky.logic.dbimport.DbImporter
+import cz.jenda.pidifrky.logic.{DebugReporter, Format, ProgressListener, Toast}
 import cz.jenda.pidifrky.ui.api.BasicActivity
 import cz.jenda.pidifrky.ui.dialogs._
+import cz.jenda.pidifrky.{CardStatusTable, CardsTable, MerchantsTable, R}
+
+import scala.util.{Failure, Success}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -58,12 +60,15 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
       Database.truncate(CardStatusTable)
       Database.truncate(MerchantsTable)
 
-      Database.executeTransactionally(
-        MerchantInsertCommand(1, "theMerchant", "themerchant", "addrs", 50, 14, preciseLocation = false),
-        MerchantInsertCommand(2, "theMerchant2", "themerchant2", "addrs", 50.5, 14.5, preciseLocation = false),
-        CardInsertCommand(1, 1, "theCard", "thecard", 50.3, 14.3, None, "", ""),
-        CardInsertCommand(2, 2, "theCard2", "thecard2", 50.7, 14.7, None, "", "")
-      )
+      //      Database.executeTransactionally(
+      //        MerchantInsertCommand(1, "theMerchant", "themerchant", "addrs", 50, 14, preciseLocation = false),
+      //        MerchantInsertCommand(2, "theMerchant2", "themerchant2", "addrs", 50.5, 14.5, preciseLocation = false),
+      //        CardInsertCommand(1, 1, "theCard", "thecard", 50.3, 14.3, None, "", ""),
+      //        CardInsertCommand(2, 2, "theCard2", "thecard2", 50.7, 14.7, None, "", "")
+      //      )
+
+
+
     }
     catch {
       case e: Exception =>
@@ -107,7 +112,21 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
   }
 
   def goToMap(v: View): Unit = {
-    goTo(classOf[MapActivity])
+//    goTo(classOf[MapActivity])
+
+    val dialog = NormalProgressDialog('testing, R.string.downloading_database, R.string.processing_cards, 100, cancellable = false)
+
+    val progressListener = ProgressListener.forDialog(dialog)
+
+    dialog.show()
+
+    DbImporter.update(progressListener).andThen {
+      case Success(_) => dialog.dismiss()
+      case Failure(e) =>
+        Toast(Format(e), 3000)
+        DebugReporter.debug(e)
+        dialog.dismiss()
+    }
   }
 
   def goToGpsLog(v: View): Unit = {

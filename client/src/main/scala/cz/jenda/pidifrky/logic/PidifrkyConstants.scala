@@ -10,12 +10,13 @@ object PidifrkyConstants {
   val DATABASE_NAME = "pidifrky.db"
 
 //  val BASE_URL = "https://pidifrky.jenda.eu"
-  val BASE_URL = "http://192.168.56.1:9000" //for testing in Genymotion
-  val URL_DATABASE = BASE_URL + "/getupdate.php"
-  val URL_REPORT = BASE_URL + "/report.php"
+  val BASE_URL = "http://192.168.56.1:9000/device" //for testing in Genymotion
   val URL_ROUTE = "http://maps.googleapis.com/maps/api/directions/json"
   val URL_CARD_DETAIL = "http://pidifrk.cz/pidifrk-detail.php?pid=%d"
   val URL_MERCHANT_DETAIL = "http://pidifrk.cz/prodejce-pidifrku.php?idp=%d"
+
+  val PATH_IMAGES_FULL = "images_full"
+  val PATH_IMAGES_THUMBS = "images_thumbs"
 
   val DATABASE_TMP_FILENAME = "data_pidifrky.json"
   val BACKUP_DIR = "pidifrkyBackup"
@@ -24,8 +25,7 @@ object PidifrkyConstants {
   val BACKUP_IMAGES_DIR = "images"
   val STARTED_COUNT = "startedCount"
   val RATED = "hasRated"
-  val DATABASE_HASH_CARDS = "databaseCardsHash"
-  val DATABASE_HASH_MERCHANTS = "databaseMerchantsHash"
+  val DATABASE_LAST_UPDATE = "databaseLastUpdate"
 
   val PREF_DISTANCE_CLOSEST = "closest_distance"
   val PREF_REFRESH_LIST = "refresh_list"
