@@ -52,7 +52,7 @@ class DatabaseDownloadController @Inject()(dao: Dao) extends DeviceController {
         .setName(card.name)
         .setNameRaw(Format.nameRaw(card.name))
 
-      builder.addAllNeighbours(card.neighboursIds.split(", ?").map(_.toInt).map(int2Integer).toSeq.asJava)
+      builder.addAllNeighbours(card.neighboursIds.split(", ?").map(_.trim.toInt).map(int2Integer).toSeq.asJava)
 
       val loc = for {
         lat <- card.latitude

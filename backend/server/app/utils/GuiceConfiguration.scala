@@ -2,7 +2,7 @@ package utils
 
 import java.nio.file.{Path, Paths}
 
-import annots.{StoragePathImpl, ConfigPropertyImpl, ConfigProperty, StoragePath}
+import annots.{StoragePath, ConfigProperty, ConfigPropertyImpl, StoragePathImpl}
 import com.google.inject.AbstractModule
 import com.typesafe.config.ConfigFactory
 
@@ -16,7 +16,6 @@ class GuiceConfiguration extends AbstractModule with Logging {
   private lazy val config = ConfigFactory.load().root()
 
   override def configure(): Unit = {
-
     bindConfig(config, "")(binder())
     bindStoragePaths(config.toConfig, binder())
   }

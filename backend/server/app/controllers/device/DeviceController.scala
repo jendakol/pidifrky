@@ -43,40 +43,42 @@ object DeviceControllerImplicits extends Results with Logging {
 
   implicit val gpbWriteable: Writeable[Message] = new Writeable(e => e.toByteArray, Some("application/x-protobuf"))
 
+  private val failed: PartialFunction[Throwable, Result] = {
+    case (e: ClientException) =>
+      Logger.debug(s"Returning BadRequest with message '${e.getMessage}'", e)
+      BadRequest(e.getMessage)
+    case (e: ServerException) =>
+      Logger.debug(s"Returning InternalServerError with message '${e.getMessage}'", e)
+      InternalServerError(e.getMessage)
+    case NonFatal(e) =>
+      Logger.debug(s"Returning InternalServerError with message '${e.getMessage}'", e)
+      InternalServerError(e.getMessage)
+  }
+
   implicit class FutureToResponse[C <: Message](val t: Future[C]) extends AnyVal {
     def toResponse: Future[Result] =
       t.map { r =>
         Logger.debug("Returning OK")
         Ok(r)
-      } recover {
-        case e: ClientException =>
-          Logger.debug("Returning BadRequest with message " + e.getMessage, e)
-          BadRequest(e.getMessage)
-        case e: ServerException =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage, e)
-          InternalServerError(e.getMessage)
-        case NonFatal(e) =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage, e)
-          InternalServerError(e.getMessage)
-      }
+      } recover failed
   }
 
   implicit class FutureToResponseUnit(t: Future[Unit]) {
-    def toResponse: Future[Result] =
+    def toResponse: Future[Result] = {
       t.map { _ =>
-        Logger.debug("Returning OK")
+        Logger.debug("Returning OK, 0 B")
         Ok("")
-      } recover {
-        case (e: ClientException) =>
-          Logger.debug("Returning BadRequest with message " + e.getMessage)
-          BadRequest(e.getMessage)
-        case (e: ServerException) =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage)
-          InternalServerError(e.getMessage)
-        case NonFatal(e) =>
-          Logger.debug("Returning InternalServerError with message " + e.getMessage)
-          InternalServerError(e.getMessage)
-      }
+      } recover failed
+    }
+  }
+
+  implicit class FutureToResponseBytes(t: Future[Array[Byte]]) {
+    def toResponse: Future[Result] = {
+      t.map { bytes =>
+        Logger.debug(s"Returning OK, ${bytes.length} B")
+        Ok(bytes)
+      } recover failed
+    }
   }
 
 }

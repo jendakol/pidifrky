@@ -21,7 +21,7 @@ class Updater @Inject()(dao: Dao, imageHelper: ImageHelper, @ConfigProperty("url
     val merchantsF = parseMerchants(xml)
     val cardsF = parseCards(xml)
 
-    val imagesF = cardsF.map(_.map(_._1.number)).flatMap(imageHelper.downloadImagesForCards)
+    val imagesF = cardsF.map(_.map(_._1)).flatMap(imageHelper.downloadImagesForCards)
 
     for {
       merchants <- merchantsF

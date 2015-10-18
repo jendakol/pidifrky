@@ -5,6 +5,7 @@
 GET         /                             @controllers.TestController.test()
 POST        /device/debugReport           @controllers.device.DeviceReportController.debug()
 POST        /device/updateDatabase        @controllers.device.DatabaseDownloadController.download()
+POST        /device/downloadImages        @controllers.device.ImageDownloadController.download()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                 controllers.Assets.at(path="/public", file)
