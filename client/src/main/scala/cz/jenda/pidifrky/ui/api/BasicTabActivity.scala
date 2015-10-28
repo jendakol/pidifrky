@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.support.v4.app.{Fragment, FragmentManager, FragmentPagerAdapter}
 import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
+import android.text.style.ImageSpan
+import android.text.{SpannableStringBuilder, Spanned}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{Application, DebugReporter}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -58,7 +60,23 @@ class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: List[TabFragm
 
   override def getCount: Int = tabs.size
 
-  override def getPageTitle(position: Int): CharSequence = tabs(position).title
+  override def getPageTitle(position: Int): CharSequence = {
+    val sb = new SpannableStringBuilder("                 "); // space added before text for convenience
+
+    //    val drawable = Application.currentActivity.get.getResources.getDrawable(R.drawable.ic_gps_fixed_white_36dp)
+    //
+    //    drawable.setBounds(0, 0, 50, 50)
+
+    Application.currentActivity.foreach { ctx =>
+      val span = new ImageSpan(ctx, R.drawable.ic_gps_fixed_white_36dp)
+      sb.setSpan(span, 5, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+
+
+    sb
+  }
+
+
 }
 
 trait TabFragment extends BasicFragment {
