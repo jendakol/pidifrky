@@ -5,7 +5,7 @@ import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 @SuppressWarnings({"unused", "ClassExplicitlyAnnotation"})
 public class StoragePathImpl implements StoragePath, Serializable {

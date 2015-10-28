@@ -2,7 +2,7 @@ package logic
 
 import javax.inject.Inject
 
-import annots.{ConfigProperty, BlockingExecutor, CallbackExecutor}
+import annots.{BlockingExecutor, CallbackExecutor, ConfigProperty}
 import data.{CardPojo, Dao, MerchantPojo, PojoFactory}
 import utils.Logging
 
@@ -10,7 +10,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.xml.{Elem, XML}
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 class Updater @Inject()(dao: Dao, imageHelper: ImageHelper, @ConfigProperty("url.pidifrk.xml") xmlDataUrl: String, geoCoder: GeoCoder, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
   protected final val Gps = "(\\d{1,2}\\.\\d+), ?(\\d{1,2}\\.\\d+)".r

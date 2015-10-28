@@ -11,7 +11,7 @@ import utils.Logging
 import scala.concurrent.Future
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 object HttpClient extends Logging {
   protected val builder = new Builder().setConnectTimeout(10000)

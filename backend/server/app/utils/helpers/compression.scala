@@ -11,7 +11,7 @@ import org.kamranzafar.jtar.{TarEntry, TarOutputStream}
 import scala.concurrent.Future
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 object GZipHelper {
   def compress(data: Array[Byte]): Future[Array[Byte]] = Future {

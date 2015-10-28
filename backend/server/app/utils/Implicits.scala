@@ -11,7 +11,7 @@ import scala.concurrent.{Future, Promise}
 import scala.language.implicitConversions
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 object Implicits {
   implicit def ningListenableToScalaFuture(l: ListenableFuture[Response]): Future[HttpResponse] = {

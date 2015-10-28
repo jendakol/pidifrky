@@ -11,7 +11,7 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 class EmailHelper @Inject()(mailerClient: MailerClient, @ConfigProperty("play.mailer.from") fromEmail: String) extends Logging {
 

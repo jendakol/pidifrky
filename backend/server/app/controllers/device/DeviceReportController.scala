@@ -8,10 +8,8 @@ import cz.jenda.pidifrky.proto.DeviceBackend.DebugReportRequest
 import play.api.mvc._
 import utils.helpers.{EmailHelper, GZipHelper}
 
-import scala.concurrent.Future
-
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 class DeviceReportController @Inject()(emailHelper: EmailHelper, @ConfigProperty("play.mailer.to") emailTo: String, @ConfigProperty("emailSubjects.debugReport") subject: String) extends DeviceController {
   def debug = Action.async { implicit request =>

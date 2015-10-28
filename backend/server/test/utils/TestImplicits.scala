@@ -3,7 +3,7 @@ package utils
 import scala.concurrent.{Await, Future}
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 object TestImplicits {
 

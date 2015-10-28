@@ -8,7 +8,7 @@ import com.google.common.io.ByteStreams
 import scala.util.Try
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 case class StorageDir(rootDir: Path) {
   Files.createDirectories(rootDir)

@@ -10,7 +10,7 @@ import utils.{GuiceConfiguration, Logging}
 import scala.concurrent.ExecutionContext
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 class AppModule extends GuiceConfiguration with Logging {
 

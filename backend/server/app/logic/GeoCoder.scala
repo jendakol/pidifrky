@@ -3,7 +3,7 @@ package logic
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-import annots.{ConfigProperty, BlockingExecutor, CallbackExecutor}
+import annots.{BlockingExecutor, CallbackExecutor, ConfigProperty}
 import com.google.common.util.concurrent.RateLimiter
 import exceptions.InvalidPayloadException
 import rapture.core.modes.returnTry._
@@ -15,7 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 class GeoCoder @Inject()(@ConfigProperty("url.google.geocoding") googleUrlGeocoding: String, @ConfigProperty("keys.google.geocoding") googleGeocodingKey: String, @BlockingExecutor blocking: ExecutionContext, @CallbackExecutor implicit val ec: ExecutionContext) extends Logging {
   protected val limiter = RateLimiter.create(10, 60, TimeUnit.SECONDS)

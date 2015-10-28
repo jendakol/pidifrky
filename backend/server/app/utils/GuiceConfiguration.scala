@@ -2,14 +2,14 @@ package utils
 
 import java.nio.file.{Path, Paths}
 
-import annots.{StoragePath, ConfigProperty, ConfigPropertyImpl, StoragePathImpl}
+import annots.{ConfigProperty, ConfigPropertyImpl, StoragePath, StoragePathImpl}
 import com.google.inject.AbstractModule
 import com.typesafe.config.ConfigFactory
 
 import scala.collection.JavaConverters._
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 class GuiceConfiguration extends AbstractModule with Logging {
 

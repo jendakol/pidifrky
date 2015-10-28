@@ -12,11 +12,10 @@ import utils.{Format, Logging}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
-import scala.reflect.ClassTag
 import scala.util.control.NonFatal
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 trait DeviceController extends Controller with Results with Logging {
 

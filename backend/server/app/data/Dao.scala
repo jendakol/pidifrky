@@ -12,7 +12,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Failure
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 class Dao @Inject()(override protected val dbConfigProvider: DatabaseConfigProvider, @CallbackExecutor implicit val ec: ExecutionContext) extends HasDatabaseConfigProvider[JdbcProfile] with Logging {
 

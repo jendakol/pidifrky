@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 import org.specs2.runner.JUnitRunner
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 @RunWith(classOf[JUnitRunner])
 class UpdateHelperTest extends FunSuite {

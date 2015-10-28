@@ -1,7 +1,7 @@
 package logic
 
 /**
-  * @author Jenda Kolena, kolena@avast.com
+  * @author Jenda Kolena, jendakolena@gmail.com
   */
 object UpdateHelper {
   private val CardsPositions: Map[Int, (Float, Float)] = Map(
