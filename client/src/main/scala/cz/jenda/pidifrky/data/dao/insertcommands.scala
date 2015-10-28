@@ -4,7 +4,7 @@ import cz.jenda.pidifrky.data.pojo.{Card, Merchant}
 import cz.jenda.pidifrky.data.{CardsTable, MerchantsTable}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 sealed trait InsertCommand {
   def query: String

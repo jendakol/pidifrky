@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.ui.api
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.TextView
+import android.widget.{ImageView, TextView}
 import cz.jenda.pidifrky.logic.DebugReporter
 import cz.jenda.pidifrky.logic.exceptions.{AnotherTypeOfViewException, CannotFindViewException}
 
@@ -59,6 +59,8 @@ object ViewHandler {
 
   def findTextView(view: View, id: Int): Option[TextView] = findView(view, id, classOf[TextView])
 
+  def findImageView(fragment: View, id: Int): Option[ImageView] = findView(fragment, id, classOf[ImageView])
+
   def findView(fragment: Fragment, id: Int): Option[View] = Option(fragment.getView).map(_.findViewById(id))
 
   def findView[T <: View](fragment: Fragment, id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = findView(fragment, id) flatMap {
@@ -76,5 +78,7 @@ object ViewHandler {
   }
 
   def findTextView(fragment: Fragment, id: Int): Option[TextView] = findView(fragment, id, classOf[TextView])
+
+  def findImageView(fragment: Fragment, id: Int): Option[ImageView] = findView(fragment, id, classOf[ImageView])
 
 }

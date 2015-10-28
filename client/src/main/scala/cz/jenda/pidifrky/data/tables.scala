@@ -1,7 +1,7 @@
 package cz.jenda.pidifrky.data
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 sealed trait EntityTable {
   def NAME: String

@@ -9,7 +9,7 @@ import scala.collection.SortedSet
 import scala.concurrent.Future
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object MerchantsDao extends EntityDao[Merchant] {
   override protected val entityFactory = Merchant

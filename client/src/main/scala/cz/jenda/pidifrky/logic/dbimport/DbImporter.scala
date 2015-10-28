@@ -12,7 +12,7 @@ import scala.collection.JavaConverters._
 import scala.concurrent.Future
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object DbImporter {
 

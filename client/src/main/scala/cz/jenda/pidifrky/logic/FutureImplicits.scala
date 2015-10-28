@@ -8,7 +8,7 @@ import scala.util.Try
 import scala.util.control.NonFatal
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object FutureImplicits {
 

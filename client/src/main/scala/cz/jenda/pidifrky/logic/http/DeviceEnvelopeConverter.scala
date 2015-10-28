@@ -10,7 +10,7 @@ import retrofit.converter.{ConversionException, Converter}
 import retrofit.mime.{TypedByteArray, TypedInput, TypedOutput}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 /* This class is based on retrofit.converter.ProtoConverter */
 object DeviceEnvelopeConverter extends Converter {

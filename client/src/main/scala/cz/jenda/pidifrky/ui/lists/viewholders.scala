@@ -8,7 +8,7 @@ import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.ui.api.ViewHandler
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 abstract class AbstractViewHolder[E <: Entity](view: View) extends RecyclerView.ViewHolder(view) {
 
@@ -31,29 +31,27 @@ class CardViewHolder(view: View, showLocation: Boolean) extends AbstractViewHold
       }
     })
 
-    //TODO - card view
+    for {
+      view <- ViewHandler.findImageView(view, R.id.thumb)
+      thumbUri <- card.getThumbImageUri
+    } yield {
+      view.setImageURI(thumbUri)
+    }
 
+    ViewHandler.findImageView(view, R.id.status).foreach { view =>
+      import cz.jenda.pidifrky.data.pojo.CardState._
+      card.state match {
+        case NONE =>
+          //TODO view.setVisibility(View.GONE)
+        case WANTED =>
+          view.setVisibility(View.VISIBLE)
+          view.setImageResource(R.drawable.checklist)
+        case OWNED =>
+          view.setVisibility(View.VISIBLE)
+          view.setImageResource(R.drawable.smiley)
+      }
 
-    //    val thumb_image: ImageView = vi.findViewById(R.id.list_image).asInstanceOf[ImageView]
-    //    val smiley_image: ImageView = vi.findViewById(R.id.list_state).asInstanceOf[ImageView]
-
-
-    //    thumb_image.setImageURI(Utils.getThumbUri(card))
-
-    //    if (card.isOwner) {
-    //      smiley_image.setImageResource(R.drawable.smiley)
-    //      vi.findViewById(R.id.corner).setVisibility(View.VISIBLE)
-    //    }
-    //    else {
-    //      if (card.isWanted) {
-    //        smiley_image.setImageResource(R.drawable.checklist)
-    //        vi.findViewById(R.id.corner).setVisibility(View.VISIBLE)
-    //      }
-    //      else {
-    //        smiley_image.setImageBitmap(null)
-    //        vi.findViewById(R.id.corner).setVisibility(View.GONE)
-    //      }
-    //    }
+    }
   }
 }
 

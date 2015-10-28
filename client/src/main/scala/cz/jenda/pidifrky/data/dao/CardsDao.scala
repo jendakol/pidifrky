@@ -10,7 +10,7 @@ import scala.concurrent.Future
 import scala.util.Success
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object CardsDao extends EntityDao[Card] {
   override protected val entityFactory = Card

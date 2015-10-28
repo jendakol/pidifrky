@@ -6,7 +6,7 @@ import java.util.Locale
 import cz.jenda.pidifrky.data.pojo.{Merchant, Card}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object CardOrdering {
 

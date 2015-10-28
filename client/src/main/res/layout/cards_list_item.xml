@@ -1,66 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:padding="5dip"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-            android:id="@+id/thumbnail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="0dip"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="5dip">
-
-        <ImageView
-                android:id="@+id/list_image"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:padding="0dip"/>
-
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/thumbnail"
-            android:layout_toRightOf="@+id/thumbnail"
-            android:textColor="#ffffff"
-            android:typeface="sans"
-            android:textSize="21sp"
-            android:textStyle="bold"/>
-
-    <TextView
-            android:id="@+id/distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:layout_marginRight="5dip"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_alignBottom="@+id/thumbnail"/>
-
-    <!-- Rightend Arrow -->
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
-
-    <ImageView android:layout_width="45dp" android:layout_height="45dp" android:id="@+id/corner"
-               android:layout_alignParentRight="false" android:layout_alignParentTop="true"
-               android:layout_alignParentLeft="true" android:layout_gravity="center_horizontal|top"
-               android:src="@drawable/white_corner" android:visibility="gone"/>
-    <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/list_state"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_marginLeft="3dp" android:layout_marginRight="3dp"
+            android:background="@drawable/border_bottom" android:clickable="true"
+            android:paddingBottom="10dp" android:paddingLeft="5dp" android:paddingRight="5dp"
+            >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_alignParentTop="true">
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/thumb" android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" android:src="@drawable/test_thumb"
+                    android:layout_centerVertical="true"/>
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView2" android:layout_alignParentLeft="true"
+                    android:src="@drawable/thumb_mask" android:layout_centerVertical="true"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/thumb" android:layout_toEndOf="@+id/thumb"
+                    android:layout_marginLeft="10dp" android:layout_centerVertical="true">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Muzeum Zd. Buriana ve Štramberku"
+                        android:id="@+id/name" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/thumb"
+                        android:layout_toEndOf="@+id/thumb" android:textSize="15sp"
+                        tools:ignore="HardcodedText"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:text="250 m"
+                          android:id="@+id/distance"
+                          android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/thumb"
+                          android:layout_toEndOf="@+id/thumb" android:textSize="15sp"
+                          tools:ignore="HardcodedText" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+            <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/status" android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" android:src="@drawable/smiley"
+                    android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

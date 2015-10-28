@@ -10,7 +10,7 @@ import scala.concurrent.Future
 import scala.util.{Failure, Try}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object Database extends SQLiteOpenHelper(Application.appContext.orElse(Application.currentActivity).getOrElse({
   DebugReporter.debugAndReport(new Exception("Missing context for database connection"))

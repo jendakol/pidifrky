@@ -11,7 +11,7 @@ import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success, Try}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object StorageHandler {
 

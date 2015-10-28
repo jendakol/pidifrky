@@ -2,12 +2,16 @@ package cz.jenda.pidifrky.logic
 
 import java.io.{File, InputStream}
 
+import android.net.Uri
+import cz.jenda.pidifrky.R
+import cz.jenda.pidifrky.logic.exceptions.ResourceNotFoundException
+
 import scala.collection.JavaConverters._
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object ImageHandler {
 
@@ -44,19 +48,23 @@ object ImageHandler {
         }
       }
     }).flatMap(identity)
-
-
-
-
-    //    Future {
-    //      Future.fromTry(StorageHandler.withStorage { st =>
-    //        Future.sequence(images.map { im =>
-    //          for {
-    //            _ <- if (im.hasFullImageBytes) Try(st.createFile(PidifrkyConstants.PATH_IMAGES_FULL, im.getCardId + ".jpg", im.getFullImageBytes.toByteArray)) else Success(())
-    //            _ <- Try(st.createFile(PidifrkyConstants.PATH_IMAGES_THUMBS, im.getCardId + ".jpg", im.getThumbnailBytes.toByteArray))
-    //          } yield ()
-    //        }.map(Future.fromTry)).map(_ => ())
-    //      }).flatMap(identity)
-    //    }.flatMap(identity)
   }
+
+  def getThumbImageUri(cardId: Int): Option[Uri] = StorageHandler.withStorage { st =>
+    val file = st.getFile(PidifrkyConstants.PATH_IMAGES_THUMBS, s"$cardId.jpg")
+    if (!file.exists()) throw ResourceNotFoundException(s"thumb for card $cardId")
+
+    Uri.fromFile(file)
+  }.recover { case _ => EmptyThumbnailUri }.toOption
+
+  def getFullImageUri(cardId: Int): Option[Uri] = StorageHandler.withStorage { st =>
+    val file = st.getFile(PidifrkyConstants.PATH_IMAGES_FULL, s"$cardId.jpg")
+    if (!file.exists()) throw ResourceNotFoundException(s"image for card $cardId")
+
+    Uri.fromFile(file)
+  }.recover { case _ => EmptyImageUri }.toOption
+
+  final lazy val EmptyThumbnailUri: Uri = Utils.toUri(R.drawable.empty_thumb)
+
+  final lazy val EmptyImageUri: Uri = Utils.toUri(R.drawable.empty)
 }

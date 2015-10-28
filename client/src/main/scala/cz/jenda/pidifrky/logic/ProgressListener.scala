@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.logic
 import cz.jenda.pidifrky.ui.dialogs.NormalProgressDialogWrapper
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 trait ProgressListener {
   def apply(percent: Int): Unit

@@ -8,7 +8,7 @@ import org.kamranzafar.jtar.{TarEntry, TarInputStream, TarOutputStream}
 import scala.concurrent.Future
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object TarGzHelper {
 

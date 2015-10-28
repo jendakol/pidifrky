@@ -16,7 +16,7 @@ import scala.util.control.NonFatal
 import scala.util.{Failure, Success, Try}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object DownloadHandler extends BroadcastReceiver {
 

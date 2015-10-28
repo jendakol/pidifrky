@@ -14,7 +14,7 @@ import scala.reflect.ClassTag
 import scala.util.Failure
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 trait EntityDao[E <: Entity] {
   protected def entityFactory: EntityFactory[E]

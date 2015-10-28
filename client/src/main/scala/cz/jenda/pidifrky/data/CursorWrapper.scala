@@ -11,7 +11,7 @@ import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 class CursorWrapper(cursor: Cursor) extends Closeable {
   DebugReporter.debug("Loaded cursor with size " + cursor.getCount)

@@ -7,7 +7,7 @@ import cz.jenda.pidifrky.logic.map.{MapMarker, MerchantMapMarker}
 import scala.util.Try
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 case class Merchant(id: Int, name: String, nameRaw: String, address: String, merchantLocation: MerchantLocation, cardsIds: Seq[Int]) extends Entity {
 

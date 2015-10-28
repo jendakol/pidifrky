@@ -1,7 +1,7 @@
 package cz.jenda.pidifrky.data.pojo;
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 public enum CardState {
     NONE, WANTED, OWNED

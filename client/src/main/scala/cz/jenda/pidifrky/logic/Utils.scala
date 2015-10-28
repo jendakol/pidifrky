@@ -15,6 +15,7 @@ import android.os.{Build, Debug}
 import android.view.Display
 import com.google.common.io.ByteStreams
 import com.splunk.mint.Mint
+import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
 import scala.concurrent.Future
@@ -28,46 +29,6 @@ import scala.util.Try
  * @since 0.2
  */
 object Utils {
-
-  def copy(src: File, dst: File): Try[Unit] = Try {
-    val in: InputStream = new FileInputStream(src)
-    val out: OutputStream = new FileOutputStream(dst)
-    val buf: Array[Byte] = new Array[Byte](1024)
-    var len: Int = 0
-    while ( {
-      len = in.read(buf)
-      len
-    } > 0) {
-      out.write(buf, 0, len)
-    }
-    in.close()
-    out.close()
-  }
-
-
-  //  def getThumbUri(number: Int): Uri = {
-  //    if (context == null || number <= 0) return null
-  //    return getThumbUri(CardsDao.getInstance(context).getByNumber(number).asInstanceOf[Nothing])
-  //  }
-  //
-  //  def getFullImageUri(number: Int): Uri = {
-  //    if (context == null || number <= 0) return null
-  //    return getFullImageUri(CardsDao.getInstance(context).getByNumber(number).asInstanceOf[Nothing])
-  //  }
-
-  def getThumbImageUri(cardId: Int): Option[Uri] = Application.currentActivity.map { context =>
-    val file = new File(context.getExternalFilesDir(null) + File.separator + PidifrkyConstants.PATH_IMAGES_THUMBS + File.separator + cardId + ".jpg")
-    if (!file.exists()) return None
-
-    Uri.fromFile(file)
-  }
-
-  def getFullImageUri(cardId: Int): Option[Uri] = Application.currentActivity.map { context =>
-    val file = new File(context.getExternalFilesDir(null) + File.separator + PidifrkyConstants.PATH_IMAGES_FULL + File.separator + cardId + ".jpg")
-    if (!file.exists()) return None
-
-    Uri.fromFile(file)
-  }
 
   case class ScreenSize(width: Int, height: Int) {
     def toGpb: cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo.ScreenSize =
@@ -198,6 +159,9 @@ object Utils {
   //    }
   //    return app_installed
   //  }
+
+  def toUri(resourceId:Int): Uri =
+    Uri.parse("android.resource://cz.jenda.pidifrky" + resourceId)
 
   def restartApp(intent: Intent)(implicit ctx: Activity): Unit = {
     DebugReporter.debug("Restarting application")

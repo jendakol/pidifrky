@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.data.dao
 import cz.jenda.pidifrky.data.{CardStatusTable, CardsTable, MerchantsTable}
 
 /**
- * @author Jenda Kolena, kolena@avast.com
+ * @author Jenda Kolena, jendakolena@gmail.com
  */
 object DbQueries {
   val getCards = s"select ${CardsTable.getColumns.mkString(", ")}, " +

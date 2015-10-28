@@ -1,11 +1,11 @@
 package cz.jenda.pidifrky.data.pojo
 
 import android.database.Cursor
-import android.graphics.{Bitmap, BitmapFactory}
 import android.location.Location
+import android.net.Uri
 import cz.jenda.pidifrky.data.CardTiles
 import cz.jenda.pidifrky.logic.map.{CardMapMarker, MapMarker}
-import cz.jenda.pidifrky.logic.{Application, Utils}
+import cz.jenda.pidifrky.logic.{Application, ImageHandler}
 
 import scala.util.Try
 
@@ -14,15 +14,9 @@ import scala.util.Try
  */
 case class Card(id: Int, number: Int, name: String, nameRaw: String, state: CardState, location: Option[Location], hasImage: Boolean, neighboursIds: Seq[Option[Int]], merchantsIds: Seq[Int]) extends Entity {
 
-  def getFullImage: Option[Bitmap] = if (hasImage) Utils.getFullImageUri(id).map { im =>
-    try {
-      BitmapFactory.decodeFile(im.getEncodedPath)
-    }
-    catch {
-      case e: NullPointerException =>
-        null
-    }
-  } else None
+  def getFullImageUri: Option[Uri] = ImageHandler.getFullImageUri(id)
+
+  def getThumbImageUri: Option[Uri] = ImageHandler.getThumbImageUri(id)
 
 
   //  def getMerchantsList: ArrayList[Merchant] = {

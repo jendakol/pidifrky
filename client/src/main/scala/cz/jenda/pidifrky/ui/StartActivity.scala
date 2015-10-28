@@ -2,6 +2,7 @@ package cz.jenda.pidifrky.ui
 
 import java.lang.Thread.UncaughtExceptionHandler
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -30,9 +31,14 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
           case _ => new scala.Exception(ex)
         })
 
-        Application.currentActivity.foreach(act => android.widget.Toast.makeText(act, Format(ex), android.widget.Toast.LENGTH_LONG))
-        System.exit(1)
-        //TODO show message and do soft restart
+        Application.currentActivity.foreach { act =>
+          val intent = new Intent(act, classOf[StartActivity])
+          intent.putExtra("exception", Array[String](ex.getClass.getSimpleName, ex.getMessage))
+          intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NO_HISTORY)
+
+          //TODO show message after soft restart
+          Utils.restartApp(intent)
+        }
       }
     })
 

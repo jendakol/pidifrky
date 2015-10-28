@@ -14,8 +14,8 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
  */
 class CardsListFragment(implicit ctx: BasicActivity) extends EntityListTabFragment[Card] {
   override val title: String = "test Tab"
-
-  protected lazy val listAdapter: BasicListAdapter[Card] = new CardsListAdapter(false)
+//TODO showLocation
+  protected lazy val listAdapter: BasicListAdapter[Card] = new CardsListAdapter(showLocation = true)
 
   protected implicit val ordering = CardOrdering.ByName
 
