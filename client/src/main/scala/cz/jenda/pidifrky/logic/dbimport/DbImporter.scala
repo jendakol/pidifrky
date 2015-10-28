@@ -1,12 +1,12 @@
 package cz.jenda.pidifrky.logic.dbimport
 
-import cz.jenda.pidifrky.MerchantsTable
-import cz.jenda.pidifrky.data.Database
 import cz.jenda.pidifrky.data.dao._
 import cz.jenda.pidifrky.data.pojo.{Card, CardState, Merchant, MerchantLocation}
+import cz.jenda.pidifrky.data.{Database, MerchantsTable}
+import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.http.HttpRequester
-import cz.jenda.pidifrky.logic.{PidifrkySettings, ProgressListener, Transaction, Utils}
-import cz.jenda.pidifrky.proto.DeviceBackend.{DatabaseUpdateRequest, DatabaseUpdateResponse}
+import cz.jenda.pidifrky.proto.DeviceBackend.{DatabaseUpdateRequest, DatabaseUpdateResponse, ImageDownloadRequest}
+import cz.jenda.pidifrky.ui.api.BasicActivity
 
 import scala.collection.JavaConverters._
 import scala.concurrent.Future
@@ -69,6 +69,23 @@ object DbImporter {
             progressListener(100)
         }
       }
+    }
+  }
+
+  def downloadImages(full: Boolean)(implicit ctx: BasicActivity): Future[Unit] = withOnlineStatus {
+    Transaction.async("images-download") {
+      (for {
+        known <- ImageHandler.getKnownImages
+        all <- CardsDao.getAllIds
+        diff = all.filterNot(known.toSet)
+      } yield {
+          val req = ImageDownloadRequest.newBuilder()
+            .addAllCardsIds(diff.map(int2Integer).asJava)
+            .setIncludeFull(full)
+            .build()
+
+          Future.fromTry(DownloadHandler.downloadImages(req))
+        }).flatMap(identity)
     }
   }
 

@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.logic
 import java.io._
 import java.net.{InetAddress, UnknownHostException}
 import java.util.concurrent.{Executors, ScheduledExecutorService, TimeUnit}
-import java.util.zip.GZIPOutputStream
+import java.util.zip.{GZIPInputStream, GZIPOutputStream}
 
 import android.app.{Activity, AlarmManager, PendingIntent}
 import android.content.pm.PackageManager
@@ -13,6 +13,7 @@ import android.location.{Location, LocationManager}
 import android.net.Uri
 import android.os.{Build, Debug}
 import android.view.Display
+import com.google.common.io.ByteStreams
 import com.splunk.mint.Mint
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
@@ -343,6 +344,18 @@ object Utils {
     gos.write(data)
     gos.close()
     os.toByteArray
+  }
+
+  def gunzip(is: InputStream): Try[Array[Byte]] = Try {
+    ByteStreams.toByteArray(new GZIPInputStream(is))
+  }
+
+  def hex2bytes(hex: String): Array[Byte] = {
+    hex.replaceAll("[^0-9A-Fa-f]", "").sliding(2, 2).toArray.map(Integer.parseInt(_, 16).toByte)
+  }
+
+  def bytes2hex(bytes: Array[Byte]): String = {
+    bytes.map("%02x".format(_)).mkString
   }
 
   executorService.scheduleAtFixedRate(new Runnable() {

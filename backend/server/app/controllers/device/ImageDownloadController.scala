@@ -2,15 +2,15 @@ package controllers.device
 
 import javax.inject.Inject
 
-import com.google.protobuf.ByteString
 import controllers.device.DeviceControllerImplicits._
 import cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadResponse.CardImage
 import cz.jenda.pidifrky.proto.DeviceBackend.{ImageDownloadRequest, ImageDownloadResponse}
 import logic.ImageHelper
 import play.api.mvc.Action
-import utils.helpers.GZipHelper
+import utils.helpers.{GZipHelper, TarGzHelper}
 
 import scala.collection.JavaConverters._
+import scala.concurrent.Future
 
 /**
   * @author Jenda Kolena, kolena@avast.com
@@ -18,21 +18,29 @@ import scala.collection.JavaConverters._
 class ImageDownloadController @Inject()(imageHelper: ImageHelper) extends DeviceController {
 
   def download = Action.async { implicit request =>
-    deviceRequest(ImageDownloadRequest.PARSER).flatMap { req =>
-      imageHelper.loadImages(req.data.getCardsIdsList.asScala.map(Integer2int))
-    }.map(_.map { image =>
-      CardImage.newBuilder()
-        .setCardId(image.id)
-        .setFullImageBytes(ByteString.copyFrom(image.bytes))
-        .setThumbnailBytes(ByteString.copyFrom(image.thumbBytes))
-        .build()
-    }).flatMap { list =>
-      val data = ImageDownloadResponse.newBuilder()
-        .addAllCardsImages(list.asJavaCollection)
-        .build().toByteArray
+    (for {
+      req <- deviceGetRequest(ImageDownloadRequest.PARSER)
+      images <- imageHelper.loadImages(req.data.getCardsIdsList.asScala.map(Integer2int), req.data.getIncludeFull)
+      //      list = images.map { image =>
+      //        val b = CardImage.newBuilder()
+      //          .setCardId(image.id)
+      //          .setThumbnailBytes(ByteString.copyFrom(image.thumbBytes))
+      //
+      //        if (req.data.getIncludeFull)
+      //          b.setFullImageBytes(ByteString.copyFrom(image.bytes))
+      //
+      //        b.build
+      //      }
+      resp <- TarGzHelper.compress(images)
+    } yield resp).toResponse
+  }
 
-      GZipHelper.compress(data)
-    }.toResponse
+  protected def createImageResponse(list: Seq[CardImage]): Future[Array[Byte]] = {
+    val data = ImageDownloadResponse.newBuilder()
+      .addAllCardsImages(list.asJavaCollection)
+      .build().toByteArray
+
+    GZipHelper.compress(data)
   }
 }
 

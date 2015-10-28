@@ -1,4 +1,4 @@
-package cz.jenda.pidifrky
+package cz.jenda.pidifrky.data
 
 /**
  * @author Jenda Kolena, kolena@avast.com

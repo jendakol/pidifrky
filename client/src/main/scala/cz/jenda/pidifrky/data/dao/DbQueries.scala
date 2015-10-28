@@ -1,6 +1,6 @@
 package cz.jenda.pidifrky.data.dao
 
-import cz.jenda.pidifrky.{CardStatusTable, CardsTable, MerchantsTable}
+import cz.jenda.pidifrky.data.{CardStatusTable, CardsTable, MerchantsTable}
 
 /**
  * @author Jenda Kolena, kolena@avast.com

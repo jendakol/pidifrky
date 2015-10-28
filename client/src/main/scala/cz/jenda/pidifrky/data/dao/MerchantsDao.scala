@@ -1,8 +1,7 @@
 package cz.jenda.pidifrky.data.dao
 
 import android.location.Location
-import cz.jenda.pidifrky.MerchantsTable
-import cz.jenda.pidifrky.data.Database
+import cz.jenda.pidifrky.data.{MerchantsTable, Database}
 import cz.jenda.pidifrky.data.pojo.Merchant
 import cz.jenda.pidifrky.logic.Application.executionContext
 

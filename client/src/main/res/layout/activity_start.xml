@@ -27,5 +27,8 @@
         <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UPDATE"
                 android:id="@+id/button3"
                 android:layout_weight="0.43" android:onClick="update"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DOWNLOAD IMAGES"
+                android:id="@+id/button4"
+                android:layout_weight="0.43" android:onClick="downloadImages"/>
     </TableRow>
 </TableLayout>

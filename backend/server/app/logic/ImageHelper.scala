@@ -74,15 +74,14 @@ class ImageHelper @Inject()(@ConfigProperty("url.pidifrk.image") imageUrl: Strin
 
   def getImage(cardNumber: Int): Option[Path] = dir.find(cardNumber + ".jpg")
 
-  def loadImages(cardNumbers: Seq[Int]): Future[Seq[CardImage]] = Future {
+  def loadImages(cardNumbers: Seq[Int], includeFull: Boolean): Future[Seq[Path]] = Future {
     cardNumbers.flatMap { id =>
-      for {
-        fullImage <- dir.find(id + ".jpg")
-        thumbImage <- dir.find(s"_thumb_$id.jpg")
-      } yield {
-        CardImage(id, Files.readAllBytes(fullImage), Files.readAllBytes(thumbImage))
+      if (includeFull) {
+        Seq(dir.find(id + ".jpg"), dir.find(s"_thumb_$id.jpg"))
+      } else {
+        Seq(dir.find(s"_thumb_$id.jpg"))
       }
-    }
+    }.flatten
   }(blocking)
 
   def createThumb(fullImage: Path): Try[Path] = Try {

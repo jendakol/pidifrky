@@ -8,7 +8,7 @@ import cz.jenda.pidifrky.ui.api.BasicActivity
 import cz.jenda.pidifrky.ui.dialogs.{DialogResultCallback, IndexDialogResult, SingleChoiceDialog}
 
 import scala.concurrent.{Future, Promise}
-import scala.util.Success
+import scala.util.{Failure, Success, Try}
 
 /**
  * @author Jenda Kolena, kolena@avast.com
@@ -50,6 +50,12 @@ object StorageHandler {
                   PidifrkySettings.setStorageType(INTERNAL)
               }
 
+              //create dirs on the storage, it they don't exist
+              storage.foreach { st =>
+                st.createDirectory(PidifrkyConstants.PATH_IMAGES_FULL, false)
+                st.createDirectory(PidifrkyConstants.PATH_IMAGES_THUMBS, false)
+              }
+
               p.complete(Success(()))
             }
           }).show()
@@ -64,9 +70,9 @@ object StorageHandler {
     p.future
   }
 
-  def withStorage[T](f: AbstractDiskStorage => T) =
-    storage.map(f).getOrElse({
+  def withStorage[T](f: AbstractDiskStorage => T): Try[T] =
+    storage.map(s => Try(f(s))).getOrElse({
       DebugReporter.debugAndReport(NoStorageException)
-      null
+      Failure(NoStorageException)
     })
 }

@@ -1,7 +1,7 @@
 package cz.jenda.pidifrky.data.dao
 
 import cz.jenda.pidifrky.data.pojo.{Card, Merchant}
-import cz.jenda.pidifrky.{CardsTable, MerchantsTable}
+import cz.jenda.pidifrky.data.{CardsTable, MerchantsTable}
 
 /**
  * @author Jenda Kolena, kolena@avast.com

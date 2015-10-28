@@ -18,21 +18,26 @@ object DeviceEnvelopeConverter extends Converter {
 
   override def toBody(`object`: scala.Any): TypedOutput = `object` match {
     case gpb: MessageLite =>
-      val data = gpb.toByteString
-
-      implicit val ctx = Application.currentActivity.getOrElse(throw new IllegalStateException("No context is available"))
-
-      val cont = Envelope.newBuilder()
-        .setUuid(PidifrkySettings.UUID)
-        .setDebug(Utils.isDebug)
-        .setAppVersion(Utils.getAppVersion)
-        .setDeviceInfo(Utils.getDeviceInfo)
-        .setData(data)
-        .build()
-        .toByteArray
+      val cont: Array[Byte] = wrapByEnvelope(gpb)
 
       new TypedByteArray(MIME_TYPE, cont)
     case _ => throw new IllegalArgumentException("The body has to be a GPB")
+  }
+
+  def wrapByEnvelope(gpb: MessageLite): Array[Byte] = {
+    val data = gpb.toByteString
+
+    implicit val ctx = Application.currentActivity.getOrElse(throw new IllegalStateException("No context is available"))
+
+    val cont = Envelope.newBuilder()
+      .setUuid(PidifrkySettings.UUID)
+      .setDebug(Utils.isDebug)
+      .setAppVersion(Utils.getAppVersion)
+      .setDeviceInfo(Utils.getDeviceInfo)
+      .setData(data)
+      .build()
+      .toByteArray
+    cont
   }
 
   override def fromBody(body: TypedInput, `type`: Type): AnyRef = {

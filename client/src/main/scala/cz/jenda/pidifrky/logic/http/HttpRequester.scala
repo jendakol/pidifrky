@@ -9,7 +9,7 @@ import com.google.common.io.ByteStreams
 import com.squareup.okhttp.OkHttpClient
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.exceptions._
-import cz.jenda.pidifrky.proto.DeviceBackend.{DatabaseUpdateRequest, DatabaseUpdateResponse, DebugReportRequest}
+import cz.jenda.pidifrky.proto.DeviceBackend._
 import retrofit.RestAdapter.Builder
 import retrofit.client.{OkClient, Response}
 import retrofit.http.{Body, POST}
@@ -36,13 +36,13 @@ object HttpRequester {
   })
 
   protected lazy val httpsClient = new Builder()
-    .setEndpoint(PidifrkyConstants.BASE_URL.replaceAll("http://", "https://"))
+    .setEndpoint(PidifrkyConstants.URL_BASE.replaceAll("http://", "https://"))
     .setClient(client)
     .setConverter(DeviceEnvelopeConverter)
     .build().create(classOf[PidifrkyService])
 
   protected lazy val httpClient = new Builder()
-    .setEndpoint(PidifrkyConstants.BASE_URL.replaceAll("https://", "http://"))
+    .setEndpoint(PidifrkyConstants.URL_BASE.replaceAll("https://", "http://"))
     .setClient(client)
     .setConverter(DeviceEnvelopeConverter)
     .build().create(classOf[PidifrkyService])

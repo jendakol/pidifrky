@@ -1,5 +1,7 @@
 package cz.jenda.pidifrky.ui.api
 
+import android.app.DownloadManager
+import android.content.IntentFilter
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.{NavUtils, TaskStackBuilder}
@@ -9,6 +11,7 @@ import com.google.android.gms.analytics.{GoogleAnalytics, HitBuilders, Tracker}
 import com.splunk.mint.Mint
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
+import cz.jenda.pidifrky.logic.dbimport.DownloadHandler
 import cz.jenda.pidifrky.logic.location.LocationHandler
 
 import scala.concurrent.Future
@@ -37,6 +40,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
   protected implicit final val ec = Application.executionContext
 
   protected var initFuture: Future[Boolean] = _
+
+  private final val DownloadIntentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -93,6 +98,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     LocationHandler.addListener(onLocationChanged)
 
     tracker.foreach(_.send(new HitBuilders.ScreenViewBuilder().build))
+
+    registerReceiver(DownloadHandler, DownloadIntentFilter)
   }
 
   override protected def onPause(): Unit = {
@@ -102,6 +109,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
     LocationHandler.stop
     LocationHandler.removeListener(onLocationChanged)
+
+    unregisterReceiver(DownloadHandler)
   }
 
   override protected def onPostResume(): Unit = {

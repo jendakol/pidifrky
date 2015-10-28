@@ -85,6 +85,7 @@ message DatabaseUpdateResponse {
 
 message ImageDownloadRequest {
     repeated int32 cards_ids = 1;
+    required bool include_full = 3;
 }
 
 message ImageDownloadResponse {
@@ -92,7 +93,7 @@ message ImageDownloadResponse {
 
     message CardImage {
         required int32 card_id = 1;
-        required bytes full_image_bytes = 2;
+        optional bytes full_image_bytes = 2;
         required bytes thumbnail_bytes = 3;
     }
 }

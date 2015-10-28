@@ -14,6 +14,7 @@ lazy val server = (project in file("server")).settings(
     "com.typesafe.play" % "play-mailer_2.11" % "3.0.1",
     "com.typesafe.play" % "play-slick_2.11" % "1.0.1",
 
+    "org.kamranzafar" % "jtar" % "2.3",
     "net.imagej" % "ij" % "1.50b",
     "com.ning" % "async-http-client" % "1.9.31",
     "mysql" % "mysql-connector-java" % "5.1.34",

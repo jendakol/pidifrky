@@ -74,6 +74,12 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
     }
   }
 
+  def downloadImages(v: View): Unit = {
+    DbImporter.downloadImages(true).andThen {
+      case _ => Toast("Request sent", 1000)
+    }
+  }
+
   def goToGpsLog(v: View): Unit = {
     goTo(classOf[GpsLogActivity])
   }

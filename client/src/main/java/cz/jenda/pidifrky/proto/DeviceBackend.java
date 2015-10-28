@@ -10677,6 +10677,15 @@ public final class DeviceBackend {
      * <code>repeated int32 cards_ids = 1;</code>
      */
     int getCardsIds(int index);
+
+    /**
+     * <code>required bool include_full = 3;</code>
+     */
+    boolean hasIncludeFull();
+    /**
+     * <code>required bool include_full = 3;</code>
+     */
+    boolean getIncludeFull();
   }
   /**
    * Protobuf type {@code ImageDownloadRequest}
@@ -10751,6 +10760,11 @@ public final class DeviceBackend {
               input.popLimit(limit);
               break;
             }
+            case 24: {
+              bitField0_ |= 0x00000001;
+              includeFull_ = input.readBool();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -10793,6 +10807,7 @@ public final class DeviceBackend {
       return PARSER;
     }
 
+    private int bitField0_;
     public static final int CARDS_IDS_FIELD_NUMBER = 1;
     private java.util.List<java.lang.Integer> cardsIds_;
     /**
@@ -10815,8 +10830,24 @@ public final class DeviceBackend {
       return cardsIds_.get(index);
     }
 
+    public static final int INCLUDE_FULL_FIELD_NUMBER = 3;
+    private boolean includeFull_;
+    /**
+     * <code>required bool include_full = 3;</code>
+     */
+    public boolean hasIncludeFull() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bool include_full = 3;</code>
+     */
+    public boolean getIncludeFull() {
+      return includeFull_;
+    }
+
     private void initFields() {
       cardsIds_ = java.util.Collections.emptyList();
+      includeFull_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10824,6 +10855,10 @@ public final class DeviceBackend {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasIncludeFull()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -10833,6 +10868,9 @@ public final class DeviceBackend {
       getSerializedSize();
       for (int i = 0; i < cardsIds_.size(); i++) {
         output.writeInt32(1, cardsIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(3, includeFull_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -10851,6 +10889,10 @@ public final class DeviceBackend {
         }
         size += dataSize;
         size += 1 * getCardsIdsList().size();
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, includeFull_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10971,6 +11013,8 @@ public final class DeviceBackend {
         super.clear();
         cardsIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        includeFull_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -10998,11 +11042,17 @@ public final class DeviceBackend {
       public cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest buildPartial() {
         cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest result = new cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           cardsIds_ = java.util.Collections.unmodifiableList(cardsIds_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.cardsIds_ = cardsIds_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.includeFull_ = includeFull_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -11028,11 +11078,18 @@ public final class DeviceBackend {
           }
           onChanged();
         }
+        if (other.hasIncludeFull()) {
+          setIncludeFull(other.getIncludeFull());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasIncludeFull()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -11117,6 +11174,38 @@ public final class DeviceBackend {
       public Builder clearCardsIds() {
         cardsIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private boolean includeFull_ ;
+      /**
+       * <code>required bool include_full = 3;</code>
+       */
+      public boolean hasIncludeFull() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bool include_full = 3;</code>
+       */
+      public boolean getIncludeFull() {
+        return includeFull_;
+      }
+      /**
+       * <code>required bool include_full = 3;</code>
+       */
+      public Builder setIncludeFull(boolean value) {
+        bitField0_ |= 0x00000002;
+        includeFull_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool include_full = 3;</code>
+       */
+      public Builder clearIncludeFull() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        includeFull_ = false;
         onChanged();
         return this;
       }
@@ -11276,11 +11365,11 @@ public final class DeviceBackend {
       int getCardId();
 
       /**
-       * <code>required bytes full_image_bytes = 2;</code>
+       * <code>optional bytes full_image_bytes = 2;</code>
        */
       boolean hasFullImageBytes();
       /**
-       * <code>required bytes full_image_bytes = 2;</code>
+       * <code>optional bytes full_image_bytes = 2;</code>
        */
       com.google.protobuf.ByteString getFullImageBytes();
 
@@ -11418,13 +11507,13 @@ public final class DeviceBackend {
       public static final int FULL_IMAGE_BYTES_FIELD_NUMBER = 2;
       private com.google.protobuf.ByteString fullImageBytes_;
       /**
-       * <code>required bytes full_image_bytes = 2;</code>
+       * <code>optional bytes full_image_bytes = 2;</code>
        */
       public boolean hasFullImageBytes() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes full_image_bytes = 2;</code>
+       * <code>optional bytes full_image_bytes = 2;</code>
        */
       public com.google.protobuf.ByteString getFullImageBytes() {
         return fullImageBytes_;
@@ -11457,10 +11546,6 @@ public final class DeviceBackend {
         if (isInitialized == 0) return false;
 
         if (!hasCardId()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        if (!hasFullImageBytes()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -11702,10 +11787,6 @@ public final class DeviceBackend {
             
             return false;
           }
-          if (!hasFullImageBytes()) {
-            
-            return false;
-          }
           if (!hasThumbnailBytes()) {
             
             return false;
@@ -11766,19 +11847,19 @@ public final class DeviceBackend {
 
         private com.google.protobuf.ByteString fullImageBytes_ = com.google.protobuf.ByteString.EMPTY;
         /**
-         * <code>required bytes full_image_bytes = 2;</code>
+         * <code>optional bytes full_image_bytes = 2;</code>
          */
         public boolean hasFullImageBytes() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>required bytes full_image_bytes = 2;</code>
+         * <code>optional bytes full_image_bytes = 2;</code>
          */
         public com.google.protobuf.ByteString getFullImageBytes() {
           return fullImageBytes_;
         }
         /**
-         * <code>required bytes full_image_bytes = 2;</code>
+         * <code>optional bytes full_image_bytes = 2;</code>
          */
         public Builder setFullImageBytes(com.google.protobuf.ByteString value) {
           if (value == null) {
@@ -11790,7 +11871,7 @@ public final class DeviceBackend {
           return this;
         }
         /**
-         * <code>required bytes full_image_bytes = 2;</code>
+         * <code>optional bytes full_image_bytes = 2;</code>
          */
         public Builder clearFullImageBytes() {
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -12520,13 +12601,14 @@ public final class DeviceBackend {
       "eResponse.UpdatedLinks.MerchantToCards\0329" +
       "\n\017CardToMerchants\022\017\n\007card_id\030\001 \002(\005\022\025\n\rme" +
       "rchants_ids\030\002 \003(\005\0329\n\017MerchantToCards\022\023\n\013" +
-      "merchant_id\030\001 \002(\005\022\021\n\tcards_ids\030\002 \003(\005\")\n\024" +
-      "ImageDownloadRequest\022\021\n\tcards_ids\030\001 \003(\005\"" +
-      "\240\001\n\025ImageDownloadResponse\0226\n\014cards_image" +
-      "s\030\001 \003(\0132 .ImageDownloadResponse.CardImag" +
-      "e\032O\n\tCardImage\022\017\n\007card_id\030\001 \002(\005\022\030\n\020full_" +
-      "image_bytes\030\002 \002(\014\022\027\n\017thumbnail_bytes\030\003 \002" +
-      "(\014B\033\n\027cz.jenda.pidifrky.protoH\001"
+      "merchant_id\030\001 \002(\005\022\021\n\tcards_ids\030\002 \003(\005\"?\n\024" +
+      "ImageDownloadRequest\022\021\n\tcards_ids\030\001 \003(\005\022" +
+      "\024\n\014include_full\030\003 \002(\010\"\240\001\n\025ImageDownloadR" +
+      "esponse\0226\n\014cards_images\030\001 \003(\0132 .ImageDow" +
+      "nloadResponse.CardImage\032O\n\tCardImage\022\017\n\007" +
+      "card_id\030\001 \002(\005\022\030\n\020full_image_bytes\030\002 \001(\014\022" +
+      "\027\n\017thumbnail_bytes\030\003 \002(\014B\033\n\027cz.jenda.pid",
+      "ifrky.protoH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12617,7 +12699,7 @@ public final class DeviceBackend {
     internal_static_ImageDownloadRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ImageDownloadRequest_descriptor,
-        new java.lang.String[] { "CardsIds", });
+        new java.lang.String[] { "CardsIds", "IncludeFull", });
     internal_static_ImageDownloadResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_ImageDownloadResponse_fieldAccessorTable = new

@@ -4,13 +4,15 @@ import com.google.protobuf.{Message, Parser, TextFormat}
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 import exceptions.{ClientException, ContentCannotBeParsedException, ServerException}
+import org.apache.commons.codec.binary.Hex
 import play.api.http.Writeable
 import play.api.mvc._
 import play.mvc.Controller
-import utils.Logging
+import utils.{Format, Logging}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
+import scala.reflect.ClassTag
 import scala.util.control.NonFatal
 
 /**
@@ -29,9 +31,20 @@ trait DeviceController extends Controller with Results with Logging {
     DeviceRequest(env.getUuid, env.getAppVersion, env.getDeviceInfo, if (env.hasDebug) Some(env.getDebug) else None, p.parseFrom(env.getData))
   }
 
-  def deviceEnvelope(implicit r: Request[AnyContent]): Future[Envelope] = r.body.asRaw.flatMap(_.asBytes()) match {
+  def deviceGetRequest[C <: Message](p: Parser[C])(implicit r: Request[AnyContent]): Future[DeviceRequest[C]] = deviceGetEnvelope map { env =>
+    DeviceRequest(env.getUuid, env.getAppVersion, env.getDeviceInfo, if (env.hasDebug) Some(env.getDebug) else None, p.parseFrom(env.getData))
+  }
+
+  protected def deviceEnvelope(implicit r: Request[AnyContent]): Future[Envelope] = r.body.asRaw.flatMap(_.asBytes()) match {
     case Some(body) => Future {
       Envelope.parseFrom(body)
+    }(blockingExecutor)
+    case None => Future.failed(ContentCannotBeParsedException(classOf[Envelope]))
+  }
+
+  protected def deviceGetEnvelope(implicit r: Request[AnyContent]): Future[Envelope] = r.headers.get("Pidifrky-Payload") match {
+    case Some(headerText) => Future {
+      Envelope.parseFrom(Hex.decodeHex(headerText.toCharArray))
     }(blockingExecutor)
     case None => Future.failed(ContentCannotBeParsedException(classOf[Envelope]))
   }
@@ -75,7 +88,7 @@ object DeviceControllerImplicits extends Results with Logging {
   implicit class FutureToResponseBytes(t: Future[Array[Byte]]) {
     def toResponse: Future[Result] = {
       t.map { bytes =>
-        Logger.debug(s"Returning OK, ${bytes.length} B")
+        Logger.debug(s"Returning OK, ${Format.formatSize(bytes.length)}")
         Ok(bytes)
       } recover failed
     }
