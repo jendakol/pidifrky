@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.map.{LocationHelper, LocationSource, StoredSource}
+import cz.jenda.pidifrky.ui.api.ElementId
 import io.nlopez.smartlocation.location.providers.LocationBasedOnActivityProvider
 import io.nlopez.smartlocation.{OnLocationUpdatedListener, SmartLocation}
 
@@ -17,7 +18,7 @@ import io.nlopez.smartlocation.{OnLocationUpdatedListener, SmartLocation}
 object LocationHandler {
   type LocationListener = Location => Unit
 
-  private var listeners: Set[LocationListener] = Set()
+  private var listeners: Map[ElementId, LocationListener] = Map()
 
   private var currentLocation: Option[Location] = None
 
@@ -29,9 +30,7 @@ object LocationHandler {
 
   private val tracking = new AtomicBoolean(false)
 
-  def start(implicit ctx: Activity): Unit = tracking.synchronized {
-    if (tracking.get()) return //already tracking
-
+  def start(implicit ctx: Activity): Unit = if (tracking.compareAndSet(false, true)) {
     if (currentLocation.isEmpty) {
       //probably first attempt to lock
       Toast(R.string.locating, Toast.Short)
@@ -53,21 +52,18 @@ object LocationHandler {
     }).foreach(updateLocation)
 
     control.start(new OnLocationUpdatedListener {
-      override def onLocationUpdated(location: Location): Unit = updateLocation(location)
+      override def onLocationUpdated(location: Location): Unit = Option(location) match {
+        case Some(loc) => updateLocation(loc)
+        case None => DebugReporter.debug("Received null location")
+      }
     })
-
-    tracking.set(true)
   }
 
-  def stop(implicit ctx: Activity): Unit = tracking.synchronized {
-    if (!tracking.get()) return
-
+  def stop(implicit ctx: Activity): Unit = if (tracking.compareAndSet(true, false)) {
     SmartLocation.`with`(ctx).location().stop()
-
-    tracking.set(false)
   }
 
-  protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = if (location != null) {
+  protected def updateLocation(location: Location)(implicit ctx: Activity): Unit = {
     currentLocation match {
       case Some(oldLocation) =>
         val dist = location.distanceTo(oldLocation)
@@ -95,12 +91,9 @@ object LocationHandler {
       case _ =>
     }
 
-    listeners.foreach { listener =>
+    listeners.values.foreach { listener =>
       listener(location)
     }
-  }
-  else {
-    DebugReporter.debug("Received null location")
   }
 
   def mockLocation(latLng: LatLng)(implicit ctx: Activity): Unit = {
@@ -121,11 +114,11 @@ object LocationHandler {
 
   def getCurrentLocation: Option[Location] = currentLocation
 
-  def addListener(listener: LocationListener): Unit = {
-    listeners = listeners + listener
+  def addListener(listener: LocationListener)(implicit id: ElementId): Unit = {
+    listeners = listeners + (id -> listener)
   }
 
-  def removeListener(listener: LocationListener): Unit = {
-    listeners = listeners - listener
+  def removeListener(implicit id: ElementId): Unit = {
+    listeners = listeners - id
   }
 }

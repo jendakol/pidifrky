@@ -53,7 +53,7 @@ object PidifrkySettings {
 
   def mapType: MapType = MapType(readInt(PidifrkyConstants.PREF_MAP_TYPE, 1))
 
-  def closestDistance: Int = readInt(PidifrkyConstants.PREF_DISTANCE_CLOSEST, 30000)
+  def closestDistance: Int = readInt(PidifrkyConstants.PREF_DISTANCE_CLOSEST, 20000)
 
   def gpsTimeout: Int = readInt(PidifrkyConstants.PREF_GPS_OFF_TIMEOUT, 5000)
 

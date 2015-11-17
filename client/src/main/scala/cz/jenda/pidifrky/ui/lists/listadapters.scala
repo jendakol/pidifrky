@@ -4,7 +4,8 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.{LayoutInflater, View, ViewGroup}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.data.pojo.{Merchant, Card, Entity}
+import cz.jenda.pidifrky.data.pojo.{Card, Entity, Merchant}
+import cz.jenda.pidifrky.logic.DebugReporter
 
 import scala.collection.SortedSet
 
@@ -16,6 +17,7 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
 
   def updateData(data: SortedSet[E]): Unit = {
     this.data = data.toList
+    DebugReporter.debug("Updating data, new size " + data.size)
     notifyDataSetChanged()
   }
 

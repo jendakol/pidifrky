@@ -12,22 +12,26 @@ import cz.jenda.pidifrky.ui.api.ViewHandler
  */
 abstract class AbstractViewHolder[E <: Entity](view: View) extends RecyclerView.ViewHolder(view) {
 
+  //TODO add showLocation
   def updateWith(entity: E): Unit
 }
 
 class CardViewHolder(view: View, showLocation: Boolean) extends AbstractViewHolder[Card](view) {
   override def updateWith(card: Card): Unit = {
-    ViewHandler.findTextView(view, R.id.name).foreach(_.setText((if (PidifrkySettings.showCardsNumbers) card.number + " - " else "") + card.name))
+    ViewHandler.findTextView(view, R.id.name).foreach{nameField=>
+      val name = (if (PidifrkySettings.showCardsNumbers) card.number + " - " else "") + card.name
+      nameField.setText(name)
+    }
 
-    ViewHandler.findTextView(view, R.id.distance).foreach(distance => {
+    ViewHandler.findTextView(view, R.id.distance).foreach(distanceField => {
       if (showLocation) {
         card.getDistance.foreach { d =>
           val dist = d / 1000d
-          distance.setText(if (dist > 0) "%.2f km".format(dist) else "")
+          distanceField.setText(if (dist > 0) "%.2f km".format(dist) else "")
         }
       }
       else {
-        distance.setText("")
+        distanceField.setText("")
       }
     })
 
@@ -38,17 +42,17 @@ class CardViewHolder(view: View, showLocation: Boolean) extends AbstractViewHold
       view.setImageURI(thumbUri)
     }
 
-    ViewHandler.findImageView(view, R.id.status).foreach { view =>
+    ViewHandler.findImageView(view, R.id.status).foreach { statusView =>
       import cz.jenda.pidifrky.data.pojo.CardState._
       card.state match {
         case NONE =>
-          //TODO view.setVisibility(View.GONE)
+          //TODO statusView.setVisibility(View.GONE)
         case WANTED =>
-          view.setVisibility(View.VISIBLE)
-          view.setImageResource(R.drawable.checklist)
+          statusView.setVisibility(View.VISIBLE)
+          statusView.setImageResource(R.drawable.checklist)
         case OWNED =>
-          view.setVisibility(View.VISIBLE)
-          view.setImageResource(R.drawable.smiley)
+          statusView.setVisibility(View.VISIBLE)
+          statusView.setImageResource(R.drawable.smiley)
       }
 
     }

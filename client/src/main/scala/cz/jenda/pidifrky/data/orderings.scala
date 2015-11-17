@@ -3,7 +3,8 @@ package cz.jenda.pidifrky.data
 import java.text.Collator
 import java.util.Locale
 
-import cz.jenda.pidifrky.data.pojo.{Merchant, Card}
+import android.location.Location
+import cz.jenda.pidifrky.data.pojo.{Card, Merchant}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -25,9 +26,30 @@ object CardOrdering {
     }
   }
 
+  class ByDistance(currentLocation: Location) extends Ordering[Card] {
+
+    override def compare(x: Card, y: Card): Int = {
+      val opt = for {
+        first <- Option(x)
+        second <- Option(y)
+        firstDistance <- first.getDistance(currentLocation)
+        secondDistance <- second.getDistance(currentLocation)
+      } yield {
+          firstDistance.compareTo(secondDistance)
+        }
+
+      opt.getOrElse(0)
+    }
+  }
+
+  object ByDistance {
+    def apply(currentLocation: Location): ByDistance = new ByDistance(currentLocation)
+  }
+
 }
 
 object MerchantOrdering {
+
   object ByName extends Ordering[Merchant] {
     private val c = Collator.getInstance(new Locale("cs", "CZ"))
 
@@ -42,5 +64,6 @@ object MerchantOrdering {
       opt.getOrElse(0)
     }
   }
+
 }
 

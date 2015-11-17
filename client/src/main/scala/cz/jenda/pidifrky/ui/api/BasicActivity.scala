@@ -26,6 +26,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
   private var activityState: ActivityState = CreatedState //default
 
   protected final implicit val ctx: BasicActivity = this
+  protected final implicit val ElemId: ElementId = ElementId()
 
   private var appStart = false
 
@@ -73,9 +74,12 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
     Toast.onRestoreState(savedInstanceState)
 
-    val actionBar = getSupportActionBar
-    actionBar.setHomeButtonEnabled(hasParentActivity)
-    actionBar.setDisplayHomeAsUpEnabled(hasParentActivity)
+    val actionBar = Option(getSupportActionBar)
+    actionBar.foreach { bar =>
+      bar.setHomeButtonEnabled(hasParentActivity)
+      bar.setDisplayHomeAsUpEnabled(hasParentActivity)
+    }
+
 
     if (PidifrkySettings.trackingEnabled) {
       val analytics = GoogleAnalytics.getInstance(this)
@@ -108,7 +112,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     DebugReporter.debug("Pausing activity " + getLocalClassName)
 
     LocationHandler.stop
-    LocationHandler.removeListener(onLocationChanged)
+    LocationHandler.removeListener
 
     unregisterReceiver(DownloadHandler)
   }

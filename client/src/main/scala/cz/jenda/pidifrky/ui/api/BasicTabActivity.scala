@@ -1,13 +1,12 @@
 package cz.jenda.pidifrky.ui.api
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.{Fragment, FragmentManager, FragmentPagerAdapter}
 import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
-import android.text.style.ImageSpan
-import android.text.{SpannableStringBuilder, Spanned}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.logic.{Application, DebugReporter}
+import cz.jenda.pidifrky.logic.DebugReporter
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -16,24 +15,29 @@ abstract class BasicTabActivity extends BasicActivity {
 
   protected def tabs: List[TabFragment]
 
+  protected def preselectedTabIndex: Int
+
   private var pagerAdapter: FragmentPagerAdapter = _
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.pagerview)
+    setContentView(R.layout.tabview)
 
     pagerAdapter = new PidifrkyPagerAdapter(getSupportFragmentManager, tabs)
 
     findView(R.id.pager, classOf[ViewPager]).foreach { pager =>
       pager.setAdapter(pagerAdapter)
       pager.addOnPageChangeListener(new OnPageChangeListener {
-        private var selected = 0
+        private var selected = math.min(tabs.size, preselectedTabIndex)
 
-        if (tabs.nonEmpty)
-          try tabs.head.onShow() catch {
+        if (tabs.nonEmpty) {
+          pager.setCurrentItem(selected)
+
+          try tabs(preselectedTabIndex).onShow() catch {
             case e: Exception => DebugReporter.debugAndReport(e)
           }
+        }
 
         override def onPageScrollStateChanged(state: Int): Unit = {}
 
@@ -50,8 +54,17 @@ abstract class BasicTabActivity extends BasicActivity {
           selected = position
         }
       })
-    }
 
+      findView(R.id.tabs, classOf[TabLayout]).foreach { tabLayout =>
+        tabLayout.setupWithViewPager(pager)
+
+        for (i <- tabs.indices) {
+          tabs(i).icon.foreach { iconRes =>
+            tabLayout.getTabAt(i).setIcon(iconRes)
+          }
+        }
+      }
+    }
   }
 }
 
@@ -60,27 +73,14 @@ class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: List[TabFragm
 
   override def getCount: Int = tabs.size
 
-  override def getPageTitle(position: Int): CharSequence = {
-    val sb = new SpannableStringBuilder("                 "); // space added before text for convenience
-
-    //    val drawable = Application.currentActivity.get.getResources.getDrawable(R.drawable.ic_gps_fixed_white_36dp)
-    //
-    //    drawable.setBounds(0, 0, 50, 50)
-
-    Application.currentActivity.foreach { ctx =>
-      val span = new ImageSpan(ctx, R.drawable.ic_gps_fixed_white_36dp)
-      sb.setSpan(span, 5, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    }
-
-
-    sb
-  }
-
+  override def getPageTitle(position: Int): CharSequence = tabs(position).title.orNull
 
 }
 
 trait TabFragment extends BasicFragment {
-  val title: String
+  val title: Option[String]
+
+  val icon: Option[Int]
 
   def onShow(): Unit = {}
 
