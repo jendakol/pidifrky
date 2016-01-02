@@ -2,8 +2,8 @@ package cz.jenda.pidifrky.ui.dialogs
 
 import android.os.{Bundle, Parcel, Parcelable}
 import android.support.v4.app.FragmentActivity
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.MaterialDialog.Builder
+import com.afollestad.materialdialogs.MaterialDialog.{Builder, SingleButtonCallback}
+import com.afollestad.materialdialogs.{DialogAction, MaterialDialog}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.DebugReporter
 
@@ -84,8 +84,8 @@ class DialogWithButtons extends DialogWithMessage {
     neutralButton.foreach(b => builder.neutralText(b.stringId))
     negativeButton.foreach(b => builder.negativeText(b.stringId))
 
-    builder.callback(new MaterialDialog.ButtonCallback() {
-      override def onNegative(dialog: MaterialDialog): Unit = try {
+    builder.onNegative(new SingleButtonCallback {
+      override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
         for {
           callback <- dialogConfirmedCallback
           button <- negativeButton
@@ -94,8 +94,8 @@ class DialogWithButtons extends DialogWithMessage {
       catch {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")
       }
-
-      override def onNeutral(dialog: MaterialDialog): Unit = try {
+    }).onNeutral(new SingleButtonCallback {
+      override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
         for {
           callback <- dialogConfirmedCallback
           button <- neutralButton
@@ -104,8 +104,8 @@ class DialogWithButtons extends DialogWithMessage {
       catch {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")
       }
-
-      override def onPositive(dialog: MaterialDialog): Unit = try {
+    }).onPositive(new SingleButtonCallback {
+      override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
         for {
           callback <- dialogConfirmedCallback
           button <- positiveButton
@@ -115,10 +115,7 @@ class DialogWithButtons extends DialogWithMessage {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")
       }
     })
-
-    builder
   }
-
 }
 
 sealed trait DialogType extends Parcelable {

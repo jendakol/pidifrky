@@ -22,6 +22,8 @@ object DownloadHandler extends BroadcastReceiver {
 
   import Application.executionContext
 
+  private lazy val DownloadImagesUri = Uri.parse(PidifrkyConstants.URL_DOWNLOAD_IMAGES)
+
   private object Ids {
     var downloadImages: Long = _
   }
@@ -38,7 +40,7 @@ object DownloadHandler extends BroadcastReceiver {
   def downloadImages(payload: ImageDownloadRequest)(implicit ctx: BasicActivity): Try[Unit] = Try {
     val env = DeviceEnvelopeConverter.wrapByEnvelope(payload)
 
-    val req = new DownloadManager.Request(Uri.parse(PidifrkyConstants.URL_DOWNLOAD_IMAGES))
+    val req = new DownloadManager.Request(DownloadImagesUri)
       .setVisibleInDownloadsUi(false)
       .setDestinationInExternalFilesDir(ctx, "", DownloadHandler.ImagesFileName)
       .addRequestHeader(PidifrkyConstants.HEADER_PAYLOAD, Utils.bytes2hex(env))

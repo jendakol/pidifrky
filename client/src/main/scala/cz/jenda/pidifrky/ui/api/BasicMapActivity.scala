@@ -5,7 +5,7 @@ import android.content.DialogInterface.OnDismissListener
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.gms.common.{ConnectionResult, GooglePlayServicesUtil}
+import com.google.android.gms.common.{ConnectionResult, GoogleApiAvailability}
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener
 import com.google.android.gms.maps.model._
 import com.google.android.gms.maps.{CameraUpdateFactory, GoogleMap, OnMapReadyCallback, SupportMapFragment}
@@ -181,7 +181,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
     map <- getMap
     location <- entity.location
     marker <- entity.toMarker
-    currentLocation <- Some(LocationHelper.toLocation(49, 15.3693800))
+    currentLocation <- LocationHandler.getCurrentLocation
   } yield {
       val polyline = new PolylineOptions()
         .add(LocationHelper.toLatLng(location), LocationHelper.toLatLng(currentLocation))
@@ -202,12 +202,13 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
 
 
   private def checkPlayServices(): Unit = {
-    val status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext)
+    val playServices = GoogleApiAvailability.getInstance
+    val status = playServices.isGooglePlayServicesAvailable(getBaseContext)
 
     status match {
       case ConnectionResult.SUCCESS => //ok
       case _ =>
-        val dialog = GooglePlayServicesUtil.getErrorDialog(status, this, 10)
+        val dialog = playServices.getErrorDialog(this, status, 10)
         dialog.setOnDismissListener(new OnDismissListener() {
           def onDismiss(dialog: DialogInterface) {
             BasicMapActivity.this.finish()

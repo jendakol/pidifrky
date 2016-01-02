@@ -18,3 +18,5 @@ case class SSLException(cause: Throwable) extends HttpException(s"SSL connection
 case class WrongHttpStatusException(httpStatus: Int) extends HttpException(s"Invalid HTTP status, was $httpStatus")
 
 case class DecodeHttpException(r: Response, cause: Throwable = null) extends HttpException("Error while decoding the HTTP response", cause)
+
+case class TimeoutException(cause: Throwable = null) extends HttpException("HTTP request timed out", cause)
