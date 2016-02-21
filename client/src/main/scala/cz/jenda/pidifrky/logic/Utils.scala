@@ -15,7 +15,6 @@ import android.os.{Build, Debug}
 import android.view.Display
 import com.google.common.io.ByteStreams
 import com.splunk.mint.Mint
-import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
 import scala.concurrent.Future
@@ -130,10 +129,12 @@ object Utils {
     debug
   }
 
-  def runOnUiThread(action: => Unit)(implicit ctx: Activity) {
+  def runOnUiThread(action: => Unit)(implicit ctx: Activity): Unit = if (ctx != null) {
     ctx.runOnUiThread(new Runnable {
       override def run(): Unit = action
     })
+  } else {
+    DebugReporter.debug("Cannot invoke action on UI thread, null context passed")
   }
 
   //  def dpToPx(pixels: Int): Int = {
@@ -160,7 +161,7 @@ object Utils {
   //    return app_installed
   //  }
 
-  def toUri(resourceId:Int): Uri =
+  def toUri(resourceId: Int): Uri =
     Uri.parse("android.resource://cz.jenda.pidifrky" + resourceId)
 
   def restartApp(intent: Intent)(implicit ctx: Activity): Unit = {

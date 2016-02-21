@@ -1,6 +1,7 @@
 package cz.jenda.pidifrky.ui.fragments
 
 import android.location.Location
+import android.view.Menu
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.CardOrdering
 import cz.jenda.pidifrky.data.dao.CardsDao
@@ -14,11 +15,15 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-class CardsAllListFragment(preload: Boolean = false)(implicit ctx: BasicActivity) extends EntityListTabFragment[Card] {
+class CardsAllListFragment extends EntityListTabFragment[Card] {
+
+  preload = false
 
   override val title: Option[String] = None
 
-  override val icon: Option[Int] = Some(R.drawable.ic_reorder_white_48dp)
+  override val iconResourceId: Option[Int] = Some(R.drawable.ic_view_list_white_36dp)
+
+  override val actionBarMenuResourceId: Option[Int] = None
 
   //TODO ordering
   protected implicit val ordering = CardOrdering.ByName
@@ -46,5 +51,19 @@ class CardsAllListFragment(preload: Boolean = false)(implicit ctx: BasicActivity
 
   override def onHide(): Unit = {
     LocationHandler.removeListener
+  }
+
+  override def onMenuInflate(menu: Menu): Unit = {}
+
+  override def onMenuAction: PartialFunction[Int, Unit] = PartialFunction.empty
+
+}
+
+object CardsAllListFragment {
+  def apply(preload: Boolean = false)(implicit ctx: BasicActivity): CardsAllListFragment = {
+    val fr = new CardsAllListFragment
+    fr.ctx = ctx
+    fr.preload = preload
+    fr
   }
 }

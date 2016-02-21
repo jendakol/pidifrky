@@ -7,7 +7,7 @@ import cz.jenda.pidifrky.ui.fragments.{CardsAllListFragment, CardsNearestListFra
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 class CardsListActivity extends BasicTabActivity {
-  override protected lazy val tabs: List[TabFragment] = List(new CardsAllListFragment, new CardsNearestListFragment, new MerchantsNearestListFragment)
+  override protected lazy val tabs: Seq[TabFragment] = Seq(CardsAllListFragment(), CardsNearestListFragment(), MerchantsNearestListFragment())
 
   override protected lazy val preselectedTabIndex: Int = 1
 }

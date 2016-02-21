@@ -45,11 +45,12 @@ trait EntityDao[E <: Entity] {
         c.close()
     }.flatMap(Future.fromTry)
       .recover {
-      case EntityNotFoundException(desc) => DebugReporter.debug("No entity was found - " + desc)
-        Seq()
-    }
+        case EntityNotFoundException(desc) =>
+          DebugReporter.debug("No entity was found - " + desc)
+          Seq()
+      }
       .map(s => collection.SortedSet(s: _*))
       .andThen {
-      case Failure(e: Exception) => DebugReporter.debugAndReport(e)
-    }
+        case Failure(e: Exception) => DebugReporter.debugAndReport(e)
+      }
 }

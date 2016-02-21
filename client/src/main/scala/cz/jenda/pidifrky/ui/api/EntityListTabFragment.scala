@@ -1,5 +1,6 @@
 package cz.jenda.pidifrky.ui.api
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.{LayoutInflater, View, ViewGroup}
@@ -13,6 +14,8 @@ import cz.jenda.pidifrky.ui.lists.BasicListAdapter
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 abstract class EntityListTabFragment[T <: Entity] extends BasicFragment with TabFragment {
+
+  protected var preload = true
 
   protected def listAdapter: BasicListAdapter[T]
 
@@ -33,5 +36,9 @@ abstract class EntityListTabFragment[T <: Entity] extends BasicFragment with Tab
     }
 
     view
+  }
+
+  def setPreload(preload: Boolean): Unit = {
+    this.preload = preload
   }
 }

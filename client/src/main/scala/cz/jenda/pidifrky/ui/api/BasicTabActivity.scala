@@ -1,23 +1,29 @@
 package cz.jenda.pidifrky.ui.api
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.{Fragment, FragmentManager, FragmentPagerAdapter}
 import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
+import android.view.{Menu, MenuItem}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.DebugReporter
+
+import scala.util.control.NonFatal
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 abstract class BasicTabActivity extends BasicActivity {
 
-  protected def tabs: List[TabFragment]
+  protected def tabs: Seq[TabFragment]
 
   protected def preselectedTabIndex: Int
 
   private var pagerAdapter: FragmentPagerAdapter = _
+
+  private var currentTab: TabFragment = _
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -34,8 +40,14 @@ abstract class BasicTabActivity extends BasicActivity {
         if (tabs.nonEmpty) {
           pager.setCurrentItem(selected)
 
-          try tabs(preselectedTabIndex).onShow() catch {
-            case e: Exception => DebugReporter.debugAndReport(e)
+          try {
+            val preselectedTab = tabs(selected)
+            preselectedTab.onShow()
+
+            currentTab = preselectedTab
+            invalidateOptionsMenu()
+          } catch {
+            case NonFatal(e) => DebugReporter.debugAndReport(e)
           }
         }
 
@@ -44,14 +56,19 @@ abstract class BasicTabActivity extends BasicActivity {
         override def onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int): Unit = {}
 
         override def onPageSelected(position: Int): Unit = {
-          try tabs(position).onShow() catch {
-            case e: Exception => DebugReporter.debugAndReport(e)
-          }
-          try tabs(selected).onHide() catch {
-            case e: Exception => DebugReporter.debugAndReport(e)
+
+          val newTab = tabs(position)
+
+          try {
+            tabs(selected).onHide()
+          } catch {
+            case NonFatal(e) => DebugReporter.debugAndReport(e)
           }
 
           selected = position
+          currentTab = newTab
+
+          invalidateOptionsMenu()
         }
       })
 
@@ -59,16 +76,49 @@ abstract class BasicTabActivity extends BasicActivity {
         tabLayout.setupWithViewPager(pager)
 
         for (i <- tabs.indices) {
-          tabs(i).icon.foreach { iconRes =>
+          tabs(i).iconResourceId.foreach { iconRes =>
             tabLayout.getTabAt(i).setIcon(iconRes)
           }
         }
       }
     }
   }
+
+  override def onPrepareOptionsMenu(menu: Menu): Boolean = Option(currentTab).exists { currentTab =>
+    currentTab.actionBarMenuResourceId match {
+      case Some(id) =>
+        try {
+          menu.clear()
+          getMenuInflater.inflate(id, menu)
+          currentTab.onMenuInflate(menu)
+        }
+        catch {
+          case NonFatal(e) => DebugReporter.debug(e, "Error while inflating menu for tab")
+        }
+        true
+
+      case None => false
+    }
+  }
+
+  override def onOptionsItemSelected(item: MenuItem): Boolean = {
+    try {
+      require(currentTab != null)
+
+      currentTab.onMenuAction.applyOrElse(item.getItemId, { _: Int =>
+        DebugReporter.debug(s"Menu action is not defined for item '${item.getTitle}'")
+        ()
+      })
+    }
+    catch {
+      case NonFatal(e) => DebugReporter.debug(e, "Error while executing options menu callback")
+    }
+
+    super.onOptionsItemSelected(item)
+  }
 }
 
-class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: List[TabFragment]) extends FragmentPagerAdapter(fragmentManager) {
+class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: Seq[TabFragment]) extends FragmentPagerAdapter(fragmentManager) {
   override def getItem(position: Int): Fragment = tabs(position)
 
   override def getCount: Int = tabs.size
@@ -78,11 +128,23 @@ class PidifrkyPagerAdapter(fragmentManager: FragmentManager, tabs: List[TabFragm
 }
 
 trait TabFragment extends BasicFragment {
-  val title: Option[String]
+  def title: Option[String]
 
-  val icon: Option[Int]
+  def iconResourceId: Option[Int]
+
+  def actionBarMenuResourceId: Option[Int]
 
   def onShow(): Unit = {}
 
   def onHide(): Unit = {}
+
+  def onMenuInflate(menu: Menu): Unit
+
+  def onMenuAction: PartialFunction[Int, Unit]
+
+  override def onResume(): Unit = {
+    super.onResume()
+
+    onShow()
+  }
 }
