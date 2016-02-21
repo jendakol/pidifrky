@@ -101,9 +101,9 @@ object LocationHandler {
     mocking = true
     val location = LocationHelper.toLocation(latLng)
     GpsLogger.addEvent("Mocking: " + Format(location))
-    Toast("Mocking location " + location, ToastButton.UNDO {
-      disableMocking
-    }, Toast.Short)
+//TODO    Toast("Mocking location " + location, ToastButton.UNDO {
+//      disableMocking
+//    }, Toast.Short)
     currentLocation = Some(location)
     updateLocation(location)
   }

@@ -43,8 +43,10 @@
     <string name="button_info">Více info</string>
     <string name="button_download_xml_short">Stáhnout databázi</string>
     <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně</string>
-    <string name="downloading_database">Stahuji databázi…</string>
-    <string name="downloading_images">Stahuji náhledy…</string>
+    <string name="downloading_database">Stahuji databázi pidifrků…</string>
+    <string name="downloading_images">Stahuji náhledy pidifrků…</string>
+    <string name="downloading_images_done">Náhledy pidifrků staženy!</string>
+    <string name="downloading_images_fail">Náhledy pidifrků nebylo možno stáhnout!</string>
     <string name="download_complete">Databáze byla aktualizována!\n(za %1$.1fs, staženo %2$s)!</string>
     <string name="processing_merchants">Zpracovávám prodejce…</string>
     <string name="processing_cards">Zpracovávám pidifrky…</string>

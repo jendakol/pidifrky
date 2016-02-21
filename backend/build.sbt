@@ -22,9 +22,13 @@ lazy val server = (project in file("server")).settings(
     jdbc,
     specs2 % Test
   )
-).enablePlugins(PlayScala).
+).enablePlugins(PlayScala, DebianPlugin).
   aggregate(clients.map(projectToRef): _*).
   dependsOn(sharedJvm)
+
+maintainer in Linux := "Jenda Kolena <jendakolena@gmail.com>"
+packageSummary in Linux := "pidifrky-backend"
+packageDescription := "Backend app for Pidifrky"
 
 lazy val client = (project in file("client-js")).settings(
   scalaVersion := scalaV,

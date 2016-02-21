@@ -81,7 +81,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
   }
 
   def downloadImages(v: View): Unit = {
-    DbImporter.downloadImages(true).andThen {
+    DbImporter.downloadImages(full = true).andThen {
       case _ => Toast("Request sent", 1000)
     }
   }

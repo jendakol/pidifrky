@@ -6,6 +6,7 @@ import android.app.DownloadManager
 import android.content.{BroadcastReceiver, Context, Intent}
 import android.net.Uri
 import android.os.ParcelFileDescriptor
+import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.http.DeviceEnvelopeConverter
 import cz.jenda.pidifrky.proto.DeviceBackend.ImageDownloadRequest
@@ -42,6 +43,7 @@ object DownloadHandler extends BroadcastReceiver {
 
     val req = new DownloadManager.Request(DownloadImagesUri)
       .setVisibleInDownloadsUi(false)
+      .setTitle(ctx.getString(R.string.downloading_images))
       .setDestinationInExternalFilesDir(ctx, "", DownloadHandler.ImagesFileName)
       .addRequestHeader(PidifrkyConstants.HEADER_PAYLOAD, Utils.bytes2hex(env))
 
@@ -60,9 +62,9 @@ object DownloadHandler extends BroadcastReceiver {
       }.flatMap(ImageHandler.saveImages).andThen {
         case Success(_) =>
           //TODO better message then toast?
-          Application.currentActivity.foreach(Toast("Images downloaded", Toast.Medium)(_))
+          Application.currentActivity.foreach(Toast(R.string.downloading_images_done, Toast.Medium)(_))
         case Failure(e: FileNotFoundException) =>
-          Application.currentActivity.foreach(Toast("Could not download the file", Toast.Medium)(_))
+          Application.currentActivity.foreach(Toast(R.string.downloading_images_fail, Toast.Medium)(_))
         case Failure(NonFatal(e)) =>
           DebugReporter.debugAndReport(e, "Error while downloading images")
           //TODO better message then toast?
