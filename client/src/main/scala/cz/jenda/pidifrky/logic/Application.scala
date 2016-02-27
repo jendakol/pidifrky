@@ -21,7 +21,7 @@ object Application {
   private val initialized = new AtomicBoolean(false)
 
   implicit val executionContext: ExecutionContextExecutorService = ExecutionContext.fromExecutorService(
-    new ForkJoinPool(math.max(4, Runtime.getRuntime.availableProcessors()))
+    new ForkJoinPool(math.max(8, math.min(3, Runtime.getRuntime.availableProcessors())))
   )
 
   def withOnlineStatus[T](block: => Future[T]): Future[T] =
@@ -30,6 +30,10 @@ object Application {
       else
         block
     }
+
+  def withCurrentContext[A](action: BasicActivity => A): Option[A] = {
+    currentActivity.map(action)
+  }
 
   //noinspection ScalaUselessExpression
   def init(implicit act: BasicActivity): Future[Boolean] = initialized.synchronized {

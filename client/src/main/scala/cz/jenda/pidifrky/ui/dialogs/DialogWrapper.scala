@@ -2,6 +2,7 @@ package cz.jenda.pidifrky.ui.dialogs
 
 import cz.jenda.pidifrky.logic.DebugReporter
 
+import scala.concurrent.Future
 import scala.reflect.ClassTag
 
 /**
@@ -44,5 +45,7 @@ class NormalProgressDialogWrapper(override val dialogId: Symbol, override privat
 
 class SingleChoiceDialogWrapper(override val dialogId: Symbol, override private[dialogs] var dialog: SingleChoiceDialog) extends DialogWrapper[SingleChoiceDialog]
 
-class DialogWithButtonsWrapper(override val dialogId: Symbol, override private[dialogs] var dialog: DialogWithButtons) extends DialogWrapper[DialogWithButtons]
+class DialogWithButtonsWrapper(override val dialogId: Symbol, override private[dialogs] var dialog: DialogWithButtons) extends DialogWrapper[DialogWithButtons] {
+  lazy val future: Future[DialogButton] = dialog.dialogConfirmedPromise.future
+}
 

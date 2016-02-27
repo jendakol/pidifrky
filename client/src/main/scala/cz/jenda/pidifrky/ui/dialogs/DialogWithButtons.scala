@@ -7,6 +7,9 @@ import com.afollestad.materialdialogs.{DialogAction, MaterialDialog}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.DebugReporter
 
+import scala.concurrent.Promise
+import scala.util.Try
+
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
@@ -21,6 +24,8 @@ class DialogWithButtons extends DialogWithMessage {
   final protected var negativeButton: Option[NegativeDialogButton] = None
 
   final protected var dialogConfirmedCallback: Option[DialogConfirmedCallback] = None
+
+  final private[dialogs] val dialogConfirmedPromise: Promise[DialogButton] = Promise()
 
 
   override def withActivity(ctx: FragmentActivity): this.type = {
@@ -86,30 +91,30 @@ class DialogWithButtons extends DialogWithMessage {
 
     builder.onNegative(new SingleButtonCallback {
       override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
-        for {
-          callback <- dialogConfirmedCallback
-          button <- negativeButton
-        } yield callback.onDialogConfirmed(dialogId, dialog, button)
+        negativeButton.foreach { button =>
+          dialogConfirmedCallback.foreach(_.onDialogConfirmed(dialogId, dialog, button))
+          dialogConfirmedPromise.complete(Try(button))
+        }
       }
       catch {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")
       }
     }).onNeutral(new SingleButtonCallback {
       override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
-        for {
-          callback <- dialogConfirmedCallback
-          button <- neutralButton
-        } yield callback.onDialogConfirmed(dialogId, dialog, button)
+        neutralButton.foreach { button =>
+          dialogConfirmedCallback.foreach(_.onDialogConfirmed(dialogId, dialog, button))
+          dialogConfirmedPromise.complete(Try(button))
+        }
       }
       catch {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")
       }
     }).onPositive(new SingleButtonCallback {
       override def onClick(dialog: MaterialDialog, which: DialogAction): Unit = try {
-        for {
-          callback <- dialogConfirmedCallback
-          button <- positiveButton
-        } yield callback.onDialogConfirmed(dialogId, dialog, button)
+        positiveButton.foreach { button =>
+          dialogConfirmedCallback.foreach(_.onDialogConfirmed(dialogId, dialog, button))
+          dialogConfirmedPromise.complete(Try(button))
+        }
       }
       catch {
         case e: Exception => DebugReporter.debugAndReport(e, "Error while executing button callback")

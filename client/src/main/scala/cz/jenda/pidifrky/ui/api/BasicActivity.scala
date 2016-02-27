@@ -15,11 +15,13 @@ import cz.jenda.pidifrky.logic.dbimport.DownloadHandler
 import cz.jenda.pidifrky.logic.location.LocationHandler
 
 import scala.concurrent.Future
+import scala.util.control.NonFatal
+import scala.util.{Failure, Success}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicActivity extends AppCompatActivity with ViewHandler with ActivityNavigator {
+abstract class BasicActivity extends AppCompatActivity with ViewHandler with PermissionHandler with ActivityNavigator {
 
   protected def hasParentActivity = true
 
@@ -69,7 +71,12 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     }
 
     if (!mockLocation) {
-      LocationHandler.start
+      requestPermission(PidifrkyPermissions.Location).andThen {
+        case Success(_) =>
+          LocationHandler.start
+        case Failure(e) =>
+          Toast(s"Permission not granted: $e", Toast.Long)
+      }
     }
 
     Toast.onRestoreState(savedInstanceState)
@@ -103,7 +110,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
 
     tracker.foreach(_.send(new HitBuilders.ScreenViewBuilder().build))
 
-    registerReceiver(DownloadHandler, DownloadIntentFilter)
   }
 
   override protected def onPause(): Unit = {
@@ -114,12 +120,19 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Act
     LocationHandler.stop
     LocationHandler.removeListener
 
-    unregisterReceiver(DownloadHandler)
+    try {
+      unregisterReceiver(DownloadHandler)
+    }
+    catch {
+      case NonFatal(e) => DebugReporter.debug(e, "Receiver couldn't be unregistered")
+    }
   }
 
   override protected def onPostResume(): Unit = {
     super.onPostResume()
     DebugReporter.debug("Resuming activity " + getLocalClassName)
+
+    registerReceiver(DownloadHandler, DownloadIntentFilter)
 
     initFuture.foreach { init =>
       try {
