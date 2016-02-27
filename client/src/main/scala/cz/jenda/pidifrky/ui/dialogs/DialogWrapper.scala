@@ -1,9 +1,10 @@
 package cz.jenda.pidifrky.ui.dialogs
 
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{Application, DebugReporter}
 
 import scala.concurrent.Future
 import scala.reflect.ClassTag
+import scala.util.Try
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -47,5 +48,11 @@ class SingleChoiceDialogWrapper(override val dialogId: Symbol, override private[
 
 class DialogWithButtonsWrapper(override val dialogId: Symbol, override private[dialogs] var dialog: DialogWithButtons) extends DialogWrapper[DialogWithButtons] {
   lazy val future: Future[DialogButton] = dialog.dialogConfirmedPromise.future
+
+  import Application.executionContext
+
+  def showAndThen(pf: PartialFunction[Try[DialogButton], Unit]): Future[DialogButton] = {
+    future.andThen(pf)
+  }
 }
 

@@ -1,6 +1,5 @@
 package cz.jenda.pidifrky.ui.fragments
 
-import android.content.Context
 import android.location.Location
 import android.view.Menu
 import cz.jenda.pidifrky.R
@@ -66,7 +65,9 @@ class CardsNearestListFragment extends EntityListTabFragment[Card] {
       LocationHandler.disableMocking
     case R.id.menu_cards_showMap =>
       //TODO params
-      ctx.goTo(classOf[MapActivity])
+      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
+        intent.putExtra(MapActivity.BundleKeys.CardsIds, listAdapter.currentData.map(_.id).toArray)
+      }
   }
 }
 

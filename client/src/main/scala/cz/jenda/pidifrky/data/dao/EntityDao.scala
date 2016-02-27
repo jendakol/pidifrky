@@ -21,7 +21,7 @@ trait EntityDao[E <: Entity] {
 
   def get(id: Int): Future[E]
 
-  def get(id: Int, ids: Int*)(implicit ord: Ordering[E]): Future[SortedSet[E]]
+  def get(ids: Seq[Int])(implicit ord: Ordering[E]): Future[SortedSet[E]]
 
   def getAll(implicit ord: Ordering[E]): Future[SortedSet[E]]
 

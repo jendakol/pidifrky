@@ -208,6 +208,10 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
     }
   }
 
+  protected def withLoadToast[A](textId: Int)(f: => Future[A]): Future[A] = {
+    LoadToast.withLoadToast(textId)(f)
+  }
+
   protected def runOnUiThread(block: => Unit): Unit = runOnUiThread(new Runnable {
     override def run(): Unit = block
   })

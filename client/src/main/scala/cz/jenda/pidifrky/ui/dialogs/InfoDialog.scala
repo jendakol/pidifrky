@@ -12,7 +12,7 @@ import scala.util.Random
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object InfoDialog {
-  def apply(dialogId: Symbol, title: Int, message: Int, cancellable: Boolean)(implicit ctx: AppCompatActivity): DialogWithButtonsWrapper =
+  def apply(dialogId: Symbol, title: Int, message: Int, cancellable: Boolean = false)(implicit ctx: AppCompatActivity): DialogWithButtonsWrapper =
     new DialogWithButtonsWrapper(dialogId,
       new DialogWithButtons()
         .withActivity(ctx)

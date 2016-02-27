@@ -20,8 +20,8 @@ object CardsDao extends EntityDao[Card] {
       .map(_.mapTo(Card))
       .flatMap(Future.fromTry)
 
-  override def get(id: Int, ids: Int*)(implicit ord: Ordering[Card]): Future[SortedSet[Card]] =
-    toEntityList(Database.rawQuery(DbQueries.getCards(Seq(id) ++ ids: _*)))
+  override def get(ids: Seq[Int])(implicit ord: Ordering[Card]): Future[SortedSet[Card]] =
+    toEntityList(Database.rawQuery(DbQueries.getCards(ids: _*)))
 
   override def getAll(implicit ord: Ordering[Card]): Future[SortedSet[Card]] =
     toEntityList(Database.rawQuery(DbQueries.getCards))

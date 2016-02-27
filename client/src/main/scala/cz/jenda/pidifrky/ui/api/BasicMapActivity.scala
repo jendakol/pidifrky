@@ -1,14 +1,16 @@
 package cz.jenda.pidifrky.ui.api
 
-import android.content.DialogInterface
 import android.content.DialogInterface.OnDismissListener
+import android.content.{Context, DialogInterface, Intent}
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.gms.common.{ConnectionResult, GoogleApiAvailability}
-import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener
+import com.google.android.gms.maps.GoogleMap.{OnCameraChangeListener, OnMapLongClickListener}
 import com.google.android.gms.maps.model._
 import com.google.android.gms.maps.{CameraUpdateFactory, GoogleMap, OnMapReadyCallback, SupportMapFragment}
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.google.maps.android.ui.IconGenerator
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.IMapPoint
@@ -16,14 +18,16 @@ import cz.jenda.pidifrky.data.pojo.Entity
 import cz.jenda.pidifrky.logic.location.{ActivityLocationResolver, LocationHandler}
 import cz.jenda.pidifrky.logic.map._
 import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings}
+import cz.jenda.pidifrky.ui.dialogs.InfoDialog
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
+abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListener {
   private lazy val iconGenerator = new IconGenerator(this)
 
   private var map: Option[GoogleMap] = None
+  private var clusterManager: Option[ClusterManager[MapMarker]] = None
 
   private var cameraMoved = false
 
@@ -38,9 +42,6 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
     ActivityLocationResolver.setBaseInterval(PidifrkySettings.gpsUpdateIntervals.map)
 
     followLocation = PidifrkySettings.followLocationOnMap
-
-    Option(savedInstanceState).foreach { bundle =>
-    }
 
     checkPlayServices()
 
@@ -59,16 +60,29 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
           uiSettings.setZoomControlsEnabled(true)
           uiSettings.setCompassEnabled(true)
 
-          BasicMapActivity.this.onMapReady(googleMap)
+          val clm = new ClusterManager[MapMarker](BasicMapActivity.this, googleMap)
+          //camera change listener called manually below!
+          googleMap.setOnMarkerClickListener(clm)
+          clm.setRenderer(new PidifrkyClusterRenderer(BasicMapActivity.this, googleMap, clm))
+
+          clusterManager = Some(clm)
+
+          googleMap.setOnMapLongClickListener(BasicMapActivity.this)
+
+          BasicMapActivity.this.onMapReady(googleMap, getIntent, clm)
 
           LocationHandler.getCurrentLocation.foreach(MapLocationSource.apply) //show the position immediately!
 
-          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(49.8401903, 15.3693800), 8f))
+          //default camera view
+          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BasicMapActivity.DefaultLatLng, 8f))
 
           googleMap.setOnCameraChangeListener(new OnCameraChangeListener() {
             def onCameraChange(cameraPosition: CameraPosition) {
               val bounds = googleMap.getProjection.getVisibleRegion.latLngBounds
               DebugReporter.debug("Map moved to " + bounds.getCenter + ", " + bounds.toString)
+
+              //call cluster manager
+              clm.onCameraChange(cameraPosition)
 
               LocationHandler.getCurrentLocation.foreach { location =>
                 if (followLocation) {
@@ -86,8 +100,20 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
           })
         }
       })
-      case Some(f) => //TODO: warning
-      case None => //TODO: warning
+
+      case Some(f) =>
+        DebugReporter.debug(s"Requested SupportMapFragment, got ${f.getClass.getName}")
+
+        InfoDialog('mapFailureWrongType, R.string.error, R.string.error_no_map).showAndThen { case _ =>
+          this.finish()
+        }
+
+      case None =>
+        DebugReporter.debug(s"Requested SupportMapFragment, got nothing")
+
+        InfoDialog('mapFailureNone, R.string.error, R.string.error_no_map).showAndThen { case _ =>
+          this.finish()
+        }
     }
   }
 
@@ -136,6 +162,8 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
       true
   }
 
+  def onMapReady(map: GoogleMap, bundle: Intent, clusterManager: ClusterManager[MapMarker]): Unit
+
   def getMap: Option[GoogleMap] = map
 
   def clearMap(): Unit = map.foreach(_.clear)
@@ -160,14 +188,23 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
 
   def centerMapToCurrent(): Unit = LocationHandler.getCurrentLocation.foreach(loc => centerMap(LocationHelper.toLatLng(loc)))
 
-  def addMarkers(entities: Entity*): Unit = {
-    map.foreach { map =>
-      entities.map(_.toMarker) foreach {
+  def addMarkers(entities: Iterable[Entity]): Unit = {
+    clusterManager.foreach { clm =>
+      entities.map(_.toMarker).foreach {
         case Some(marker) =>
-          map.addMarker(marker.getMarker)
-        case _ =>
+          clm.addItem(marker)
+
+        case _ => //non-displayable entity
       }
     }
+
+    //    map.foreach { map =>
+    //      entities.map(_.toMarker) foreach {
+    //        case Some(marker) =>
+    //          map.addMarker(marker.getMarker)
+    //        case _ =>
+    //      }
+    //    }
   }
 
   def addLine(options: LineOptions, points: IMapPoint*): Unit = map foreach { map =>
@@ -194,7 +231,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
 
       map.addMarker(new MarkerOptions().position(LocationHelper.getCenter(location, currentLocation)).icon(icon))
 
-      map.addMarker(marker.getMarker)
+      map.addMarker(marker.getMarkerOptions)
     }
 
   def isVisibleOnMap(location: Location): Boolean =
@@ -226,6 +263,22 @@ abstract class BasicMapActivity extends BasicActivity with OnMapReadyCallback {
             }
         }
     }
+  }
+}
+
+object BasicMapActivity {
+  final val DefaultLatLng = new LatLng(49.8401903, 15.3693800)
+}
+
+private class PidifrkyClusterRenderer(ctx: Context, googleMap: GoogleMap, clusterManager: ClusterManager[MapMarker])
+  extends DefaultClusterRenderer(ctx, googleMap, clusterManager) {
+
+  override def onBeforeClusterItemRendered(item: MapMarker, markerOptions: MarkerOptions): Unit = {
+    val options = item.getMarkerOptions
+
+    markerOptions.title(options.getTitle)
+    markerOptions.icon(options.getIcon)
+    markerOptions.anchor(options.getAnchorU, options.getAnchorV)
   }
 }
 

@@ -1,6 +1,5 @@
 package cz.jenda.pidifrky.ui.lists
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.{LayoutInflater, View, ViewGroup}
 import cz.jenda.pidifrky.R
@@ -34,6 +33,8 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
 
     createViewHolder(view)
   }
+
+  def currentData: Seq[E] = data
 
   override def getItemId(position: Int): Long = position
 

@@ -19,8 +19,8 @@ object MerchantsDao extends EntityDao[Merchant] {
       .map(_.mapTo(Merchant))
       .flatMap(Future.fromTry)
 
-  override def get(id: Int, ids: Int*)(implicit ord: Ordering[Merchant]): Future[SortedSet[Merchant]] =
-    toEntityList(Database.rawQuery(DbQueries.getMerchants(Seq(id) ++ ids: _*)))
+  override def get(ids: Seq[Int])(implicit ord: Ordering[Merchant]): Future[SortedSet[Merchant]] =
+    toEntityList(Database.rawQuery(DbQueries.getMerchants(ids: _*)))
 
   override def getAll(implicit ord: Ordering[Merchant]): Future[SortedSet[Merchant]] =
     toEntityList(Database.rawQuery(DbQueries.getMerchants()))
