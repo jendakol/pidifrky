@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.LatLng
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.map.{LocationHelper, LocationSource, StoredSource}
-import cz.jenda.pidifrky.ui.api.ElementId
+import cz.jenda.pidifrky.ui.api.{Toast, ElementId}
 import io.nlopez.smartlocation.location.providers.LocationBasedOnActivityProvider
 import io.nlopez.smartlocation.{OnLocationUpdatedListener, SmartLocation}
 
@@ -83,11 +83,11 @@ object LocationHandler {
 
     lastSource match {
       case Some(source) if source.name != location.getProvider =>
-        if (source == StoredSource) Toast(R.string.location_found, Toast.Medium) //loaded first "not stored" location
+        if (source == StoredSource) Toast(R.string.location_found, Toast.Short) //loaded first "not stored" location
         lastSource = Some(locationSource)
       case None =>
         lastSource = Some(locationSource)
-        if (locationSource != StoredSource) Toast(R.string.location_found, Toast.Medium)
+        if (locationSource != StoredSource) Toast(R.string.location_found, Toast.Short)
       case _ =>
     }
 

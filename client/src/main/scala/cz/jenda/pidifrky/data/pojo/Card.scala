@@ -6,7 +6,9 @@ import android.net.Uri
 import cz.jenda.pidifrky.data.CardTiles
 import cz.jenda.pidifrky.logic.map.{CardMapMarker, MapMarker}
 import cz.jenda.pidifrky.logic.{Application, ImageHandler}
+import cz.jenda.pidifrky.ui.api.BasicActivity
 
+import scala.concurrent.Future
 import scala.util.Try
 
 /**
@@ -14,9 +16,9 @@ import scala.util.Try
  */
 case class Card(id: Int, number: Int, name: String, nameRaw: String, state: CardState, location: Option[Location], hasImage: Boolean, neighboursIds: Seq[Option[Int]], merchantsIds: Seq[Int]) extends Entity {
 
-  def getFullImageUri: Option[Uri] = ImageHandler.getFullImageUri(id)
+  def getFullImageUri(implicit ctx: BasicActivity): Future[Uri] = ImageHandler.getFullImageUri(id)
 
-  def getThumbImageUri: Option[Uri] = ImageHandler.getThumbImageUri(id)
+  def getThumbImageUri(implicit ctx: BasicActivity): Future[Uri] = ImageHandler.getThumbImageUri(id)
 
 
   //  def getMerchantsList: ArrayList[Merchant] = {

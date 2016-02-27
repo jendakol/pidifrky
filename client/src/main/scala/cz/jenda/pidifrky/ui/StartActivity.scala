@@ -10,7 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic._
 import cz.jenda.pidifrky.logic.dbimport.DbImporter
-import cz.jenda.pidifrky.ui.api.BasicActivity
+import cz.jenda.pidifrky.ui.api.{Toast, BasicActivity}
 import cz.jenda.pidifrky.ui.dialogs._
 
 import scala.util.{Failure, Success}
@@ -81,9 +81,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
   }
 
   def downloadImages(v: View): Unit = {
-    DbImporter.downloadImages(full = true).andThen {
-      case _ => Toast("Request sent", 1000)
-    }
+    DbImporter.downloadImages(full = true)
   }
 
   def goToGpsLog(v: View): Unit = {

@@ -1,4 +1,4 @@
-package cz.jenda.pidifrky.logic
+package cz.jenda.pidifrky.ui.api
 
 import android.app.Activity
 import android.graphics.Color
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.widget.{TextView, Toast => AndroidToast}
 import cz.jenda.pidifrky.R
+import cz.jenda.pidifrky.logic.{DebugReporter, Utils}
 
 import scala.util.control.NonFatal
 
@@ -13,9 +14,8 @@ import scala.util.control.NonFatal
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object Toast {
-  final val Short = 1500
-  final val Medium = 2500
-  final val Long = 4000
+  final val Short = AndroidToast.LENGTH_SHORT
+  final val Long = AndroidToast.LENGTH_LONG
 
   private var toast: Option[AndroidToast] = None
 
@@ -24,6 +24,8 @@ object Toast {
 
     Utils.runOnUiThread {
       try {
+        DebugReporter.debug(s"Showing toast '$text'")
+
         val toast = new AndroidToast(ctx)
         toast.setDuration(AndroidToast.LENGTH_LONG)
 

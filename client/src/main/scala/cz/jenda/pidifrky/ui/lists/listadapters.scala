@@ -6,14 +6,15 @@ import android.view.{LayoutInflater, View, ViewGroup}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.{Card, Entity, Merchant}
 import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.ui.api.BasicActivity
 
 import scala.collection.SortedSet
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx: Context) extends RecyclerView.Adapter[AbstractViewHolder[E]] {
-  protected var data: List[E]
+abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx: BasicActivity) extends RecyclerView.Adapter[AbstractViewHolder[E]] {
+  protected var data: Seq[E]
 
   def updateData(data: SortedSet[E]): Unit = {
     this.data = data.toList
@@ -42,18 +43,18 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
 
 }
 
-class CardsListAdapter(protected var data: List[Card], showLocation: Boolean)(implicit ctx: Context) extends BasicListAdapter[Card](showLocation) {
+class CardsListAdapter(protected var data: Seq[Card], showLocation: Boolean)(implicit ctx: BasicActivity) extends BasicListAdapter[Card](showLocation) {
 
-  def this(showLocation: Boolean)(implicit ctx: Context) = this(List(), showLocation)
+  def this(showLocation: Boolean)(implicit ctx: BasicActivity) = this(Seq(), showLocation)
 
   override protected val layoutId: Int = R.layout.cards_list_item
 
   override def createViewHolder(view: View): AbstractViewHolder[Card] = new CardViewHolder(view, showLocation)
 }
 
-class MerchantsListAdapter(protected var data: List[Merchant], showLocation: Boolean)(implicit ctx: Context) extends BasicListAdapter[Merchant](showLocation) {
+class MerchantsListAdapter(protected var data: Seq[Merchant], showLocation: Boolean)(implicit ctx: BasicActivity) extends BasicListAdapter[Merchant](showLocation) {
 
-  def this(showLocation: Boolean)(implicit ctx: Context) = this(List(), showLocation)
+  def this(showLocation: Boolean)(implicit ctx: BasicActivity) = this(Seq(), showLocation)
 
   override protected val layoutId: Int = R.layout.merchants_list_item
 

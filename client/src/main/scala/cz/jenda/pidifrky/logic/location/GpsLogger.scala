@@ -1,6 +1,6 @@
 package cz.jenda.pidifrky.logic.location
 
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{Application, DebugReporter, Utils}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -14,6 +14,8 @@ object GpsLogger {
 
   def addEvent(event: String): Unit = {
     DebugReporter.debug(event)
-    listener.foreach(_.apply(event))
+    Application.currentActivity.foreach { implicit ctx =>
+      Utils.runOnUiThread(listener.foreach(_.apply(event)))
+    }
   }
 }

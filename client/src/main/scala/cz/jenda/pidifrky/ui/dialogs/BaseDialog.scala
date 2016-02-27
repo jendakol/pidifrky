@@ -3,6 +3,7 @@ package cz.jenda.pidifrky.ui.dialogs
 import android.app.{Activity, Dialog}
 import android.content.DialogInterface
 import android.content.DialogInterface.OnCancelListener
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.{DialogFragment, FragmentActivity}
 import android.support.v7.app.AppCompatActivity
@@ -96,6 +97,11 @@ trait BaseDialog extends DialogFragment {
 
     val builder = createDialogBuilder
 
+    builder
+      .itemsColor(Color.WHITE)
+      .negativeColor(Color.WHITE)
+      .neutralColor(Color.WHITE)
+      .positiveColor(Color.WHITE)
 
 
     builder.cancelListener(new OnCancelListener {

@@ -84,7 +84,7 @@ object DbImporter {
             .setIncludeFull(full)
             .build()
 
-          Future.fromTry(DownloadHandler.downloadImages(req))
+          DownloadHandler.downloadImages(req)
         }).flatMap(identity)
     }
   }

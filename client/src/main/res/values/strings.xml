@@ -45,6 +45,7 @@
     <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně</string>
     <string name="downloading_database">Stahuji databázi pidifrků…</string>
     <string name="downloading_images">Stahuji náhledy pidifrků…</string>
+    <string name="downloading_images_saving">Ukládám náhledy pidifrků…</string>
     <string name="downloading_images_done">Náhledy pidifrků staženy!</string>
     <string name="downloading_images_fail">Náhledy pidifrků nebylo možno stáhnout!</string>
     <string name="download_complete">Databáze byla aktualizována!\n(za %1$.1fs, staženo %2$s)!</string>
@@ -69,8 +70,8 @@
     <string name="creating_trip">Počítám výlet…</string>
     <string name="loading_card">Načítám pidifrk…</string>
     <string name="showing_merchants">Zobrazuji prodejce…</string>
-    <string name="loading_merchants">Načítám prodejce…</string>
-    <string name="loading_merchant">Načítám prodejce…</string>
+    <!--<string name="loading_merchants">Načítám prodejce…</string>-->
+    <!--<string name="loading_merchant">Načítám prodejce…</string>-->
     <string name="distance">Vzdálenost</string>
     <string name="trip_select_cards">Vyber prosím ze seznamu 1–8 pidifrků, ze kterých chceš sestavit výlet.</string>
     <string name="map_info">Vzdálenosti mezi pidifrky a prodejci jsou pouze přibližné (vzdušnou čarou).</string>
@@ -213,6 +214,7 @@
     <string name="merchant">Prodejce</string>
     <string name="current_position">Vaše aktuální poloha</string>
     <string name="button_show_nearest_merchants">Nejbližší prodejci</string>
+
     <string name="settings_basic">Základní nastavení</string>
     <string name="settings_tiles">Nastavení pidifrkmapy</string>
     <string name="settings_list">Nastavení seznamu</string>
@@ -250,6 +252,16 @@
     <string name="settings_debug_autoSend">Zaznamenané informace budou odesílány automaticky</string>
     <string name="settings_debug_allow">Pokud máš s aplikací problémy, povol tuto možnost, abychom mohli lépe pomoct s vyřešením problémů.</string>
     <string name="settings_debug_allow_short">Povolit záznam debug informací</string>
+
+
+    <string name="permission_requesting">Získávám oprávnění…</string>
+    <string name="permission_internet">Přístup k internetu je potřeba kvůli stažení seznamu pidifrků a jejich náhledů.</string>
+    <string name="permission_internet_title">Přístup k internetu</string>
+    <string name="permission_storage">Přístup k úložišti je potřeba k uložení náhledů pidifrků, popřípadě jejich záloh.</string>
+    <string name="permission_storage_title">Přístup k úložišti</string>
+    <string name="permission_location">Přístup k aktuální pozici telefonu je potřeba k zobrazení nejbližších pidifrků a prodejců.</string>
+    <string name="permission_location_title">Přístup k pozici</string>
+
 
     <string name="title_activity_extra">Extra</string>
 

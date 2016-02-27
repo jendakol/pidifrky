@@ -15,7 +15,7 @@ import cz.jenda.pidifrky.data.IMapPoint
 import cz.jenda.pidifrky.data.pojo.Entity
 import cz.jenda.pidifrky.logic.location.{ActivityLocationResolver, LocationHandler}
 import cz.jenda.pidifrky.logic.map._
-import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings, Toast}
+import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
