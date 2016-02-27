@@ -18,7 +18,7 @@ class CardsAllListFragment(preload: Boolean = false)(implicit ctx: BasicActivity
 
   override val title: Option[String] = None
 
-  override val icon: Option[Int] = Some(R.drawable.ic_reorder_white_48dp)
+  override val icon: Option[Int] = Some(R.drawable.ic_reorder_white_36dp)
 
   //TODO ordering
   protected implicit val ordering = CardOrdering.ByName
