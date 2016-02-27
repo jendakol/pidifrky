@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_gps_fixed_white_36dp"
             pidifrky:showAsAction="always"/>
     <item
-            android:id="@+id/menu_map_showList"
+            android:id="@+id/menu_map_switchToList"
             android:title="@string/menu_showCardsList"
             android:icon="@drawable/ic_view_list_white_36dp"
             pidifrky:showAsAction="ifRoom"/>
@@ -18,7 +18,7 @@
             android:title="@string/menu_map_showNormal"
             pidifrky:showAsAction="never"/>
     <item
-            android:id="@+id/menu_map_showSattelite"
+            android:id="@+id/menu_map_showSatellite"
             android:title="@string/menu_map_showPhoto"
             pidifrky:showAsAction="never"/>
     <item
@@ -30,12 +30,12 @@
             android:title="@string/menu_map_reloadDisplay"
             pidifrky:showAsAction="never"/>
     <item
-            android:id="@+id/menu_map_followPosition"
+            android:id="@+id/menu_map_followLocation"
             android:title="@string/menu_map_followPosition"
             android:checkable="true"
             pidifrky:showAsAction="never"/>
     <item
-            android:id="@+id/menu_map_info"
+            android:id="@+id/menu_map_showHelp"
             android:title="@string/menu_help"
             pidifrky:showAsAction="never"/>
     <item

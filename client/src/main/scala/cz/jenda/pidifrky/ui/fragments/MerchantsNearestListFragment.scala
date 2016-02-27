@@ -17,7 +17,7 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, MerchantsListAdapter}
  */
 class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 
-  preload = true
+  override protected val preload = true
 
   override val title: Option[String] = None
 
@@ -45,10 +45,9 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 }
 
 object MerchantsNearestListFragment {
-  def apply(preload: Boolean = true)(implicit ctx: BasicActivity): MerchantsNearestListFragment = {
+  def apply()(implicit ctx: BasicActivity): MerchantsNearestListFragment = {
     val fr = new MerchantsNearestListFragment
     fr.ctx = ctx
-    fr.preload = preload
     fr
   }
 }

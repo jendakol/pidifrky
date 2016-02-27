@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.CardsListActivity">
+        <activity android:name=".ui.ListActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.StartActivity"/>

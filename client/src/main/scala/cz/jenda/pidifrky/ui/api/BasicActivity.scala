@@ -168,9 +168,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
     activityState = StoppedState
   }
 
-  protected def onActionBarClicked: PartialFunction[Int, Boolean] = {
-    case _ => false
-  }
+  protected def onActionBarClicked: PartialFunction[Int, Unit] = PartialFunction.empty
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = {
     actionBarMenu().foreach(menuId => getMenuInflater.inflate(menuId, menu))
@@ -202,9 +200,16 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
       true
     }
     else {
-      actionBarMenu()
-        .map { _ => if (onActionBarClicked.isDefinedAt(id)) onActionBarClicked.apply(id) else false }
-        .getOrElse(super.onOptionsItemSelected(item))
+      actionBarMenu().map { _ =>
+        if (onActionBarClicked.isDefinedAt(id)) {
+          onActionBarClicked.apply(id)
+          true
+        } else {
+          false
+        }
+      }.getOrElse {
+        super.onOptionsItemSelected(item)
+      }
     }
   }
 

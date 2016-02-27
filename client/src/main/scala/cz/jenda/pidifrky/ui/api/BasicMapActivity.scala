@@ -4,7 +4,6 @@ import android.content.DialogInterface.OnDismissListener
 import android.content.{Context, DialogInterface, Intent}
 import android.location.Location
 import android.os.Bundle
-import android.view.Menu
 import com.google.android.gms.common.{ConnectionResult, GoogleApiAvailability}
 import com.google.android.gms.maps.GoogleMap.{OnCameraChangeListener, OnMapLongClickListener}
 import com.google.android.gms.maps.model._
@@ -23,25 +22,17 @@ import cz.jenda.pidifrky.ui.dialogs.InfoDialog
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListener {
+abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListener with OnCameraChangeListener {
   private lazy val iconGenerator = new IconGenerator(this)
 
   private var map: Option[GoogleMap] = None
   private var clusterManager: Option[ClusterManager[MapMarker]] = None
-
-  private var cameraMoved = false
-
-  private var followLocation: Boolean = true //default
-
-  override protected def actionBarMenu(): Option[Int] = Some(R.menu.map)
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.map)
 
     ActivityLocationResolver.setBaseInterval(PidifrkySettings.gpsUpdateIntervals.map)
-
-    followLocation = PidifrkySettings.followLocationOnMap
 
     checkPlayServices()
 
@@ -69,12 +60,12 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
 
           googleMap.setOnMapLongClickListener(BasicMapActivity.this)
 
-          BasicMapActivity.this.onMapReady(googleMap, getIntent, clm)
-
           LocationHandler.getCurrentLocation.foreach(MapLocationSource.apply) //show the position immediately!
 
           //default camera view
           googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BasicMapActivity.DefaultLatLng, 8f))
+
+          BasicMapActivity.this.onMapReady(googleMap, getIntent, clm)
 
           googleMap.setOnCameraChangeListener(new OnCameraChangeListener() {
             def onCameraChange(cameraPosition: CameraPosition) {
@@ -84,18 +75,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
               //call cluster manager
               clm.onCameraChange(cameraPosition)
 
-              LocationHandler.getCurrentLocation.foreach { location =>
-                if (followLocation) {
-                  cameraMoved = true
-                  if (!isVisibleOnMap(location)) {
-                    followLocation = false
-
-                    PidifrkySettings.withEditor(_.putBoolean("mapFollowPosition", followLocation))
-                    Toast(R.string.map_following_off, Toast.Short)
-                    runOnUiThread(invalidateOptionsMenu())
-                  }
-                }
-              }
+              BasicMapActivity.this.onCameraChange(cameraPosition)
             }
           })
         }
@@ -115,51 +95,6 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
           this.finish()
         }
     }
-  }
-
-  override protected def onLocationChanged(location: Location): Unit = {
-    super.onLocationChanged(location)
-
-    if (followLocation) {
-      centerMap(LocationHelper.toLatLng(location))
-    }
-  }
-
-  override def onPrepareOptionsMenu(menu: Menu): Boolean = {
-    menu.getItem(0).setVisible(mockLocation) //TODO
-    //TODO menu.getItem(1).setVisible(getListActivityClass != null)
-    menu.getItem(6).setChecked(followLocation)
-    true
-  }
-
-  override protected def onActionBarClicked: PartialFunction[Int, Boolean] = {
-    case R.id.menu_map_followPosition =>
-      followLocation = !followLocation
-      PidifrkySettings.withEditor(_.putBoolean("mapFollowPosition", followLocation))
-
-      runOnUiThread(invalidateOptionsMenu())
-
-      if (followLocation) {
-        centerMapToCurrent()
-        Toast(R.string.map_following_on, Toast.Short)
-      }
-      else {
-        Toast(R.string.map_following_off, Toast.Short)
-      }
-
-      true
-    case R.id.menu_map_showNormal =>
-      setMapType(NormalMapType)
-      true
-    case R.id.menu_map_showSattelite =>
-      setMapType(SatteliteMapType)
-      true
-    case R.id.menu_map_showHybrid =>
-      setMapType(HybridMapType)
-      true
-    case _ =>
-      Toast("Not supported", Toast.Long)
-      true
   }
 
   def onMapReady(map: GoogleMap, bundle: Intent, clusterManager: ClusterManager[MapMarker]): Unit
@@ -188,6 +123,12 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
 
   def centerMapToCurrent(): Unit = LocationHandler.getCurrentLocation.foreach(loc => centerMap(LocationHelper.toLatLng(loc)))
 
+  override def invalidateOptionsMenu(): Unit = {
+    runOnUiThread {
+      super.invalidateOptionsMenu()
+    }
+  }
+
   def addMarkers(entities: Iterable[Entity]): Unit = {
     clusterManager.foreach { clm =>
       entities.map(_.toMarker).foreach {
@@ -197,14 +138,6 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
         case _ => //non-displayable entity
       }
     }
-
-    //    map.foreach { map =>
-    //      entities.map(_.toMarker) foreach {
-    //        case Some(marker) =>
-    //          map.addMarker(marker.getMarker)
-    //        case _ =>
-    //      }
-    //    }
   }
 
   def addLine(options: LineOptions, points: IMapPoint*): Unit = map foreach { map =>

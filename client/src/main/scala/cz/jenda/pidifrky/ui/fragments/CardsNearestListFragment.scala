@@ -11,6 +11,7 @@ import cz.jenda.pidifrky.logic.FutureImplicits._
 import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.ui.MapActivity
+import cz.jenda.pidifrky.ui.MapActivity.ViewType
 import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 
@@ -19,7 +20,7 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
  */
 class CardsNearestListFragment extends EntityListTabFragment[Card] {
 
-  preload = true
+  override protected val preload = true
 
   override val title: Option[String] = None
 
@@ -63,19 +64,18 @@ class CardsNearestListFragment extends EntityListTabFragment[Card] {
   override def onMenuAction: PartialFunction[Int, Unit] = {
     case R.id.menu_cards_gpsOn =>
       LocationHandler.disableMocking
+
     case R.id.menu_cards_showMap =>
-      //TODO params
       ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
-        intent.putExtra(MapActivity.BundleKeys.CardsIds, listAdapter.currentData.map(_.id).toArray)
+        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestCards.id)
       }
   }
 }
 
 object CardsNearestListFragment {
-  def apply(preload: Boolean = true)(implicit ctx: BasicActivity): CardsNearestListFragment = {
+  def apply()(implicit ctx: BasicActivity): CardsNearestListFragment = {
     val fr = new CardsNearestListFragment
     fr.ctx = ctx
-    fr.preload = preload
     fr
   }
 }

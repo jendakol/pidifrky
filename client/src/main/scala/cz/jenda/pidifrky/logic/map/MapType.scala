@@ -12,7 +12,7 @@ sealed trait MapType {
 object MapType {
   def apply(id: Int) = id match {
     case GoogleMap.MAP_TYPE_NORMAL => NormalMapType
-    case GoogleMap.MAP_TYPE_SATELLITE => SatteliteMapType
+    case GoogleMap.MAP_TYPE_SATELLITE => SatelliteMapType
     case GoogleMap.MAP_TYPE_HYBRID => HybridMapType
   }
 }
@@ -21,7 +21,7 @@ case object NormalMapType extends MapType {
   override val id: Int = GoogleMap.MAP_TYPE_NORMAL
 }
 
-case object SatteliteMapType extends MapType {
+case object SatelliteMapType extends MapType {
   override val id: Int = GoogleMap.MAP_TYPE_SATELLITE
 }
 

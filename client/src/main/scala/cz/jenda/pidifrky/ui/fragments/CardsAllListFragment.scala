@@ -9,6 +9,8 @@ import cz.jenda.pidifrky.data.pojo.Card
 import cz.jenda.pidifrky.logic.Application.executionContext
 import cz.jenda.pidifrky.logic.FutureImplicits._
 import cz.jenda.pidifrky.logic.location.LocationHandler
+import cz.jenda.pidifrky.ui.MapActivity
+import cz.jenda.pidifrky.ui.MapActivity.ViewType
 import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 
@@ -17,13 +19,13 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
  */
 class CardsAllListFragment extends EntityListTabFragment[Card] {
 
-  preload = false
+  override protected val preload = false
 
   override val title: Option[String] = None
 
   override val iconResourceId: Option[Int] = Some(R.drawable.ic_view_list_white_36dp)
 
-  override val actionBarMenuResourceId: Option[Int] = None
+  override val actionBarMenuResourceId: Option[Int] = Some(R.menu.cards_list)
 
   //TODO ordering
   protected implicit val ordering = CardOrdering.ByName
@@ -53,17 +55,25 @@ class CardsAllListFragment extends EntityListTabFragment[Card] {
     LocationHandler.removeListener
   }
 
-  override def onMenuInflate(menu: Menu): Unit = {}
+  override def onMenuInflate(menu: Menu): Unit = {
+    Option(menu.findItem(R.id.menu_cards_gpsOn)).foreach(_.setVisible(LocationHandler.isMockingLocation))
+  }
 
-  override def onMenuAction: PartialFunction[Int, Unit] = PartialFunction.empty
+  override def onMenuAction: PartialFunction[Int, Unit] = {
+    case R.id.menu_cards_gpsOn =>
+      LocationHandler.disableMocking
+    case R.id.menu_cards_showMap =>
+      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
+        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.AllCards.id)
+      }
+  }
 
 }
 
 object CardsAllListFragment {
-  def apply(preload: Boolean = false)(implicit ctx: BasicActivity): CardsAllListFragment = {
+  def apply()(implicit ctx: BasicActivity): CardsAllListFragment = {
     val fr = new CardsAllListFragment
     fr.ctx = ctx
-    fr.preload = preload
     fr
   }
 }

@@ -55,7 +55,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
   }
 
   def click(v: View): Unit = {
-    goTo(classOf[CardsListActivity])
+    goTo(classOf[ListActivity])
   }
 
   def goToMap(v: View): Unit = {
