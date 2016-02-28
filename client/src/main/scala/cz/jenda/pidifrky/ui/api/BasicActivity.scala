@@ -81,8 +81,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
       }
     }
 
-    Toast.onRestoreState(savedInstanceState)
-
     val actionBar = Option(getSupportActionBar)
     actionBar.foreach { bar =>
       bar.setHomeButtonEnabled(hasParentActivity)
@@ -111,7 +109,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
     LocationHandler.addListener(onLocationChanged)
 
     tracker.foreach(_.send(new HitBuilders.ScreenViewBuilder().build))
-
   }
 
   override protected def onPause(): Unit = {
@@ -151,7 +148,6 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
   override def onSaveInstanceState(outState: Bundle): Unit = {
     super.onSaveInstanceState(outState)
-    Toast.onSaveState(outState)
   }
 
   override protected def onStop(): Unit = {
@@ -196,23 +192,26 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
   }
 
   override def onOptionsItemSelected(item: MenuItem): Boolean = {
-    val id = item.getItemId
-    if (id == android.R.id.home) {
-      upButtonClicked()
-      true
-    }
-    else {
-      actionBarMenu().map { _ =>
-        if (onActionBarClicked.isDefinedAt(id)) {
-          onActionBarClicked.apply(id)
-          true
-        } else {
-          false
-        }
-      }.getOrElse {
-        super.onOptionsItemSelected(item)
+    if (!super.onOptionsItemSelected(item)) {
+      val id = item.getItemId
+      if (id == android.R.id.home) {
+        upButtonClicked()
+        true
       }
-    }
+      else {
+        //are we able to process the event, or pass it further?
+        actionBarMenu().exists { _ =>
+          DebugReporter.debug(s"Clicked '${item.getTitle}' on action bar")
+
+          if (onActionBarClicked.isDefinedAt(id)) {
+            onActionBarClicked.apply(id)
+            true
+          } else {
+            false
+          }
+        }
+      }
+    } else true
   }
 
   protected def withLoadToast[A](textId: Int)(f: => Future[A]): Future[A] = {

@@ -24,10 +24,12 @@ abstract class BasicTabActivity extends BasicActivity {
 
   private var currentTab: TabFragment = _
 
+  protected def tabLayoutId: Int
+
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.tabview)
+    setContentView(tabLayoutId)
 
     pagerAdapter = new PidifrkyPagerAdapter(getSupportFragmentManager, tabs)
 

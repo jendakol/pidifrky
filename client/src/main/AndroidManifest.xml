@@ -29,17 +29,22 @@
             android:label="@string/app_name"
             android:theme="@style/MyMaterialTheme">
         <activity android:name=".ui.StartActivity">
+
+        </activity>
+
+        <activity android:name=".ui.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
 
-        <activity android:name=".ui.ListActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.StartActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="app" android:host="pidifrky"/>
+            </intent-filter>
+
         </activity>
 
         <activity android:name=".ui.MapActivity"/>

@@ -42,7 +42,8 @@
     <string name="error">Chyba</string>
     <string name="button_info">Více info</string>
     <string name="button_download_xml_short">Stáhnout databázi</string>
-    <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně</string>
+    <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně
+    </string>
     <string name="downloading_database">Stahuji databázi pidifrků…</string>
     <string name="downloading_images">Stahuji náhledy pidifrků…</string>
     <string name="downloading_images_saving">Ukládám náhledy pidifrků…</string>
@@ -83,7 +84,9 @@
     <string name="backup_completed">Záloha dokončena!</string>
     <string name="backup_started">Zálohování započalo…</string>
     <string name="restore_available_question">Chceš obnovit sbírku pidifrků a seznam přání za zálohy?</string>
-    <string name="delete_current_entries">Chceš před obnovením zálohy smazat aktuální záznamy o sbírce pidifrků a seznamu přání?</string>
+    <string name="delete_current_entries">Chceš před obnovením zálohy smazat aktuální záznamy o sbírce pidifrků a
+        seznamu přání?
+    </string>
     <string name="restore_failed">Obnova se nepodařila, záloha je nedostupná nebo poškozená!</string>
     <string name="restore_not_available_owned">Obnova sbírky není dostupná - záloha neexistuje!</string>
     <string name="restore_not_available_wanted">Obnova seznamu přání není dostupná - záloha neexistuje!</string>
@@ -94,27 +97,38 @@
     <string name="backuping_images">Zálohuji náhledy…</string>
     <string name="report_sending">Odesílám…</string>
     <string name="report_received">Zpráva odeslána, díky!</string>
-    <string name="database_info">První stažení databáze (včetně obrázků) trvá cca 3 minuty (v závislosti na rychlosti připojení) a spotřebuje 80MB dat.
+    <string name="database_info">První stažení databáze (včetně obrázků) trvá cca 3 minuty (v závislosti na rychlosti
+        připojení) a spotřebuje 80MB dat.
         Průběžný update databáze je již výrazně rychlejší a netrvá většinou déle než 30s.
     </string>
     <string name="database_upgrade">Před pokračováním je třeba znovu stáhnout databázi.</string>
     <string name="database_update">Je k dispozici aktualizace databáze. Přeješ si ji stáhnout?</string>
     <string name="database_update_not_available">Máš aktuální verzi databáze!</string>
-    <string name="error_no_location_data_merchant">Prodejce bohužel nemá udanou polohu a nelze jej proto zobrazit na mapě ani k němu navigovat!</string>
-    <string name="error_no_location_data_card">Pidifrk bohužel nemá udanou polohu a nelze jej proto zobrazit na mapě ani k němu navigovat!</string>
+    <string name="error_no_location_data_merchant">Prodejce bohužel nemá udanou polohu a nelze jej proto zobrazit na
+        mapě ani k němu navigovat!
+    </string>
+    <string name="error_no_location_data_card">Pidifrk bohužel nemá udanou polohu a nelze jej proto zobrazit na mapě ani
+        k němu navigovat!
+    </string>
     <string name="error_no_gps_data">Prodejce nemá GPS polohu a bude proto na mapě zobrazen pouze přibližně!</string>
     <string name="error_host_not_reachable">Připojení k internetu není funkční!</string>
-    <string name="error_update_not_available">Služba pro update databáze není dostupná. Zkus to prosím znovu později.</string>
+    <string name="error_update_not_available">Služba pro update databáze není dostupná. Zkus to prosím znovu později.
+    </string>
     <string name="error_no_nearest_cards_found">V zadané vzdálenosti %.1f km nebyly nalezeny žádné pidifrky, nebo žádné
         neodpovídají filtru/výsledku hledání.
     </string>
-    <string name="error_no_nearest_merchants_found">V zadané vzdálenosti %.1f km nebyli nalezeni žádní prodejci.</string>
+    <string name="error_no_nearest_merchants_found">V zadané vzdálenosti %.1f km nebyli nalezeni žádní prodejci.
+    </string>
     <string name="error_no_cards_found">Žádné pidifrky neodpovídají filtru/výsledku hledání.</string>
-    <string name="error_database">Před pokračováním je třeba stáhnout databázi, protože stará je poškozená, nebo vůbec neexistuje.</string>
+    <string name="error_database">Před pokračováním je třeba stáhnout databázi, protože stará je poškozená, nebo vůbec
+        neexistuje.
+    </string>
     <string name="error_no_localization_services">V přístroji není povolena žádná metoda získání aktuální pozice!
         Povol, prosím, systém GPS, nebo pokračuj bez možnosti zobrazit nejbližší pidifrky a prodejce.
     </string>
-    <string name="error_localization_not_working">Nepodařilo se zjistit pozici telefonu! Aplikace bude přepnuta do módu bez lokalizace.</string>
+    <string name="error_localization_not_working">Nepodařilo se zjistit pozici telefonu! Aplikace bude přepnuta do módu
+        bez lokalizace.
+    </string>
     <string name="error_no_ram">Aplikace bohužel nemá dostatek paměti pro svou činnost.</string>
     <string name="error_activity_cannot_be_displayed_localization">V přístroji není povolena žádná metoda získání
         aktuální pozice a proto nemůže být zobrazen seznam nejbližších pidifrků ani prodejců!
@@ -128,11 +142,14 @@
         nebo do něj nelze zapisovat!
     </string>
     <string name="error_memory_not_accessible">Operaci se nepodařilo dokončit, neboť úložiště není dostupné!</string>
-    <string name="error_no_map">Nelze zobrazit mapu.\nPro zobrazení mapy musí být nainstalována aplikace Google Maps. Pokud nainstalována je a přesto se
+    <string name="error_no_map">Nelze zobrazit mapu.\nPro zobrazení mapy musí být nainstalována aplikace Google Maps.
+        Pokud nainstalována je a přesto se
         zobrazila tato chyba, dej to prosím vědět vývojářům. Děkujeme.
     </string>
     <string name="error_gps">Lokalizace pomocí GPS není povolena, určená poloha tedy bude pouze přibližná…</string>
-    <string name="error_no_internet_connection">Připojení k internetu není funkční! Povol, prosím, přístup k internetu.</string>
+    <string name="error_no_internet_connection">Připojení k internetu není funkční! Povol, prosím, přístup k
+        internetu.
+    </string>
     <string name="error_download_failed">Stažení aktualizace se nepodařilo. Zkuste to prosím znovu.</string>
     <string name="error_no_space_for_update">V úložišti není dostatek místa pro stažení aktualizace!</string>
     <string name="error_exception">V aplikaci nastala chyba. Vydavatel již byl informován. Děkujeme za pochopení.</string>
@@ -144,6 +161,9 @@
     <string name="error_trip_failed">Výlet se bohužel nepodařilo naplánovat z důvodu neznámé chyby!</string>
     <string name="error_trip_failed_noResult">Výlet se bohužel nepodařilo naplánovat (Google tvrdí, že to nejde).</string>
     <string name="error_enter_email_account">Před pokračováním je třeba nastavit emailovou adresu!</string>
+
+    <string name="drawer_open">Otevřít navigaci</string>
+    <string name="drawer_close">Zavřít navigaci</string>
 
     <string name="menu_showCardsList">Zobrazit seznam</string>
     <string name="menu_showCardOnMap">Zobrazit pidifrk na mapě</string>
@@ -200,7 +220,7 @@
     <string name="map_following_on">Sledování pozice zapnuto</string>
 
     <string name="button_exit">Ukončit</string>
-    <string name="button_settings">Nastavení</string>
+    <string name="button_appsettings">Nastavení aplikace</string>
     <string name="button_continue">Pokračovat</string>
     <string name="button_stats">Statistiky</string>
     <string name="button_about">O pidifrcích</string>
@@ -225,9 +245,12 @@
     <string name="settings_backup">Zálohování</string>
     <string name="settings_backup_ownedCards_short">Zálohování sbírky</string>
     <string name="settings_restore_ownedCards">Obnovení sbírky a seznamu přání</string>
-    <string name="settings_backup_ownedCards">Zálohování sbírky pidifrků a seznamu přání, aby mohly být po přeinstalaci obnoveny</string>
+    <string name="settings_backup_ownedCards">Zálohování sbírky pidifrků a seznamu přání, aby mohly být po přeinstalaci
+        obnoveny
+    </string>
     <string name="settings_backup_images_short">Zálohování obrázků</string>
-    <string name="settings_backup_images">Zálohování obrázků pidifrků, aby se po přeinstalaci nemusely znvou stahovat</string>
+    <string name="settings_backup_images">Zálohování obrázků pidifrků, aby se po přeinstalaci nemusely znvou stahovat
+    </string>
     <string name="settings_localization">Nastavení lokalizace</string>
     <string name="settings_localization_hint">Menší interval znamená lepší funkci ale větší spotřebu baterie</string>
     <string name="settings_localization_list">Obnova pozice v seznamu</string>
@@ -235,7 +258,8 @@
     <string name="settings_localization_map">Obnova pozice v mapě</string>
     <string name="settings_other">Ostatní</string>
     <string name="settings_tracking_short">Anonymní statistiky užívání</string>
-    <string name="settings_tracking">Odesílat anonymní statistiky užívání. Nech tuto volbu prosím povolenou, sledování pomáhá při dalším vylepšování
+    <string name="settings_tracking">Odesílat anonymní statistiky užívání. Nech tuto volbu prosím povolenou, sledování
+        pomáhá při dalším vylepšování
         aplikace.
     </string>
     <string name="settings_showTilesNumbers_short">Zobrazit čísla na pidifrkmapě</string>
@@ -250,16 +274,23 @@
     <string name="settings_debug_sent">Informace odeslány, díky!</string>
     <string name="settings_debug_autoSend_short">Povolit automatické odesílání debug informací</string>
     <string name="settings_debug_autoSend">Zaznamenané informace budou odesílány automaticky</string>
-    <string name="settings_debug_allow">Pokud máš s aplikací problémy, povol tuto možnost, abychom mohli lépe pomoct s vyřešením problémů.</string>
+    <string name="settings_debug_allow">Pokud máš s aplikací problémy, povol tuto možnost, abychom mohli lépe pomoct s
+        vyřešením problémů.
+    </string>
     <string name="settings_debug_allow_short">Povolit záznam debug informací</string>
 
 
     <string name="permission_requesting">Získávám oprávnění…</string>
-    <string name="permission_internet">Přístup k internetu je potřeba kvůli stažení seznamu pidifrků a jejich náhledů.</string>
+    <string name="permission_internet">Přístup k internetu je potřeba kvůli stažení seznamu pidifrků a jejich náhledů.
+    </string>
     <string name="permission_internet_title">Přístup k internetu</string>
-    <string name="permission_storage">Přístup k úložišti je potřeba k uložení náhledů pidifrků, popřípadě jejich záloh.</string>
+    <string name="permission_storage">Přístup k úložišti je potřeba k uložení náhledů pidifrků, popřípadě jejich
+        záloh.
+    </string>
     <string name="permission_storage_title">Přístup k úložišti</string>
-    <string name="permission_location">Přístup k aktuální pozici telefonu je potřeba k zobrazení nejbližších pidifrků a prodejců.</string>
+    <string name="permission_location">Přístup k aktuální pozici telefonu je potřeba k zobrazení nejbližších pidifrků a
+        prodejců.
+    </string>
     <string name="permission_location_title">Přístup k pozici</string>
 
 
@@ -272,7 +303,8 @@
     <string name="report_improvement">Vylepšení aplikace</string>
     <string name="report_greeting">Pozdrav</string>
     <string name="stats_whatelse">Co dalšího bys tu chtěl vidět?</string>
-    <string name="about_desc">Tato aplikace je výhradně mým dílem.\nJe podporována vydavatelem pidifrků p. Rillichem, nicméně nejedná se o oficiální aplikaci.
+    <string name="about_desc">Tato aplikace je výhradně mým dílem.\nJe podporována vydavatelem pidifrků p. Rillichem,
+        nicméně nejedná se o oficiální aplikaci.
         Aplikace je vytvářena ve volném čase a bez nároku na jakýkoli honorář, čistě pro radost.
     </string>
 

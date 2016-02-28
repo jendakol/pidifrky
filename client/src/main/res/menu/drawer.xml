@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_cards_newTrip"
+          android:title="@string/menu_newTrip"
+          android:icon="@drawable/ic_directions_car_white_36dp"/>
+
+    <item android:id="@+id/menu_cards_showSettings"
+          android:title="@string/button_appsettings"
+          android:icon="@drawable/ic_settings_white_36dp"/>
+</menu>
