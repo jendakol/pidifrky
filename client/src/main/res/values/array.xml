@@ -21,23 +21,19 @@
     </string-array>
 
     <string-array name="refreshOptions">
-        <item>1 s</item>
-        <item>3 s</item>
-        <item>5 s</item>
-        <item>10 s</item>
-        <item>20 s</item>
-        <item>30 s</item>
-        <item>60 s</item>
+        <item>@string/settings_localizationInterval_values_1</item>
+        <item>@string/settings_localizationInterval_values_2</item>
+        <item>@string/settings_localizationInterval_values_3</item>
+        <item>@string/settings_localizationInterval_values_4</item>
+        <item>@string/settings_localizationInterval_values_5</item>
     </string-array>
 
     <string-array name="refreshValues">
         <item>1000</item>
         <item>3000</item>
-        <item>5000</item>
-        <item>10000</item>
-        <item>20000</item>
+        <item>7000</item>
+        <item>15000</item>
         <item>30000</item>
-        <item>60000</item>
     </string-array>
 
     <string-array name="filterTypes">

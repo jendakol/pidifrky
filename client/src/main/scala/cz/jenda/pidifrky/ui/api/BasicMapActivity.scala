@@ -16,7 +16,7 @@ import cz.jenda.pidifrky.data.IMapPoint
 import cz.jenda.pidifrky.data.pojo.Entity
 import cz.jenda.pidifrky.logic.location.{ActivityLocationResolver, LocationHandler}
 import cz.jenda.pidifrky.logic.map._
-import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings}
+import cz.jenda.pidifrky.logic.{PidifrkyConstants, DebugReporter, PidifrkySettings}
 import cz.jenda.pidifrky.ui.dialogs.InfoDialog
 
 /**
@@ -98,7 +98,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
   }
 
   protected def showDefaultView(): Unit = map.foreach { googleMap =>
-    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BasicMapActivity.DefaultLatLng, 8f))
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PidifrkyConstants.MAP_CENTER, 8f))
   }
 
   def onMapReady(map: GoogleMap, bundle: Intent, clusterManager: ClusterManager[MapMarker]): Unit
@@ -204,10 +204,6 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
         }
     }
   }
-}
-
-object BasicMapActivity {
-  final val DefaultLatLng = new LatLng(49.8401903, 15.3693800)
 }
 
 private class PidifrkyClusterRenderer(ctx: Context, googleMap: GoogleMap, clusterManager: ClusterManager[MapMarker])

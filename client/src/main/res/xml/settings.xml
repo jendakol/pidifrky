@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceScreen
+            android:title="@string/settings_localizationInterval"
+            android:key="settings_localizationInterval">
+        <Preference
+                android:summary="@string/settings_localizationInterval_hint"/>
+        <ListPreference
+                android:entries="@array/refreshOptions"
+                android:entryValues="@array/refreshValues"
+                android:key="refresh_list"
+                android:title="@string/settings_localizationInterval_list"/>
+        <ListPreference
+                android:entries="@array/refreshOptions"
+                android:entryValues="@array/refreshValues"
+                android:key="refresh_detail"
+                android:title="@string/settings_localizationInterval_detail"/>
+        <ListPreference
+                android:entries="@array/refreshOptions"
+                android:entryValues="@array/refreshValues"
+                android:key="refresh_map"
+                android:title="@string/settings_localizationInterval_map"/>
+    </PreferenceScreen>
+
+    <PreferenceScreen
+            android:title="@string/settings_basic"
+            android:key="settings_basic">
+        <ListPreference
+                android:entries="@array/distanceOptions"
+                android:entryValues="@array/distanceValues"
+                android:key="closest_distance"
+                android:summary="@string/settings_distance"
+                android:title="@string/settings_distance_title"/>
+        <EditTextPreference
+                android:defaultValue="5"
+                android:dialogTitle="@string/settings_gps_off_title"
+                android:digits="0123456789"
+                android:key="gps_off_timeout"
+                android:summary="@string/settings_gps_off"
+                android:title="@string/settings_gps_off_title"/>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
+            android:title="@string/settings_other"
+            android:key="settings_other">
+        <CheckBoxPreference
+                android:title="@string/settings_tracking_short"
+                android:summary="@string/settings_tracking"
+                android:key="analyticsTracking"/>
+    </PreferenceScreen>
+
+    <PreferenceScreen
+            android:title="@string/settings_debug_title"
+            android:key="settings_debug_title">
+        <CheckBoxPreference
+                android:title="@string/settings_debug_allow_short"
+                android:summary="@string/settings_debug_allow"
+                android:key="debugAllowed"/>
+        <CheckBoxPreference
+                android:title="@string/settings_debug_autoSend_short"
+                android:summary="@string/settings_debug_autoSend"
+                android:key="debugAutoSend"/>
+    </PreferenceScreen>
+
+    <PreferenceScreen
+            android:title="DEBUG MENU"
+            android:key="DEBUG_MENU">
+        <Preference
+                android:title="Clear preferences"
+                android:key="debug_clear_preferences"/>
+        <Preference
+                android:title="@string/settings_debug_send"
+                android:key="debugSend"/>
+    </PreferenceScreen>
+</PreferenceScreen>

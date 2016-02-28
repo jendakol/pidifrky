@@ -57,7 +57,7 @@ trait NavigationDrawer extends AppCompatActivity with ViewHandler with Navigatio
         }
 
         toggle.setDrawerIndicatorEnabled(true)
-        layout.setDrawerListener(toggle)
+        layout.addDrawerListener(toggle)
 
         toggle
       }

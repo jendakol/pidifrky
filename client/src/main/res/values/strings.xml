@@ -42,8 +42,7 @@
     <string name="error">Chyba</string>
     <string name="button_info">Více info</string>
     <string name="button_download_xml_short">Stáhnout databázi</string>
-    <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně
-    </string>
+    <string name="button_download_xml">Databáze se aktualizuje automaticky, aktualizaci lze ovšem spustit i ručně</string>
     <string name="downloading_database">Stahuji databázi pidifrků…</string>
     <string name="downloading_images">Stahuji náhledy pidifrků…</string>
     <string name="downloading_images_saving">Ukládám náhledy pidifrků…</string>
@@ -251,11 +250,16 @@
     <string name="settings_backup_images_short">Zálohování obrázků</string>
     <string name="settings_backup_images">Zálohování obrázků pidifrků, aby se po přeinstalaci nemusely znvou stahovat
     </string>
-    <string name="settings_localization">Nastavení lokalizace</string>
-    <string name="settings_localization_hint">Menší interval znamená lepší funkci ale větší spotřebu baterie</string>
-    <string name="settings_localization_list">Obnova pozice v seznamu</string>
-    <string name="settings_localization_detail">Obnova pozice v detailu</string>
-    <string name="settings_localization_map">Obnova pozice v mapě</string>
+    <string name="settings_localizationInterval">Nastavení intervalu lokalizace</string>
+    <string name="settings_localizationInterval_hint">Nastavení obnovování pozice má vliv na spotřebu baterie - čím častější, tím větší je spotřeba</string>
+    <string name="settings_localizationInterval_list">Obnova pozice v seznamu</string>
+    <string name="settings_localizationInterval_detail">Obnova pozice v detailu</string>
+    <string name="settings_localizationInterval_map">Obnova pozice v mapě</string>
+    <string name="settings_localizationInterval_values_1">Velmi častá</string>
+    <string name="settings_localizationInterval_values_2">Častá</string>
+    <string name="settings_localizationInterval_values_3">Normální</string>
+    <string name="settings_localizationInterval_values_4">Občas</string>
+    <string name="settings_localizationInterval_values_5">Šetřit baterii</string>
     <string name="settings_other">Ostatní</string>
     <string name="settings_tracking_short">Anonymní statistiky užívání</string>
     <string name="settings_tracking">Odesílat anonymní statistiky užívání. Nech tuto volbu prosím povolenou, sledování
@@ -401,8 +405,5 @@
     </string>
     <string name="app_author">Jenda Kolena</string>
     <string name="title_activity_gps_log">GpsLogActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
 </resources>

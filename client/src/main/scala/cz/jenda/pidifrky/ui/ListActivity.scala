@@ -3,13 +3,13 @@ package cz.jenda.pidifrky.ui
 import android.os.Bundle
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.DebugReporter
-import cz.jenda.pidifrky.ui.api.{NavigationDrawer, BasicTabActivity, TabFragment}
+import cz.jenda.pidifrky.ui.api.{BasicTabActivity, ExceptionHandler, NavigationDrawer, TabFragment}
 import cz.jenda.pidifrky.ui.fragments.{CardsAllListFragment, CardsNearestListFragment, MerchantsNearestListFragment}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-class ListActivity extends BasicTabActivity with NavigationDrawer {
+class ListActivity extends BasicTabActivity with NavigationDrawer with ExceptionHandler {
   override protected def tabLayoutId: Int = R.layout.activity_list
 
   override protected val hasParentActivity: Boolean = false
@@ -29,6 +29,9 @@ class ListActivity extends BasicTabActivity with NavigationDrawer {
   }
 
   override protected def onNavigationDrawerClick: PartialFunction[Int, Unit] = {
+    case R.id.drawer_showSettings =>
+      goTo(classOf[SettingsActivity])
+
     case _ =>
       DebugReporter.debug("not implemented")
   }

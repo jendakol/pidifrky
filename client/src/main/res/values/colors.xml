@@ -5,5 +5,6 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#616161</color>
     <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#96000000</color>
+    <color name="colorAccent">@color/windowBackground</color>
+    <color name="preference_fallback_accent_color">@color/colorAccent</color>
 </resources>

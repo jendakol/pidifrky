@@ -1,6 +1,7 @@
 package cz.jenda.pidifrky.logic
 
 import com.google.android.gms.maps.model.LatLng
+import cz.jenda.pidifrky.logic.map.LocationHelper
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com

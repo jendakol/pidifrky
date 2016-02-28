@@ -1,6 +1,9 @@
 package cz.jenda.pidifrky.logic
 
+import java.util
+
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.preference.PreferenceManager
 import com.splunk.mint.Mint
 import com.sromku.simple.storage.SimpleStorage.StorageType
@@ -46,7 +49,7 @@ object PidifrkySettings {
   def gpsUpdateIntervals: GpsIntervalSettings = GpsIntervalSettings(
     readInt(PidifrkyConstants.PREF_REFRESH_LIST, 3000),
     readInt(PidifrkyConstants.PREF_REFRESH_DETAIL, 3000),
-    readInt(PidifrkyConstants.PREF_REFRESH_MAP, 2000)
+    readInt(PidifrkyConstants.PREF_REFRESH_MAP, 3000)
   )
 
   def followLocationOnMap: Boolean = readBoolean(PidifrkyConstants.PREF_MAP_FOLLOW_LOCATION, default = false)
@@ -91,17 +94,21 @@ object PidifrkySettings {
 
   def showCardsNumbers: Boolean = readBoolean(PidifrkyConstants.PREF_SHOW_CARDS_NUMBERS, default = false)
 
+  def showTilesNumbers: Boolean = readBoolean(PidifrkyConstants.PREF_SHOW_TILES_NUMBERS, default = false)
+
+  def showTilesFound: Boolean = readBoolean(PidifrkyConstants.PREF_SHOW_TILES_FOUND, default = false)
+
   /* ----- ----- ----- ----- ----- */
 
-  def withEditor[T](f: SharedPreferences.Editor => T): T = {
+  def withEditor[T](f: PreferencesEditor => T): T = {
     val editor = preferences.edit()
-    val result = f(editor)
+    val result = f(new PreferencesEditor(editor))
     editor.apply()
     result
   }
 
   protected def readInt(name: String, default: Int): Int = try {
-    preferences.getInt(name, default)
+    preferences.getString(name, default.toString).toInt
   }
   catch {
     case e: Exception =>
@@ -110,7 +117,7 @@ object PidifrkySettings {
   }
 
   protected def readLong(name: String, default: Long): Long = try {
-    preferences.getLong(name, default)
+    preferences.getString(name, default.toString).toLong
   }
   catch {
     case e: Exception =>
@@ -120,6 +127,7 @@ object PidifrkySettings {
 
   protected def readBoolean(name: String, default: Boolean): Boolean = try {
     preferences.getBoolean(name, default)
+    //    preferences.getString(name, default.toString).toBoolean
   }
   catch {
     case e: NullPointerException =>
@@ -131,6 +139,30 @@ object PidifrkySettings {
   }
 
   def sharedPreferences: Option[SharedPreferences] = Option(preferences)
+}
+
+class PreferencesEditor(wrapped: Editor) extends Editor {
+  override def putString(key: String, value: String): Editor = wrapped.putString(key, value)
+
+  override def clear(): Editor = wrapped.clear()
+
+  override def putFloat(key: String, value: Float): Editor = wrapped.putString(key, value.toString)
+
+  override def remove(key: String): Editor = wrapped.remove(key)
+
+  override def putBoolean(key: String, value: Boolean): Editor = wrapped.putBoolean(key, value)
+
+  //  override def putBoolean(key: String, value: Boolean): Editor = wrapped.putString(key, value.toString)
+
+  override def putInt(key: String, value: Int): Editor = wrapped.putString(key, value.toString)
+
+  override def apply(): Unit = wrapped.apply()
+
+  override def putLong(key: String, value: Long): Editor = wrapped.putString(key, value.toString)
+
+  override def putStringSet(key: String, values: util.Set[String]): Editor = wrapped.putStringSet(key, values)
+
+  override def commit(): Boolean = wrapped.commit()
 }
 
 case class GpsIntervalSettings(list: Int, detail: Int, map: Int)
