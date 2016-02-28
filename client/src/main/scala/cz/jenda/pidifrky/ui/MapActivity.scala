@@ -8,8 +8,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.{CameraPosition, LatLng}
 import com.google.maps.android.clustering.ClusterManager
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.data.CardOrdering
-import cz.jenda.pidifrky.data.dao.CardsDao
+import cz.jenda.pidifrky.data.dao.{CardsDao, MerchantsDao}
+import cz.jenda.pidifrky.data.{CardOrdering, MerchantOrdering}
 import cz.jenda.pidifrky.logic.FutureImplicits._
 import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
@@ -23,7 +23,6 @@ import scala.util.Success
  */
 class MapActivity extends BasicMapActivity {
 
-  import CardOrdering.Implicits.ByName
   import MapActivity._
   import ViewType._
 
@@ -36,10 +35,24 @@ class MapActivity extends BasicMapActivity {
   private var cameraMoved = false
 
   override def onMapReady(map: GoogleMap, intent: Intent, clusterManager: ClusterManager[MapMarker]): Unit = {
+    //load specific cards
     Option(intent.getIntArrayExtra(BundleKeys.CardsIds)).foreach { ids =>
+      import CardOrdering.Implicits.ByName
+
       withLoadToast(R.string.showing_cards) {
         CardsDao.get(ids.toSeq).andThenOnUIThread { case Success(cards) =>
           addMarkers(cards)
+        }
+      }
+    }
+
+    //load specific merchants
+    Option(intent.getIntArrayExtra(BundleKeys.MerchantsIds)).foreach { ids =>
+      import MerchantOrdering.Implicits.ByName
+
+      withLoadToast(R.string.showing_merchants) {
+        MerchantsDao.get(ids.toSeq).andThenOnUIThread { case Success(merchs) =>
+          addMarkers(merchs)
         }
       }
     }
@@ -53,24 +66,44 @@ class MapActivity extends BasicMapActivity {
     invalidateOptionsMenu()
   }
 
-  private def showItems(): Unit = viewType match {
-    case NearestCards =>
-      LocationHandler.getCurrentLocation.foreach { loc =>
+  private def showItems(): Unit = {
+    clearMap()
+
+    viewType match {
+      case AllCards =>
+        import CardOrdering.Implicits.ByName
+
         withLoadToast(R.string.showing_cards) {
-          CardsDao.getNearest(loc, PidifrkySettings.closestDistance)
+          CardsDao.getAll
             .andThenOnUIThread { case Success(cards) =>
               addMarkers(cards)
             }
         }
-      }
 
-    case AllCards =>
-      withLoadToast(R.string.showing_cards) {
-        CardsDao.getAll
-          .andThenOnUIThread { case Success(cards) =>
-            addMarkers(cards)
+      case NearestCards =>
+        import CardOrdering.Implicits.ByName
+
+        LocationHandler.getCurrentLocation.foreach { loc =>
+          withLoadToast(R.string.showing_cards) {
+            CardsDao.getNearest(loc, PidifrkySettings.closestDistance)
+              .andThenOnUIThread { case Success(cards) =>
+                addMarkers(cards)
+              }
           }
-      }
+        }
+
+      case NearestMerchants =>
+        import MerchantOrdering.Implicits.ByName
+
+        LocationHandler.getCurrentLocation.foreach { loc =>
+          withLoadToast(R.string.showing_merchants) {
+            MerchantsDao.getNearest(loc, PidifrkySettings.closestDistance)
+              .andThenOnUIThread { case Success(merchs) =>
+                addMarkers(merchs)
+              }
+          }
+        }
+    }
   }
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
@@ -111,7 +144,7 @@ class MapActivity extends BasicMapActivity {
     Option(menu.findItem(FollowLocation)).foreach(_.setChecked(followLocation))
     Option(menu.findItem(SwitchToList)).foreach(_.setVisible {
       viewType match {
-        case NearestCards | AllCards => true
+        case NearestCards | AllCards | NearestMerchants => true
 
         case _ => false
       }
@@ -150,6 +183,11 @@ class MapActivity extends BasicMapActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
       }
 
+    case MenuKeys.ReloadDisplay =>
+      showDefaultView()
+      centerMapToCurrent()
+      showItems()
+
     case _ =>
       Toast("Not supported", Toast.Long)
   }
@@ -170,6 +208,7 @@ object MapActivity {
     private val prefix = getClass.getName + "_"
 
     final val CardsIds = prefix + "cardsIds"
+    final val MerchantsIds = prefix + "merchsIds"
     final val ViewType = prefix + "viewType"
   }
 
@@ -201,7 +240,7 @@ object MapActivity {
 
     case object NearestCards extends ViewType(1)
 
-    case object NearestMerchants extends ViewType(3)
+    case object NearestMerchants extends ViewType(2)
 
   }
 

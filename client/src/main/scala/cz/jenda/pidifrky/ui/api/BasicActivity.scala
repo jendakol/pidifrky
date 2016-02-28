@@ -25,7 +25,9 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
   protected def hasParentActivity = true
 
-  private var activityState: ActivityState = CreatedState //default
+  import ActivityState._
+
+  private var activityState: ActivityState = Created //default
 
   protected final implicit val ctx: BasicActivity = this
   protected final implicit val ElemId: ElementId = ElementId()
@@ -55,7 +57,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
     DebugReporter.debug("Creating activity " + getLocalClassName)
 
-    activityState = CreatedState
+    activityState = Created
 
     appStart = Application.currentActivity.isEmpty
 
@@ -102,7 +104,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
   override protected def onStart(): Unit = {
     super.onStart()
-    activityState = StartedState
+    activityState = Started
     DebugReporter.debug("Starting activity " + getLocalClassName)
     Application.currentActivity = Some(this)
 
@@ -114,7 +116,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
   override protected def onPause(): Unit = {
     super.onPause()
-    activityState = PausedState
+    activityState = Paused
     DebugReporter.debug("Pausing activity " + getLocalClassName)
 
     LocationHandler.stop
@@ -165,7 +167,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
       }
     }
 
-    activityState = StoppedState
+    activityState = Stopped
   }
 
   protected def onActionBarClicked: PartialFunction[Int, Unit] = PartialFunction.empty
@@ -234,6 +236,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
   protected def onApplicationMinimize(): Unit = {
     DebugReporter.debug("Application has been minimized")
   }
+
+  def getState: ActivityState = activityState
 
   /* --- */
 

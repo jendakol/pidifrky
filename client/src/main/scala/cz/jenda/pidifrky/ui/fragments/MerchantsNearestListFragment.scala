@@ -9,6 +9,8 @@ import cz.jenda.pidifrky.logic.Application.executionContext
 import cz.jenda.pidifrky.logic.FutureImplicits._
 import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
+import cz.jenda.pidifrky.ui.MapActivity
+import cz.jenda.pidifrky.ui.MapActivity.ViewType
 import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, MerchantsListAdapter}
 
@@ -25,7 +27,7 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 
   protected lazy val listAdapter: BasicListAdapter[Merchant] = new MerchantsListAdapter(false)
 
-  override val actionBarMenuResourceId: Option[Int] = None
+  override val actionBarMenuResourceId: Option[Int] = Some(R.menu.merchants_list)
 
 
   //TODO ordering
@@ -39,9 +41,19 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
     }
   }
 
-  override def onMenuInflate(menu: Menu): Unit = {}
+  override def onMenuInflate(menu: Menu): Unit = {
+    Option(menu.findItem(R.id.menu_merchants_gpsOn)).foreach(_.setVisible(LocationHandler.isMockingLocation))
+  }
 
-  override def onMenuAction: PartialFunction[Int, Unit] = PartialFunction.empty
+  override def onMenuAction: PartialFunction[Int, Unit] = {
+    case R.id.menu_merchants_gpsOn =>
+      LocationHandler.disableMocking
+
+    case R.id.menu_merchants_showMap =>
+      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
+        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestMerchants.id)
+      }
+  }
 }
 
 object MerchantsNearestListFragment {

@@ -1,6 +1,5 @@
 package cz.jenda.pidifrky.ui.api
 
-import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.{Fragment, FragmentManager, FragmentPagerAdapter}
@@ -8,7 +7,7 @@ import android.support.v4.view.ViewPager
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.view.{Menu, MenuItem}
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{ActivityState, DebugReporter, Utils}
 
 import scala.util.control.NonFatal
 
@@ -42,7 +41,8 @@ abstract class BasicTabActivity extends BasicActivity {
 
           try {
             val preselectedTab = tabs(selected)
-            preselectedTab.onShow()
+            preselectedTab.visible = true
+            Utils.runOnUiThread(preselectedTab.onShow())
 
             currentTab = preselectedTab
             invalidateOptionsMenu()
@@ -58,17 +58,37 @@ abstract class BasicTabActivity extends BasicActivity {
         override def onPageSelected(position: Int): Unit = {
 
           val newTab = tabs(position)
+          newTab.visible = true
+          newTab.getActivity match {
+            case ba: BasicActivity =>
+              ba.getState match {
+                case ActivityState.Started => Utils.runOnUiThread(newTab.onShow())
+                case _ => //wrong state of activity
+              }
+            case _ => //null or weird activity
+          }
 
           try {
-            tabs(selected).onHide()
+            val oldTab = tabs(selected)
+            oldTab.visible = false
+            Utils.runOnUiThread(oldTab.onHide())
           } catch {
             case NonFatal(e) => DebugReporter.debugAndReport(e)
           }
 
+          DebugReporter.debug(s"Select tab index $position, class ${newTab.getClass.getSimpleName}, title ${newTab.title}")
+
           selected = position
           currentTab = newTab
 
-          invalidateOptionsMenu()
+          Utils.runOnUiThread {
+            pager.invalidate()
+            if (pager.beginFakeDrag()) {
+              pager.fakeDragBy(0.1f)
+              pager.endFakeDrag()
+            }
+            invalidateOptionsMenu()
+          }
         }
       })
 
@@ -142,9 +162,14 @@ trait TabFragment extends BasicFragment {
 
   def onMenuAction: PartialFunction[Int, Unit]
 
+  private[api] var visible = false
+
+  //the onShow is called here instead of in onPageSelected, because it's too early there (before attach to activity)
   override def onResume(): Unit = {
     super.onResume()
 
-    onShow()
+    if (visible) {
+      onShow()
+    }
   }
 }

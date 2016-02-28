@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:layout_height="50dp"
+      android:layout_width="fill_parent">
+
+    <item
+        android:id="@+id/menu_merchants_gpsOn"
+        android:title="@string/gps_on"
+        android:icon="@drawable/ic_location_on_white_36dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_merchants_showMap"
+        android:title="@string/menu_showAllOnMap"
+        android:icon="@drawable/ic_map_white_36dp"
+        app:showAsAction="always"/>
+    <item android:title="@string/menu_display_options_with_arrow"
+          android:icon="@drawable/ic_settings_white_36dp"
+          app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menu_merchants_filter"
+                android:title="@string/menu_filter"/>
+            <item
+                android:id="@+id/menu_merchants_search"
+                android:title="@string/menu_search"/>
+            <item
+                android:id="@+id/menu_merchants_sort"
+                android:title="@string/menu_sort"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_merchants_showSettings"
+        android:title="@string/button_settings"/>
+
+</menu>

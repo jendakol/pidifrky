@@ -63,7 +63,7 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
           LocationHandler.getCurrentLocation.foreach(MapLocationSource.apply) //show the position immediately!
 
           //default camera view
-          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BasicMapActivity.DefaultLatLng, 8f))
+          showDefaultView()
 
           BasicMapActivity.this.onMapReady(googleMap, getIntent, clm)
 
@@ -97,11 +97,18 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
     }
   }
 
+  protected def showDefaultView(): Unit = map.foreach { googleMap =>
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BasicMapActivity.DefaultLatLng, 8f))
+  }
+
   def onMapReady(map: GoogleMap, bundle: Intent, clusterManager: ClusterManager[MapMarker]): Unit
 
   def getMap: Option[GoogleMap] = map
 
-  def clearMap(): Unit = map.foreach(_.clear)
+  def clearMap(): Unit = {
+    map.foreach(_.clear())
+    clusterManager.foreach(_.clearItems())
+  }
 
   def setMapType(mapType: MapType, save: Boolean = true): Unit = {
     if (save) PidifrkySettings.withEditor(_.putInt("mapType", mapType.id))

@@ -5,10 +5,13 @@ package cz.jenda.pidifrky.logic
  */
 sealed trait ActivityState
 
-case object CreatedState extends ActivityState
+object ActivityState {
+  case object Created extends ActivityState
 
-case object StartedState extends ActivityState
+  case object Started extends ActivityState
 
-case object PausedState extends ActivityState
+  case object Paused extends ActivityState
 
-case object StoppedState extends ActivityState
+  case object Stopped extends ActivityState
+}
+
