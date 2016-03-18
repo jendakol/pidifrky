@@ -54,6 +54,10 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
         intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestMerchants.id)
       }
   }
+
+  override def onClick(entity: Merchant): Unit = {}
+
+  override def onLongClick(entity: Merchant): Unit = {}
 }
 
 object MerchantsNearestListFragment {

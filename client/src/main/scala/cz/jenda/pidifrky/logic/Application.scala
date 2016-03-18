@@ -32,7 +32,11 @@ object Application {
     }
 
   def withCurrentContext[A](action: BasicActivity => A): Option[A] = {
-    currentActivity.map(action)
+    val r = currentActivity.map(action)
+
+    if (r.isEmpty) DebugReporter.debug("Action Application.withCurrentContext were not invoked, because context is empty")
+
+    r
   }
 
   //noinspection ScalaUselessExpression

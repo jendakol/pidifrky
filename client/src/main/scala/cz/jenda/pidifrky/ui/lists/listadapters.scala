@@ -34,6 +34,10 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
     createViewHolder(view)
   }
 
+  def getItem(position: Int): Option[E] = {
+    if (data.size<position) Option(data(position)) else None
+  }
+
   def currentData: Seq[E] = data
 
   override def getItemId(position: Int): Long = position

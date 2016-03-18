@@ -6,7 +6,7 @@ import android.view.{LayoutInflater, View, ViewGroup}
 import com.malinskiy.superrecyclerview.SuperRecyclerView
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.Entity
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{Application, DebugReporter}
 import cz.jenda.pidifrky.ui.lists.BasicListAdapter
 
 /**
@@ -27,6 +27,18 @@ abstract class EntityListTabFragment[T <: Entity] extends BasicFragment with Tab
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity))
         recyclerView.setAdapter(adapter)
+
+        Application.withCurrentContext { implicit ctx =>
+          RecyclerViewItemClickListener(recyclerView, new OnItemClickListener {
+            override def onClick(view: View, position: Int): Unit = {
+              adapter.getItem(position).foreach(EntityListTabFragment.this.onClick)
+            }
+
+            override def onLongClick(view: View, position: Int): Unit = {
+              adapter.getItem(position).foreach(EntityListTabFragment.this.onLongClick)
+            }
+          })
+        }
       }
       catch {
         case e: Exception =>
@@ -36,4 +48,8 @@ abstract class EntityListTabFragment[T <: Entity] extends BasicFragment with Tab
 
     view
   }
+
+  def onClick(entity: T)
+
+  def onLongClick(entity: T)
 }

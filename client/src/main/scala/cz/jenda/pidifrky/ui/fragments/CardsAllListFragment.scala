@@ -68,6 +68,9 @@ class CardsAllListFragment extends EntityListTabFragment[Card] {
       }
   }
 
+  override def onClick(entity: Card): Unit = {}
+
+  override def onLongClick(entity: Card): Unit = {}
 }
 
 object CardsAllListFragment {

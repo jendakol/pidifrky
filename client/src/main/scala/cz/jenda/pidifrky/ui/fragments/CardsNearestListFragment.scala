@@ -12,7 +12,7 @@ import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.ui.MapActivity
 import cz.jenda.pidifrky.ui.MapActivity.ViewType
-import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
+import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment, Toast}
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 
 /**
@@ -70,6 +70,12 @@ class CardsNearestListFragment extends EntityListTabFragment[Card] {
         intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestCards.id)
       }
   }
+
+  override def onClick(entity: Card): Unit = {
+    Toast(s"Card clicked ${entity.name}", Toast.Short)
+  }
+
+  override def onLongClick(entity: Card): Unit = {}
 }
 
 object CardsNearestListFragment {
