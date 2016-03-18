@@ -31,7 +31,6 @@ trait PermissionHandler extends AppCompatActivity {
     }.flatMap { case (perm, res) => if (res) None else Some(perm) }
 
     if (notGranted.isEmpty) {
-      DebugReporter.debug(s"Requesting already granted permission $permission")
       return Future.successful(())
     }
 

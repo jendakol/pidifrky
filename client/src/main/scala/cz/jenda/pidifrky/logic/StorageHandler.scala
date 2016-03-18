@@ -23,6 +23,8 @@ object StorageHandler {
     ctx.requestPermission(PidifrkyPermissions.ExternalStorage).flatMap { _ =>
       val p = Promise[Unit]()
 
+      DebugReporter.debug("Initializing storage")
+
       import com.sromku.simple.storage.SimpleStorage.StorageType._
 
       val external = SimpleStorage.getExternalStorage
@@ -32,14 +34,20 @@ object StorageHandler {
         case Some(INTERNAL) =>
           storage = Some(internal)
           p.complete(Success(()))
+          DebugReporter.debug("Initialized INTERNAL storage")
+
         case Some(EXTERNAL) =>
-          if (external.isWritable)
+          if (external.isWritable) {
             storage = Some(external)
+            DebugReporter.debug("Initialized EXTERNAL storage")
+          }
           else {
             //TODO - fail when ext is selected but not writable ?
             storage = Some(internal)
+            DebugReporter.debug("Initialized INTERNAL storage")
           }
           p.complete(Success(()))
+
         case None =>
           if (external.isWritable) {
             SingleChoiceDialog('selectstorage, R.string.storage_title_select, R.array.storageTypes, new DialogResultCallback[IndexDialogResult] {
@@ -48,9 +56,11 @@ object StorageHandler {
                   case 0 =>
                     storage = Some(external)
                     PidifrkySettings.setStorageType(EXTERNAL)
+                    DebugReporter.debug("Initialized EXTERNAL storage")
                   case 1 =>
                     storage = Some(internal)
                     PidifrkySettings.setStorageType(INTERNAL)
+                    DebugReporter.debug("Initialized INTERNAL storage")
                 }
 
                 //create dirs on the storage, it they don't exist
@@ -67,6 +77,7 @@ object StorageHandler {
             storage = Some(internal)
             PidifrkySettings.setStorageType(INTERNAL)
             p.complete(Success(()))
+            DebugReporter.debug("Initialized INTERNAL storage, EXTERNAL not writeable")
           }
       }
 
@@ -76,9 +87,10 @@ object StorageHandler {
 
   def withStorage[T](f: AbstractDiskStorage => T)(implicit ctx: BasicActivity): Future[T] =
     ctx.requestPermission(PidifrkyPermissions.ExternalStorage).map { _ =>
-      storage.map(f(_)).getOrElse({
-        DebugReporter.debugAndReport(NoStorageException)
-        throw NoStorageException
-      })
+      storage.map(f(_)).getOrElse {
+        val ex = NoStorageException
+        DebugReporter.debugAndReport(ex)
+        throw ex
+      }
     }
 }

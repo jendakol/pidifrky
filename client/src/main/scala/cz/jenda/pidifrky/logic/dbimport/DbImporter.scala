@@ -72,7 +72,7 @@ object DbImporter {
     }
   }
 
-  def downloadImages(full: Boolean)(implicit ctx: BasicActivity): Future[Unit] = withOnlineStatus {
+  def downloadImages(fullImages: Boolean)(implicit ctx: BasicActivity): Future[Unit] = withOnlineStatus {
     Transaction.async("images-download") {
       (for {
         known <- ImageHandler.getKnownImages
@@ -81,7 +81,7 @@ object DbImporter {
       } yield {
           val req = ImageDownloadRequest.newBuilder()
             .addAllCardsIds(diff.map(int2Integer).asJava)
-            .setIncludeFull(full)
+            .setIncludeFull(fullImages)
             .build()
 
           DownloadHandler.downloadImages(req)

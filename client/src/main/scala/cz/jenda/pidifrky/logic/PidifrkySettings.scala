@@ -61,7 +61,7 @@ object PidifrkySettings {
   def gpsTimeout: Int = readInt(PidifrkyConstants.PREF_GPS_OFF_TIMEOUT, 5000)
 
   def markAndGetStarts: Int = try {
-    val started: Int = preferences.getInt(PidifrkyConstants.STARTED_COUNT, 0) + 1
+    val started: Int = readInt(PidifrkyConstants.STARTED_COUNT, 0) + 1
     withEditor(_.putInt(PidifrkyConstants.STARTED_COUNT, started))
     started
   }
@@ -82,7 +82,7 @@ object PidifrkySettings {
   def markDatabaseUpdate(): Unit = withEditor(_.putLong(PidifrkyConstants.DATABASE_LAST_UPDATE, System.currentTimeMillis()))
 
   def storageType: Option[StorageType] = {
-    val i = preferences.getInt(PidifrkyConstants.STORAGE_TYPE, -1)
+    val i = readInt(PidifrkyConstants.STORAGE_TYPE, -1)
 
     (if (i >= 0) Some(i) else None).map(StorageType.values())
   }

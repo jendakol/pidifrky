@@ -81,7 +81,7 @@ class StartActivity extends BasicActivity with DialogResultCallback[IndexDialogR
   }
 
   def downloadImages(v: View): Unit = {
-    DbImporter.downloadImages(full = true)
+    DbImporter.downloadImages(fullImages = true)
   }
 
   def goToGpsLog(v: View): Unit = {

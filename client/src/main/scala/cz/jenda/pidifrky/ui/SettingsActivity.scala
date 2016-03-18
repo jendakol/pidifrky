@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.support.v7.preference.{ListPreference, Preference, PreferenceFragmentCompat, PreferenceScreen}
 import android.view.View
 import cz.jenda.pidifrky.R
-import cz.jenda.pidifrky.logic.{Application, DebugReporter, PidifrkySettings, Utils}
+import cz.jenda.pidifrky.logic._
+import cz.jenda.pidifrky.logic.dbimport.DbImporter
 import cz.jenda.pidifrky.ui.api.{BasicActivity, Toast}
+import cz.jenda.pidifrky.ui.dialogs.NormalProgressDialog
 
 import scala.collection.mutable
 import scala.util.control.NonFatal
+import scala.util.{Failure, Success}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -76,6 +79,8 @@ class SettingsActivity extends BasicActivity with PreferenceFragmentCompat.OnPre
 
 class SettingsFragment extends PreferenceFragmentCompat with SharedPreferences.OnSharedPreferenceChangeListener {
 
+  import Application.executionContext
+
   override def onCreatePreferences(bundle: Bundle, rootKey: String): Unit = {
     setPreferencesFromResource(R.xml.settings, rootKey)
 
@@ -126,14 +131,44 @@ class SettingsFragment extends PreferenceFragmentCompat with SharedPreferences.O
   }
 
   override def onPreferenceTreeClick(preference: Preference): Boolean = {
-    preference.getKey match {
-      case "debug_clear_preferences" =>
-        Application.initSettingsDefault(clear = true)
-        Toast("Preferences reset", Toast.Long)(getActivity)
-        true
+    Application.withCurrentContext { implicit ctx =>
+      preference.getKey match {
+        case "download_db" =>
+          val dialog = NormalProgressDialog('testing, R.string.downloading_database, R.string.processing_cards, 100, cancellable = false)
 
-      case _ => super.onPreferenceTreeClick(preference)
-    }
+          val progressListener = ProgressListener.forDialog(dialog)
+
+          dialog.show()
+
+          DbImporter.update(progressListener).andThen {
+            case Success(_) =>
+              dialog.dismiss()
+              Toast("DB updated!", 3000)
+            case Failure(e) =>
+              Toast(Format(e), 3000)
+              DebugReporter.debug(e)
+              dialog.dismiss()
+          }
+          true
+
+        case "download_images" =>
+          DbImporter.downloadImages(fullImages = false)
+          Toast("Downloading images", Toast.Long)(getActivity)
+          true
+
+        case "debug_clear_preferences" =>
+          Application.initSettingsDefault(clear = true)
+          Toast("Preferences reset", Toast.Long)(getActivity)
+          true
+
+        case "debug_send" =>
+          DebugReporter.sendIfAllowed()
+          Toast("Preferences reset", Toast.Long)(getActivity)
+          true
+
+        case _ => super.onPreferenceTreeClick(preference)
+      }
+    }.getOrElse(super.onPreferenceTreeClick(preference))
   }
 }
 

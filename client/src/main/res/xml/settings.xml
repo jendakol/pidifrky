@@ -67,10 +67,16 @@
             android:title="DEBUG MENU"
             android:key="DEBUG_MENU">
         <Preference
+                android:title="Download DB"
+                android:key="download_db"/>
+        <Preference
+                android:title="Download images"
+                android:key="download_images"/>
+        <Preference
                 android:title="Clear preferences"
                 android:key="debug_clear_preferences"/>
         <Preference
                 android:title="@string/settings_debug_send"
-                android:key="debugSend"/>
+                android:key="debug_send"/>
     </PreferenceScreen>
 </PreferenceScreen>
