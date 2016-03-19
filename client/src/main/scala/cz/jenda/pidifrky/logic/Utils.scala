@@ -17,7 +17,7 @@ import com.google.common.io.ByteStreams
 import com.splunk.mint.Mint
 import cz.jenda.pidifrky.proto.DeviceBackend.Envelope.DeviceInfo
 
-import scala.concurrent.Future
+import scala.concurrent.{Future, Promise}
 import scala.util.Try
 
 /**
@@ -129,12 +129,17 @@ object Utils {
     debug
   }
 
-  def runOnUiThread(action: => Unit)(implicit ctx: Activity): Unit = if (ctx != null) {
+  def runOnUiThread[Result](action: => Result)(implicit ctx: Activity): Future[Result] = if (ctx != null) {
+    val p = Promise[Result]()
     ctx.runOnUiThread(new Runnable {
-      override def run(): Unit = action
+      override def run(): Unit = p.complete(Try {
+        action
+      })
     })
+    p.future
   } else {
     DebugReporter.debug("Cannot invoke action on UI thread, null context passed")
+    Future.failed(new IllegalArgumentException("Cannot invoke action on UI thread, null context passed"))
   }
 
   //  def dpToPx(pixels: Int): Int = {

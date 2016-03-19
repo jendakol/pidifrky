@@ -17,11 +17,9 @@ import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, CardsListAdapter}
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-class CardsAllListFragment extends EntityListTabFragment[Card] {
+class CardsAllListFragment extends CardsListFragment {
 
   override protected val preload = false
-
-  override val title: Option[String] = None
 
   override val iconResourceId: Option[Int] = Some(R.drawable.ic_view_list_white_36dp)
 
@@ -40,37 +38,12 @@ class CardsAllListFragment extends EntityListTabFragment[Card] {
     adapter
   }
 
-  override def onShow(): Unit = {
-    if (!preload) LocationHandler.getCurrentLocation.foreach(updateCards)
-    LocationHandler.addListener(updateCards)
-  }
-
   protected def updateCards(loc: Location): Unit = {
     CardsDao.getAll.foreachOnUIThread { cards =>
       listAdapter.updateData(cards)
     }
   }
 
-  override def onHide(): Unit = {
-    LocationHandler.removeListener
-  }
-
-  override def onMenuInflate(menu: Menu): Unit = {
-    Option(menu.findItem(R.id.menu_cards_gpsOn)).foreach(_.setVisible(LocationHandler.isMockingLocation))
-  }
-
-  override def onMenuAction: PartialFunction[Int, Unit] = {
-    case R.id.menu_cards_gpsOn =>
-      LocationHandler.disableMocking
-    case R.id.menu_cards_showMap =>
-      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
-        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.AllCards.id)
-      }
-  }
-
-  override def onClick(entity: Card): Unit = {}
-
-  override def onLongClick(entity: Card): Unit = {}
 }
 
 object CardsAllListFragment {

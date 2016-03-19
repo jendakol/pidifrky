@@ -35,7 +35,7 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
   }
 
   def getItem(position: Int): Option[E] = {
-    if (data.size<position) Option(data(position)) else None
+    if (position < data.size && position >= 0) Option(data(position)) else None
   }
 
   def currentData: Seq[E] = data

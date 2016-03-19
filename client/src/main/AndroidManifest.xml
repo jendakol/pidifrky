@@ -60,6 +60,12 @@
                     android:value=".ui.ListActivity"/>
         </activity>
 
+        <activity android:name=".ui.CardDetailActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.ListActivity"/>
+        </activity>
+
         <activity
                 android:name=".ui.GpsLogActivity"
                 android:label="@string/title_activity_gps_log">

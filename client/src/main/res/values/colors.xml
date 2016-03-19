@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#333333</color>
-    <color name="colorPrimaryDark">#222222</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="windowBackground">#616161</color>
-    <color name="navigationBarColor">#000000</color>
+    <color name="colorPrimary">#ff333333</color>
+    <color name="colorPrimaryDark">#ff222222</color>
+    <color name="textColorPrimary">#FFFFFFFF</color>
+    <color name="windowBackground">#ff616161</color>
+    <color name="navigationBarColor">#ff000000</color>
     <color name="colorAccent">@color/windowBackground</color>
     <color name="preference_fallback_accent_color">@color/colorAccent</color>
 </resources>

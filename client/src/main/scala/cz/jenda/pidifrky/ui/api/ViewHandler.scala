@@ -43,9 +43,9 @@ object ViewHandler {
 
   def findView(view: View, id: Int): Option[View] = Option(view.findViewById(id))
 
-  def findView[T <: View](activity: View, id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = findView(activity, id) flatMap {
+  def findView[T <: View](activity: View, id: Int, cl: Class[T]): Option[T] = findView(activity, id) flatMap {
     case v: View =>
-      if (ct.runtimeClass.isInstance(v)) {
+      if (cl.isInstance(v)) {
         Some(v.asInstanceOf[T])
       }
       else {
@@ -63,9 +63,9 @@ object ViewHandler {
 
   def findView(fragment: Fragment, id: Int): Option[View] = Option(fragment.getView).map(_.findViewById(id))
 
-  def findView[T <: View](fragment: Fragment, id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = findView(fragment, id) flatMap {
+  def findView[T <: View](fragment: Fragment, id: Int, cl: Class[T]): Option[T] = findView(fragment, id) flatMap {
     case v: View =>
-      if (ct.runtimeClass.isInstance(v)) {
+      if (cl.isInstance(v)) {
         Some(v.asInstanceOf[T])
       }
       else {

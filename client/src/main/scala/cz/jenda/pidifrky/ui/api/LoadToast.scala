@@ -5,7 +5,7 @@ import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.logic.{DebugReporter, Utils}
 import net.steamcrafted.loadtoast.{LoadToast => ToastLib}
 
-import scala.concurrent.Future
+import scala.concurrent.{Future, Promise}
 import scala.util.control.NonFatal
 import scala.util.{Failure, Success}
 
@@ -37,6 +37,17 @@ object LoadToast {
     apply(ctx.getString(textId), f)
   }
 
+  def apply(textId: Int)(implicit ctx: BasicActivity): LoadToastCompleter = {
+    val p = Promise[Unit]()
+    apply(ctx.getString(textId), p.future)
+
+    new LoadToastCompleter {
+      override def failure(): Unit = p.tryFailure(new Exception) //can be anything, won't be used
+
+      override def success(): Unit = p.trySuccess(())
+    }
+  }
+
   def withLoadToast[A](text: String)(f: => Future[A])(implicit ctx: BasicActivity): Future[A] = {
     apply(text, f)
     f
@@ -55,4 +66,10 @@ object LoadToast {
       .setTranslationY(200)
       .show()
   }
+}
+
+trait LoadToastCompleter {
+  def success(): Unit
+
+  def failure(): Unit
 }

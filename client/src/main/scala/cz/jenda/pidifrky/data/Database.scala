@@ -1,7 +1,6 @@
 package cz.jenda.pidifrky.data
 
 import android.database.sqlite.{SQLiteDatabase, SQLiteOpenHelper}
-import cz.jenda.pidifrky._
 import cz.jenda.pidifrky.data.dao.InsertCommand
 import cz.jenda.pidifrky.logic.Application.executionContext
 import cz.jenda.pidifrky.logic.{Application, DebugReporter, PidifrkyConstants, Transaction}
@@ -104,9 +103,9 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
     DebugReporter.debug("DB query: " + query)
 
     val selection = if (selectionSeq.nonEmpty) {
-      " where " + selectionSeq.keys map { key =>
+      " where " + selectionSeq.keys.map { key =>
         s"$key = ?"
-      } mkString " and "
+      }.mkString(" and ")
     } else ""
 
     val args = selectionSeq.values.map(_.toString).toArray
@@ -119,9 +118,9 @@ object Database extends SQLiteOpenHelper(Application.appContext.orElse(Applicati
   protected def selectFrom(table: EntityTable, columns: Array[String])(selectionSeq: Map[String, AnyVal], orderBy: Option[String], limit: Option[String]): Future[CursorWrapper] = Future {
     DebugReporter.debug(s"DB select from ${table.NAME}, columns ${columns.mkString("(", ", ", ")")}")
 
-    val selection = selectionSeq.keys map { key =>
+    val selection = selectionSeq.keys.map { key =>
       s"$key = ?"
-    } mkString " and "
+    }.mkString(" and ")
 
     val args = selectionSeq.values.map(_.toString).toArray
 
