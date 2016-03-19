@@ -30,6 +30,7 @@ class CardDetailActivity extends BasicActivity {
   import MerchantOrdering.Implicits._
 
   private var card: Option[Card] = None
+  private var merchants: Seq[Merchant] = Seq()
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
@@ -45,7 +46,10 @@ class CardDetailActivity extends BasicActivity {
       imageUri <- card.getFullImageUri
       merchants <- MerchantsDao.get(card.merchantsIds)
     } yield Utils.runOnUiThread {
+      val merchSeq = merchants.toSeq
+
       this.card = Option(card)
+      this.merchants = merchSeq
 
       findView(R.id.name, classOf[TextView]).foreach(_.setText(card.name))
       findView(R.id.number, classOf[TextView]).foreach(_.setText(getText(R.string.number) + " " + card.number))
@@ -66,7 +70,7 @@ class CardDetailActivity extends BasicActivity {
       findView(R.id.list, classOf[SuperRecyclerView]).foreach { recyclerView =>
         recyclerView.setLayoutManager(new LinearLayoutManager(ctx))
 
-        val adapter = new MerchantsListAdapter(merchants.toSeq, true)
+        val adapter = new MerchantsListAdapter(merchSeq, true)
         recyclerView.setAdapter(adapter)
 
         RecyclerViewItemClickListener(recyclerView, new OnItemClickListener {
@@ -113,7 +117,18 @@ class CardDetailActivity extends BasicActivity {
   }
 
   protected def showMap(v: View): Unit = {
-    Toast("Not supported", Toast.Short)
+    import MapActivity._
+
+    card.foreach { card =>
+      goWithParamsTo(classOf[MapActivity]) { intent =>
+        card.location.foreach { loc =>
+          intent.putExtra(BundleKeys.ShowLineTo, LocationHelper.toLatLng(loc))
+        }
+
+        intent.putExtra(BundleKeys.CardsIds, Array(card.id))
+        intent.putExtra(BundleKeys.MerchantsIds, card.merchantsIds.toArray)
+      }
+    }
   }
 
   protected def changeListStatus(v: View): Unit = {

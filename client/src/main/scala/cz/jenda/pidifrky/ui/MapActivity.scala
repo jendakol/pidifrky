@@ -1,6 +1,7 @@
 package cz.jenda.pidifrky.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
@@ -11,12 +12,14 @@ import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.dao.{CardsDao, MerchantsDao}
 import cz.jenda.pidifrky.data.{CardOrdering, MerchantOrdering}
 import cz.jenda.pidifrky.logic.FutureImplicits._
-import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.logic.map._
-import cz.jenda.pidifrky.ui.api.{BasicMapActivity, Toast}
+import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings, Utils}
+import cz.jenda.pidifrky.ui.api.{BasicMapActivity, LineOptions, Toast}
 
-import scala.util.Success
+import scala.concurrent.Future
+import scala.util.control.NonFatal
+import scala.util.{Failure, Success}
 
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
@@ -24,83 +27,94 @@ import scala.util.Success
 class MapActivity extends BasicMapActivity {
 
   import MapActivity._
-  import ViewType._
 
   override protected def actionBarMenu(): Option[Int] = Some(R.menu.map)
 
-  private var viewType: ViewType = NearestCards //default, to prevent NPE
+  private var viewType: ViewType = ViewType.None //default, to prevent NPE
 
   private var followLocation: Boolean = true
 
-  private var cameraMoved = false
+  private var intent: Option[Intent] = None
 
   override def onMapReady(map: GoogleMap, intent: Intent, clusterManager: ClusterManager[MapMarker]): Unit = {
-    //load specific cards
-    Option(intent.getIntArrayExtra(BundleKeys.CardsIds)).foreach { ids =>
-      import CardOrdering.Implicits.ByName
+    viewType = ViewType(intent.getIntExtra(BundleKeys.ViewType, ViewType.None.id))
 
-      withLoadToast(R.string.showing_cards) {
-        CardsDao.get(ids.toSeq).andThenOnUIThread { case Success(cards) =>
-          addMarkers(cards)
-        }
-      }
-    }
+    this.intent = Option(intent)
 
-    //load specific merchants
-    Option(intent.getIntArrayExtra(BundleKeys.MerchantsIds)).foreach { ids =>
-      import MerchantOrdering.Implicits.ByName
-
-      withLoadToast(R.string.showing_merchants) {
-        MerchantsDao.get(ids.toSeq).andThenOnUIThread { case Success(merchs) =>
-          addMarkers(merchs)
-        }
-      }
-    }
-
-    centerMapToCurrent()
-
-    viewType = ViewType(intent.getIntExtra(BundleKeys.ViewType, NearestCards.id))
-
-    showItems()
-
+    reloadMapView(true)
     invalidateOptionsMenu()
   }
 
-  private def showItems(): Unit = {
-    clearMap()
-
+  private def reloadMapView(forced: Boolean): Unit = {
     viewType match {
-      case AllCards =>
+      case ViewType.AllCards =>
         import CardOrdering.Implicits.ByName
 
         withLoadToast(R.string.showing_cards) {
           CardsDao.getAll
             .andThenOnUIThread { case Success(cards) =>
-              addMarkers(cards)
+              displayItems(forced, cards)
             }
         }
 
-      case NearestCards =>
+      case ViewType.NearestCards =>
         import CardOrdering.Implicits.ByName
 
         LocationHandler.getCurrentLocation.foreach { loc =>
           withLoadToast(R.string.showing_cards) {
             CardsDao.getNearest(loc, PidifrkySettings.closestDistance)
               .andThenOnUIThread { case Success(cards) =>
-                addMarkers(cards)
+                displayItems(forced, cards)
               }
           }
         }
 
-      case NearestMerchants =>
+      case ViewType.NearestMerchants =>
         import MerchantOrdering.Implicits.ByName
 
         LocationHandler.getCurrentLocation.foreach { loc =>
           withLoadToast(R.string.showing_merchants) {
             MerchantsDao.getNearest(loc, PidifrkySettings.closestDistance)
               .andThenOnUIThread { case Success(merchs) =>
-                addMarkers(merchs)
+                displayItems(forced, merchs)
               }
+          }
+        }
+
+      case ViewType.None =>
+        intent.foreach { intent =>
+          withLoadToast(R.string.loading_map) {
+
+            //load specific cards
+            val cf = Option(intent.getIntArrayExtra(BundleKeys.CardsIds)).map { ids =>
+              import CardOrdering.Implicits.ByName
+
+              CardsDao.get(ids.toSeq).mapOnUIThread { cards =>
+                cards.toSeq
+              }
+            }.getOrElse(Future.successful(Seq()))
+
+            //load specific merchants
+            val mf = Option(intent.getIntArrayExtra(BundleKeys.MerchantsIds)).map { ids =>
+              import MerchantOrdering.Implicits.ByName
+
+              MerchantsDao.get(ids.toSeq).mapOnUIThread { merchs =>
+                merchs.toSeq
+              }
+            }.getOrElse(Future.successful(Seq()))
+
+            for {
+              cards <- cf
+              merchs <- mf
+            } yield Utils.runOnUiThread {
+              Option(intent.getParcelableExtra[LatLng](BundleKeys.ShowLineTo)).foreach { latLng =>
+                setDistanceLine(LineOptions(Color.RED, 5), latLng)
+              }
+
+              displayItems(forced, cards ++ merchs, Option(intent.getParcelableExtra[LatLng](BundleKeys.ShowLineTo)))
+            }
+          }.andThen { case Failure(NonFatal(e)) =>
+            DebugReporter.debugAndReport(e)
           }
         }
     }
@@ -115,7 +129,6 @@ class MapActivity extends BasicMapActivity {
   override def onCameraChange(cameraPosition: CameraPosition): Unit = {
     LocationHandler.getCurrentLocation.foreach { location =>
       if (followLocation) {
-        cameraMoved = true
         if (!isVisibleOnMap(location)) {
           followLocation = false
 
@@ -134,11 +147,12 @@ class MapActivity extends BasicMapActivity {
       centerMap(LocationHelper.toLatLng(location))
     }
 
-    showItems()
+    reloadMapView(false)
   }
 
   override def onPrepareOptionsMenu(menu: Menu): Boolean = {
     import MenuKeys._
+    import ViewType._
 
     Option(menu.findItem(GpsOn)).foreach(_.setVisible(mockLocation))
     Option(menu.findItem(FollowLocation)).foreach(_.setChecked(followLocation))
@@ -168,6 +182,11 @@ class MapActivity extends BasicMapActivity {
         Toast(R.string.map_following_off, Toast.Short)
       }
 
+    case MenuKeys.GpsOn =>
+      LocationHandler.disableMocking
+      mockLocation = false
+      invalidateOptionsMenu()
+
     case MenuKeys.ShowNormal =>
       setMapType(NormalMapType)
 
@@ -184,9 +203,7 @@ class MapActivity extends BasicMapActivity {
       }
 
     case MenuKeys.ReloadDisplay =>
-      showDefaultView()
-      centerMapToCurrent()
-      showItems()
+      reloadMapView(true)
 
     case _ =>
       Toast("Not supported", Toast.Long)
@@ -199,6 +216,12 @@ class MapActivity extends BasicMapActivity {
   override def onMapLongClick(latLng: LatLng): Unit = {
     //TODO mocking on map
     LocationHandler.mockLocation(latLng)
+    mockLocation = true
+    invalidateOptionsMenu()
+  }
+
+  override def onMapMarkerClick(m: MapMarker): Unit = {
+    Toast(m.title, Toast.Short)
   }
 }
 
@@ -209,6 +232,7 @@ object MapActivity {
 
     final val CardsIds = prefix + "cardsIds"
     final val MerchantsIds = prefix + "merchsIds"
+    final val ShowLineTo = prefix + "showLineTo"
     final val ViewType = prefix + "viewType"
   }
 
@@ -231,16 +255,19 @@ object MapActivity {
 
   object ViewType {
     def apply(id: Int): ViewType = id match {
+      case None.id => None
       case AllCards.id => AllCards
       case NearestCards.id => NearestCards
       case NearestMerchants.id => NearestMerchants
     }
 
-    case object AllCards extends ViewType(0)
+    case object None extends ViewType(0)
 
-    case object NearestCards extends ViewType(1)
+    case object AllCards extends ViewType(1)
 
-    case object NearestMerchants extends ViewType(2)
+    case object NearestCards extends ViewType(2)
+
+    case object NearestMerchants extends ViewType(3)
 
   }
 

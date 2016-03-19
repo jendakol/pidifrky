@@ -16,7 +16,7 @@
         android:typeface="sans"
         android:textSize="18sp"
         android:text="name"
-        android:textStyle="bold" android:lines="2"/>
+        android:textStyle="bold" android:singleLine="true"/>
 
     <TextView
         android:id="@+id/address"
@@ -27,7 +27,7 @@
         android:textSize="15sp"
         android:textColor="#ffffff"
         android:text="address"
-        android:layout_below="@+id/name" android:layout_alignParentLeft="true" android:lines="2"/>
+        android:layout_below="@+id/name" android:layout_alignParentLeft="true" android:singleLine="true"/>
 
     <TextView
         android:id="@+id/distance"

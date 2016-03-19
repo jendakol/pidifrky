@@ -40,17 +40,6 @@ object FutureImplicits {
       Future.failed(new IllegalArgumentException("Cannot invoke action on UI thread, null context passed"))
     }
 
-    def block: T = {
-      try {
-        Await.result(future, 2.seconds)
-      }
-      catch {
-        case e: TimeoutException =>
-          DebugReporter.debug(e, "Task wasn't completed in 2 seconds")
-          throw e
-      }
-    }
-
     def andThenOnUIThread(pf: PartialFunction[Try[T], Unit])(implicit executor: ExecutionContext, ctx: Activity): Future[T] = {
       if (ctx != null) {
         future.andThen {
@@ -62,6 +51,17 @@ object FutureImplicits {
       }
 
       future
+    }
+
+    def block: T = {
+      try {
+        Await.result(future, 2.seconds)
+      }
+      catch {
+        case e: TimeoutException =>
+          DebugReporter.debug(e, "Task wasn't completed in 2 seconds")
+          throw e
+      }
     }
   }
 

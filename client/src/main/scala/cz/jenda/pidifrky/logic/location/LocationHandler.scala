@@ -99,6 +99,8 @@ object LocationHandler {
   def mockLocation(latLng: LatLng)(implicit ctx: Activity): Unit = {
     SmartLocation.`with`(ctx).location().stop()
     mocking = true
+    tracking.set(false)
+
     val location = LocationHelper.toLocation(latLng)
     GpsLogger.addEvent("Mocking: " + Format(location))
 //TODO    Toast("Mocking location " + location, ToastButton.UNDO {

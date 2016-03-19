@@ -3,7 +3,7 @@ package cz.jenda.pidifrky.logic.map
 import java.util.Locale
 
 import android.location.{Location, LocationManager}
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.{LatLng, LatLngBounds}
 
 import scala.language.implicitConversions
 
@@ -41,6 +41,12 @@ object LocationHelper {
 
   def formatLocation(location: Location): String = {
     s"N %.4f, E %.4f".formatLocal(Locale.US, location.getLatitude, location.getLongitude)
+  }
+
+  def toLatLngBounds(points: Seq[LatLng]): LatLngBounds = {
+    val builder = LatLngBounds.builder()
+    points.foreach(builder.include)
+    builder.build()
   }
 }
 

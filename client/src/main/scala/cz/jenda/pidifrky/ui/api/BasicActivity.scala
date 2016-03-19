@@ -141,7 +141,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
         }
       }
       catch {
-        case e: Exception => DebugReporter.debugAndReport(e, "Error while executing onApplicationStart")
+        case NonFatal(e) => DebugReporter.debugAndReport(e, "Error while executing onApplicationStart")
       }
     }
   }
@@ -159,7 +159,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
         onApplicationMinimize()
       }
       catch {
-        case e: Exception => DebugReporter.debugAndReport(e, "Error while minimizing the app")
+        case NonFatal(e) => DebugReporter.debugAndReport(e, "Error while minimizing the app")
       }
     }
 
