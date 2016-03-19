@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:clickable="true"
+    android:background="@drawable/border_bottom">
 
     <TextView
         android:id="@+id/name"
@@ -13,34 +14,29 @@
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:typeface="sans"
-        android:textSize="22dip"
-        android:textStyle="bold"
+        android:textSize="18sp"
         android:text="name"
-        />
+        android:textStyle="bold" android:lines="2"/>
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="right"
+        android:layout_alignParentRight="false"
         android:layout_marginRight="5dip"
-        android:textSize="16dip"
+        android:textSize="15sp"
         android:textColor="#ffffff"
-        android:textStyle="bold"
         android:text="address"
-        android:layout_below="@+id/name"/>
+        android:layout_below="@+id/name" android:layout_alignParentLeft="true" android:lines="2"/>
 
     <TextView
-        android:id="@+id/gps"
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="right"
+        android:layout_alignParentRight="false"
         android:layout_marginRight="5dip"
-        android:textSize="16dip"
+        android:textSize="15sp"
         android:textColor="#ffffff"
-        android:textStyle="bold"
         android:text="gps"
-        android:layout_below="@+id/address"/>
+        android:layout_below="@+id/address" android:layout_alignParentLeft="true"/>
 </RelativeLayout>

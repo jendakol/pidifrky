@@ -106,7 +106,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
     DebugReporter.debug("Starting activity " + getLocalClassName)
     Application.currentActivity = Some(this)
 
-    LocationHandler.addListener(onLocationChanged)
+    LocationHandler.setListener(onLocationChanged)
 
     tracker.foreach(_.send(new HitBuilders.ScreenViewBuilder().build))
   }
@@ -117,7 +117,7 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
     DebugReporter.debug("Pausing activity " + getLocalClassName)
 
     LocationHandler.stop
-    LocationHandler.removeListener
+    LocationHandler.unSetListener
 
     try {
       unregisterReceiver(DownloadHandler)

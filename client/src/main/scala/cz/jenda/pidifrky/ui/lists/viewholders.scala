@@ -1,9 +1,12 @@
 package cz.jenda.pidifrky.ui.lists
 
+import java.util.Locale
+
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.{Card, Entity, Merchant}
+import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.logic.{Application, PidifrkySettings}
 import cz.jenda.pidifrky.ui.api.{BasicActivity, ViewHandler}
 
@@ -62,6 +65,16 @@ class MerchantViewHolder(view: View, showLocation: Boolean) extends AbstractView
 
   override def updateWith(merchant: Merchant)(implicit ctx: BasicActivity): Unit = {
     ViewHandler.findTextView(view, R.id.name).foreach(_.setText(merchant.name))
-    //TODO - merchant view
+    ViewHandler.findTextView(view, R.id.address).foreach(_.setText(merchant.address))
+
+    for {
+      loc <- merchant.location
+      currentLoc <- LocationHandler.getCurrentLocation
+      distanceView <- ViewHandler.findTextView(view, R.id.distance)
+    } yield {
+      val dist = currentLoc.distanceTo(loc) / 1000.0
+
+      distanceView.setText("%.1f km".formatLocal(Locale.US, dist))
+    }
   }
 }

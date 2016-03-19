@@ -114,11 +114,11 @@ object LocationHandler {
 
   def getCurrentLocation: Option[Location] = currentLocation
 
-  def addListener(listener: LocationListener)(implicit id: ElementId): Unit = {
+  def setListener(listener: LocationListener)(implicit id: ElementId): Unit = {
     listeners = listeners + (id -> listener)
   }
 
-  def removeListener(implicit id: ElementId): Unit = {
+  def unSetListener(implicit id: ElementId): Unit = {
     listeners = listeners - id
   }
 }

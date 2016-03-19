@@ -21,13 +21,13 @@ trait CardsListFragment extends EntityListTabFragment[Card] {
 
   override def onShow(): Unit = {
     if (!preload) LocationHandler.getCurrentLocation.foreach(updateCards)
-    LocationHandler.addListener(updateCards)
+    LocationHandler.setListener(updateCards)
   }
 
   protected def updateCards(loc: Location): Unit
 
   override def onHide(): Unit = {
-    LocationHandler.removeListener
+    LocationHandler.unSetListener
   }
 
   override def onMenuInflate(menu: Menu): Unit = {

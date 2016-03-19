@@ -16,11 +16,11 @@ object MapLocationSource extends com.google.android.gms.maps.LocationSource with
 
   override def activate(onLocationChangedListener: OnLocationChangedListener): Unit = {
     listener = Some(onLocationChangedListener)
-    LocationHandler.addListener(this)
+    LocationHandler.setListener(this)
   }
 
   override def deactivate(): Unit = {
-    LocationHandler.removeListener
+    LocationHandler.unSetListener
   }
 
   override def apply(location: Location): Unit = listener.foreach(_.onLocationChanged(location))

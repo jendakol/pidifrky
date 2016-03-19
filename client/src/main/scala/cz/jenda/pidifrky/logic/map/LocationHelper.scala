@@ -1,5 +1,7 @@
 package cz.jenda.pidifrky.logic.map
 
+import java.util.Locale
+
 import android.location.{Location, LocationManager}
 import com.google.android.gms.maps.model.LatLng
 
@@ -9,7 +11,7 @@ import scala.language.implicitConversions
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 object LocationHelper {
-  val DEGREES_90: Double = 90 * 72080//meters
+  val DEGREES_90: Double = 90 * 72080 //meters
 
   implicit def toLatLng(location: Location): LatLng = new LatLng(location.getLatitude, location.getLongitude)
 
@@ -35,6 +37,10 @@ object LocationHelper {
 
   def toDegrees(meters: Double): Double = {
     meters * 90.0 / DEGREES_90
+  }
+
+  def formatLocation(location: Location): String = {
+    s"N %.4f, E %.4f".formatLocal(Locale.US, location.getLatitude, location.getLongitude)
   }
 }
 
