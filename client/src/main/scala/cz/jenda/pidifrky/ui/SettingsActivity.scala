@@ -19,6 +19,7 @@ import scala.util.{Failure, Success}
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 class SettingsActivity extends BasicActivity with PreferenceFragmentCompat.OnPreferenceStartScreenCallback {
+  override protected val layoutResourceId = None
 
   private val titleStack = new mutable.Stack[CharSequence]()
 
@@ -152,7 +153,7 @@ class SettingsFragment extends PreferenceFragmentCompat with SharedPreferences.O
           true
 
         case "download_images" =>
-          DbImporter.downloadImages(fullImages = false)
+          DbImporter.downloadImages(fullImages = true)
           Toast("Downloading images", Toast.Long)(getActivity)
           true
 

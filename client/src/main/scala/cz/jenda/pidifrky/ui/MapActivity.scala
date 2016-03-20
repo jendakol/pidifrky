@@ -197,7 +197,7 @@ class MapActivity extends BasicMapActivity {
       setMapType(HybridMapType)
 
     case MenuKeys.SwitchToList =>
-      goWithParamsTo(classOf[ListActivity]) { i =>
+      goWithParamsTo(classOf[MainActivity]) { i =>
         i.putExtra(BundleKeys.ViewType, viewType.id)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
       }

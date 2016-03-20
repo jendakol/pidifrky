@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.{LayoutInflater, View, ViewGroup}
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.{Card, Entity, Merchant}
-import cz.jenda.pidifrky.logic.DebugReporter
+import cz.jenda.pidifrky.logic.{DebugReporter, Utils}
 import cz.jenda.pidifrky.ui.api.BasicActivity
 
 import scala.collection.SortedSet
@@ -24,7 +24,7 @@ abstract class BasicListAdapter[E <: Entity](showLocation: Boolean)(implicit ctx
   override def getItemCount: Int =
     data.size
 
-  override def onBindViewHolder(holder: AbstractViewHolder[E], position: Int): Unit = {
+  override def onBindViewHolder(holder: AbstractViewHolder[E], position: Int): Unit = Utils.runOnUiThread {
     holder.updateWith(data(position))
   }
 

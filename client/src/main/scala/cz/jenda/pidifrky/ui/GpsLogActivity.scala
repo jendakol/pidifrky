@@ -9,9 +9,11 @@ import cz.jenda.pidifrky.logic.location.GpsLogger
 import cz.jenda.pidifrky.ui.api.BasicActivity
 
 class GpsLogActivity extends BasicActivity {
+
+  override protected val layoutResourceId = Some(R.layout.activity_gps_log)
+
   protected override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_gps_log)
 
     for {
       bundle <- Option(savedInstanceState)

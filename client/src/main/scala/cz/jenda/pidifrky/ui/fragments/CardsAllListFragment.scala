@@ -30,17 +30,7 @@ class CardsAllListFragment extends CardsListFragment {
   //TODO ordering
   protected implicit val ordering = CardOrdering.ByName
 
-  override protected lazy val listAdapter: BasicListAdapter[Card] = {
-
-    //TODO show location
-    val adapter = new CardsListAdapter(showLocation = true)
-    if (preload) {
-      LocationHandler.getCurrentLocation.foreach(updateCards)
-    }
-    adapter
-  }
-
-  protected def updateCards(loc: Location): Unit = {
+  protected def updateCards(loc: Location): Unit = withCurrentActivity { implicit ctx =>
     CardsDao.getAll.foreachOnUIThread { cards =>
       listAdapter.updateData(cards)
     }
@@ -48,9 +38,9 @@ class CardsAllListFragment extends CardsListFragment {
 }
 
 object CardsAllListFragment {
-  def apply()(implicit ctx: BasicActivity): CardsAllListFragment = {
+  def apply()/*(implicit ctx: BasicActivity)*/: CardsAllListFragment = {
     val fr = new CardsAllListFragment
-    fr.ctx = ctx
+//    fr.ctx = ctx
     fr
   }
 }

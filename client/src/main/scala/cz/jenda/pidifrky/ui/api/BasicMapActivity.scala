@@ -24,6 +24,8 @@ import cz.jenda.pidifrky.ui.dialogs.InfoDialog
  * @author Jenda Kolena, jendakolena@gmail.com
  */
 abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListener with OnCameraChangeListener {
+  override protected val layoutResourceId = Some(R.layout.map)
+
   private lazy val iconGenerator = new IconGenerator(this)
 
   private var map: Option[GoogleMap] = None
@@ -38,8 +40,6 @@ abstract class BasicMapActivity extends BasicActivity with OnMapLongClickListene
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.map)
-
     ActivityLocationResolver.setBaseInterval(PidifrkySettings.gpsUpdateIntervals.map)
 
     checkPlayServices()

@@ -22,6 +22,16 @@ trait ViewHandler extends AppCompatActivity {
 
 }
 
+trait FragmentViewHandler extends Fragment {
+
+  def findView(id: Int): Option[View] = ViewHandler.findView(this, id)
+
+  def findView[T <: View](id: Int, cl: Class[T])(implicit ct: ClassTag[T]): Option[T] = ViewHandler.findView(this, id, cl)
+
+  def findTextView(id: Int): Option[TextView] = ViewHandler.findView(this, id, classOf[TextView])
+
+}
+
 object ViewHandler {
   def findView(activity: AppCompatActivity, id: Int): Option[View] = Option(activity.findViewById(id))
 

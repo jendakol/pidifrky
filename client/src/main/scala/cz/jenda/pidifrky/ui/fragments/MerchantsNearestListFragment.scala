@@ -1,5 +1,6 @@
 package cz.jenda.pidifrky.ui.fragments
 
+import android.location.Location
 import android.view.Menu
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.MerchantOrdering
@@ -7,11 +8,11 @@ import cz.jenda.pidifrky.data.dao.MerchantsDao
 import cz.jenda.pidifrky.data.pojo.Merchant
 import cz.jenda.pidifrky.logic.Application.executionContext
 import cz.jenda.pidifrky.logic.FutureImplicits._
-import cz.jenda.pidifrky.logic.PidifrkySettings
 import cz.jenda.pidifrky.logic.location.LocationHandler
+import cz.jenda.pidifrky.logic.{DebugReporter, PidifrkySettings}
 import cz.jenda.pidifrky.ui.MapActivity
 import cz.jenda.pidifrky.ui.MapActivity.ViewType
-import cz.jenda.pidifrky.ui.api.{BasicActivity, EntityListTabFragment}
+import cz.jenda.pidifrky.ui.api.EntityListTabFragment
 import cz.jenda.pidifrky.ui.lists.{BasicListAdapter, MerchantsListAdapter}
 
 /**
@@ -25,19 +26,29 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 
   override val iconResourceId: Option[Int] = Some(R.drawable.basket)
 
-  protected lazy val listAdapter: BasicListAdapter[Merchant] = new MerchantsListAdapter(false)
-
-  override val actionBarMenuResourceId: Option[Int] = Some(R.menu.merchants_list)
-
-
   //TODO ordering
   protected implicit val ordering = MerchantOrdering.ByName
 
-  override def onShow(): Unit = {
-    LocationHandler.getCurrentLocation.foreach { loc =>
-      MerchantsDao.getNearest(loc, PidifrkySettings.closestDistance).foreachOnUIThread { merchs =>
-        listAdapter.updateData(merchs)
-      }
+  protected lazy val listAdapter: BasicListAdapter[Merchant] = withCurrentActivity { implicit ctx =>
+    DebugReporter.debug("Initializing list adapter for merchants")
+
+    //TODO show location
+    val adapter = new MerchantsListAdapter(showLocation = true)
+    if (preload) {
+      LocationHandler.getCurrentLocation.foreach(updateMerchants)
+    }
+    adapter
+  }
+
+  override val actionBarMenuResourceId: Option[Int] = Some(R.menu.merchants_list)
+
+  override def onShow(): Unit = withCurrentActivity { implicit ctx =>
+    LocationHandler.getCurrentLocation.foreach(updateMerchants)
+  }
+
+  protected def updateMerchants(loc: Location): Unit = withCurrentActivityIfPossible { implicit ctx =>
+    MerchantsDao.getNearest(loc, PidifrkySettings.closestDistance).foreachOnUIThread { merchs =>
+      listAdapter.updateData(merchs)
     }
   }
 
@@ -47,11 +58,15 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 
   override def onMenuAction: PartialFunction[Int, Unit] = {
     case R.id.menu_merchants_gpsOn =>
-      LocationHandler.disableMocking
+      withCurrentActivity { implicit ctx =>
+        LocationHandler.disableMocking
+      }
 
     case R.id.menu_merchants_showMap =>
-      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
-        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestMerchants.id)
+      withCurrentActivity { implicit ctx =>
+        ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
+          intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.NearestMerchants.id)
+        }
       }
   }
 
@@ -61,9 +76,9 @@ class MerchantsNearestListFragment extends EntityListTabFragment[Merchant] {
 }
 
 object MerchantsNearestListFragment {
-  def apply()(implicit ctx: BasicActivity): MerchantsNearestListFragment = {
+  def apply() /*(implicit ctx: BasicActivity)*/ : MerchantsNearestListFragment = {
     val fr = new MerchantsNearestListFragment
-    fr.ctx = ctx
+    //    fr.ctx = ctx
     fr
   }
 }

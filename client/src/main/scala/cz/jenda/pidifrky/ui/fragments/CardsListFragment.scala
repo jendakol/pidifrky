@@ -5,10 +5,11 @@ import android.location.Location
 import android.view.Menu
 import cz.jenda.pidifrky.R
 import cz.jenda.pidifrky.data.pojo.Card
-import cz.jenda.pidifrky.logic.Application
+import cz.jenda.pidifrky.logic.{DebugReporter, Application}
 import cz.jenda.pidifrky.logic.location.LocationHandler
 import cz.jenda.pidifrky.ui.MapActivity.ViewType
 import cz.jenda.pidifrky.ui.api.EntityListTabFragment
+import cz.jenda.pidifrky.ui.lists.{CardsListAdapter, BasicListAdapter}
 import cz.jenda.pidifrky.ui.{CardDetailActivity, MapActivity}
 
 /**
@@ -20,6 +21,17 @@ trait CardsListFragment extends EntityListTabFragment[Card] {
   override val actionBarMenuResourceId: Option[Int] = Some(R.menu.cards_list)
 
   protected def viewType: ViewType
+
+  override protected lazy val listAdapter: BasicListAdapter[Card] = withCurrentActivity { implicit ctx =>
+    DebugReporter.debug("Initializing list adapter for cards")
+
+    //TODO show location
+    val adapter = new CardsListAdapter(showLocation = true)
+    if (preload) {
+      LocationHandler.getCurrentLocation.foreach(updateCards)
+    }
+    adapter
+  }
 
   override def onShow(): Unit = {
     if (!preload) LocationHandler.getCurrentLocation.foreach(updateCards)
@@ -37,22 +49,21 @@ trait CardsListFragment extends EntityListTabFragment[Card] {
   }
 
   override def onMenuAction: PartialFunction[Int, Unit] = {
-    case R.id.menu_cards_gpsOn =>
-      LocationHandler.disableMocking
+    case R.id.menu_merchants_gpsOn =>
+      withCurrentActivity { implicit ctx =>
+        LocationHandler.disableMocking
+      }
 
-    case R.id.menu_cards_showMap =>
-      ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
-        intent.putExtra(MapActivity.BundleKeys.ViewType, viewType.id)
+    case R.id.menu_merchants_showMap =>
+      withCurrentActivity { implicit ctx =>
+        ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
+          intent.putExtra(MapActivity.BundleKeys.ViewType, viewType.id)
+        }
       }
   }
 
   override def onClick(card: Card): Unit = {
-    Application.withCurrentContext { implicit ctx =>
-      val intent = new Intent(ctx, classOf[CardDetailActivity])
-      intent.putExtra(CardDetailActivity.BundleKeys.CardId, card.id)
 
-      ctx.startActivity(intent)
-    }
   }
 
   override def onLongClick(card: Card): Unit = {}

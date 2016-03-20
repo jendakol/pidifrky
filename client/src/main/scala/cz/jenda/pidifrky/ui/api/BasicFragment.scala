@@ -7,30 +7,36 @@ import cz.jenda.pidifrky.logic.DebugReporter
 /**
  * @author Jenda Kolena, jendakolena@gmail.com
  */
-abstract class BasicFragment extends Fragment {
+abstract class BasicFragment extends Fragment with FragmentViewHandler {
   protected final implicit val ElemId: ElementId = ElementId()
 
-  protected implicit var ctx: BasicActivity = _
+  private var ctx: Option[BasicActivity] = None
 
-
-  override def onCreate(savedInstanceState: Bundle): Unit = {
-    super.onCreate(savedInstanceState)
+  override def onActivityCreated(savedInstanceState: Bundle): Unit = {
+    super.onActivityCreated(savedInstanceState)
+    DebugReporter.debug("Parent activity is created")
 
     getActivity match {
       case a: BasicActivity =>
-        ctx = a
+        ctx = Option(a)
         DebugReporter.debug(s"${getClass.getSimpleName} attached to ${a.getClass.getSimpleName}")
         super.onResume()
       case _ => throw new IllegalArgumentException(s"Unsupported attachment of fragment to ${getActivity.getClass.getName}")
     }
   }
 
-  //
-  //  override def onResume(): Unit = getActivity match {
-  //    case a: BasicActivity =>
-  //      ctx = a
-  //      DebugReporter.debug(s"${getClass.getSimpleName} attached to ${a.getClass.getSimpleName}")
-  //      super.onResume()
-  //    case _ => throw new IllegalArgumentException(s"Unsupported attachment of fragment to ${getActivity.getClass.getName}")
-  //  }
+  protected def withCurrentActivity[A](a: BasicActivity => A): A = {
+    ctx.map(a)
+      .getOrElse {
+        throw new IllegalStateException("Action could not be performed, because the context is missing")
+      }
+  }
+
+  protected def withCurrentActivityIfPossible[A](a: BasicActivity => A): Option[A] = {
+    ctx.map(a)
+  }
+
+  protected def invalidateOptionsMenu(): Unit = {
+    ctx.foreach(_.invalidateOptionsMenu()) //don't throw exception!
+  }
 }

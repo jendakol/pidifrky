@@ -30,11 +30,14 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
   private var activityState: ActivityState = Created //default
 
   protected final implicit val ctx: BasicActivity = this
+
   protected final implicit val ElemId: ElementId = ElementId()
 
   private var appStart = false
 
   private var rotating = false
+
+  protected def layoutResourceId: Option[Int]
 
   protected def actionBarMenu(): Option[Int] = None
 
@@ -50,6 +53,8 @@ abstract class BasicActivity extends AppCompatActivity with ViewHandler with Per
 
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
+
+    layoutResourceId.foreach(setContentView)
 
     Application.appContext = Some(getApplicationContext)
 

@@ -25,6 +25,8 @@ class CardDetailActivity extends BasicActivity {
 
   import CardDetailActivity._
 
+  override protected val layoutResourceId = Some(R.layout.card_detail)
+
   override protected val actionBarMenu = Some(R.menu.card_detail)
 
   import MerchantOrdering.Implicits._
@@ -35,14 +37,13 @@ class CardDetailActivity extends BasicActivity {
   override protected def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.card_detail)
-
     val intent = getIntent
 
     val cardId = intent.getIntExtra(BundleKeys.CardId, 0)
 
     for {
       card <- CardsDao.get(cardId)
+      //TODO non-existing image!
       imageUri <- card.getFullImageUri
       merchants <- MerchantsDao.get(card.merchantsIds)
     } yield Utils.runOnUiThread {
