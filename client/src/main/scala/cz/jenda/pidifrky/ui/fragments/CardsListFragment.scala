@@ -19,6 +19,8 @@ trait CardsListFragment extends EntityListTabFragment[Card] {
 
   override val actionBarMenuResourceId: Option[Int] = Some(R.menu.cards_list)
 
+  protected def viewType: ViewType
+
   override def onShow(): Unit = {
     if (!preload) LocationHandler.getCurrentLocation.foreach(updateCards)
     LocationHandler.setListener(updateCards)
@@ -40,7 +42,7 @@ trait CardsListFragment extends EntityListTabFragment[Card] {
 
     case R.id.menu_cards_showMap =>
       ctx.goWithParamsTo(classOf[MapActivity]) { intent =>
-        intent.putExtra(MapActivity.BundleKeys.ViewType, ViewType.AllCards.id)
+        intent.putExtra(MapActivity.BundleKeys.ViewType, viewType.id)
       }
   }
 

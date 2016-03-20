@@ -21,6 +21,8 @@ class CardsAllListFragment extends CardsListFragment {
 
   override protected val preload = false
 
+  override protected val viewType = ViewType.AllCards
+
   override val iconResourceId: Option[Int] = Some(R.drawable.ic_view_list_white_36dp)
 
   override val actionBarMenuResourceId: Option[Int] = Some(R.menu.cards_list)
@@ -43,7 +45,6 @@ class CardsAllListFragment extends CardsListFragment {
       listAdapter.updateData(cards)
     }
   }
-
 }
 
 object CardsAllListFragment {

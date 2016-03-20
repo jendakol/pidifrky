@@ -106,6 +106,18 @@ abstract class BasicTabActivity extends BasicActivity {
     }
   }
 
+  override protected def onPostResume(): Unit = {
+    super.onPostResume()
+
+    Option(currentTab).foreach(_.onShow())
+  }
+
+  override protected def onStop(): Unit = {
+    super.onStop()
+
+    Option(currentTab).foreach(_.onHide())
+  }
+
   override def onPrepareOptionsMenu(menu: Menu): Boolean = Option(currentTab).exists { currentTab =>
     currentTab.actionBarMenuResourceId match {
       case Some(id) =>

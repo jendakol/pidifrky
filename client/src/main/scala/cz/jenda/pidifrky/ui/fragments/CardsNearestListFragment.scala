@@ -22,10 +22,11 @@ class CardsNearestListFragment extends CardsListFragment {
 
   override protected val preload = true
 
+  override protected val viewType = ViewType.NearestCards
+
   override val iconResourceId: Option[Int] = Some(R.drawable.ic_gps_fixed_white_36dp)
 
   override protected lazy val listAdapter: BasicListAdapter[Card] = {
-
     //TODO show location
     val adapter = new CardsListAdapter(showLocation = true)
     if (preload) {
@@ -33,7 +34,6 @@ class CardsNearestListFragment extends CardsListFragment {
     }
     adapter
   }
-
 
   protected def updateCards(loc: Location): Unit = {
     //TODO ordering
@@ -43,8 +43,6 @@ class CardsNearestListFragment extends CardsListFragment {
       listAdapter.updateData(cards)
     }
   }
-
-
 }
 
 object CardsNearestListFragment {
